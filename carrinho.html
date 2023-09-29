@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    
+    <title>TINYWOOD</title>
+</head>
+<body>
+    <script src="index.js" defer></script>
+    <script src="carrinho.js" defer></script>
+    <div class="nav_nav container">
+        <div class="nav_fundo"></div>
+        <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
+
+
+        <div class="nav_div_pesquisa">
+                <div class="nav_pesquisa">
+                    <img src="Icones/pesquisa_cinza.svg" class="nav_icon">
+                    <input type="text" placeholder="Pesquisar...">
+                </div>
+
+                <div class="nav_p_resultados">
+                    <table>
+                        <tr>
+                            <td><p>Chaveiro CARRARO</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>Algo não chaveiro</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>Chaveiro DIY da Mariana</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>Chaveiro com tentativa de desenho do Bastazini</p></td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+        
+        <img src="Icones/Frame 3.svg" class="nav_tres_risco" alt="Mais opções">
+        <div class="nav_elementos">
+            <div class="nav_risco"></div>
+            <div class="nav_home">
+                <img class="nav_icon" src="Icones/home_escuro.svg">
+                <p>HOME</p>
+            </div>
+            <div class="nav_produtos">
+                <img class="nav_icon" src="Icones/icon _shopping bag.svg">
+                <p>PRODUTOS</p>
+            </div>
+            <div class="nav_sobre">
+                <img class="nav_icon" src="Icones/icon _about.svg">
+                <p>SOBRE</p>
+            </div>
+
+            <div class="nav_info_lateral" id="nav_botao_ativo">
+                <img class="nav_icon2" src="Icones/carrinho_branco.svg">
+                <p>CARRINHO</p>
+            </div>
+            <div class="nav_info_lateral">
+                <img class="nav_icon2" src="Icones/icon _login_.svg">
+                <p>LOGIN</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <section id="grid_carrinho" class="container">
+        <div class="produtos_compra">
+
+
+            <div class="produto_compra">
+                <img src="Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div style="display: flex">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
+                </div>
+            </div>
+            <div class="produto_compra">
+                <img src="Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div style="display: flex">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
+                </div>
+            </div>
+            <div class="produto_compra">
+                <img src="Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div style="display: flex">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
+                </div>
+            </div>
+            <div class="produto_compra">
+                <img src="Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div style="display: flex">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
+                </div>
+            </div>
+            <div class="produto_compra">
+                <img src="Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div style="display: flex">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
+                </div>
+            </div>
+            <div class="produto_compra">
+                <img src="Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div style="display: flex">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
+                </div>
+            </div>
+            <div class="produto_compra">
+                <img src="Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div style="display: flex">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
+                </div>
+            </div>
+            <div class="produto_compra">
+                <img src="Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div style="display: flex">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="compra_total">
+            <h1>CARRINHO</h1>
+            <div>
+                <div id="compras_efetuadas">
+                    <div class="compra_cabecalho">
+                        <h1>Quantidade</h1>
+                        <h1>Produto</h1>
+                        <h1>Preço</h1>
+                    </div>
+                    
+                </div>
+                <div class="compras_total">
+                    <p>TOTAL</p>
+                    <h1 id="total">R$ 9,98</h1>
+                </div>
+                <div class="finalizar_compra">
+                    <h1>FINALIZAR COMPRA</h1>
+                </div>
+            </div>  
+        </div>
+    </section>
+    
+    <footer>
+        <div id="f_1"></div>
+        <div id="f_2"></div>
+        <div id="f_3"></div>
+        <div id="f_4"></div>
+        <div id="f_5"></div>
+
+        <div class="footer_logo">
+            <img src="Icones/logo-bola-branco.svg" alt="Logo da Tiny Wood">
+            <div class="footer_logo_info">
+                <h1>TINY WOOD</h1>
+                <p>Alguimas informaçoes pq eu vi num lugar e 
+                    vou colocar
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vo
+                luptate quidem distinctio rerum assumenda quae aut, dicta c</p>
+                <div class="footer_logo_info_mais">
+                    <div class="footer_logo_info_mais_botao" value="1"></div>
+                    <div class="footer_logo_info_mais_botao" value="2"></div>
+                    <div class="footer_logo_info_mais_botao" value="3"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>All copyrights to &copy; TinyWood</p>
+        </div>
+        <div class="footer_info">
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

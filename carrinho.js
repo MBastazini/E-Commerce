@@ -1,0 +1,66 @@
+function novoProduto(nome, quantidade, preco) {
+    var produto_compra = document.createElement('div');
+    produto_compra.classList.add('compra_efetuada');
+    
+    var nomeElement = document.createElement("p");
+    nomeElement.innerText = nome;
+    
+    var quantidadeElement = document.createElement("p");
+    quantidadeElement.innerText = quantidade + 'x';
+    
+    var precoElement = document.createElement("h1");
+    precoElement.innerText = "R$ " + preco;
+
+    produto_compra.appendChild(quantidadeElement);
+    produto_compra.appendChild(nomeElement);
+    produto_compra.appendChild(precoElement);
+
+    const aba_produto_compras = document.getElementById('compras_efetuadas');
+    aba_produto_compras.appendChild(produto_compra);
+    novoValorTotal();
+}
+
+
+//Pegar anotação no notion spbre formatação na moeda 'REAL'.
+// Função para extrair os dados de cada elemento e chamar novoProduto
+function adicionarProdutosDaTabela() {
+    // Obtém todos os elementos com a classe "produto_compra"
+    var elementosProdutos = document.querySelectorAll('.produto_compra');
+    
+    // Itera sobre os elementos
+    elementosProdutos.forEach(function(elemento) {
+        // Extrai os dados do elemento atual
+        var nomeProduto = elemento.querySelector('p').innerText;
+        var quantidadeProduto = elemento.querySelector('#quantidade').innerText;
+        var precoProduto = elemento.querySelector('h1').innerText;
+        
+        // Remove o "R$" do preço e converte para número
+        precoProduto = parseFloat(precoProduto.replace('R$ ', '').replace(',', '.'));
+
+        // Chama a função novoProduto para adicionar o produto à tabela
+        novoProduto(nomeProduto, quantidadeProduto, precoProduto);
+    });
+}
+
+// Exemplo de chamada da função adicionarProdutosDaTabela
+function novoValorTotal()
+{
+    const total = document.getElementById('total');
+    var valor_total = 0;
+
+    const compras_efetuadas = document.querySelectorAll('.compra_efetuada > h1');
+    compras_efetuadas.forEach(element => {
+        var texto_valor = element.innerText;
+        texto_valor = texto_valor.replace('R$ ', ''); // Remove 'R$ '
+        texto_valor = texto_valor.replace(',', '.');  // Substitui a vírgula por um ponto
+        valor_total += (parseFloat(texto_valor));
+    });
+    total.innerText = `R$ ${valor_total}`;
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    
+
+    adicionarProdutosDaTabela();
+});
