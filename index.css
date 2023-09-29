@@ -834,7 +834,7 @@ Divisão pra ficar mais facil de achar ali na direita
     transition: 1s;
     position: relative;
     overflow: hidden;
-    background-image: url('Icones/quad_grad.svg');
+    background-image: url('quad_grad.svg');
     background-size: cover; /* Ajusta o tamanho da imagem para cobrir todo o div */
     background-repeat: no-repeat; /* Evita a repetição da imagem */
     background-position: center; /* Centraliza a imagem no div */
@@ -1185,17 +1185,12 @@ Divisão pra ficar mais facil de achar ali na direita
     gap: 50px;
     margin-top: 50px;
     width: 100%;
-    max-height: 100vh;
 }
 
 .produtos_compra{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
-    box-sizing: border-box;
-    margin: 50px;
-    height: 40%;
-    overflow-y: auto;
 }
 .produto_compra{
     width: 100%;
@@ -1207,10 +1202,6 @@ Divisão pra ficar mais facil de achar ali na direita
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    
-}
-.produto_compra > div > p{
-    font-size: 25px;
 }
 .produto_compra img{
     width: 100%;
@@ -1220,75 +1211,40 @@ Divisão pra ficar mais facil de achar ali na direita
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
     height: 50%;
-    margin: 5px 0px;
 }
 .compra_total{
-    height: fit-content;
-    box-sizing: border-box;
-    width: fit-content;
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-}
-.compra_total, .compra_total > div{
-    width: 100%;
-    background-color: var(--destaque_texto);
-    border-radius: 15px;
+    width: 90%;
+    height: 300px;
+    background-color: var(--destaque_01);
+    border-radius: 15px 15px 0px 0px;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 5%;
     gap: 20px;
 }
-.compra_total > div{
-    background-color: var(--destaque_01);
-    width: 90%;
-    box-sizing: border-box;
-}
-.compra_total p{
-    font-size: 20px;
-    font-weight: 400;
-}
-.preco{
-    font-weight: 800;
-}
-.compra_total > h1{
-    color: white;
-    font-size: 30px;
-    font-weight: 600;
-}
-#compras_efetuadas{
+.compras_efetuadas{
     width: 100%;
 }
-.compra_efetuada, .compra_cabecalho{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
-    transition: 0.3s;
+.compra_efetuada{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
-.compra_efetuada:hover{
-    background-color:   rgba(150, 195, 121, 0.3);
-    transition: 0.3s;
-}
-.compra_cabecalho{
-    margin-bottom: 30px;
-    font-size: small;
-    border: 2px solid white;
-    padding: 10px;
-    border-radius: 10px;
+.compra_efetuada div{
+    display: flex;
+    gap: 10px
 }
 
 .compras_total{
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background-color: white;
+    background-color: var(--destaque_texto);
     width: 100%;
     border-radius: 3px;
-    margin: 30px 0px;
 }
 
 .finalizar_compra{
@@ -1297,24 +1253,15 @@ Divisão pra ficar mais facil de achar ali na direita
     color: white;
     display: flex;
     justify-content: center;
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.5s;
-    position: relative;
 }
-.finalizar_compra:hover{
-    transform: scale(1.1);
-    transition: 0.5s;
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
-}
-#quantidade{
-    font-size: 30px;
-}
+
 #quantidade::before, #quantidade::after{
     content: '-';
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: 100%;
     background-color: #96C379;
     color: white;
@@ -1641,6 +1588,8 @@ INICIO @media
     .tela_botao{
         margin: auto;
     }
+
+ 
 }
 
 
