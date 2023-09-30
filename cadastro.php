@@ -12,46 +12,51 @@
 
     $select = $conn->query($sql1);
 
-    $checa = 0;
+    $check = 0;
+    $senha = $_POST['senha'];
+    $csenha = $_POST['senha_c'];
+    $cod = "";
 
     while ($var = $select->fetch() )  
     {
         $varEmail  = $var['email'];
  
-        if($varEmail == $_POST['email']){
-            $checa = 1;
+        if($varEmail == $_POST['email'] ){
+            $cod = $var['cod_usuario'];
+            $check = 1;
         }
     }
 
-    if($checa == 1){
+    if($check == 1 ){
         echo "html com caixa q ja tem conta";
-        sleep(5);
+        sleep(2);
         header('Location: login.html');
     }
     else{
+        if($senha == $csenha){
+            $linha = [ 
+                'nome'      => $_POST['nome'],   
+                'email'     => $_POST['email'],
+                'telefone'  => $_POST['telefone'], 
+                'senha'     => $_POST['senha']];
 
-        $linha = [ 
-                    'nome'      => $_POST['nome'],   
-                    'email'     => $_POST['email'],
-                    'telefone'  => $_POST['telefone'], 
-                    'senha'     => $_POST['senha']];
 
+            $sql = " insert into tbl_usuario (nome,email,telefone,senha)  
+                        values (:nome,:email,:telefone,:senha) ";
 
-        $sql = " insert into tbl_usuario (nome,email,telefone,senha)  
-                    values (:nome,:email,:telefone,:senha) ";
+            $inclui = $conn->prepare($sql); 
+            $inclui->execute($linha);
 
-        $inclui = $conn->prepare($sql); 
-        $inclui->execute($linha);
+            Cookie('login', $cod, 1440);
+            $_SESSION['conectado'] = sessao($cod);
 
-        $sql2 = "select * from tbl_usuario order by email where email = $varEmail";
-        $select2 = $conn->query($sql2);
-
-        $var2 = $select2->fetch();
-        
-        Cookie('login', $var2['cod_usuario'], 1440);
-        sessao($var2['cod_usuario']);
-
-        header('Location: index.html');   
+            header('Location: index.html');
+        }
+        else{
+            echo "caixa com erro de senha";
+            header('Location: cadastro.html');
+        }
+           
     }
       
 
