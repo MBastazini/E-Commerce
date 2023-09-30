@@ -9,31 +9,53 @@ function checa_botao(input, texto)
 }
 
 
+function adicionarEventos(inputElement, textoElement) {
+    checa_botao(inputElement, textoElement);
+    inputElement.addEventListener('focus', () => {
+      textoElement.id = 'input-ativo';
+    });
+    /* Usar o codigo abaixo se achar necessario.
+     Ele faz com que, se um texto for adicionado sem que o usuario chege a dar um input 
+     (de forma automatica pelo navegador, por exemplo) o texto suba mesmo assim.
+     Porem, usando ele, quando se digita um texto e apaga tudo, sem perder o focus, o texto desce
+     Use por sua propria escolha.
+     
+     inputElement.addEventListener('input', () => {
+       checa_botao(inputElement, textoElement);
+     }); */
+    inputElement.addEventListener('blur', () => {
+      checa_botao(inputElement, textoElement);
+    });
+  }
 
 document.addEventListener("DOMContentLoaded", function() {
-    const email = document.querySelector('.login > form > .email > input');
-    const email_texto = document.querySelector('.login > form > .email > p');
-
-    const senha = document.querySelector('.login > form > .senha > input');
-    const senha_texto = document.querySelector('.login > form > .senha > p');
-
-    // eggee
-    checa_botao(email, email_texto);    
-    email.addEventListener('focus', () => {
-        email_texto.id = 'input-ativo';
-    });
     
-    email.addEventListener('blur', () => {
-        checa_botao(email, email_texto);
-    });
+    const email = document.querySelector('.tela_log_cad > form > .email > input');
+    const email_texto = document.querySelector('.tela_log_cad > form > .email > p');
 
-    // eggee
-    checa_botao(senha, senha_texto);
-    senha.addEventListener('focus', () => {
-        senha_texto.id = 'input-ativo';
-    });
-    senha.addEventListener('blur', () => {
-        checa_botao(senha, senha_texto);
-    });
+    const senha = document.querySelector('.tela_log_cad > form > .senha > input');
+    const senha_texto = document.querySelector('.tela_log_cad > form > .senha > p');
+
+    const nome = document.querySelector('.tela_log_cad > form > .nome > input');
+    const nome_texto = document.querySelector('.tela_log_cad > form > .nome > p');
+
+    const telefone = document.querySelector('.tela_log_cad > form > .telefone > input');
+    const telefone_texto = document.querySelector('.tela_log_cad > form > .telefone > p');
+
+    const senha_c = document.querySelector('.tela_log_cad > form > .senha_c > input');
+    const senha_c_texto = document.querySelector('.tela_log_cad > form > .senha_c > p');
+      
+      const elementos = [
+        { input: email, texto: email_texto },
+        { input: senha, texto: senha_texto },
+        { input: nome, texto: nome_texto },
+        { input: telefone, texto: telefone_texto },
+        { input: senha_c, texto: senha_c_texto }
+      ]
+      
+      elementos.forEach(({ input, texto }) => {
+        adicionarEventos(input, texto);
+      });
+      
     
 });

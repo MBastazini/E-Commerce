@@ -1393,28 +1393,39 @@
     .sec_login{
         margin: 100px 0px;
     }
-    .login{
+    .tela_log_cad{
         width: 500px;
         padding: 50px;
         background-color: var(--destaque_01);
-        border-radius: 15px;
-        
+        border-radius: 15px;  
     }
-    .login > form > h1{
+    .tela_log_cad.cadastro{
+        width: 800px;
+    }
+    .tela_log_cad > h1{
         font-size: 40px;
         font-weight: 400;
         margin-bottom: 50px;
+        text-align: center;
     }
-    .login > form{
+    .tela_log_cad.login > form{
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    .login > form div{
+    .tela_log_cad.cadastro > form{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        gap:50px;
+        justify-items: center;
+    }
+    .tela_log_cad > form div{
         width: 100%;
     }
-    .login > form > .inp > input{
+    .tela_log_cad > form > .inp > input{
         width: 100%;
         height: 60px;
         border-radius: 5px;
@@ -1425,27 +1436,31 @@
         color: gray;
         box-sizing: border-box;
     }
-    .login > form > .inp > input:focus{
+    .tela_log_cad > form > .inp > input:focus{
         border: 3px solid var(--cor_destaque);
         outline: none;
         transition: 0.2s;
         color: black;
     }
     #input-ativo, #input-ativo-blur{
-        top: 0;
-        left: 0;
+        top: -5px;
+        left: 10px;
         transform: translate(0%,-100%);
         transition: 0.5s;
         color: black;
+        font-size: 20px;
     }
     #input-ativo-blur{
         color: rgba(0, 0, 0, 0.5);
     }
-    .login > form > .inp{
+    .tela_log_cad > form > .inp{
         position: relative;
+
+    }
+    .tela_log_cad.login > form > .inp{
         margin-bottom: 50px;
     }
-    .login > form > .inp > p{
+    .tela_log_cad > form > .inp > p{
         position: absolute;
         top: 50%;
         left: 50%;
@@ -1453,8 +1468,10 @@
         font-size: 25px;
         transition: 0.5s;
         color: gray;
+        pointer-events: none;
+        user-select: none;
     }
-    .login > form > .btn > input{
+    .tela_log_cad > form > .btn > input{
         background-color: var(--destaque_texto);
         color: white;
         width: 100%;
@@ -1467,22 +1484,22 @@
         border: none;
         outline: none;
     }
-    .login > form > .btn > input:hover{
+    .tela_log_cad > form > .btn > input:hover{
         background-color: var(--cor_destaque);
         transition: 0.5s;
         cursor: pointer;
     }
-    .login > form > .cadastro > p, .login > form > .cadastro > a{
+    .troca_log_cad > p, .troca_log_cad > a{
         font-size: 25px;
     }
-    .login > form > .cadastro{
+    .tela_log_cad > .troca_log_cad{
         display: flex;
         margin: 10px;
         width: 100%;
         justify-content: center;
 
     }
-    .login > form > p{
+    .tela_log_cad > p{
         font-size: 20px;
         width: 100%;
         display: flex;
@@ -1491,7 +1508,7 @@
         box-sizing: border-box;
         margin-top: 15px;
     }
-    .login > form > p::after, .login > form > p::before{
+    .tela_log_cad > p::after, .tela_log_cad > p::before{
         content: '';
         display: block;
         width: 50%;
@@ -1622,170 +1639,198 @@
 }
 
     @media (max-width: 1024px) {
-.container{
-        max-width: 768px;
-}
+        .container{
+                max-width: 768px;
+        }
 
-.nav_nav div p:not(.nav_p_resultados p){
-        display: none;
-}
-.tela_inicial{
-        grid-template-columns: auto;
-        grid-gap: 0px;
-        width: 100%;
-}
-.texto_inicial h1{
-        font-size: 80px;
-}
-.tela_inicial_img{
-        display: none;
-}
-.tela_inicial_img2{
-        display: block;
-        position: absolute;
-        width: 300px;
-        top: 0;
-        left: 0;
-        transform: translateX(150%);
-}
-.tela_scroll_down a{
-        display: none;
-}
-.texto_inicial p{
-        font-size: 35px;
-}
-.tela_botao p{
-        font-size: 40px !important;
-}
-.tela_botao{
-        margin: auto;
-}
-
-
-.nav_elementos{
-        display: flex;
-}
-
-    /*parte info01_1*/
-.info01_1{
-        flex-direction: column;
-}
-.info01_1 img{
-        margin-left: 0px;
-        margin-top: 15px;
-}
-.info01_1_div{
-        background-color: white;
-        border-radius: 15px;
-}
-.info01_1_div h1{
-        text-align: center;
-}
-.info01_container{
-        height: 600px;
-}
-.info01_container div{
-        margin-bottom: 150px;
-}
+        .nav_nav div p:not(.nav_p_resultados p){
+                display: none;
+        }
+        .tela_inicial{
+                grid-template-columns: auto;
+                grid-gap: 0px;
+                width: 100%;
+        }
+        .texto_inicial h1{
+                font-size: 80px;
+        }
+        .tela_inicial_img{
+                display: none;
+        }
+        .tela_inicial_img2{
+                display: block;
+                position: absolute;
+                width: 300px;
+                top: 0;
+                left: 0;
+                transform: translateX(150%);
+        }
+        .tela_scroll_down a{
+                display: none;
+        }
+        .texto_inicial p{
+                font-size: 35px;
+        }
+        .tela_botao p{
+                font-size: 40px !important;
+        }
+        .tela_botao{
+                margin: auto;
+        }
 
 
-    footer{
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-}
-.footer_div{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-}
-.footer_div h1::after{
-        left: 50%;
-        transform: translateX(-50%);
-}
-}
+        .nav_elementos{
+                display: flex;
+        }
+
+            /*parte info01_1*/
+        .info01_1{
+                flex-direction: column;
+        }
+        .info01_1 img{
+                margin-left: 0px;
+                margin-top: 15px;
+        }
+        .info01_1_div{
+                background-color: white;
+                border-radius: 15px;
+        }
+        .info01_1_div h1{
+                text-align: center;
+        }
+        .info01_container{
+                height: 600px;
+        }
+        .info01_container div{
+                margin-bottom: 150px;
+        }
+
+
+            footer{
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+        }
+        .footer_div{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+        }
+        .footer_div h1::after{
+                left: 50%;
+                transform: translateX(-50%);
+        }
+
+        .tela_log_cad.cadastro{
+            width: 500px;
+        }
+        .tela_log_cad.cadastro > form{
+            display: flex;
+            flex-direction: column;
+        }
+        .tela_log_cad.cadastro > form > div{
+            width: 100% !important;
+        }
+    }
 
     @media (max-width: 768px) {
-.container{
-        max-width: 640px;
-}
+        .container{
+                max-width: 640px;
+        }
 
-.nav_logo{
-        content: url('logo-bola.svg');
-        width: 50px;
-        min-width: 50px;
-}
+        .nav_logo{
+                content: url('logo-bola.svg');
+                width: 50px;
+                min-width: 50px;
+        }
 
 
-.texto_inicial h1{
-        font-size: 65px;
-}
-.tela_inicial_img2{
-        width: 250px;
-}
-.texto_inicial p{
-        font-size: 30px;
-}
-.tela_botao p{
-        font-size: 30px !important;
-}
-.tela_botao{
-        margin: auto;
-}
-    
-    /*Parte info01*/
-.info01_container{
-        height: 650px;
-}
-.info01_container div{
-        margin-bottom: 250px;
-}
-}
+        .texto_inicial h1{
+                font-size: 65px;
+        }
+        .tela_inicial_img2{
+                width: 250px;
+        }
+        .texto_inicial p{
+                font-size: 30px;
+        }
+        .tela_botao p{
+                font-size: 30px !important;
+        }
+        .tela_botao{
+                margin: auto;
+        }
+            
+            /*Parte info01*/
+        .info01_container{
+                height: 650px;
+        }
+        .info01_container div{
+                margin-bottom: 250px;
+        }
+        
+    }
 
     @media (min-width: 641px)
     {
-.nav_elementos{
-        opacity: 1 !important;
-        transform: translateX(0%) !important;
-}
-}
+        .nav_elementos{
+                opacity: 1 !important;
+                transform: translateX(0%) !important;
+        }
+    }
     @media (max-width: 640px) {
-.container{
-        max-width: 475px;
-}
+        .container{
+                max-width: 475px;
+        }
 
-.nav_elementos div{
-        padding: 0 !important;
-}
-.nav_elementos{
-        flex-direction: column;
-        position: absolute;
-        right: 15px;
-        top: 50px;
-        background-color: var(--fundo_01);
-        transform: translateY(0%);
-        opacity: 1;
-        height: auto;
-        z-index: -2;
-        opacity: 0;
-}
-.nav_tres_risco{
-        display: block;
-        width: 30px;
-        margin-left: 10px !important;
-        margin-right: 10px !important;
-}
+        .nav_elementos div{
+                padding: 0 !important;
+        }
+        .nav_elementos{
+                flex-direction: column;
+                position: absolute;
+                right: 15px;
+                top: 50px;
+                background-color: var(--fundo_01);
+                transform: translateY(0%);
+                opacity: 1;
+                height: auto;
+                z-index: -2;
+                opacity: 0;
+        }
+        .nav_tres_risco{
+                display: block;
+                width: 30px;
+                margin-left: 10px !important;
+                margin-right: 10px !important;
+        }
 
-.texto_inicial h1{
-        font-size: 50px;
-}
-.tela_inicial_img2{
-        width: 180px;
-}
+        
+
+    .texto_inicial h1{
+            font-size: 50px;
+    }
+    .tela_inicial_img2{
+            width: 180px;
+    }
 
     /*Parte info01*/
-.info01_1 img{
-        height: 50px;
-}
+    .info01_1 img{
+            height: 50px;
+    }
+
+    .tela_log_cad{
+        width: 300px;
+    }
+    .tela_log_cad > h1{
+        font-size: 30px;
+    }
+    .tela_log_cad > form > .inp > p{
+        font-size: 20px;
+    }
+
+    .tela_log_cad.cadastro{
+        width: 300px;
+    }
 }
 
     /*CELULAR */

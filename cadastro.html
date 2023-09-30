@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link href="index.css" rel="stylesheet" type="text/css"> 
-    <title>Cadastro Tiny Wood</title>
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    
+    <title>TINYWOOD</title>
 </head>
 <body>
-    
     <script src="index.js" defer></script>
+    <script src="login.js" defer></script>
     <div class="nav_nav container">
         <div class="nav_fundo"></div>
-        <a href="index.html"><img src="logo-verde.svg" class="nav_logo"></a>
+        <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
 
 
         <div class="nav_div_pesquisa">
                 <div class="nav_pesquisa">
-                    <img src="pesquisa_cinza.svg" class="nav_icon">
+                    <img src="Icones/pesquisa_cinza.svg" class="nav_icon">
                     <input type="text" placeholder="Pesquisar...">
                 </div>
 
@@ -38,49 +40,132 @@
                 </div>
         </div>
         
-        <img src="Frame 3.svg" class="nav_tres_risco">
+        <img src="Icones/Frame 3.svg" class="nav_tres_risco" alt="Mais opções">
         <div class="nav_elementos">
             <div class="nav_risco"></div>
-            <div class="nav_home">
-                <img class="nav_icon" src="icon _home.svg">
+            <div class="nav_home" id="nav_botao_ativo">
+                <img class="nav_icon" src="Icones/icon _home.svg">
                 <p>HOME</p>
             </div>
             <div class="nav_produtos">
-                <img class="nav_icon" src="icon _shopping_bag.svg">
+                <img class="nav_icon" src="Icones/icon _shopping bag.svg">
                 <p>PRODUTOS</p>
             </div>
             <div class="nav_sobre">
-                <img class="nav_icon" src="icon _about.svg">
+                <img class="nav_icon" src="Icones/icon _about.svg">
                 <p>SOBRE</p>
             </div>
 
             <div class="nav_info_lateral">
-                <img class="nav_icon2" src="icon _shopping.svg">
+                <img class="nav_icon2" src="Icones/icon _shopping.svg">
                 <p>CARRINHO</p>
             </div>
-            <div class="nav_info_lateral">
-                <img class="nav_icon2" src="icon _login_.svg">
-                <p>LOGIN</p>
-            </div>
+            <a href="usuario.php">
+                <div class="nav_info_lateral">
+                    <img class="nav_icon2" src="Icones/icon _login_.svg">
+                    <p>LOGIN</p>
+                </div>
+            </a>
         </div>
         
     </div>
 
+    <section class="container sec_login">
+        <div class="cadastro tela_log_cad">
+            <h1>CADASTRAR-SE</h1>
+            <form action='cadastro.php' method='post'>
+                
+                <div class="nome inp" style="grid-area: 1/1/1/3; width: 50%;">
+                    <input type="text" name="nome" maxlength="80">
+                    <p>Nome</p>
+                </div>
+                <div class="email inp" style="grid-area: 2/1/2/2;">
+                    <input type="text" name="email" maxlength="100">
+                    <p>E-mail</p>
+                </div>
+                <div class="telefone inp" style="grid-area: 3/1/3/2;">
+                    <input type="text" name="telefone" maxlength="13">
+                    <p>Telefone</p>
+                </div>
+                <div class="senha inp" style="grid-area: 2/2/2/3;">
+                    <input type="password" name="senha" maxlength="40">
+                    <p>Senha</p>
+                </div>
+                <div class="senha_c inp" style="grid-area: 3/2/3/3;">
+                    <input type="password" name="senha_c" maxlength="40">
+                    <p>Confirmar senha</p>
+                </div>
+                <div class="btn" style="grid-area: 4/1/4/3; width: 80%;">
+                    <input type="submit" value="CADASTRE-SE">
+                </div>
+            </form>
+                <div class="troca_log_cad">
+                    <p>Já possuí uma conta?&nbsp;</p>
+                    <a href="login.html"><p>Faça o login.</p></a>
+                </div>
+                <p>OU</p>
+                <div class="google">
+                    LOG-IN with (code above)
+                </div>
+        </div>
+    </section>
 
-    <div class="container-lf">
+    <footer>
+        <div id="f_1"></div>
+        <div id="f_2"></div>
+        <div id="f_3"></div>
+        <div id="f_4"></div>
+        <div id="f_5"></div>
 
-        <!--Fundo de tela-->
-        <div class="tela">
-            <div class="cad_fundo">
-                <br>
-                
-                    <p class="cad_texto"> INICIAR SESSÃO</p>
-                
-                <br>
-                
-                <p class="cad_email">Nome</p>
-                
-                <form action='cadastro.php' method='post'>
+        <div class="footer_logo">
+            <img src="Icones/logo-bola-branco.svg" alt="Logo da Tiny Wood">
+            <div class="footer_logo_info">
+                <h1>TINY WOOD</h1>
+                <p>Alguimas informaçoes pq eu vi num lugar e 
+                    vou colocar
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vo
+                luptate quidem distinctio rerum assumenda quae aut, dicta c</p>
+                <div class="footer_logo_info_mais">
+                    <div class="footer_logo_info_mais_botao" value="1"></div>
+                    <div class="footer_logo_info_mais_botao" value="2"></div>
+                    <div class="footer_logo_info_mais_botao" value="3"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>All copyrights to &copy; TinyWood</p>
+        </div>
+        <div class="footer_info">
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+<!---<form action='cadastro.php' method='post'>
                     <input class="cad_email" type="text" name="nome" placeholder="  Digite seu nome . . ." maxlength="80"> 
                     <br>
                         <p class="cad_email">E-mail</p>
@@ -93,34 +178,4 @@
                         <input class="cad_senha" type="password" name="senha" placeholder="  Digite sua senha . . ." maxlength="40"> 
                     <br>
                         <input class="cad_enviar" type="submit" action="cadastro.php" value="INICIAR SESSÃO">
-                </form>
-
-                <br>
-                <div class="cad_texto2">já possui uma conta ?<a class="cad_link" href="login.html"> Faça o login</a> </div>
-                
-                <p class="cad_texto3"> ---------- OU ---------- </p>
-                    
-                <br>
-
-                <a class="cad_goo" ><img src="btn_google_light_normal_ios.svg"> ENTRAR COM O GOOGLE</a>
-                
-            </div>
-            
-        </div>
-        
-        <footer class="rodape">
-            <p class="rod_texto"> &copy; Bauru - SP</p>
-            <p class="rod_texto">Colegio  técnico industrial - Prof. Isaac Portal Roldan </p>
-            <p class="rod_texto">Olá, você veio! umas observações finais sobre o site, espero tê-las feio até o storyboard. 1° -> 
-                                O site esta muito gordo/grande, pretendo diminuir praticamente tudo para ficar mais espaço e não não maçudo
-                                . 2° -> a ideia de manter tudo em uma mesma teçla não sei se é permanente, posso alterar isso 
-                                depois, pretendo mudar todas as abas que apareceram aqui um pouco, então não vai ficar assim no projeto 
-                                final. é isso, tenha um otimo dia!
-            </p>    
-        </footer>
-    </div>
-</body>
-</html>
-
-
-
+                </form> --->

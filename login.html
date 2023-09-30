@@ -12,7 +12,7 @@
     <script src="index.js" defer></script>
     <script src="login.js" defer></script>
     <div class="nav_nav container">
-        <div class="nav_fundo" style="position: fixed; width: 200vw; transform: translateX(-20%);"></div>
+        <div class="nav_fundo"></div>
         <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
 
 
@@ -71,9 +71,10 @@
     </div>
 
     <section class="container sec_login">
-        <div class="login">
+        <div class="login tela_log_cad">
+            <h1>INICIAR SESSÃO</h1>
             <form action="login.php" method="post">
-                <h1>INICIAR SESSÃO</h1>
+                
                 <div class="email inp">
                     <input type="text" name="email" maxlength="100">
                     <p>E-mail</p>
@@ -85,7 +86,9 @@
                 <div class="btn">
                     <input type="submit" value="INICIAR SESSÃO">
                 </div>
-                <div class="cadastro">
+                
+            </form>
+                <div class="troca_log_cad">
                     <p>Não possui uma conta?&nbsp;</p>
                     <a href="cadastro.html"><p>Faça o cadastro.</p></a>
                 </div>
@@ -93,7 +96,6 @@
                 <div class="google">
                     LOG-IN with (code above)
                 </div>
-            </form>
         </div>
     </section>
 
