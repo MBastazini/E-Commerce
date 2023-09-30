@@ -10,11 +10,11 @@ function novoProduto(id, nome, quantidade, preco) {
     produto_compra.onclick = function() {
         var produto = document.getElementById(`${id}`);
         produto.style.backgroundColor = 'rgba(150, 195, 121, 0.6)';
-        produto.style.transform = 'scale(1.05)';
+        produto.style.transform = 'scale(1.03)';
         setTimeout(function() {
             produto.style.backgroundColor = '#D4EBC6';
             produto.style.transform = 'scale(1)';
-        }, 500);
+        }, 300);
     }
 
     var nomeElement = document.createElement("p");
@@ -77,4 +77,7 @@ function novoValorTotal()
 document.addEventListener("DOMContentLoaded", function() {
     adicionarProdutosDaTabela();
 
+    const produtos_compra = document.querySelector('#produtos_compra');
+    const compra_total = document.querySelector('#compra_total');
+    produtos_compra.style.maxHeight = `${compra_total.offsetHeight - 100}px`;
 });
