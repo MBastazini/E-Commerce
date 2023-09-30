@@ -29,7 +29,7 @@
     
 
   if (isset($_SESSION['conectado'])) {
-    $conec = $_SESSION['conectado'];
+      $conec = $_SESSION['conectado'];
     } 
     else{        
         $conec = false;

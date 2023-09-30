@@ -1310,7 +1310,7 @@
     box-sizing: border-box;
 }
 .finalizar_compra:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: 0.5s;
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
 }
@@ -1431,12 +1431,15 @@
         transition: 0.2s;
         color: black;
     }
-    #input-ativo{
+    #input-ativo, #input-ativo-blur{
         top: 0;
         left: 0;
         transform: translate(0%,-100%);
         transition: 0.5s;
         color: black;
+    }
+    #input-ativo-blur{
+        color: rgba(0, 0, 0, 0.5);
     }
     .login > form > .inp{
         position: relative;
@@ -1451,7 +1454,51 @@
         transition: 0.5s;
         color: gray;
     }
+    .login > form > .btn > input{
+        background-color: var(--destaque_texto);
+        color: white;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        text-align: center;
+        border-radius: 5px;
+        transition: 0.5s;
+        font-size: 25px;
+        border: none;
+        outline: none;
+    }
+    .login > form > .btn > input:hover{
+        background-color: var(--cor_destaque);
+        transition: 0.5s;
+        cursor: pointer;
+    }
+    .login > form > .cadastro > p, .login > form > .cadastro > a{
+        font-size: 25px;
+    }
+    .login > form > .cadastro{
+        display: flex;
+        margin: 10px;
+        width: 100%;
+        justify-content: center;
 
+    }
+    .login > form > p{
+        font-size: 20px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        box-sizing: border-box;
+        margin-top: 15px;
+    }
+    .login > form > p::after, .login > form > p::before{
+        content: '';
+        display: block;
+        width: 50%;
+        height: 3px;
+        background-color: black;
+    }
+    
     /*
 
 

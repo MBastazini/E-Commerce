@@ -1,7 +1,7 @@
 function checa_botao(input, texto)
 {
     if (input.value != '') {
-        texto.id = 'input-ativo';
+        texto.id = 'input-ativo-blur';
     }
     else{
         texto.id = '';
