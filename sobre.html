@@ -10,7 +10,7 @@
 </head>
 <body>
     <script src="index.js" defer></script>
-    <script src="login.js" defer></script>
+    <script src="carrinho.js" defer></script>
     <div class="nav_nav container">
         <div class="nav_fundo"></div>
         <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
@@ -43,16 +43,18 @@
         <img src="Icones/Frame 3.svg" class="nav_tres_risco" alt="Mais opções">
         <div class="nav_elementos">
             <div class="nav_risco"></div>
-            <div class="nav_home">
-                <img class="nav_icon" src="Icones/home_escuro.svg">
-                <p>HOME</p>
-            </div>
+            <a href="index.html">
+                <div class="nav_home">
+                    <img class="nav_icon" src="Icones/home_escuro.svg">
+                    <p>HOME</p>
+                </div>
+            </a>
             <div class="nav_produtos">
                 <img class="nav_icon" src="Icones/icon _shopping bag.svg">
                 <p>PRODUTOS</p>
             </div>
-            <div class="nav_sobre">
-                <img class="nav_icon" src="Icones/icon _about.svg">
+            <div class="nav_sobre" id="nav_botao_ativo">
+                <img class="nav_icon" src="Icones/sobre_branco.svg">
                 <p>SOBRE</p>
             </div>
 
@@ -60,40 +62,26 @@
                 <img class="nav_icon2" src="Icones/icon _shopping.svg">
                 <p>CARRINHO</p>
             </div>
-            <div class="nav_info_lateral"  id="nav_botao_ativo">
-                <img class="nav_icon2" src="Icones/login_branco.svg">
+            <div class="nav_info_lateral">
+                <img class="nav_icon2" src="Icones/icon _login_.svg">
                 <p>LOGIN</p>
             </div>
         </div>
         
     </div>
 
-    <section class="container sec_login">
-        <div class="login tela_log_cad">
-            <h1>INICIAR SESSÃO</h1>
-            <form action="login.php" method="post">
-                
-                <div class="email inp">
-                    <input type="email" name="email" maxlength="100">
-                    <p>E-mail</p>
+    <section class="tela_sobre container">
+        <h1>A TINY WOOD</h1>
+        <div class="sobre_img">
+            <img src="Icones/foto-teste.png">
+            <div id="sobre_mateus" class="img_sobre_info">
+                <div>
+                    <h1>Mateus Bastazini</h1>
+                    <h1>N° 24</h1>
+                    <p> > Lider tecnico / Financeiro</p>
+                    <p> > Frotend HTML / CSS / JS</p>
                 </div>
-                <div class="senha inp">
-                    <input type="password" name="senha" maxlength="40">
-                    <p>Senha</p>
-                </div>
-                <div class="btn">
-                    <input type="submit" value="INICIAR SESSÃO">
-                </div>
-                
-            </form>
-                <div class="troca_log_cad">
-                    <p>Não possui uma conta?&nbsp;</p>
-                    <a href="cadastro.html"><p>Faça o cadastro.</p></a>
-                </div>
-                <p>OU</p>
-                <div class="google">
-                    LOG-IN with (code above)
-                </div>
+            </div>
         </div>
     </section>
 
