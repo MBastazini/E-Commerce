@@ -15,7 +15,7 @@
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    $checa = 0;
+    $check = 0;
 
     while ($var = $select->fetch() )  
     {
@@ -24,36 +24,33 @@
         $varCod = $var['cod_usuario'];
 
         if($varEmail == $email AND $varSenha != $senha){
-            $checa = 1;
+            $check = 1;
         }
 
         if($varEmail == $email AND $varSenha == $senha){
-            $checa = 2;
+            $check = 2;
             $varEmail = $var['email'];
             $varSenha = $var['senha'];
         }
 
-        if($checa == 0){
+        if($check == 0){
             echo "html com caixa q NAO tem conta......";
             header('Location: cadastro.html');
         }
         
-        if($checa == 1){
+        if($check == 1){
             echo "html com caixa senha incorreta";
             header('Location: login.html');
         }
     
-        if($checa == 2){
+        if($check == 2){
     
             
             Cookie('login', $varCod, 1440);
-            /*sessao($varCod);*/
-            /*$true = true;*/
             $_SESSION['conectado'] = sessao($cod);
 
             echo "Caixa com confirmacao de login......";
-            sleep(1);
-            header('Location: login.html');   
+            header('Location: index.html');   
         }
     }
 
