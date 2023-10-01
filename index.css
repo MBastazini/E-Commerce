@@ -1217,6 +1217,11 @@
     transition: 0.2s;
     
 }
+.produto_compra:hover{
+    transform: scale(1.03) !important;
+    transition: 0.2s;
+    
+}
 .produto_compra > div > p{
     font-size: 25px;
 }
@@ -1334,7 +1339,6 @@
     margin: 0px 20px;
     cursor: pointer;
 }
-
 #quantidade::after{
     content: '+';
 }
