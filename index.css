@@ -789,6 +789,9 @@
     text-align: right;
     transform: translate(-20px, -50%);
     padding-right: 0;
+    color: white;
+    text-align: center;
+    transition: 0.5s;
 }
 .t_esquerda{
     text-align: left;
@@ -796,6 +799,10 @@
 }
 .t_direita p{
     margin-right: 20px;
+}
+.t_centro{
+    font-size: 40px;
+    font-weight: 200;
 }
 .titulo p{
     color: white;
@@ -1447,6 +1454,9 @@
         color: gray;
         box-sizing: border-box;
     }
+    .tela_log_cad > form > .inp > input:hover{
+        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
+    }
     .tela_log_cad > form > .inp > input:focus{
         border: 3px solid var(--cor_destaque);
         outline: none;
@@ -1591,19 +1601,55 @@
     section.tela_sobre{
         margin: 100px 0px;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info_tiny_wood{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 150px;
+        width: 100%;
+    }
+    .info_tiny_wood:hover > h1{
+        width: 60%;
+        transition: 0.5s;
+    }
+    .info_tiny_wood > p{
+        font-size: 30px;
+        font-weight: 400;
+        line-height: 1.2;
+        margin-bottom: 10px;
     }
     .tela_sobre > h1{
         font-size: 60px;
         font-weight: 400;
-        margin-bottom: 50px;
+        margin-bottom: 10px;
         text-align: center;
+    }
+    .tela_sobre > p{
+        font-size: 30px;
+        font-weight: 400;
+        line-height: 1.2;
+
+        margin-bottom: 50px;
     }
     .sobre_img{
         position: relative;
+        width: 100%;
     }
     .sobre_img > img{
         width: 100%;
         object-fit: cover;
+        transition: 0.5s;
+    }
+    .sobre_img > img:hover{
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
+        transition: 0.5s;
     }
     .img_sobre_info{
         position: absolute;
@@ -1645,6 +1691,47 @@
     #sobre_mateus > div{
         width: 300px;
         height: 200px;
+    }
+
+    #sobre_devs, #sobre_contato{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        width: 100%;
+    }
+    #sobre_contato > div{
+        width: 100%;
+        background-color: var(--destaque_01);
+        padding: 20px;
+        position: relative;
+    }
+    #sobre_contato > div > p{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .dev{
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        justify-content: center;
+    }
+    .dev img{
+        width: 200px;
+        height: 200px;
+        border-radius: 20%;
+        object-fit: cover;
+    }
+    .dev h1{
+        font-size: 30px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+    .dev p{
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.2;
+        margin-bottom: 10px;
     }
     /*
 
