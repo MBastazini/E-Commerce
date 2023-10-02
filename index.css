@@ -1693,10 +1693,10 @@
         height: 200px;
     }
 
-    #sobre_devs, #sobre_contato{
+    #sobre_contato{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 50px;
+        gap: 200px;
         width: 100%;
     }
     #sobre_contato > div{
@@ -1704,31 +1704,93 @@
         background-color: var(--destaque_01);
         padding: 20px;
         position: relative;
+        box-sizing: border-box;
     }
     #sobre_contato > div > p{
         position: absolute;
+        font-size: 25px;
         top: 0;
         left: 0;
+        transform: translate(0%, -100%);
+        margin-left: 10px;
+    }
+    #sobre_contato > div > h1{
+        font-size: 40px;
+        text-align: center;
+        font-weight: 400;
+
+    }  
+    
+    #sobre_devs{
+        position: relative;
+        height: 1500px;
+        width: 100%;
     }
     .dev{
+        position: absolute;
         display: flex;
         gap: 30px;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        background-color: var(--destaque_01);
+        padding: 40px;
+        box-sizing: border-box;
+        border-radius: 15px;
+        box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.1);
+        width: 600px;
+        aspect-ratio: 1;
+        user-select: none;
+        cursor: all-scroll;
+        transition: box-shadow 0.2s;
+        transition: transform 0.2s;
     }
-    .dev img{
+    .dev_btn{
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: var(--cor_destaque);
+        cursor: pointer;
+    }
+
+    .dev_btn.enabled{
+        background-color: var(--destaque_texto);
+    }
+    .dev.enabled{
+        user-select: auto;
+        cursor: auto;
+    }
+    .dev.active{
+        box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.25);
+        transition: box-shadow 0.2s;
+        z-index: 3;
+    }
+    .dev > .dev_img{
         width: 200px;
         height: 200px;
         border-radius: 20%;
-        object-fit: cover;
+        background-image: url(Icones/quadrado.svg);
     }
     .dev h1{
-        font-size: 30px;
+        font-size: 50px;
         font-weight: 400;
         margin-bottom: 10px;
+        width: 90%;
+        text-align: center;
+    }
+    .dev h1::after{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 8px;
+        margin-top: 5px;
+        background-color: var(--destaque_texto);
     }
     .dev p{
-        font-size: 20px;
+        font-size: 30px;
         font-weight: 400;
         line-height: 1.2;
         margin-bottom: 10px;
