@@ -803,6 +803,7 @@
 .t_centro{
     font-size: 40px;
     font-weight: 200;
+    padding-right: 20px;
 }
 .titulo p{
     color: white;
@@ -1655,64 +1656,27 @@
         box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
         transition: 0.5s;
     }
-    .img_sobre_info{
-        position: absolute;
-    }
-    .img_sobre_info:hover > div{
-        opacity: 1;
-        transition: 0.8s;
-        margin-left: 100%;
-    }
-
-    .img_sobre_info > div{
-        margin-left: 50%;
-        background-color: white;
-        border-radius: 10px;
-        box-sizing: border-box;
-        padding: 15px;
-        opacity: 0;
-        transition: 0.8s;
-        pointer-events: none;
-    }
-    .img_sobre_info > div > h1{
-        font-size: 30px;
-        font-weight: 400;
-    }
-    .img_sobre_info > div > p{
-        font-size: 20px;
-        font-weight: 400;
-        margin-top: 15px;
-        margin-bottom: 5px;
-    }
 
 
-    #sobre_mateus{
-        bottom: 0px;
-        left: 0px;
-        height: 300px;
-        width: 400px;
-    }
-    #sobre_mateus > div{
-        width: 300px;
-        height: 200px;
-    }
 
     #sobre_contato{
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 200px;
         width: 100%;
+        box-sizing: border-box;
     }
     #sobre_contato > div{
         width: 100%;
         background-color: var(--destaque_01);
         padding: 20px;
         position: relative;
-
+        box-sizing: border-box;
         transition: 0.5s;
     }
     #sobre_contato > div > img{
         position: absolute;
+        width: 40px;
         opacity: 0;
     }
     #sobre_contato > div:hover{
@@ -1745,6 +1709,18 @@
         height: 1500px;
         width: 100%;
     }
+
+    #msg{
+        position: absolute;
+        font-size: 30px;
+        background-color: var(--destaque_01);
+        padding: 10px;
+        border-radius: 10px;
+        transform: translate(0%, -100%);
+    }
+
+
+
     .dev{
         position: absolute;
         display: flex;
@@ -1816,6 +1792,28 @@
         line-height: 1.2;
         margin-bottom: 10px;
     }
+
+    /*Organização posocional dos desenvolvedores*/
+    .dev#mateus{
+        top: 20px;
+        left: 0px;
+    }
+    .dev#luiz{
+        top: 0px;
+        left: 520px;
+    }
+    .dev#leticia{
+        top: 0px;
+        left: 1040px;
+    }
+    .dev#mariana{
+        top: 800px;
+        left: 250px;
+    }
+    .dev#matheus{
+        top: 800px;
+        left: 780px;
+    }
     /*
 
 
@@ -1831,54 +1829,101 @@
 
 
     @media (max-width: 1536px) { 
-.container{
-        max-width: 1280px;
-}
+        .container{
+                max-width: 1280px;
+        }
 
-    /*Parte da tela_inicial*/
-.tela_madeira h1{
-        font-size: 80px;
-}
-.texto_inicial h1{
-        font-size: 80px;
-}
-.texto_inicial p{
-        font-size: 30px;
-}
-.tela_inicial_img{
-        height: 600px;
-        width: 500px;
-        transition: 0.1s;
-}
+            /*Parte da tela_inicial*/
+        .tela_madeira h1{
+                font-size: 80px;
+        }
+        .texto_inicial h1{
+                font-size: 80px;
+        }
+        .texto_inicial p{
+                font-size: 30px;
+        }
+        .tela_inicial_img{
+                height: 600px;
+                width: 500px;
+                transition: 0.1s;
+        }
 
 
-.nav_elementos{
-        display: flex;
-}
+        .nav_elementos{
+                display: flex;
+        }
 
-    /*Parte info01*/
-.info01_1 p{
-        font-size: 15px;
-}
-.info01_1 h1{
-        font-size: 20px;
-}
+            /*Parte info01*/
+        .info01_1 p{
+                font-size: 15px;
+        }
+        .info01_1 h1{
+                font-size: 20px;
+        }
 
-.info01_1 *:not(.info01_1 img){
-        margin: 13px;
-}
+        .info01_1 *:not(.info01_1 img){
+                margin: 13px;
+        }
 
-    /*parte video*/
-.info_video{
-        flex-direction: column;
-}
-.info_video div{
-        width: 100%;
-}
-.video_texto h1{
-        text-align: center;
-}
+            /*parte video*/
+        .info_video{
+                flex-direction: column;
+        }
+        .info_video div{
+                width: 100%;
+        }
+        .video_texto h1{
+                text-align: center;
+        }
+        
+        .dev > .dev_img{
+            width: 80%;
+            height: 40%;
+            background-image: url(Icones/quadrados.svg);
+            background-size: cover;
+        }
+        .dev h1{
+            font-size: 30px;
+        }
+        .dev p{
+            font-size: 20px;
+        }
+        .dev{
+            width: 400px;
+        }
 
+        #sobre_devs{
+            height: 1200px;
+        }
+        #sobre_contato > div > img{
+            width: 30px;
+        }
+        #msg{
+            font-size: 20px;
+        }
+
+        /*Reposicionamento dos devs*/
+        .dev#mateus{
+            top: 20px;
+            left: 0px;
+        }
+        .dev#luiz{
+            top: 0px;
+            left: 400px;
+        }
+        .dev#leticia{
+            top: 0px;
+            left: 800px;
+        }
+        .dev#mariana{
+            top: 600px;
+            left: 200px;
+        }
+        .dev#matheus{
+            top: 600px;
+            left: 600px;
+        }
 }
 
     @media (max-width: 1280px) {
@@ -1940,6 +1985,42 @@
         margin: 50px 0px 0px 0px;
     }
 
+    #sobre_contato > div > h1{
+        font-size: 30px;
+    } 
+    .info_tiny_wood > p{
+        font-size: 25px;
+    }
+
+    .t_centro{
+        font-size: 35px;
+    }
+
+    /*Reposicionamento dos devs*/
+    .dev#mateus{
+        top: 20px;
+        left: 50px;
+    }
+    .dev#luiz{
+        top: 0px;
+        left: 550px;
+    }
+    .dev#leticia{
+        top: 600px;
+        left: 50px;
+    }
+    .dev#mariana{
+        top: 600px;
+        left: 550px;
+    }
+    .dev#matheus{
+        top: 1200px;
+        left: 300px;
+    }
+
+    #sobre_devs{
+        height: 1800px;
+    }
 }
 
     @media (max-width: 1024px) {
@@ -2045,6 +2126,42 @@
         #compra_total p, #compra_total h1{
             font-size: 18px;
         }
+
+
+        #sobre_contato > div > h1{
+            font-size: 25px; 
+        } 
+        #sobre_contato{
+            gap: 50px;
+        }
+        .tela_sobre > h1{
+            font-size: 50px;
+        }
+        .tela_sobre > p{
+            font-size: 25px;
+        }
+
+        /**/
+        .dev#mateus{
+            top: 20px;
+            left: 0px;
+        }
+        .dev#luiz{
+            top: 0px;
+            left: 400px;
+        }
+        .dev#leticia{
+            top: 600px;
+            left: 0px;
+        }
+        .dev#mariana{
+            top: 600px;
+            left: 400px;
+        }
+        .dev#matheus{
+            top: 1200px;
+            left: 200px;
+        }
     }
 
     @media (max-width: 768px) {
@@ -2085,6 +2202,75 @@
         
         #compra_total p, #compra_total h1{
             font-size: 15px;
+        }
+
+
+        #sobre_contato > div > h1{
+            font-size: 20px; 
+        } 
+        #sobre_contato{
+            gap: 10px;
+        }
+
+        .info_tiny_wood > #contato{
+            font-size: 30px;
+        }
+        .info_tiny_wood > p{
+            font-size: 20px;
+        }
+        .t_centro{
+            font-size: 25px;
+            padding: 15px;
+        }
+
+        #sobre_contato > div > img{
+            width: 25px;
+        }
+
+        .dev h1{
+            font-size: 25px;
+        }
+        .dev p{
+            font-size: 15px;
+        }
+        .dev > .dev_img{
+            width: 60%;
+            height: 30%;
+        }
+        .dev{
+            gap: 10px;
+            width: 300px;
+            padding: 20px;
+        }
+        .dev_btn{
+            width: 25px;
+            height: 25px;
+        }
+
+
+        .dev#mateus{
+            top: 20px;
+            left: 20px;
+        }
+        .dev#luiz{
+            top: 0px;
+            left: 320px;
+        }
+        .dev#leticia{
+            top: 400px;
+            left: 20px;
+        }
+        .dev#mariana{
+            top: 400px;
+            left: 320px;
+        }
+        .dev#matheus{
+            top: 800px;
+            left: 170px;
+        }
+
+        #sobre_devs{
+            height: 1200px;
         }
     }
 
@@ -2166,7 +2352,80 @@
         .compra_cabecalho > h1{
             font-size: 10px !important;
         }
+
+        .tela_sobre > h1{
+            font-size: 40px;
+        }
+        .tela_sobre > p{
+            font-size: 20px;
+        }
+        #sobre_contato > div > h1{
+            font-size: 18px; 
+            text-align: right;
+        }
+        #sobre_contato > div > img{
+            width: 20px;
+        }
+        #sobre_contato > div{
+            padding: 15px;
+        }
+
+
+
+        .info_tiny_wood{
+            margin-top: 80px;
+        }
+        .dev{
+            width: 220px;
+            gap: 0px;
+        }
+        .dev > .dev_img{
+            display: none;
+        }
+        .dev p::before{
+            display: none;
+        }
+        .dev h1::after{
+            height: 5px;
+        }
+        .dev h1{
+            padding-top: 25px;
+        }
+        .dev_btn{
+            left: 50%;
+            transform: translateX(-50%);
+            top: 10px;
+        }
+
+        .dev#mateus{
+            top: 20px;
+            left: 0px;
+        }
+        .dev#luiz{
+            top: 0px;
+            left: 250px;
+        }
+        .dev#leticia{
+            top: 370px;
+            left: 0px;
+        }
+        .dev#mariana{
+            top: 370px;
+            left: 250px;
+        }
+        .dev#matheus{
+            top: 720px;
+            left: 125px;
+        }
+
+        #sobre_devs{
+            height: 1000px;
+        }
 }
+
+
+
+
 
     /*CELULAR */
     @media (max-width: 475px) {

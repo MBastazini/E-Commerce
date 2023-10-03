@@ -29,6 +29,24 @@ function addDragEvents(element, btn_element) {
   });
 }
 
+
+function CopyMessage(element)
+{
+    var copyText = element.querySelector('h1');
+
+    copyText = copyText.innerText.replace(/\+|\(|\)|\-/g, '');
+    navigator.clipboard.writeText(copyText);
+    /* Crate a messege on the mouse position */
+    var msg = document.createElement('div');
+    msg.id = 'msg';
+    msg.innerText = 'Copiado!';
+    msg.style.left = event.clientX + 'px';
+    msg.style.top = event.clientY + scrollY + 'px';
+    document.body.appendChild(msg);
+    /* Remove the message after 1 second */
+    setTimeout(function(){document.body.removeChild(msg)}, 1000);
+    
+}
 document.addEventListener('DOMContentLoaded', function () {
   const devElements = document.querySelectorAll('.dev');
   const btn_desliga = document.querySelectorAll('.dev_btn');
@@ -51,4 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  
 });

@@ -75,14 +75,6 @@
         <p>"Alguma mensagem / spot pequena"</p>
         <div class="sobre_img">
             <img src="Icones/foto-teste.png">
-            <div id="sobre_mateus" class="img_sobre_info">
-                <div>
-                    <h1>Mateus Bastazini</h1>
-                    <h1>N° 24</h1>
-                    <p> > Lider tecnico / Financeiro</p>
-                    <p> > Frotend HTML / CSS / JS</p>
-                </div>
-            </div>
         </div>
         <div class="info_tiny_wood">
             <h1 class="titulo t_centro">SOBRE NÓS</h1>
@@ -98,12 +90,12 @@
             </div>
             <h2 id="contato">CONTATE-NOS</h2>
             <div id="sobre_contato">
-                <div>
+                <div onclick="CopyMessage(this)">
                     <img src="Icones/copy.svg">
                      <p>Telefone</p>
                      <h1>+55 (14) 98144-4444</h1>
                 </div>
-                <div>
+                <div onclick="CopyMessage(this)">
                     <img src="Icones/copy.svg">
                      <p>E-mail</p>
                      <h1>tinywood@gmail.com</h1>
@@ -114,57 +106,58 @@
         <div class="info_tiny_wood">
             <h1 class="titulo t_centro">DESENVOLVEDORES</h1>
             <div id="sobre_devs">
-                <div class="dev enabled" style="top: 0; left: 0;">
-                    <div class="dev_btn"></div>
+                <div class="dev" id="mateus">
+                    <div class="dev_btn enabled"></div>
                     <h1>Mateus Bastazini<br>N°24</h1>
                     <div class="dev_img"></div>
                     <p> Financeiro e lider tecnico, responsavel pelo 
-                        CSS / HTML e JavaScript do site,
+                        CSS / HTML / JavaScript e design do site, ajudou na lixação
+                        e corte a laser das madeiras,
                         inclusive é ele quem esta escrevendo isso, Bom dia.
 
                     </p>
                 </div>
-                <div class="dev enabled" style="top: 0px; left: 500px">
+                <div class="dev enabled" id="luiz">
                     <div class="dev_btn"></div>
-                    <h1>Mateus Bastazini<br>N°24</h1>
+                    <h1>Luiz Felipe<br>N°22</h1>
                     <div class="dev_img"></div>
-                    <p> Financeiro e lider tecnico, responsavel pelo 
-                        CSS / HTML e JavaScript do site,
-                        inclusive é ele quem esta escrevendo isso, Bom dia.
+                    <p> Lider geral, responsavel pelo backend e banco de dados,
+                        alem de ser o responsavel pela ideia de chaveiros de madeira,
+                        e quem mais ajudou a obte-las e trata-las.
 
                     </p>
                 </div>
-                <div class="dev enabled" style="top: 0px; left: 1000px">
+                <div class="dev enabled" id="leticia">
                     <div class="dev_btn"></div>
-                    <h1>Mateus Bastazini<br>N°24</h1>
+                    <h1>Leticia Garcia<br>N°21</h1>
                     <div class="dev_img"></div>
-                    <p> Financeiro e lider tecnico, responsavel pelo 
-                        CSS / HTML e JavaScript do site,
-                        inclusive é ele quem esta escrevendo isso, Bom dia.
+                    <p> ______, responsavel, juntamente com a Mariana, pelos mapas
+                        conceituais e logicos do banco de dados, alem de ajudar
+                        na obtenção dos metais para os chaveiros, lixação e no corte a laser.
 
                     </p>
                 </div>
-                <div class="dev enabled" style="top: 700px; left: 250px">
+                <div class="dev enabled" id="mariana">
                     <div class="dev_btn"></div>
-                    <h1>Mateus Bastazini<br>N°24</h1>
+                    <h1>Mriana Senger<br>N°23</h1>
                     <div class="dev_img"></div>
-                    <p> Financeiro e lider tecnico, responsavel pelo 
-                        CSS / HTML e JavaScript do site,
-                        inclusive é ele quem esta escrevendo isso, Bom dia.
+                    <p> _______, responsavel, juntamente com a Leticia, pelos mapas
+                        conceituais e logicos do banco de dados, alem de montar o design dos chaveiros
+                        e ajudar com a lixação.
 
                     </p>
                 </div>
-                <div class="dev enabled" style="top: 700px; left: 750px">
+                <div class="dev enabled" id="matheus">
                     <div class="dev_btn"></div>
-                    <h1>Mateus Bastazini<br>N°24</h1>
+                    <h1>Matheus Trantini<br>N°25</h1>
                     <div class="dev_img"></div>
-                    <p> Financeiro e lider tecnico, responsavel pelo 
-                        CSS / HTML e JavaScript do site,
-                        inclusive é ele quem esta escrevendo isso, Bom dia.
+                    <p> Marketing, montou o documento necessario para o envio do projeto e conseguiu um patrocinio.
 
                     </p>
                 </div>
             </div>
+            <p style="font-size: 20px;">P. S. O primeiro desenvolvedor esta torto, não acha?<br>
+            porque não dá uma ajeitada?</p>
         </div>
         
     </section>
@@ -221,4 +214,4 @@
         </div>
     </footer>
 </body>
-</html>d
+</html>
