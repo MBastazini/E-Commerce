@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    
+    <title>TINYWOOD</title>
+</head>
+<body style="overflow-x: hidden;">
+    <script src="produtos.js" defer></script>
+    <script src="index.js" defer></script>
+    <div class="nav_nav container">
+        <div class="nav_fundo"></div>
+        <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
+
+
+        <div class="nav_div_pesquisa">
+                <div class="nav_pesquisa">
+                    <img src="Icones/pesquisa_cinza.svg" class="nav_icon">
+                    <input type="text" placeholder="Pesquisar...">
+                </div>
+
+                <div class="nav_p_resultados">
+                    <table>
+                        <tr>
+                            <td><p>Chaveiro CARRARO</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>Algo não chaveiro</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>Chaveiro DIY da Mariana</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>Chaveiro com tentativa de desenho do Bastazini</p></td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+        
+        <img src="Icones/Frame 3.svg" class="nav_tres_risco" alt="Mais opções">
+        <div class="nav_elementos">
+            <div class="nav_risco"></div>
+            <a href="index.html">
+                <div class="nav_home">
+                    <img class="nav_icon" src="Icones/home_escuro.svg">
+                    <p>HOME</p>
+                </div>
+            </a>
+            <div class="nav_produtos">
+                <img class="nav_icon" src="Icones/icon _shopping bag.svg">
+                <p>PRODUTOS</p>
+            </div>
+            <div class="nav_sobre" id="nav_botao_ativo">
+                <img class="nav_icon" src="Icones/sobre_branco.svg">
+                <p>SOBRE</p>
+            </div>
+
+            <div class="nav_info_lateral">
+                <img class="nav_icon2" src="Icones/icon _shopping.svg">
+                <p>CARRINHO</p>
+            </div>
+            <div class="nav_info_lateral">
+                <img class="nav_icon2" src="Icones/icon _login_.svg">
+                <p>LOGIN</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <section id="produtos" class="container">
+        <div id="filtro">
+            <h1>FILTROS</h1>
+            <div>  
+                <h1>ATIVOS</h1>
+                <div id="ativos">
+                    <span id="n_ativo">
+                        <p>Nenhum</p>
+                    </span>
+                </div>
+
+                <div class="filtro_opcoes">
+                    <h1>TIPO</h1>
+                    <div onclick="checkFiltro(this)">
+                        <input type="checkbox" name="TIPO0">
+                        <p>TIPO0</p>
+                    </div>
+                    <div onclick="checkFiltro(this)">
+                        <input type="checkbox" name="TIPO1">
+                        <p>TIPO1</p>
+                    </div>
+                    <div onclick="checkFiltro(this)">
+                        <input type="checkbox"  name="2">
+                        <p>2</p>
+                    </div>
+                    <div onclick="checkFiltro(this)">
+                        <input type="checkbox"  name="TIPo3">
+                        <p>TIPO3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="area_produtos">
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <img src="Icones/quadrado.svg" alt="Produto">
+                <div>
+                    <h1>CHAVEIRO CARRARO</h1>
+                    <h2>R$ 4,99</h2>
+                    <div class="product_botoes">
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action="#">
+                            <button type="submit" id="add-cart">
+                                <p>+</p>
+                                <img src="Icones/carrinho_branco.svg" alt="carrinho">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div id="f_1"></div>
+        <div id="f_2"></div>
+        <div id="f_3"></div>
+        <div id="f_4"></div>
+        <div id="f_5"></div>
+
+        <div class="footer_logo">
+            <img src="Icones/logo-bola-branco.svg" alt="Logo da Tiny Wood">
+            <div class="footer_logo_info">
+                <h1>TINY WOOD</h1>
+                <p>Alguimas informaçoes pq eu vi num lugar e 
+                    vou colocar
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vo
+                luptate quidem distinctio rerum assumenda quae aut, dicta c</p>
+                <div class="footer_logo_info_mais">
+                    <div class="footer_logo_info_mais_botao" value="1"></div>
+                    <div class="footer_logo_info_mais_botao" value="2"></div>
+                    <div class="footer_logo_info_mais_botao" value="3"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>All copyrights to &copy; TinyWood</p>
+        </div>
+        <div class="footer_info">
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+            <div class="footer_div">
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

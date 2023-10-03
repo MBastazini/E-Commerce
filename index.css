@@ -1236,8 +1236,8 @@
     font-size: 25px;
 }
 .produto_compra img{
-    width: 100%;
-    height: 50%;
+    height: 100%;
+    aspect-ratio: 1;
 }
 .produto_compra > div{
     display: flex;
@@ -1276,7 +1276,7 @@
 .preco{
     font-weight: 800;
 }
-.compra_total > h1{
+#compra_total > h1{
     color: white;
     font-size: 30px;
     font-weight: 600;
@@ -1814,7 +1814,284 @@
         top: 800px;
         left: 780px;
     }
+
+
+       /*
+    ====================================================
+    ====================================================
+    ====================================================
+
+
+
+
+    ====================================================
+    Divisão pra ficar mais facil de achar ali na direita
+    ====================================================
+
+
+
+
+    ====================================================
+    ====================================================
+    ====================================================
+    */
+    /*FIM DA SEÇAO NAV E INICIO DA SEÇAO TELA INICIAL*/
     /*
+    ====================================================
+    ====================================================
+    ====================================================
+
+
+
+
+    ====================================================
+    Divisão pra ficar mais facil de achar ali na direita
+    ====================================================
+
+
+
+
+    ====================================================
+    ====================================================
+    ====================================================
+    */
+    /*FIM DA SEÇAO NAV E INICIO DA SEÇAO TELA INICIAL*/
+    /*
+    ====================================================
+    ====================================================
+    ====================================================
+
+
+
+
+    ====================================================
+    Divisão pra ficar mais facil de achar ali na direita
+    ====================================================
+
+
+
+
+    ====================================================
+    ====================================================
+    ====================================================
+    */
+
+    section#produtos{
+        width: 100%;
+        margin-top: 100px;
+    }
+    #filtro{
+        border: 5px solid var(--destaque_texto);
+        border-radius: 15px;
+        background-color: var(--destaque_texto);
+        position: fixed; 
+        width: 300px;
+    }
+    #filtro.nao-fixo{
+        top: 100%;
+        position: absolute;
+    }
+    #filtro > h1{
+        color: white;
+        width: 100%;
+        padding: 10px;
+        font-size: 35px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    #filtro > div{
+        background-color: var(--destaque_01);
+        padding: 20px;
+        border-radius: 15px;
+        background-image: none;
+    }
+    #filtro > div h1{
+        font-size: 25px;
+        font-weight: 200;
+    }
+    .filtro_opcoes{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .filtro_opcoes > div{
+        display: flex;
+        gap: 30px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid black;
+        transition: 0.3s;
+        background-color: var(--destaque_01);
+        cursor: pointer;
+    }
+    .filtro_opcoes > div:hover{
+        border: 1px solid var(--destaque_texto);
+    }
+    .filtro_opcoes > div.enabled{
+        background-color: var(--destaque_texto);
+        border: 1px solid var(--destaque_texto);
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+    }
+    .filtro_opcoes > div.enabled > p{
+        color: white;
+    }
+    .filtro_opcoes > div > p{
+        font-size: 20px;
+        font-weight: 100;
+    }
+    .filtro_opcoes > div > input[type='checkbox']{
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        background-color: #424242;
+        border-radius: 5px;
+    }
+    .filtro_opcoes > div > input[type='checkbox']:checked{
+        background-image: url(Icones/Check.svg);
+        background-size: cover;
+    }
+    #ativos{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #ativos > #n_ativo{
+        background-color: #a7a7a7;
+    }
+    #ativos > div, #ativos > span{
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px;
+        display: flex;
+        gap: 5px;
+        background-color: var(--cor_destaque);
+        color: white;
+        align-items: center;
+        cursor: pointer;
+    }
+    #ativos > div > img{
+        width: 18px;
+        height: 18px;
+    }
+
+    #area_produtos{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        box-sizing: border-box;
+        margin: 30px;
+        height: 90%;
+        overflow-y: auto;
+        padding: 20px 20px;
+        padding-left: 300px;
+    }
+    .product{
+        width: 100%;
+        display: flex;
+        gap: 15px;
+        box-sizing: border-box;
+        padding: 15px;
+        border-radius: 15px;
+        background-color: var(--destaque_01);
+        height: 200px;
+        transition: 0.5s;
+    }
+    .product:hover{
+        box-shadow: -10px 10px 10px 2px rgba(0, 0, 0, 0.1);
+        transition: 0.5s;
+        transform: translate(5px, -5px);
+    }
+    .product:hover > div h1::after{
+        width: 100%;
+        transition: 0.5s;
+    }
+    .product > div{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .product > div h1{
+        font-size: 30px;
+        font-weight: 500;
+        color: var(--cor_destaque);
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .product > div h1::after{
+        content: '';
+        display: block;
+        width: 80%;
+        height: 3px;
+        background-color: var(--cor_destaque);
+        margin-top: 5px;
+        transition: 0.5s;
+    }
+
+    .product > div h2{
+        font-size: 25px;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .product > div p{
+        font-size: 20px;
+        font-weight: 100;
+    }
+
+    .product > img{
+        height: 100%;
+        aspect-ratio: 1;
+    }
+    .product_botoes{
+        display: flex;
+        margin-top: 10px;
+        gap: 15px;
+    }
+    .product_botoes button{
+        background-color: var(--cor_destaque);
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        padding: 15px 25px;
+        cursor: pointer;
+        transition: 0.5s;
+        
+
+    }
+    .product_botoes button:hover{
+        transform: scale(1.1);
+    }
+    #add-cart{
+        background-color: var(--destaque_02);
+        display: flex;
+        padding: 5px 20px;
+        align-items: center;
+        gap: 5px
+    }
+    #add-cart p{
+        font-size: 40px;
+    }
+    #add-cart img{
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+    }
+        /*
 
 
 
