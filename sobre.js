@@ -2,10 +2,10 @@ let zIndexCounter = 1; // Inicialize o contador de z-index
 
 function Moveitem({ movementX, movementY }) {
   const activeItem = document.querySelector('.dev.active');
-
+  const activeItemStyle = window.getComputedStyle(activeItem);
   if (activeItem) {
-    let left = parseInt(activeItem.style.left) || 0;
-    let top = parseInt(activeItem.style.top) || 0;
+    let left = parseInt(activeItemStyle.getPropertyValue('left')) || 0;
+    let top = parseInt(activeItemStyle.getPropertyValue('top')) || 0;
     activeItem.style.left = `${left + movementX}px`;
     activeItem.style.top = `${top + movementY}px`;
   }
