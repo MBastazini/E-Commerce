@@ -62,14 +62,7 @@ function checkFiltro(element)
 }
 
 
-window.addEventListener('scroll', () => {
-    const filtro = document.getElementById('filtro');
-    if (window.scrollY >= 500) {
-        filtro.classList.add('nao-fixo'); // Adicione uma classe para deixar de ser fixo
-    } else {
-        filtro.classList.remove('nao-fixo'); // Remova a classe para ser fixo
-    }
-});
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
