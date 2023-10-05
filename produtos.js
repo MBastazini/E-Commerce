@@ -62,6 +62,9 @@ function checkFiltro(element)
 }
 
 function telaProduto(){
+    const produto_grande = document.getElementById('produto_grande');
+    produto_grande.classList.add('ativo');
+    
     
 }   
 
@@ -74,10 +77,20 @@ document.addEventListener('DOMContentLoaded', function () {
         checkFiltro(check.parentElement);
     });
 
-    const produtos = document.querySelectorAll('.produto');
+
+    
+
+    const produtos = document.querySelectorAll('.product');
     produtos.forEach((produto) => {
         produto.addEventListener('click', function () {
-            
+            setTimeout(telaProduto(), 1000);
         });
     });
+
+    const pg_blur = document.getElementById('pg_blur');
+    pg_blur.addEventListener('click', function(e){
+        produto_grande.classList.remove('ativo');
+    });
+    
+    
 });
