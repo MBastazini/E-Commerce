@@ -13,6 +13,13 @@
         $conec = false;
     }
 
+    if (isset($_SESSION['conectado'])) {
+        $conec = $_SESSION['conectado'];
+        } 
+        else{        
+            $conec = false;
+        }
+
     if($conec){
         header('Location: minhaconta.php');
     }
