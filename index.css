@@ -1881,6 +1881,7 @@
         margin-top: 100px;
         display: grid;
         grid-template-columns: 1fr 4fr;
+        filter: blur(3px);
     }
     #filtro{
         border: 5px solid var(--destaque_texto);
@@ -2094,6 +2095,16 @@
         width: 35px;
         height: 35px;
         margin-right: 10px;
+    }
+
+    #produto_grande{
+        position: fixed;
+        top: 0px;
+        right: 0;
+        width: 40%;
+        min-height: 100vh;
+        background-color: var(--destaque_01);
+        border: 5px solid black;
     }
         /*
 

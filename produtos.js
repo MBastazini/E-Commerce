@@ -61,7 +61,9 @@ function checkFiltro(element)
     }
 }
 
-
+function telaProduto(){
+    
+}   
 
 
 
@@ -70,5 +72,12 @@ document.addEventListener('DOMContentLoaded', function () {
     cheks.forEach((check) => {
         check.checked = !check.checked;
         checkFiltro(check.parentElement);
+    });
+
+    const produtos = document.querySelectorAll('.produto');
+    produtos.forEach((produto) => {
+        produto.addEventListener('click', function () {
+            
+        });
     });
 });
