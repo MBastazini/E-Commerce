@@ -2027,7 +2027,7 @@
         justify-content: center;
         align-items: center;
     }
-    .product > div h1{
+    .product > div h1, #pg_info h1{
         font-size: 30px;
         font-weight: 500;
         color: var(--cor_destaque);
@@ -2039,7 +2039,7 @@
         justify-content: center;
         align-items: center;
     }
-    .product > div h1::after{
+    .product > div h1::after, #pg_info h1::after{
         content: '';
         display: block;
         width: 80%;
@@ -2113,7 +2113,7 @@
         pointer-events: none;
     }
     #pg_info{
-        background-color: var(--destaque_01);
+        background-color: white;
         border: 5px solid black;
         transform: translateX(100%);
         transition: 0.5s;
@@ -2124,7 +2124,72 @@
         width: 40%;
         height: 100%;
         pointer-events: all;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: auto;
+
     }
+
+    #pg_info > h1{
+        font-size: 50px;
+        margin: 30px;
+        margin-bottom: 0px;
+    }
+    #pg_info > h2{
+        font-size: 40px;
+        font-weight: 200;
+        margin: 30px;
+        margin-top: 0px;
+    }
+    #pg_info > p{
+        font-size: 30px;
+        font-weight: 100;
+        margin: 30px;
+        margin-top: 0px;
+        color: rgb(77, 77, 77);
+    }
+    #pg_info button > p{
+        font-size: 30px;
+        word-spacing: 100%;
+    }
+    #pg_info button > img{
+        width: 45px;
+        height: 45px;
+        margin: 30px;
+    }
+    #pg_info div.product_botoes{
+        justify-content: space-around;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 30px;
+        margin-bottom: 40px;
+    }
+    #pg_info button#add-cart{
+        background-color: var(--destaque_02);
+        display: flex;
+        padding: 5px 30px;
+        align-items: center;
+        gap: 5px
+    }
+    #pg_info button#add-cart p{
+        font-size: 50px;
+    }
+    #pg_info button{
+        height: fit-content;
+        padding: 40px;
+    }
+    #pg_info:hover > h1::after{
+        width: 100%;
+        transition: 0.5s;
+    }
+    #pg_info > img{
+        width: 45%;
+        margin: 30px;
+    }
+
+
+
     #pg_blur{
         width: 100%;
         height: 100%;
@@ -2137,7 +2202,7 @@
         transition: 0.5s;
     }
     #produto_grande.ativo #pg_blur{
-        opacity: 0.5;
+        opacity: 0.3;
         pointer-events: all;
     }
     #produto_grande.ativo #pg_info{
