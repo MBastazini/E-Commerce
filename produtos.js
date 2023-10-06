@@ -51,7 +51,7 @@ function checkFiltro(element)
                     n_ativo.style.display = 'block';
                 }
             }
-        });
+        }); 
     }
     else
     {
@@ -59,8 +59,39 @@ function checkFiltro(element)
         element.classList.add('enabled');
         criaFiltro(filtro);
     }
+    mudaFiltro();
 }
 
+function mudaFiltro(){
+    const produtos = document.querySelectorAll('.product');
+    const filtros = document.querySelectorAll('#ativos > div');
+    produtos.forEach((produto) => {
+        const p_filtros = produto.querySelectorAll('div > h3');
+        let ativo = true;
+        filtros.forEach((filtro) => {
+            let filtro_ativo = false;
+            
+            p_filtros.forEach((p_filtro) => {
+                if (filtro.getAttribute('name') == p_filtro.innerText)
+                {
+                    filtro_ativo = true;
+                }
+            });
+            if (!filtro_ativo)
+            {
+                ativo = false;
+            }
+        });
+        if (ativo)
+        {
+            produto.style.display = 'flex';
+        }
+        else
+        {
+            produto.style.display = 'none';
+        }
+    });
+}
 function telaProduto(produto){
     const produto_grande = document.getElementById('produto_grande');
     produto_grande.classList.add('ativo');
