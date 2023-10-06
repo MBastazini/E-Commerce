@@ -1906,6 +1906,7 @@ body{
         margin-top: 100px;
         display: grid;
         grid-template-columns: 1fr 4fr;
+        min-height: 100vh;
 
     }
     #filtro{
@@ -2030,6 +2031,9 @@ body{
         background-color: var(--destaque_01);
         height: 200px;
         transition: 0.5s;
+    }
+    .product > div > p{
+        display: none;
     }
     .product:hover{
         box-shadow: -10px 10px 10px 2px rgba(0, 0, 0, 0.1);

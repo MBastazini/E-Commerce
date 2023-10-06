@@ -61,11 +61,18 @@ function checkFiltro(element)
     }
 }
 
-function telaProduto(){
+function telaProduto(produto){
     const produto_grande = document.getElementById('produto_grande');
     produto_grande.classList.add('ativo');
-    
-    
+    const nome_produto = produto_grande.querySelector('#pg_info > h1');
+    const descricao_produto = produto_grande.querySelector('#pg_info > p');
+    const preco_produto = produto_grande.querySelector('#pg_info > h2');
+    const img_produto = produto_grande.querySelector('#pg_info > img');
+
+    img_produto.src = produto.querySelector('img').src;
+    nome_produto.innerText = produto.querySelector('div > h1').innerText;
+    descricao_produto.innerText = produto.querySelector('div > p').innerText;
+    preco_produto.innerText = produto.querySelector('div > h2').innerText;
 }   
 
 
@@ -83,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const produtos = document.querySelectorAll('.product');
     produtos.forEach((produto) => {
         produto.addEventListener('click', function () {
-            setTimeout(telaProduto(), 1000);
+            setTimeout(telaProduto(produto), 1000);
         });
     });
 
