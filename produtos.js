@@ -11,6 +11,23 @@ function removeFiltro(element)
     });
 }
 
+function abreFiltro(){
+    const a_filtro = document.getElementById('filtro').querySelector('div');
+    const filtro_img = document.querySelector('#filtro > h1 > img');
+    if (a_filtro.id == 'ativo')
+    {
+        a_filtro.id = '';
+        filtro_img.style.rotate = '0deg';
+    }
+    else
+    {
+        a_filtro.id = 'ativo';
+        filtro_img.style.rotate = '180deg';
+    }
+
+}
+
+
 function criaFiltro(filtro)
 {
     /* criar uma div, colocar dentro del aum texto e uma imagem */

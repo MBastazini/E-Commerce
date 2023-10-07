@@ -73,7 +73,10 @@
 
     <section id="produtos" class="container">
         <div id="filtro">
-            <h1>FILTROS</h1>
+            <h1  onclick="abreFiltro()">FILTROS
+                <img src="Icones/Down.svg">
+            </h1>
+            
             <div>  
                 <h1>ATIVOS</h1>
                 <div id="ativos">
@@ -81,9 +84,9 @@
                         <p>Nenhum</p>
                     </div>
                 </div>
-
+                <h1>TIPO</h1>
                 <div class="filtro_opcoes">
-                    <h1>TIPO</h1>
+                    
                     <div onclick="checkFiltro(this)">
                         <input type="checkbox" name="INFORMATICA">
                         <p>INFORMATICA</p>
