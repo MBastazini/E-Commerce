@@ -2782,6 +2782,12 @@
 .tela_botao{
         margin: auto;
 }
+
+.adm{
+    justify-content: center;
+    align-items: center;
+}
+
 }
 
 

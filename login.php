@@ -47,7 +47,7 @@
     
             
             Cookie('login', $varCod, 1440);
-            $_SESSION['conectado'] = sessao($cod);
+            $_SESSION['conectado'] = sessao($varCod);
 
             echo "Caixa com confirmacao de login......";
             header('Location: index.html');   
