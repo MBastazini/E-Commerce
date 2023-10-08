@@ -9,8 +9,8 @@
     <title>TINYWOOD</title>
 </head>
 <body>
-    <script src="index.js" defer></script>
-    <script src="login.js" defer></script>
+    <script src="JS/index.js" defer></script>
+    <script src="JS/login.js" defer></script>
     <div class="nav_nav container">
         <div class="nav_fundo"></div>
         <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
@@ -23,43 +23,62 @@
                 </div>
 
                 <div class="nav_p_resultados">
-                    <table>
-                        <tr>
-                            <td><p>Chaveiro CARRARO</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Algo não chaveiro</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Chaveiro DIY da Mariana</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Chaveiro com tentativa de desenho do Bastazini</p></td>
-                        </tr>
-                    </table>
+                    <a href="produtos.html#1">
+                        <div>
+                            <p>Chaveiro Engines</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#2">
+                        <div>
+                            <p>Chaveiro Lampada</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#3">
+                        <div>
+                            <p>Chaveiro CPU</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#4">
+                        <div>
+                            <p>Chaveiro CTI</p>
+                        </div>
+                    </a>
                 </div>
         </div>
         
-        <img src="Icones/Frame 3.svg" class="nav_tres_risco" alt="Mais opções">
+        <img src="Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
         <div class="nav_elementos">
             <div class="nav_risco"></div>
-            <div class="nav_home">
-                <img class="nav_icon" src="Icones/home_escuro.svg">
-                <p>HOME</p>
-            </div>
-            <div class="nav_produtos">
-                <img class="nav_icon" src="Icones/icon _shopping bag.svg">
-                <p>PRODUTOS</p>
-            </div>
-            <div class="nav_sobre">
-                <img class="nav_icon" src="Icones/icon _about.svg">
-                <p>SOBRE</p>
-            </div>
 
-            <div class="nav_info_lateral">
-                <img class="nav_icon2" src="Icones/icon _shopping.svg">
-                <p>CARRINHO</p>
-            </div>
+            <a href="index.html">
+                <div class="nav_home">
+                    <img class="nav_icon" src="Icones/home_preto.svg">
+                    <p>HOME</p>
+                </div>
+            </a>
+            
+            <a href="produtos.html">
+                <div class="nav_produtos">
+                    <img class="nav_icon" src="Icones/shopping_preto.svg">
+                    <p>PRODUTOS</p>
+                </div>
+            </a>
+            
+            <a href="sobre.html">
+                <div class="nav_sobre">
+                    <img class="nav_icon" src="Icones/sobre_preto.svg">
+                    <p>SOBRE</p>
+                </div>
+            </a>
+            
+
+            <a href="carrinho.html">
+                <div class="nav_info_lateral">
+                    <img class="nav_icon2" src="Icones/carrinho_preto.svg">
+                    <p>CARRINHO</p>
+                </div>
+            </a>
+            
             <div class="nav_info_lateral"  id="nav_botao_ativo">
                 <img class="nav_icon2" src="Icones/login_branco.svg">
                 <p>LOGIN</p>
@@ -87,8 +106,10 @@
                 
             </form>
                 <div class="troca_log_cad">
-                    <p>Não possui uma conta?&nbsp;</p>
-                    <a href="cadastro.html"><p>Faça o cadastro.</p></a>
+                    <a href="cadastro.html">
+                        <p id="black_text">Não possui uma conta?</p>
+                        <p>Faça o cadastro.</p>
+                    </a>
                 </div>
                 <p>OU</p>
                 <div class="google">

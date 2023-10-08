@@ -1566,15 +1566,18 @@ a{
         transition: 0.5s;
         cursor: pointer;
     }
-    .troca_log_cad > p, .troca_log_cad > a{
-        font-size: 25px;
-    }
-    .tela_log_cad > .troca_log_cad{
+    .tela_log_cad > .troca_log_cad > a{
         display: flex;
         margin: 10px;
+        gap: 5px;
         width: 100%;
         justify-content: center;
+        font-size: 25px;
+        color: #0000EE
 
+    }
+    #black_text{
+        color: black;
     }
     .tela_log_cad > p{
         font-size: 20px;

@@ -134,19 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
          altura_a_descer = ajusteTelaInicial(altura_a_descer);
      });
      
-     const nav_tres_risco = document.querySelector('.nav_tres_risco');
- 
-     nav_tres_risco.addEventListener('click', () => {
-         const nav_elementos = document.querySelector('.nav_elementos');
-         if (nav_elementos.style.opacity == '1') {
-             nav_elementos.style.opacity = '0';
-             nav_elementos.style.transform = 'translateY(-150%)';
-         }
-         else{
-             nav_elementos.style.opacity = '1';
-             nav_elementos.style.transform = 'translateY(0%)';
-         }
-     });
+     
  
  
  
