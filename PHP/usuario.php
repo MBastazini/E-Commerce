@@ -29,7 +29,7 @@
         }
     }
     else{
-        header('Location: login.html');
+        header('Location: ../login.html');
     }
 
 ?>

@@ -35,12 +35,12 @@
 
         if($check == 0){
             echo "html com caixa q NAO tem conta......";
-            header('Location: cadastro.html');
+            header('Location: ../cadastro.html');
         }
         
         if($check == 1){
             echo "html com caixa senha incorreta";
-            header('Location: login.html');
+            header('Location: ../login.html');
         }
     
         if($check == 2){
@@ -50,7 +50,7 @@
             $_SESSION['conectado'] = sessao($varCod);
 
             echo "Caixa com confirmacao de login......";
-            header('Location: index.html');   
+            header('Location: ../index.html');   
         }
     }
 

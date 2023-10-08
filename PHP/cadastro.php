@@ -30,7 +30,7 @@
     if($check == 1 ){
         echo "html com caixa q ja tem conta";
         sleep(2);
-        header('Location: login.html');
+        header('Location: ../login.html');
     }
     else{
         if($senha == $csenha){
@@ -50,11 +50,11 @@
             Cookie('login', $cod, 1440);
             $_SESSION['conectado'] = sessao($cod);
 
-            header('Location: index.html');
+            header('Location: ../index.html');
         }
         else{
             echo "caixa com erro de senha";
-            header('Location: cadastro.html');
+            header('Location: ../cadastro.html');
         }
            
     }
