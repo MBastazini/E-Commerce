@@ -11,6 +11,33 @@
 
 
 */
+function mudaLink(str){
+    let link = window.location.href;
+    let a = link.split('/');
+    alert(a);
+}
+
+function checkInput(pesquisa_input, resultados){
+    if (pesquisa_input.value.length > 0)
+        {
+            resultados.id = 'ativo';
+            const texto_opcoes = document.querySelectorAll('.nav_p_resultados > a > div > p');
+            texto_opcoes.forEach((texto_opcao) => {
+                if (texto_opcao.innerText.toLowerCase().includes(pesquisa_input.value.toLowerCase()))
+                {
+                    texto_opcao.parentElement.parentElement.style.display = 'block';
+                }
+                else
+                {
+                    texto_opcao.parentElement.parentElement.style.display = 'none';
+                }
+            });
+        }
+        else
+        {
+            resultados.id = '';
+        }
+}
 document.addEventListener("DOMContentLoaded", function() {
     const resultados = document.querySelector('.nav_p_resultados');
     const pesquisa_input = document.querySelector('.nav_pesquisa input');   
@@ -18,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const pesquisa_img = document.querySelector('.nav_pesquisa img');     
 
     pesquisa_input.addEventListener('focus', () => {
-        resultados.style.display = 'flex'; // Exemplo: definindo a cor de fundo para lightgray
+        checkInput(pesquisa_input, resultados);
         pesquisa.style.border = '2px solid #52381A';
         pesquisa_img.style.transform = 'translateX(0%)'
         pesquisa_img.style.opacity = '1';
@@ -26,33 +53,17 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     pesquisa_input.addEventListener('blur', () => {
-        resultados.style.display = 'none'; // Remover o estilo quando o campo perde foco
-        pesquisa.style.border = '2px solid #D4EBC6';
-        pesquisa_img.style.transform = 'translateX(-30px)'
-        pesquisa_input.style.transform = 'translateX(-30px)'
-        pesquisa_img.style.opacity = '0';
-    });
+        setTimeout(() => {
+            resultados.id = '';
+        }, 500);
+            pesquisa.style.border = '2px solid #D4EBC6';
+            pesquisa_img.style.transform = 'translateX(-30px)'
+            pesquisa_input.style.transform = 'translateX(-30px)'
+            pesquisa_img.style.opacity = '0';
+    }); 
 
-    pesquisa_input.addEventListener('input', () => {
-        const value = pesquisa_input.value.toLowerCase();
-        const p_resultados = document.querySelectorAll('.nav_p_resultados p');
-        
-        if (value === '') {
-            // Se o valor estiver vazio, esconda todos os resultados
-            p_resultados.forEach(p_resultado => {
-                p_resultado.style.display = 'none';
-                //Adicionar aqui o codigo pra sumir com a div de resultados
-            });
-        } else {
-            // Caso contrário, filtre os resultados com base no valor inserido
-            p_resultados.forEach(p_resultado => {
-                if (p_resultado.innerText.toLowerCase().includes(value)) {
-                    p_resultado.style.display = 'block';
-                } else {
-                    p_resultado.style.display = 'none';
-                }
-            });
-        }
+     pesquisa_input.addEventListener('input', () => {
+        checkInput(pesquisa_input, resultados);
     });
 
     

@@ -126,14 +126,24 @@ function telaProduto(produto){
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    let url = window.location.href;
+    if (url.includes('#'))
+    {
+        let id = url.split('#')[1];
+        const produto = document.getElementById(id);
+        if (produto)
+        {
+            setTimeout(telaProduto(produto), 1000);
+        }
+    }
+
+
+
     const cheks = document.querySelectorAll('.filtro_opcoes > div > input[type="checkbox"]');
     cheks.forEach((check) => {
         check.checked = !check.checked;
         checkFiltro(check.parentElement);
     });
-
-
-    
 
     const produtos = document.querySelectorAll('.product');
     produtos.forEach((produto) => {

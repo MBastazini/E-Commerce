@@ -24,6 +24,10 @@ body{
     justify-content: flex-start;
     align-items: center;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
 .over_hid{
     overflow-x: hidden;
 }
@@ -91,7 +95,7 @@ body{
     transform: translateX(-20%);
 }
     /*Dá uma margem a tudo dentro de nav menos a pesquisa*/
-.nav_nav *:not(.nav_div_pesquisa){
+.nav_nav *:not(.nav_div_pesquisa, .nav_p_resultados, .nav_p_resultados *){
     margin: 5px;
 
 }
@@ -152,33 +156,42 @@ body{
     position: absolute faz com que os elementos não ocupem espaço no documento
     top: 130% desce o elemento (ele fica no ponto esquerdo-superior de seu pai.)
     z-index: 1 -> indica que ele fica acima de todos os demais elementos.*/
+
 .nav_p_resultados{
-    position: absolute;
-    display: none;
-    top: 130%;
+   background-color: white;
+   width: 100%;
+   box-sizing: border-box;
+   border-radius: 15px;
+   opacity: 0;
+   pointer-events: none;
+   transition: 0.5s;
+   position: absolute;
+   top: 0px;
+   z-index: -1;
+}
+.nav_p_resultados#ativo{
+    opacity: 1;
+    pointer-events: all;
+    top: 50px;
     transition: 0.5s;
-
-
-    z-index: 1;
-    height: auto !important;
-    transform: translateY(-15px);
-    width: 100%;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 10px;
-    color: black;
-    align-items: flex-start !important;
-    flex-direction: column !important;
 }
 
-
-.nav_p_resultados table{
-    height: 100%;
-    width: 100%;
+.nav_p_resultados div:hover{
+    background-color: var(--destaque_01);
+    transition: 0.5s;
+}
+.nav_p_resultados div{
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+    margin: 5px;
 }
 .nav_p_resultados p{
-    margin-left: 10px;
-    font-size: large;
+    font-size: 20px;
 }
+
+
+
 
     /*tira uma barra preta que normalmente aparece em um input*/
 .nav_pesquisa input:focus{
@@ -234,10 +247,7 @@ body{
         transition: 1s;
         
 }
-.nav_elementos a{
-        text-decoration: none;
-        color: black;
-}
+
 .nav_pesquisa{
     display: flex;
     align-items: center;
@@ -252,9 +262,8 @@ body{
     width: 200px;
     min-width: 200px;
 }
-.nav_p_resultados p{
-    display: none;
-}
+
+
 
 .nav_tres_risco{
     display: none;
@@ -334,7 +343,6 @@ body{
 }
 .texto_inicial h1{
     font-size: 100px;
-    text-decoration: none;
     font-weight: 400;
     font-style: normal;
     line-height: normal;
@@ -356,14 +364,16 @@ body{
     border-radius: 8px;
     cursor: pointer;
     transition: 0.5s;
+    
 }
+
 .tela_madeira h1::before{
     content: '';
     color: white;
 }
 .tela_botao:hover{
-    box-shadow: 8px 11px 20px -2px rgba(82, 56, 26, 0.70);
-    transform: translateY(-6%) translateX(-2%);
+    box-shadow: -8px 11px 20px -2px rgba(82, 56, 26, 0.70);
+    transform: translateY(-6%) translateX(2%);
 }
 .tela_botao p{
     padding: 0;
@@ -451,10 +461,7 @@ body{
 .tela_scroll_down.up img{
     transform: rotate(180deg);
 }
-.tela_scroll_down a{
-    text-decoration: none;
-    color: black;
-}
+
 .tela_scroll_down img{
     width: 25px;
     height: 25px;
@@ -871,9 +878,14 @@ body{
 
 }
 .produto_texto{
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 .produto_texto p{
     font-size: 20px;
@@ -885,9 +897,9 @@ body{
 .produto_texto h1{
     font-size: 30px;
     font-weight: 400;
-    padding: 8px;
+    padding: 8px 15px;
     background-color: rgba(255, 255, 255, 0.6);
-    width: 100%;
+    width: fit-content;
 }
 .produto_botao{
     height: max-content;
@@ -905,10 +917,13 @@ body{
 .produto_botao div{
     width: 40px;
     height: 40px;
-    background-color: #52381A;
+    background-color: var(--destaque_02);
     cursor: pointer;
     box-shadow: -2px 2px 3px 2px rgba(0, 0, 0, 0.25);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .produto_botao div p{
     position: absolute;
@@ -921,6 +936,13 @@ body{
     opacity: 0;
     transition: 0.5s;
     z-index: -1;
+    white-space: nowrap;
+    color: black;
+}
+.produto_botao div img{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
 }
 .produto_botao div:hover p{
     transform: translateX(0%);
@@ -1132,12 +1154,12 @@ body{
     margin-left: 10px;
     margin-top: 20px;
     font-weight: 600;
-    transition: 0.1s;
+    transition: 0.2s;
     cursor: pointer;
 }
 .footer_div p:hover{
     transform: translateX(10px);
-    transition: 0.1s;
+    transition: 0.2s;
 }
 .copyright{
     position: absolute;
@@ -1307,7 +1329,6 @@ body{
     padding: 10px;
     border-radius: 10px;
     transition: 0.3s;
-    text-decoration: none;
     color: black;
 }
 .compra_efetuada:hover{
