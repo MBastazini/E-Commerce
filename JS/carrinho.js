@@ -75,6 +75,7 @@ function novoValorTotal()
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    alert('oi');
     adicionarProdutosDaTabela();
 
     const produtos_compra = document.querySelector('#produtos_compra');
