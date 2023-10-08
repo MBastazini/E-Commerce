@@ -320,7 +320,7 @@ body{
 .tela_inicial_img2{
     display: none;
 }
-.telaInicio{
+#telaInicio{
     transition: 0.1s;
     width: 100%;
     background-image: linear-gradient(rgba(150, 195, 121, 0.5), white);
@@ -441,7 +441,16 @@ body{
     gap: 20px;
     transition: 0.2s;
 }
-
+.tela_scroll_down.up{
+    top: -100px;
+    height: fit-content;
+}
+.tela_scroll_down.up h1{
+    font-size: 25px;
+}
+.tela_scroll_down.up img{
+    transform: rotate(180deg);
+}
 .tela_scroll_down a{
     text-decoration: none;
     color: black;
@@ -1203,7 +1212,7 @@ body{
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 50px;
-    margin-top: 50px;
+    margin-top: 100px;
     width: 100%;
     min-height: 80vh;
 }
@@ -1624,7 +1633,7 @@ body{
     ====================================================
     */
 
-    section.tela_sobre{
+    section#tela_sobre{
         margin: 100px 0px;
         width: 100%;
         display: flex;
@@ -1651,7 +1660,7 @@ body{
         line-height: 1.2;
         margin-bottom: 10px;
     }
-    .tela_sobre > h1{
+    #tela_sobre > h1{
         font-size: 60px;
         font-weight: 400;
         margin-bottom: 10px;
@@ -1661,7 +1670,7 @@ body{
         margin-bottom: 40px;
         font-size: 40px;
     }
-    .tela_sobre > p{
+    #tela_sobre > p{
         font-size: 30px;
         font-weight: 400;
         line-height: 1.2;
@@ -2594,10 +2603,10 @@ body{
         #sobre_contato{
             gap: 50px;
         }
-        .tela_sobre > h1{
+        #tela_sobre > h1{
             font-size: 50px;
         }
-        .tela_sobre > p{
+        #tela_sobre > p{
             font-size: 25px;
         }
 
@@ -2891,10 +2900,10 @@ body{
             font-size: 10px !important;
         }
 
-        .tela_sobre > h1{
+        #tela_sobre > h1{
             font-size: 40px;
         }
-        .tela_sobre > p{
+        #tela_sobre > p{
             font-size: 20px;
         }
         #sobre_contato > div > h1{
