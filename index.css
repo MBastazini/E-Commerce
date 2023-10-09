@@ -2102,7 +2102,7 @@ a{
         justify-content: center;
         align-items: center;
     }
-    .product > div h1::after, #pg_info h1::after{
+    .product > div h1::after{
         content: '';
         display: block;
         width: 80%;
@@ -2166,109 +2166,90 @@ a{
     }
 
     #produto_grande{
-        position: fixed;
-        top: 0px;
-        right: 0;
-        width: 100%;
-        min-height: 100vh;
-        pointer-events: none;
-    }
-    #pg_info{
-        background-color: white;
-        border: 5px solid black;
-        transform: translateX(100%);
-        transition: 0.5s;
-        margin-top: 60px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 40%;
-        height: 100%;
-        pointer-events: all;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow: auto;
-
-    }
-
-    #pg_info > h1{
-        font-size: 50px;
-        margin: 30px;
-        margin-bottom: 0px;
-    }
-    #pg_info > h2{
-        font-size: 40px;
-        font-weight: 200;
-        margin: 30px;
-        margin-top: 0px;
-    }
-    #pg_info > p{
-        font-size: 30px;
-        font-weight: 100;
-        margin: 30px;
-        margin-top: 0px;
-        color: rgb(77, 77, 77);
-    }
-    #pg_info button > p{
-        font-size: 30px;
-        word-spacing: 100%;
-    }
-    #pg_info button > img{
-        width: 45px;
-        height: 45px;
-        margin: 30px;
-    }
-    #pg_info div.product_botoes{
-        justify-content: space-around;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 30px;
-        margin-bottom: 40px;
-    }
-    #pg_info button#add-cart{
-        background-color: var(--destaque_02);
-        display: flex;
-        padding: 5px 30px;
-        align-items: center;
-        gap: 5px
-    }
-    #pg_info button#add-cart p{
-        font-size: 50px;
-    }
-    #pg_info button{
-        height: fit-content;
-        padding: 40px;
-    }
-    #pg_info:hover > h1::after{
-        width: 100%;
-        transition: 0.5s;
-    }
-    #pg_info > img{
-        width: 45%;
-        margin: 30px;
-    }
-
-
-
-    #pg_blur{
-        width: 100%;
-        height: 100%;
-        background-color: var(--destaque_01);
-        opacity: 0;
         position: absolute;
         top: 0;
         left: 0;
-        pointer-events: none;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #pg_info{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        width: 700px;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+    }
+    #pg_info .div_img_grande{
+        display: flex;
+        align-items: center;
+    }
+    #pg_info .seta{
+        height: 450px;
+        width: 70px;
+        box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: 0.5s;
     }
-    #produto_grande.ativo #pg_blur{
-        opacity: 0.3;
-        pointer-events: all;
-    }
-    #produto_grande.ativo #pg_info{
-        transform: translateX(0%);
+    #pg_info .seta:hover{
+        transform: scale(1.05);
+        background-color: rgba(212, 235, 198, 0.3);
         transition: 0.5s;
+        cursor: pointer;
+    }
+    #pg_info .img_grande{
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
+        z-index: 4;
+    }
+    #pg_info .div_img_pequena{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin: 50px;
+        position: relative;
+    }
+    #pg_info .div_img_pequena > img{
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        position: relative;
+    }
+    #pg_info h1{
+        margin: 10px;
+        font-size: 35px;
+    }
+    .div_img_pequena #img_ativa{
+        border: 3px solid #656565;
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        width: 80px;
+        height: 80px;
+    }
+    .div_img_pequena #img_ativa::after{
+        content: '100px';
+        display: none;
+    }
+    #pg_blur{
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(150, 195, 121, 0.5);
+        width: 100%;
+        height: 100%;
+        z-index: 2;
     }
         /*
 
