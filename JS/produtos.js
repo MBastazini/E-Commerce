@@ -1,3 +1,63 @@
+
+function clickMudaImg(img_clicada){
+    /* Chamar a função mudaImg(1), até que a 'img_clicada' possua o id='ativa' */
+    while(img_clicada.id != 'ativo'){
+        mudaImg(1);
+    }
+}
+function mudaImg(a){
+    const img = document.querySelectorAll('.div_img_pequena > img');
+    const img_ativa = document.getElementById('img_ativa');
+    /* Se 'a' vale 0, indica uma movimentação de uma imagem para a direita,
+    se for 1, vai mudar uma imagem para a esquerda (existem 4 imagens) */
+    if (a == 0){
+        for (let i = 0; i < img.length; i++){
+            if (img[i].id == 'ativo'){
+                img[i].id = '';
+                if (i == img.length - 1){
+                    img[0].id = 'ativo';
+                    img_ativa.style.left = -10 + 'px';
+                    break;
+                }
+                else{
+                    img[i + 1].id = 'ativo';
+                    let distancia = parseInt(img_ativa.style.left);
+                    img_ativa.style.left = (distancia + 100) + 'px';
+                    break;
+                }
+            }
+        }
+    }
+    else{
+        for (let i = 0; i < img.length; i++){
+            if (img[i].id == 'ativo'){
+                img[i].id = '';
+                if (i == 0){
+                    img[img.length - 1].id = 'ativo';
+                    img_ativa.style.left = 290 + 'px';
+                    break;
+                }
+                else{
+                    img[i - 1].id = 'ativo';
+                    let distancia = parseInt(img_ativa.style.left);
+                    img_ativa.style.left = (distancia - 100) + 'px';
+                    break;
+                }
+            }
+        }
+    }
+
+    img.forEach((img) => {
+        if (img.id == 'ativo')
+        {
+            const img_grande = document.getElementById('img_grande');
+            img_grande.src = img.src;
+        }
+    });
+        
+}
+
+
 function removeFiltro(element)
 {
     let filtro = element.getAttribute('name');
@@ -103,15 +163,10 @@ function mudaFiltro(){
 function telaProduto(produto){
     const produto_grande = document.getElementById('produto_grande');
     produto_grande.classList.add('ativo');
-    const nome_produto = produto_grande.querySelector('#pg_info > h1');
-    const descricao_produto = produto_grande.querySelector('#pg_info > p');
-    const preco_produto = produto_grande.querySelector('#pg_info > h2');
-    const img_produto = produto_grande.querySelector('#pg_info > img');
-
-    img_produto.src = produto.querySelector('img').src;
-    nome_produto.innerText = produto.querySelector('div > h1').innerText;
-    descricao_produto.innerText = produto.querySelector('div > p').innerText;
-    preco_produto.innerText = produto.querySelector('div > h2').innerText;
+    const produto_grande_h1 = document.querySelector('#pg_info > h1');
+    const nome_produto = produto.querySelector('div > h1').innerText;
+    produto_grande_h1.innerText = nome_produto;
+    //Fazer aqui o codigo para carregar a pasta da imagem correta tambem.
 }   
 
 
@@ -147,6 +202,5 @@ document.addEventListener('DOMContentLoaded', function () {
     pg_blur.addEventListener('click', function(e){
         produto_grande.classList.remove('ativo');
     });
-    
-    
+    pg_blur.style.height = document.body.scrollHeight + 'px';
 });
