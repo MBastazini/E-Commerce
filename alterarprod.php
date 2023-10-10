@@ -7,7 +7,8 @@
     
    $conn = coneccao();
 
-    $id = $_GET['id'];
+   $id = $_GET['id'] ; 
+
 
     $sql1 = "select * from tbl_produto where cod_produto = $id";
     $select = $conn->query($sql1); 
@@ -24,73 +25,52 @@
         $margem_lucro = $var['margem_lucro'];
         $icms = $var['icms'];
     }  
-
+    echo"
+    <!DOCTYPE html>
+    <html lang='pt-br'>
+    <head>
+        <title>Minha Conta</title>
+        <link rel='stylesheet' type='text/css' href='index.css'>
+        </head>
+    <body>";
 
    echo"
     <h3>Alterar produto</h3>
-        <form action='adicionarprod.php' method='post'>
+        <form action='update.php' method='post'>
         <p>codigo</p>
-        <input type='type'  name='cod' value='$cod'> 
+        <input type='text'  name='cod' value='$cod'> 
 
         <p>nome</p>
-        <input type='type'  name='nome' value='$nome'> 
+        <input type='text'  name='nome' value='$nome'> 
         
         <p>descricao</p>
-        <input type='type'  name='descricao' value='$desc'> 
+        <input type='text'  name='desc' value='$desc'> 
         
         <p>preço</p>
-        <input type='type'  name='preco' value='$preco'> 
+        <input type='text'  name='prec' value='$preco'> 
 
         <p>excluido</p>
-        <input type='type'  name='excluido' value='$excluido'> 
+        <input type='text'  name='ex' value='$excluido'> 
 
         <p>data de exclusão</p>
-        <input type='type'  name='dataexclusao' value='$data_exclusao'> 
+        <input type='text'  name='dtex' value='$data_exclusao'> 
 
         <p>codigo visual</p>
-        <input type='type'  name='codvisual' value='$codigovisual'> 
+        <input type='text'  name='covi' value='$codigovisual'> 
 
         <p>custo</p>
-        <input type='type'  name='custo' value='$custo'> 
+        <input type='text'  name='custo' value='$custo'> 
 
         <p>margem de lucro</p>
-        <input type='type'  name='lucro' value='$margem_lucro'> 
+        <input type='text'  name='lucro' value='$margem_lucro'> 
 
         <p>icms</p>
-        <input type='type'  name='icms' value='$icms'> 
+        <input type='text'  name='icms' value='$icms'> 
+
+        <input type='submit' value='alterar'>
 
         </form>
     ";
 
-   $linha = [   'cod_produto'     => $linha['cod_produto'],
-                'nome'            => $linha['nome'],
-                'descricao'       => $linha['descricao'],
-                'preco'           => $linha['preco'],
-               'excluido'         => $linha['excluido'],
-                'data_exclusao'   => $linha['data_exclusao'],
-                'codigovisual'    => $linha['codigovisual'],
-                'custo'           => $linha['custo'],
-                'margem_lucro'    => $linha['margem_lucro'],
-                'icms'            => $linha['icms']
-];
-
-   $sql2 = "update tbl_produto set 
-            cod_produto         = :cod_produto
-             nome               = :nome, 
-             descricao          = :descricao,   
-             preco              = :preco, 
-             excluido           = :excluido,   
-             data_exclusao      = :data_exclusao 
-             codigovisual       = :codigovisual 
-             data_exclusao      = :data_exclusao 
-             custo              = :custo 
-             margem_lucro       = :margem_lucro 
-             icms               = :icms 
-           where cod_produto = :cod_produto "; 
-   
-   $update = $conn->prepare($sql2); 
-   $update->execute($linha);
-
-   header('Location: admconta.php');     
 
 ?>
