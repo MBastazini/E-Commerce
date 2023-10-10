@@ -108,8 +108,8 @@ echo"
                     <td>$varcusto</td>
                     <td>$varlucro</td>
                     <td>$varIcms</td>
-                    <td><a href='alterarprod.php?id=$varId'><img src='Icones/alterar.png' width=30></a></td>
-                    <td><a href='excluiprod.php?id=$varId'><img src='Icones/lixo.png' width=30></a></td>
+                    <td><a href='alterarprod.php?id=$varId'><img src='../Icones/alterar.png' width=30></a></td>
+                    <td><a href='excluiprod.php?id=$varId'><img src='../Icones/lixo.png' width=30></a></td>
                 </tr>";       
         }
 
