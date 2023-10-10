@@ -256,6 +256,7 @@ a{
     background-color: white;
     border-radius: 5px;
     color: black;
+    white-space: nowrap;
 }
 
 .nav_logo{
@@ -458,8 +459,11 @@ a{
 .tela_scroll_down.up h1{
     font-size: 25px;
 }
+/* Já ta colocado em todos os footer, eu posso até
+trocar pra classe roda180 que faz a exata mesma coisa, mas só
+consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 .tela_scroll_down.up img{
-    transform: rotate(180deg);
+    rotate: 180deg;
 }
 
 .tela_scroll_down img{
@@ -2199,6 +2203,9 @@ a{
         display: flex;
         align-items: center;
     }
+    .roda180{
+        rotate: 180deg;
+    }
     #pg_info .seta{
         height: 450px;
         width: 70px;
@@ -2207,7 +2214,7 @@ a{
         align-items: center;
         justify-content: center;
         transition: 0.5s;
-        border-radius: 10px;
+        border-radius: 0 10px 10px 0px;
     }
     #pg_info .seta:hover{
         transform: scale(1.05);
