@@ -1468,6 +1468,11 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         margin-bottom: 50px;
         text-align: center;
     }
+    .tela_log_cad > form > p{
+        margin-bottom: 5px;
+        text-align: center;
+        color: red;
+    }
     .tela_log_cad.login > form{
         width: 100%;
         display: flex;
@@ -1583,7 +1588,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #black_text{
         color: black;
     }
-    .tela_log_cad > p{
+    .tela_log_cad #ou{
         font-size: 20px;
         width: 100%;
         display: flex;
@@ -1591,8 +1596,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         gap: 20px;
         box-sizing: border-box;
         margin-top: 15px;
+        margin-bottom: 0;
+        color: black;
     }
-    .tela_log_cad > p::after, .tela_log_cad > p::before{
+    .tela_log_cad #ou::after, .tela_log_cad #ou::before{
         content: '';
         display: block;
         width: 50%;
