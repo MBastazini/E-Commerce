@@ -3,19 +3,54 @@
     error_reporting (E_ALL);
 
     session_start();        
-
+    $session_id = session_id();
+    
     include("caixa.php");
     
     $conn = coneccao();
 
-    $sql1 = "select * from tbl_usuario order by email ";
-
-    $select = $conn->query($sql1);
-
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    $check = 0;
+    $sql_email = "select * from tbl_usuario where email = :email";
+
+    $select = $conn->prepare($sql_email);
+    $select->execute(['email' => $email]);
+    $resultado = $select->fetch();
+    if ($resultado == NULL)
+    {
+        header('Location: ../carrinho.html');
+    }
+    else{
+        $linha = [
+            'email' => $email,
+            'senha' => $senha
+        ];
+        $sql_senha = "select * from tbl_usuario where email = :email and senha = :senha";
+        $select2 = $conn->prepare($sql_senha);
+        $select2->execute($linha);
+        $resultado2 = $select2->fetch();
+        if ($resultado2 == NULL)
+        {
+            header('Location: ../sobre.html');
+        }
+        else{
+            //Login efetuado com sucesso.
+            Cookie('sessao', $session_id, 1440); //24 horas
+            $_SESSION['nome'] = $resultado2['nome'];
+            $_SESSION['conectado'] = true;
+            $_SESSION['cod_usuario'] = $resultado2['cod_usuario'];
+            if ($resultado2['cod_usuario'] == 0)
+            {
+                $_SESSION['adm'] = true;
+            }
+            else{
+                $_SESSION['adm'] = false;
+            }
+            header('Location: ../index.html');
+        }
+    }
+    /*$check = 0;
 
     while ($var = $select->fetch() )  
     {
@@ -31,30 +66,22 @@
             $check = 2;
             $varEmail = $var['email'];
             $varSenha = $var['senha'];
-        }
 
-        if($check == 0){
-            echo "html com caixa q NAO tem conta......";
-            header('Location: ../cadastro.html');
-        }
-        
-        if($check == 1){
-            echo "html com caixa senha incorreta";
-            header('Location: ../login.html');
-        }
-    
-        if($check == 2){
-    
             
-            Cookie('login', $varCod, 1440);
-            $_SESSION['conectado'] = sessao($varCod);
 
             echo "Caixa com confirmacao de login......";
-            header('Location: ../index.html');   
+            header('Location: ../index.html'); 
+            break;
         }
     }
 
+    if($check == 0){
+        echo "html com caixa q NAO tem conta......";
+        header('Location: ../cadastro.html');
+    }
     
-      
-
+    if($check == 1){
+        echo "html com caixa senha incorreta";
+        header('Location: ../login.html');
+    }*/
 ?>

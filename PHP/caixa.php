@@ -21,7 +21,7 @@
 
   function Cookie($nome, $valor, $min) 
   {
-   setcookie($nome, $valor, time() + $min * 60); 
+      setcookie($nome, $valor, time() + $min * 60); 
   }
 
   function sessao($cod)
