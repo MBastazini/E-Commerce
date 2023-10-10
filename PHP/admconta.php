@@ -8,7 +8,7 @@
 
     $conn = coneccao();
 
-    $sql = "select * from tbl_produto order by nome";
+    $sql = "select * from tbl_produto order by cod_produto";
 
     $select = $conn->query($sql);
 
@@ -29,34 +29,34 @@ echo"
 <h3>Adicionar produto</h3>
 <form action='adicionarprod.php' method='post'>
     codigo
-    <input type='type'  name='cod_produto'> 
+    <input type='text'  name='cod_produto'> 
 
     nome
-    <input type='type'  name='nome'> 
+    <input type='text'  name='nome'> 
     
     descricao
-    <input type='type'  name='descricao'> 
+    <input type='text'  name='descricao'> 
     
     preço
-    <input type='type'  name='preco'> 
+    <input type='text'  name='preco'> 
 
     excluido(true ou false)
-    <input type='type'  name='excluido'> 
+    <input type='text'  name='excluido'> 
 
     data de exclusão
-    <input type='type'  name='data_exclusao'> 
+    <input type='text'  name='data_exclusao'> 
 
     codigo visual
-    <input type='type'  name='codigovisual'> 
+    <input type='text'  name='codigovisual'> 
 
     custo
-    <input type='type'  name='custo'> 
+    <input type='text'  name='custo'> 
 
     margem de lucro
-    <input type='type'  name='margem_lucro'> 
+    <input type='text'  name='margem_lucro'> 
 
     icms
-    <input type='type'  name='icms'> 
+    <input type='text'  name='icms'> 
 
     <input type='submit' value='adicionar'>
 </form>
@@ -108,8 +108,8 @@ echo"
                     <td>$varcusto</td>
                     <td>$varlucro</td>
                     <td>$varIcms</td>
-                    <td><a href='alterarprod.php?id=$varId'><img src='Icones/logo.svg' width=30></a></td>
-                    <td><a href='excluiprod.php?id=$varId'><img src='logo-bola.svg' width=30></a></td>
+                    <td><a href='alterarprod.php?id=$varId'><img src='Icones/alterar.png' width=30></a></td>
+                    <td><a href='excluiprod.php?id=$varId'><img src='Icones/lixo.png' width=30></a></td>
                 </tr>";       
         }
 
