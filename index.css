@@ -2207,6 +2207,7 @@ a{
         align-items: center;
         justify-content: center;
         transition: 0.5s;
+        border-radius: 10px;
     }
     #pg_info .seta:hover{
         transform: scale(1.05);
@@ -2214,12 +2215,17 @@ a{
         transition: 0.5s;
         cursor: pointer;
     }
+    #pg_info > p{
+        font-size: 15px;
+        margin: 10px;
+    }
     #pg_info #img_grande{
         width: 500px;
         height: 500px;
         object-fit: cover;
         box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
         z-index: 4;
+        border-radius: 10px;
     }
     #pg_info .div_img_pequena{
         display: flex;
@@ -2234,6 +2240,7 @@ a{
         object-fit: cover;
         position: relative;
         cursor: pointer;
+        border-radius: 10px;
     }
     #pg_info h1{
         margin: 10px;
@@ -2246,6 +2253,7 @@ a{
         width: 83px;
         height: 83px;
         transition: 0.3s;
+        border-radius: 10px;
     }
     #pg_blur{
         position: absolute;

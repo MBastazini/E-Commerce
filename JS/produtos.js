@@ -166,10 +166,23 @@ function telaProduto(produto){
     const produto_grande_h1 = document.querySelector('#pg_info > h1');
     const nome_produto = produto.querySelector('div > h1').innerText;
     produto_grande_h1.innerText = nome_produto;
+    const pg_info = document.getElementById('pg_info');
+    pg_info.style.top = (window.scrollY + 50) + 'px';
     //Fazer aqui o codigo para carregar a pasta da imagem correta tambem.
 }   
 
 
+    // Função para verificar se um cookie específico existe
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Verifica se o cookie "fragmentRemoved" existe
+    const fragmentRemoved = getCookie("fragmentRemoved");
+
+    // Verifica se há um fragmento na URL quando a página é carregada
 
 document.addEventListener('DOMContentLoaded', function () {
     let url = window.location.href;
