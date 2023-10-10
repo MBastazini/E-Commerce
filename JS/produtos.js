@@ -11,6 +11,23 @@ function removeFiltro(element)
     });
 }
 
+function abreFiltro(){
+    const a_filtro = document.getElementById('filtro').querySelector('div');
+    const filtro_img = document.querySelector('#filtro > h1 > img');
+    if (a_filtro.id == 'ativo')
+    {
+        a_filtro.id = '';
+        filtro_img.style.rotate = '0deg';
+    }
+    else
+    {
+        a_filtro.id = 'ativo';
+        filtro_img.style.rotate = '180deg';
+    }
+
+}
+
+
 function criaFiltro(filtro)
 {
     /* criar uma div, colocar dentro del aum texto e uma imagem */
@@ -67,29 +84,20 @@ function mudaFiltro(){
     const filtros = document.querySelectorAll('#ativos > div');
     produtos.forEach((produto) => {
         const p_filtros = produto.querySelectorAll('div > h3');
-        let ativo = true;
-        filtros.forEach((filtro) => {
-            let filtro_ativo = false;
-            
-            p_filtros.forEach((p_filtro) => {
-                if (filtro.getAttribute('name') == p_filtro.innerText)
-                {
-                    filtro_ativo = true;
-                }
-            });
-            if (!filtro_ativo)
+        produto.style.display = 'none';
+
+        filtros.forEach((filtro) => {      
+            if(filtro.style.display != 'none')
             {
-                ativo = false;
-            }
+                p_filtros.forEach((p_filtro) => {
+                    if (filtro.getAttribute('name') == p_filtro.innerText)
+                    {
+                        produto.style.display = 'flex';
+                    }
+                });
+            }   
         });
-        if (ativo)
-        {
-            produto.style.display = 'flex';
-        }
-        else
-        {
-            produto.style.display = 'none';
-        }
+
     });
 }
 function telaProduto(produto){
@@ -109,14 +117,24 @@ function telaProduto(produto){
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    let url = window.location.href;
+    if (url.includes('#'))
+    {
+        let id = url.split('#')[1];
+        const produto = document.getElementById(id);
+        if (produto)
+        {
+            setTimeout(telaProduto(produto), 1000);
+        }
+    }
+
+
+
     const cheks = document.querySelectorAll('.filtro_opcoes > div > input[type="checkbox"]');
     cheks.forEach((check) => {
         check.checked = !check.checked;
         checkFiltro(check.parentElement);
     });
-
-
-    
 
     const produtos = document.querySelectorAll('.product');
     produtos.forEach((produto) => {

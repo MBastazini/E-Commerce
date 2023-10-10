@@ -4,7 +4,7 @@
     $_SESSION['adm'] = false;
     echo"caixa com texto bonitinho de até logo";
     sleep(2);
-    header('Location: index.html');        
+    header('Location: ../index.html');        
         
 
 ?>

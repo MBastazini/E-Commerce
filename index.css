@@ -24,6 +24,10 @@ body{
     justify-content: flex-start;
     align-items: center;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
 .over_hid{
     overflow-x: hidden;
 }
@@ -91,7 +95,7 @@ body{
     transform: translateX(-20%);
 }
     /*Dá uma margem a tudo dentro de nav menos a pesquisa*/
-.nav_nav *:not(.nav_div_pesquisa){
+.nav_nav *:not(.nav_div_pesquisa, .nav_p_resultados, .nav_p_resultados *){
     margin: 5px;
 
 }
@@ -152,33 +156,42 @@ body{
     position: absolute faz com que os elementos não ocupem espaço no documento
     top: 130% desce o elemento (ele fica no ponto esquerdo-superior de seu pai.)
     z-index: 1 -> indica que ele fica acima de todos os demais elementos.*/
+
 .nav_p_resultados{
-    position: absolute;
-    display: none;
-    top: 130%;
+   background-color: white;
+   width: 100%;
+   box-sizing: border-box;
+   border-radius: 15px;
+   opacity: 0;
+   pointer-events: none;
+   transition: 0.5s;
+   position: absolute;
+   top: 0px;
+   z-index: -1;
+}
+.nav_p_resultados#ativo{
+    opacity: 1;
+    pointer-events: all;
+    top: 50px;
     transition: 0.5s;
-
-
-    z-index: 1;
-    height: auto !important;
-    transform: translateY(-15px);
-    width: 100%;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 10px;
-    color: black;
-    align-items: flex-start !important;
-    flex-direction: column !important;
 }
 
-
-.nav_p_resultados table{
-    height: 100%;
-    width: 100%;
+.nav_p_resultados div:hover{
+    background-color: var(--destaque_01);
+    transition: 0.5s;
+}
+.nav_p_resultados div{
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+    margin: 5px;
 }
 .nav_p_resultados p{
-    margin-left: 10px;
-    font-size: large;
+    font-size: 20px;
 }
+
+
+
 
     /*tira uma barra preta que normalmente aparece em um input*/
 .nav_pesquisa input:focus{
@@ -234,10 +247,7 @@ body{
         transition: 1s;
         
 }
-.nav_elementos a{
-        text-decoration: none;
-        color: black;
-}
+
 .nav_pesquisa{
     display: flex;
     align-items: center;
@@ -252,9 +262,8 @@ body{
     width: 200px;
     min-width: 200px;
 }
-.nav_p_resultados p{
-    display: none;
-}
+
+
 
 .nav_tres_risco{
     display: none;
@@ -320,7 +329,7 @@ body{
 .tela_inicial_img2{
     display: none;
 }
-.telaInicio{
+#telaInicio{
     transition: 0.1s;
     width: 100%;
     background-image: linear-gradient(rgba(150, 195, 121, 0.5), white);
@@ -334,7 +343,6 @@ body{
 }
 .texto_inicial h1{
     font-size: 100px;
-    text-decoration: none;
     font-weight: 400;
     font-style: normal;
     line-height: normal;
@@ -356,14 +364,16 @@ body{
     border-radius: 8px;
     cursor: pointer;
     transition: 0.5s;
+    
 }
+
 .tela_madeira h1::before{
     content: '';
     color: white;
 }
 .tela_botao:hover{
-    box-shadow: 8px 11px 20px -2px rgba(82, 56, 26, 0.70);
-    transform: translateY(-6%) translateX(-2%);
+    box-shadow: -8px 11px 20px -2px rgba(82, 56, 26, 0.70);
+    transform: translateY(-6%) translateX(2%);
 }
 .tela_botao p{
     padding: 0;
@@ -441,11 +451,17 @@ body{
     gap: 20px;
     transition: 0.2s;
 }
-
-.tela_scroll_down a{
-    text-decoration: none;
-    color: black;
+.tela_scroll_down.up{
+    top: -100px;
+    height: fit-content;
 }
+.tela_scroll_down.up h1{
+    font-size: 25px;
+}
+.tela_scroll_down.up img{
+    transform: rotate(180deg);
+}
+
 .tela_scroll_down img{
     width: 25px;
     height: 25px;
@@ -862,9 +878,14 @@ body{
 
 }
 .produto_texto{
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 .produto_texto p{
     font-size: 20px;
@@ -876,9 +897,9 @@ body{
 .produto_texto h1{
     font-size: 30px;
     font-weight: 400;
-    padding: 8px;
+    padding: 8px 15px;
     background-color: rgba(255, 255, 255, 0.6);
-    width: 100%;
+    width: fit-content;
 }
 .produto_botao{
     height: max-content;
@@ -896,10 +917,13 @@ body{
 .produto_botao div{
     width: 40px;
     height: 40px;
-    background-color: #52381A;
+    background-color: var(--destaque_02);
     cursor: pointer;
     box-shadow: -2px 2px 3px 2px rgba(0, 0, 0, 0.25);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .produto_botao div p{
     position: absolute;
@@ -912,6 +936,13 @@ body{
     opacity: 0;
     transition: 0.5s;
     z-index: -1;
+    white-space: nowrap;
+    color: black;
+}
+.produto_botao div img{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
 }
 .produto_botao div:hover p{
     transform: translateX(0%);
@@ -1123,12 +1154,12 @@ body{
     margin-left: 10px;
     margin-top: 20px;
     font-weight: 600;
-    transition: 0.1s;
+    transition: 0.2s;
     cursor: pointer;
 }
 .footer_div p:hover{
     transform: translateX(10px);
-    transition: 0.1s;
+    transition: 0.2s;
 }
 .copyright{
     position: absolute;
@@ -1203,7 +1234,7 @@ body{
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 50px;
-    margin-top: 50px;
+    margin-top: 100px;
     width: 100%;
     min-height: 80vh;
 }
@@ -1221,7 +1252,7 @@ body{
 }
 .produto_compra{
     width: 100%;
-    height: 300px;
+    height: fit-content;
     background-color: var(--destaque_01);
     border-radius: 10px;
     display: flex;
@@ -1243,7 +1274,7 @@ body{
     font-size: 25px;
 }
 .produto_compra img{
-    height: 100%;
+    height: 150px;
     aspect-ratio: 1;
 }
 .produto_compra > div{
@@ -1298,7 +1329,6 @@ body{
     padding: 10px;
     border-radius: 10px;
     transition: 0.3s;
-    text-decoration: none;
     color: black;
 }
 .compra_efetuada:hover{
@@ -1536,15 +1566,18 @@ body{
         transition: 0.5s;
         cursor: pointer;
     }
-    .troca_log_cad > p, .troca_log_cad > a{
-        font-size: 25px;
-    }
-    .tela_log_cad > .troca_log_cad{
+    .tela_log_cad > .troca_log_cad > a{
         display: flex;
         margin: 10px;
+        gap: 5px;
         width: 100%;
         justify-content: center;
+        font-size: 25px;
+        color: #0000EE
 
+    }
+    #black_text{
+        color: black;
     }
     .tela_log_cad > p{
         font-size: 20px;
@@ -1624,7 +1657,7 @@ body{
     ====================================================
     */
 
-    section.tela_sobre{
+    section#tela_sobre{
         margin: 100px 0px;
         width: 100%;
         display: flex;
@@ -1651,7 +1684,7 @@ body{
         line-height: 1.2;
         margin-bottom: 10px;
     }
-    .tela_sobre > h1{
+    #tela_sobre > h1{
         font-size: 60px;
         font-weight: 400;
         margin-bottom: 10px;
@@ -1661,7 +1694,7 @@ body{
         margin-bottom: 40px;
         font-size: 40px;
     }
-    .tela_sobre > p{
+    #tela_sobre > p{
         font-size: 30px;
         font-weight: 400;
         line-height: 1.2;
@@ -1930,7 +1963,9 @@ body{
         box-sizing: border-box;
         text-align: center;
     }
-
+    #filtro > h1 > img{
+        display: none;
+    }
     #filtro > div{
         background-color: var(--destaque_01);
         padding: 20px;
@@ -2030,8 +2065,8 @@ body{
         padding: 15px;
         border-radius: 15px;
         background-color: var(--destaque_01);
-        height: 200px;
         transition: 0.5s;
+        align-items: center;
     }
     .product > div > p{
         display: none;
@@ -2067,7 +2102,7 @@ body{
         justify-content: center;
         align-items: center;
     }
-    .product > div h1::after, #pg_info h1::after{
+    .product > div h1::after{
         content: '';
         display: block;
         width: 80%;
@@ -2089,7 +2124,7 @@ body{
     }
 
     .product > img{
-        height: 100%;
+        height: 150px;
         aspect-ratio: 1;
     }
     .product_botoes{
@@ -2131,111 +2166,90 @@ body{
     }
 
     #produto_grande{
-        position: fixed;
-        top: 0px;
-        right: 0;
-        width: 100%;
-        min-height: 100vh;
-        display: grid;
-        grid-template-columns: 6fr 4fr;
-        pointer-events: none;
-    }
-    #pg_info{
-        background-color: white;
-        border: 5px solid black;
-        transform: translateX(100%);
-        transition: 0.5s;
-        margin-top: 60px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 40%;
-        height: 100%;
-        pointer-events: all;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow: auto;
-
-    }
-
-    #pg_info > h1{
-        font-size: 50px;
-        margin: 30px;
-        margin-bottom: 0px;
-    }
-    #pg_info > h2{
-        font-size: 40px;
-        font-weight: 200;
-        margin: 30px;
-        margin-top: 0px;
-    }
-    #pg_info > p{
-        font-size: 30px;
-        font-weight: 100;
-        margin: 30px;
-        margin-top: 0px;
-        color: rgb(77, 77, 77);
-    }
-    #pg_info button > p{
-        font-size: 30px;
-        word-spacing: 100%;
-    }
-    #pg_info button > img{
-        width: 45px;
-        height: 45px;
-        margin: 30px;
-    }
-    #pg_info div.product_botoes{
-        justify-content: space-around;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 30px;
-        margin-bottom: 40px;
-    }
-    #pg_info button#add-cart{
-        background-color: var(--destaque_02);
-        display: flex;
-        padding: 5px 30px;
-        align-items: center;
-        gap: 5px
-    }
-    #pg_info button#add-cart p{
-        font-size: 50px;
-    }
-    #pg_info button{
-        height: fit-content;
-        padding: 40px;
-    }
-    #pg_info:hover > h1::after{
-        width: 100%;
-        transition: 0.5s;
-    }
-    #pg_info > img{
-        width: 45%;
-        margin: 30px;
-    }
-
-
-
-    #pg_blur{
-        width: 100%;
-        height: 100%;
-        background-color: var(--destaque_01);
-        opacity: 0;
         position: absolute;
         top: 0;
         left: 0;
-        pointer-events: none;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #pg_info{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        width: 700px;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+    }
+    #pg_info .div_img_grande{
+        display: flex;
+        align-items: center;
+    }
+    #pg_info .seta{
+        height: 450px;
+        width: 70px;
+        box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: 0.5s;
     }
-    #produto_grande.ativo #pg_blur{
-        opacity: 0.3;
-        pointer-events: all;
-    }
-    #produto_grande.ativo #pg_info{
-        transform: translateX(0%);
+    #pg_info .seta:hover{
+        transform: scale(1.05);
+        background-color: rgba(212, 235, 198, 0.3);
         transition: 0.5s;
+        cursor: pointer;
+    }
+    #pg_info .img_grande{
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
+        z-index: 4;
+    }
+    #pg_info .div_img_pequena{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin: 50px;
+        position: relative;
+    }
+    #pg_info .div_img_pequena > img{
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        position: relative;
+    }
+    #pg_info h1{
+        margin: 10px;
+        font-size: 35px;
+    }
+    .div_img_pequena #img_ativa{
+        border: 3px solid #656565;
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        width: 80px;
+        height: 80px;
+    }
+    .div_img_pequena #img_ativa::after{
+        content: '100px';
+        display: none;
+    }
+    #pg_blur{
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(150, 195, 121, 0.5);
+        width: 100%;
+        height: 100%;
+        z-index: 2;
     }
         /*
 
@@ -2347,6 +2361,14 @@ body{
             top: 600px;
             left: 600px;
         }
+
+
+        .product > div h1{
+            font-size: 25px;
+        }
+        .product > div h2{
+            font-size: 22px;
+        }
 }
 
     @media (max-width: 1280px) {
@@ -2443,6 +2465,35 @@ body{
 
     #sobre_devs{
         height: 1800px;
+    }
+
+    #area_produtos{
+        grid-template-columns: 1fr;
+    }
+    .product > div h1{
+        font-size: 35px;
+    }
+    .product > div h2{
+        font-size: 25px;
+    }
+
+
+    #pg_info button{
+        padding: 30px;
+    }
+    #pg_info button > p{
+        font-size: 25px;
+    }
+    #pg_info button > img{
+        width: 35px;
+        height: 35px;
+        margin: 22px;
+    }
+    #pg_info button#add-cart p{
+        font-size: 40px;
+    }
+    #pg_info button#add-cart{
+        padding: 5px 20px;
     }
 }
 
@@ -2557,10 +2608,10 @@ body{
         #sobre_contato{
             gap: 50px;
         }
-        .tela_sobre > h1{
+        #tela_sobre > h1{
             font-size: 50px;
         }
-        .tela_sobre > p{
+        #tela_sobre > p{
             font-size: 25px;
         }
 
@@ -2584,6 +2635,35 @@ body{
         .dev#matheus{
             top: 1200px;
             left: 200px;
+        }
+
+
+
+
+        .product > div h1{
+            font-size: 25px;
+        }
+        .product > div h2{
+            font-size: 20px;
+        }
+
+
+        #pg_info > h1{
+            font-size: 40px;
+        }
+        #pg_info > h2{
+            font-size: 30px;
+        }
+        #pg_info > p{
+            font-size: 25px;
+        }
+        .product_botoes{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #pg_info{
+            width: 50%;
         }
     }
 
@@ -2695,15 +2775,64 @@ body{
         #sobre_devs{
             height: 1200px;
         }
-    }
 
-    @media (min-width: 641px)
-    {
-        .nav_elementos{
-                opacity: 1 !important;
-                transform: translateX(0%) !important;
+
+        section#produtos{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #area_produtos{
+            padding-left: 20px;
+        }
+        #filtro{
+            position: relative;
+            top: 0px;
+            width: 90%;
+        }
+        .filtro_opcoes{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        #filtro > h1 > img{
+            display: block;
+            width: 40px;
+            transition: 0.5s;
+        }
+        #filtro > h1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #filtro > div{
+            position: absolute;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 0 0 15px 15px;
+            transform: translateY(-10px);
+            height: 0px;
+            overflow: hidden;
+            transition: 0.5s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0;
+            border: 10px solid var(--destaque_texto);
+            transform: translateY(-15px);
+        }
+        #filtro > div#ativo{
+            padding: 20px;
+            height: 40vh;
+            overflow: auto;
+            transition: 0.5s;
+            transform: translateY(0px);
+            z-index: 1;
         }
     }
+
+    
 
 
     @media (max-width: 640px) {
@@ -2776,10 +2905,10 @@ body{
             font-size: 10px !important;
         }
 
-        .tela_sobre > h1{
+        #tela_sobre > h1{
             font-size: 40px;
         }
-        .tela_sobre > p{
+        #tela_sobre > p{
             font-size: 20px;
         }
         #sobre_contato > div > h1{
@@ -2844,11 +2973,37 @@ body{
         #sobre_devs{
             height: 1000px;
         }
+
+
+        .product > img{
+            height: 100px;
+        }
+        .product > div p{
+            font-size: 15px;
+        }
+        .product_botoes button{
+            padding: 5px 15px;
+        }
+        #add-cart p{
+            font-size: 30px;
+        }
+        #add-cart img{
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
 }
 
 
 
 
+@media (min-width: 641px)
+    {
+        .nav_elementos{
+                opacity: 1 !important;
+                transform: translateX(0%) !important;
+        }
+    }
 
     /*CELULAR */
     @media (max-width: 475px) {

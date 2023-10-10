@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="index.css">
-    
-    <title>TINYWOOD</title>
+    <link rel="icon" type="image/x-icon" href="Icones/logo-bola.svg">
+    <title>Tiny Wood</title>
 </head>
 <body>
-    <script src="index.js" defer></script>
-    <script src="home.js" defer></script>
+    <script src="JS/home.js" defer></script>
+    <script src="JS/index.js" defer></script>
+
     <div class="nav_nav nav_sobe container">
         <div class="nav_fundo nf_fixo"></div>
         <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
@@ -23,55 +24,65 @@
                 </div>
 
                 <div class="nav_p_resultados">
-                    <table>
-                        <tr>
-                            <td><p>Chaveiro CARRARO</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Algo não chaveiro</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Chaveiro DIY da Mariana</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Chaveiro com tentativa de desenho do Bastazini</p></td>
-                        </tr>
-                    </table>
+                    <a href="produtos.html#1">
+                        <div>
+                            <p>Chaveiro Engines</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#2">
+                        <div>
+                            <p>Chaveiro Lampada</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#3">
+                        <div>
+                            <p>Chaveiro CPU</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#4">
+                        <div>
+                            <p>Chaveiro CTI</p>
+                        </div>
+                    </a>
                 </div>
         </div>
         
-        <img src="Icones/Frame 3.svg" class="nav_tres_risco" alt="Mais opções">
+        <img src="Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
         <div class="nav_elementos">
             <div class="nav_risco"></div>
+     
             <div class="nav_home" id="nav_botao_ativo">
-                <img class="nav_icon" src="Icones/icon _home.svg">
+                <img class="nav_icon" src="Icones/home_branco.svg">
                 <p>HOME</p>
             </div>
-            <div class="nav_produtos">
-                <img class="nav_icon" src="Icones/icon _shopping bag.svg">
-                <p>PRODUTOS</p>
-            </div>
+            <a href="produtos.html">
+                <div class="nav_produtos">
+                    <img class="nav_icon" src="Icones/shopping_preto.svg">
+                    <p>PRODUTOS</p>
+                </div>
             <a href="sobre.html">   
                 <div class="nav_sobre">
-                    <img class="nav_icon" src="Icones/icon _about.svg">
+                    <img class="nav_icon" src="Icones/sobre_preto.svg">
                     <p>SOBRE</p>
                 </div>
             </a>
 
-            <div class="nav_info_lateral">
-                <img class="nav_icon2" src="Icones/icon _shopping.svg">
-                <p>CARRINHO</p>
-            </div>
-            <a href="usuario.php">
+            <a href="carrinho.html">
                 <div class="nav_info_lateral">
-                    <img class="nav_icon2" src="Icones/icon _login_.svg">
+                    <img class="nav_icon2" src="Icones/carrinho_preto.svg">
+                    <p>CARRINHO</p>
+                </div>
+            </a>
+            <a href="PHP/usuario.php">
+                <div class="nav_info_lateral">
+                    <img class="nav_icon2" src="Icones/login_preto.svg">
                     <p>LOGIN</p>
                 </div>
             </a>
         </div>
         
     </div>
-    <section class="telaInicio">
+    <section id="telaInicio">
         <div class="tela_inicial_flex">
             <div class="tela_inicial container">
                 <div class="texto_inicial">
@@ -86,9 +97,11 @@
                         por um cortador a laser, pequenininhos para qualquer situação!
                         'bonitinhos e baratinhos'
                     </p>
-                    <div class="tela_botao">
-                        <p>GARANTA O SEU!</p>
-                    </div>
+                    <a href="produtos.html">
+                        <div class="tela_botao">
+                            <p>GARANTA O SEU!</p>
+                        </div>
+                    </a>
                     <img src="Icones/quadrados.png" class="tela_inicial_img2" alt="Imagem dos produtos">
                 </div>
                 <img src="Icones/quadrados.png" class="tela_inicial_img" alt="Imagem dos produtos">
@@ -141,22 +154,24 @@
         <div class="info_video container">
             <div id="risco"></div>
             <div class="video_texto">
-                <h1>これがレクイエムだ</h1>
-                <p>これ -> 'Kore' (Isto / Este)<br>
-                    が -> 'Ga' (Indica o objeto direto da frase)<br>
-                    レクイエム -> 'Rekuiemu' (Requiem)<br>
-                    だ -> 'Da' (É)<br>
-                    Tradução: 'Este é o Requiem'
+                <h1>Video</h1>
+                <p>
+                    (pensar em uma frase melhor)
+                    <br>
+
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 </p>
                 <p><br>Talvez eu deixe isso menor, se não houver texto
-                    suficiente pra ocupar tudo.
+                    suficiente pra ocupar tudo.<br>
+                    - adeus requiem
                 </p>
             </div>
             <div class="video_v">
-                <iframe src="https://www.youtube.com/embed/JHdvtSB7K4w?si=4ow0_fF4UMLC4ksJ" 
-                title="Video de nossos produtos" frameborder="0" 
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/jWOetWUeAts?si=M14RkQutcYtTMVAM" 
+                title="YouTube video player" 
+                frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen></iframe>
+                allowfullscreen></iframe>            
             </div>
 
         </div>
@@ -173,13 +188,28 @@
                     <div class="produto_info">
                         <div class="produto_texto">
                             <p>R$ 10,99</p>
-                            <h1>Chaveiro Carraro</h1>
+                            <h1>Chaveiro Engines</h1>
                             
                         </div>
                         <div class="produto_botao">
-                            <div><p>Comprar</p></div>
-                            <div><p>Mais</p></div>
-                            <div><p>Sla</p></div>
+                            <a href="#">
+                                <div>
+                                    <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
+                                    <p>Comprar</p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="Icones/carrinho_branco.svg" alt="Carrinho de compras">
+                                    <p>+ Carrinho</p>
+                                </div>
+                            </a>
+                            <a href="produtos.html#1">
+                                <div>
+                                    <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
+                                    <p>Ver mais</p>
+                                </div>
+                            </a>
                         </div>
                         
                     </div>
@@ -188,13 +218,28 @@
                     <div class="produto_info">
                         <div class="produto_texto">
                             <p>R$ 10,99</p>
-                            <h1>Chaveiro Carraro</h1>
+                            <h1>Chaveiro Lampada</h1>
                             
                         </div>
                         <div class="produto_botao">
-                            <div><p>Comprar</p></div>
-                            <div><p>Mais</p></div>
-                            <div><p>Sla</p></div>
+                            <a href="#">
+                                <div>
+                                    <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
+                                    <p>Comprar</p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="Icones/carrinho_branco.svg" alt="Carrinho de compras">
+                                    <p>+ Carrinho</p>
+                                </div>
+                            </a>
+                            <a href="produtos.html#2">
+                                <div>
+                                    <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
+                                    <p>Ver mais</p>
+                                </div>
+                            </a>
                         </div>
                         
                     </div>
@@ -203,13 +248,28 @@
                     <div class="produto_info">
                         <div class="produto_texto">
                             <p>R$ 10,99</p>
-                            <h1>Chaveiro Carraro</h1>
+                            <h1>Chaveiro CPU</h1>
                             
                         </div>
                         <div class="produto_botao">
-                            <div><p>Comprar</p></div>
-                            <div><p>Mais</p></div>
-                            <div><p>Sla</p></div>
+                            <a href="#">
+                                <div>
+                                    <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
+                                    <p>Comprar</p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="Icones/carrinho_branco.svg" alt="Carrinho de compras">
+                                    <p>+ Carrinho</p>
+                                </div>
+                            </a>
+                            <a href="produtos.html#3">
+                                <div>
+                                    <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
+                                    <p>Ver mais</p>
+                                </div>
+                            </a>
                         </div>
                         
                     </div>
@@ -218,62 +278,37 @@
                     <div class="produto_info">
                         <div class="produto_texto">
                             <p>R$ 10,99</p>
-                            <h1>Chaveiro Carraro</h1>
+                            <h1>Chaveiro CTI</h1>
                             
                         </div>
                         <div class="produto_botao">
-                            <div><p>Comprar</p></div>
-                            <div><p>Mais</p></div>
-                            <div><p>Sla</p></div>
+                            <a href="produtos.html#4">
+                                <div>
+                                    <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
+                                    <p>Comprar</p>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="Icones/carrinho_branco.svg" alt="Carrinho de compras">
+                                    <p>+ Carrinho</p>
+                                </div>
+                            </a>
+                            <a href="produtos.html#4">
+                                <div>
+                                    <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
+                                    <p>Ver mais</p>
+                                </div>
+                            </a>
                         </div>
                         
                     </div>
                 </div>
-                <div class="produto">
-                    <div class="produto_info">
-                        <div class="produto_texto">
-                            <p>R$ 10,99</p>
-                            <h1>Chaveiro Carraro</h1>
-                            
-                        </div>
-                        <div class="produto_botao">
-                            <div><p>Comprar</p></div>
-                            <div><p>Mais</p></div>
-                            <div><p>Sla</p></div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="produto">
-                    <div class="produto_info">
-                        <div class="produto_texto">
-                            <p>R$ 10,99</p>
-                            <h1>Chaveiro Carraro</h1>
-                            
-                        </div>
-                        <div class="produto_botao">
-                            <div><p>Comprar</p></div>
-                            <div><p>Mais</p></div>
-                            <div><p>Sla</p></div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="produto">
-                    <div class="produto_info">
-                        <div class="produto_texto">
-                            <p>R$ 10,99</p>
-                            <h1>Chaveiro Carraro</h1>
-                            
-                        </div>
-                        <div class="produto_botao">
-                            <div><p>Comprar</p></div>
-                            <div><p>Mais</p></div>
-                            <div><p>Sla</p></div>
-                        </div>
-                        
-                    </div>
-                </div>
+                
+                
+               
+               
+                
                 <span id="produto_padding"></span>
             </div>
         </div>
@@ -294,6 +329,12 @@
         </div>
     </section>
     <footer>
+        <div class="tela_scroll_down up">
+            <a href="#telaInicio" class="a"> 
+                <h1>Voltar ao topo</h1> 
+                <img src="Icones/arrow.svg">
+            </a>
+        </div>
         <div id="f_1"></div>
         <div id="f_2"></div>
         <div id="f_3"></div>
@@ -322,11 +363,12 @@
         </div>
         <div class="footer_info">
             <div class="footer_div">
-                <h1>Contato</h1>
-                <a><p>E-mail</p></a>
-                <a><p>Telefone</p></a>
-                <a><p>sla1</p></a>
-                <a><p>sla2</p></a>
+                <h1>Desenvolvedores</h1>
+                <a href="sobre.html#leticia"><p>Leticia Garcia | N° 21</p></a>
+                <a href="sobre.html#luiz"><p>Luiz Felipe | N° 22</p></a>
+                <a href="sobre.html#mariana"><p>Mariana Senger | N° 23</p></a>
+                <a href="sobre.html#mateus"><p>Mateus Bastazini | N° 24</p></a>
+                <a href="sobre.html#matheus"><p>Matheus Trentini | N° 25</p></a>
             </div>
             <div class="footer_div">
                 <h1>Contato</h1>
@@ -344,23 +386,6 @@
             </div>
         </div>
     </footer>
-    <!---
-    <form action='login.php' method='post'>
-                        <p class="cad_email">E-mail</p>
-                        <input class="cad_email" type="email" name="email" placeholder="  Digite seu email . . ." maxlength="100"> 
-                    <br>
-                        <p class="cad_senha">Senha</p>
-                        <input class="cad_senha" type="password" name="senha" placeholder="  Digite sua senha . . ." maxlength="40"> 
-                    <br>
-                        <input class="cad_enviar" type="submit" value="LOGIN SESSÃO">
-                    <br>
-                        <div class="cad_texto2"><a class="cad_link" href="esqueci.php"> esqueci minha senha</a> </div>
-                
-                </form>
-                
-                <br>
-            <div class="cad_texto2">não possui uma conta ?<a class="cad_link" href="cadastro.html"> Faça o cadastro</a> </div>
-    -->
 </body>
 </html>
 

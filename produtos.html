@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="index.css">
     
-    <title>TINYWOOD</title>
+    <title>Produtos - Tiny Wood</title>
 </head>
 <body class="over_hid">
-    <script src="produtos.js" defer></script>
-    <script src="index.js" defer></script>
+    <script src="JS/produtos.js" defer></script>
+    <script src="JS/index.js" defer></script>
 
     <div class="nav_nav container">
         <div class="nav_fundo nf_fixo"></div>
@@ -24,56 +24,72 @@
                 </div>
 
                 <div class="nav_p_resultados">
-                    <table>
-                        <tr>
-                            <td><p>Chaveiro CARRARO</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Algo não chaveiro</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Chaveiro DIY da Mariana</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Chaveiro com tentativa de desenho do Bastazini</p></td>
-                        </tr>
-                    </table>
+                    <a href="produtos.html#1">
+                        <div>
+                            <p>Chaveiro Engines</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#2">
+                        <div>
+                            <p>Chaveiro Lampada</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#3">
+                        <div>
+                            <p>Chaveiro CPU</p>
+                        </div>
+                    </a>
+                    <a href="produtos.html#4">
+                        <div>
+                            <p>Chaveiro CTI</p>
+                        </div>
+                    </a>
                 </div>
         </div>
         
-        <img src="Icones/Frame 3.svg" class="nav_tres_risco" alt="Mais opções">
+        <img src="Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
         <div class="nav_elementos">
             <div class="nav_risco"></div>
             <a href="index.html">
                 <div class="nav_home">
-                    <img class="nav_icon" src="Icones/home_escuro.svg">
+                    <img class="nav_icon" src="Icones/home_preto.svg">
                     <p>HOME</p>
                 </div>
             </a>
-            <div class="nav_produtos">
-                <img class="nav_icon" src="Icones/icon _shopping bag.svg">
+            <div class="nav_produtos"  id="nav_botao_ativo">
+                <img class="nav_icon" src="Icones/shopping_branco.svg">
                 <p>PRODUTOS</p>
             </div>
-            <div class="nav_sobre" id="nav_botao_ativo">
-                <img class="nav_icon" src="Icones/sobre_branco.svg">
-                <p>SOBRE</p>
-            </div>
+            <a href="sobre.html">
+                <div class="nav_sobre">
+                    <img class="nav_icon" src="Icones/sobre_preto.svg">
+                    <p>SOBRE</p>
+                </div>
+            </a>
 
-            <div class="nav_info_lateral">
-                <img class="nav_icon2" src="Icones/icon _shopping.svg">
-                <p>CARRINHO</p>
-            </div>
-            <div class="nav_info_lateral">
-                <img class="nav_icon2" src="Icones/icon _login_.svg">
-                <p>LOGIN</p>
-            </div>
+            <a href="carrinho.html">
+                <div class="nav_info_lateral">
+                    <img class="nav_icon2" src="Icones/carrinho_preto.svg">
+                    <p>CARRINHO</p>
+                </div>
+            </a>
+            
+            <a href="PHP/usuario.php">
+                <div class="nav_info_lateral">
+                    <img class="nav_icon2" src="Icones/login_preto.svg">
+                    <p>LOGIN</p>
+                </div>
+            </a>
         </div>
         
     </div>
 
     <section id="produtos" class="container">
         <div id="filtro">
-            <h1>FILTROS</h1>
+            <h1  onclick="abreFiltro()">FILTROS
+                <img src="Icones/Down.svg">
+            </h1>
+            
             <div>  
                 <h1>ATIVOS</h1>
                 <div id="ativos">
@@ -81,9 +97,9 @@
                         <p>Nenhum</p>
                     </div>
                 </div>
-
+                <h1>TIPO</h1>
                 <div class="filtro_opcoes">
-                    <h1>TIPO</h1>
+                    
                     <div onclick="checkFiltro(this)">
                         <input type="checkbox" name="INFORMATICA">
                         <p>INFORMATICA</p>
@@ -104,7 +120,8 @@
             </div>
         </div>
         <div id="area_produtos">
-            <div class="product">
+            <!-- Neste caso o ID não é para estetica, mas indica que o id_produto é 1. -->
+            <div class="product" id="1">
                 <img src="Icones/quadrados.png" alt="Produto">
                 <div>
                     <h1>CHAVEIRO ENGINES</h1> <!-- Nome -> H1 -->
@@ -127,7 +144,7 @@
                 </div>
             </div>  
             
-            <div class="product">
+            <div class="product" id="2">
                 <img src="Icones/quadrados.png" alt="Produto">
                 <div>
                     <h1>CHAVEIRO LAMPADA</h1> <!-- Nome -> H1 -->
@@ -150,7 +167,7 @@
                 </div>
             </div>
 
-            <div class="product">
+            <div class="product" id="3">
                 <img src="Icones/quadrados.png" alt="Produto">
                 <div>
                     <h1>CHAVEIRO CPU</h1> <!-- Nome -> H1 -->
@@ -175,7 +192,7 @@
                 </div>
             </div>
 
-            <div class="product">
+            <div class="product" id="4">
                 <img src="Icones/quadrados.png" alt="Produto">
                 <div>
                     <h1>CHAVEIRO CTI</h1> <!-- Nome -> H1 -->
@@ -198,28 +215,39 @@
             </div>
         </div>
     </section>
+
     <div id="produto_grande">
         <div id="pg_blur"></div>
         <div id="pg_info">
             <h1>CHAVEIRO CARRARO</h1>
-            <img src="Icones/quadrado.svg">
-            <h2>R$ 4,99</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Necessitatibus incidunt consequatur non qui recusandae </p>
-            <div class="product_botoes">
-                <button>
-                    <p>COMPRAR</p>
-                </button>
-                <form action="#">
-                    <button type="submit" id="add-cart">
-                        <p>+</p>
-                        <img src="Icones/carrinho_branco.svg" alt="carrinho">
-                    </button>
-                </form>
+            <div class="div_img_grande">
+                <div class="seta">
+                    <img src="Icones/Seta-img.svg" style="rotate: 180deg">
+                </div>
+                
+                <img src="Imagens/Produtos/1/produto1.png" class="img_grande">
+
+                <div class="seta">
+                    <img src="Icones/Seta-img.svg">
+                </div>
+            </div>
+
+            <div class="div_img_pequena">
+                <img src="Imagens/Produtos/1/produto1.png">
+                <img src="Imagens/Produtos/1/produto2.png">
+                <img src="Imagens/Produtos/1/produto3.png">
+                <img src="Imagens/Produtos/1/produto4.png">
+                <div id="img_ativa"></div>
             </div>
         </div>
     </div>
     <footer>
+        <div class="tela_scroll_down up">
+            <a href="#produtos" class="a"> 
+                <h1>Voltar ao topo</h1> 
+                <img src="Icones/arrow.svg">
+            </a>
+        </div>
         <div id="f_1"></div>
         <div id="f_2"></div>
         <div id="f_3"></div>
@@ -248,11 +276,12 @@
         </div>
         <div class="footer_info">
             <div class="footer_div">
-                <h1>Contato</h1>
-                <a><p>E-mail</p></a>
-                <a><p>Telefone</p></a>
-                <a><p>sla1</p></a>
-                <a><p>sla2</p></a>
+                <h1>Desenvolvedores</h1>
+                <a href="sobre.html#leticia"><p>Leticia Garcia | N° 21</p></a>
+                <a href="sobre.html#luiz"><p>Luiz Felipe | N° 22</p></a>
+                <a href="sobre.html#mariana"><p>Mariana Senger | N° 23</p></a>
+                <a href="sobre.html#mateus"><p>Mateus Bastazini | N° 24</p></a>
+                <a href="sobre.html#matheus"><p>Matheus Trentini | N° 25</p></a>
             </div>
             <div class="footer_div">
                 <h1>Contato</h1>
