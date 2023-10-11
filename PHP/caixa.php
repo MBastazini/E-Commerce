@@ -13,6 +13,14 @@
     } else { return $Conn; }
   }
   
+  function inicioSessao(){
+    if (isset($_COOKIE['sessao'])) {
+        session_id($_COOKIE['sessao']);
+    } 
+    session_start();
+  }
+
+
   function Login ($login, $senha, &$adm)  
   {
    $adm = ($login == 'tinywoodcti@gmail.com' and $senha == 'LLMMM2023');
@@ -24,26 +32,40 @@
       setcookie($nome, $valor, time() + $min * 60); 
   }
 
-  function sessao($cod)
+  function usuarioNavegacao()
   {
-    
+    inicioSessao();
 
-  if (isset($_SESSION['conectado'])) {
-      $conec = $_SESSION['conectado'];
-    } 
-    else{        
-        $conec = false;
+    $conectado = false;
+    if (isset($_SESSION['conectado'])){
+        $conectado = $_SESSION['conectado'];
     }
 
-    if($conec){
-      echo "mensagem bonitinha de bem vindo de volta";
+    if ($conectado)
+    {
+      if ($_SESSION['adm'])
+      {
+        echo "<a href='PHP/usuario.php'>
+        <div class='nav_info_lateral logged_adm'>
+            <img class='nav_icon2' src='Icones/User-adm.svg'>
+            <p> Administrador </p>
+        </div>";
+      }
+      else{
+        echo "<a href='PHP/usuario.php'>
+        <div class='nav_info_lateral logged'>
+            <img class='nav_icon2' src='Icones/User-branco.svg'>
+            <p>". $_SESSION['nome'] ."</p>
+        </div>";
+      }   
     }
     else{
-      if($cod == 0){
-        $_SESSION['adm'] = true;
-      }
-
-      return true;    
+        echo "<a href='PHP/usuario.php'>
+        <div class='nav_info_lateral'>
+            <img class='nav_icon2' src='Icones/login_preto.svg'>
+            <p>LOGIN</p>
+        </div>
+    </a>";
     }
   }
 

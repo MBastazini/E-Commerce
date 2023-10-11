@@ -36,7 +36,7 @@
             $inclui->execute($linha);
 
             Cookie('sessao', $session_id, 1440); //24 horas
-            $_SESSION['nome'] = $linha['nome'];
+            $_SESSION['nome'] = explode(" ", $linha['nome'])[0];
             $_SESSION['conectado'] = true;
             
             $sql_user = "select cod_usuario from tbl_usuario where email = :email and senha = :senha";

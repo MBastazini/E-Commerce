@@ -45,26 +45,6 @@
                     }
 
                 ?>
-                    <a href="produtos.html#1">
-                        <div>
-                            <p>Chaveiro Engines</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#2">
-                        <div>
-                            <p>Chaveiro Lampada</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#3">
-                        <div>
-                            <p>Chaveiro CPU</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#4">
-                        <div>
-                            <p>Chaveiro CTI</p>
-                        </div>
-                    </a>
                 </div>
         </div>
         
@@ -95,10 +75,13 @@
                 </div>
             </a>
             <a href="PHP/usuario.php">
-                <div class="nav_info_lateral">
-                    <img class="nav_icon2" src="Icones/login_preto.svg">
-                    <p>LOGIN</p>
-                </div>
+                <?php 
+
+                usuarioNavegacao();
+
+
+                ?>
+                
             </a>
         </div>
         

@@ -258,6 +258,14 @@ a{
     color: black;
     white-space: nowrap;
 }
+.nav_info_lateral.logged{
+    background-color: var(--destaque_02);
+    color: white;
+}
+.nav_info_lateral.logged_adm{
+    background-color: var(--destaque_texto);
+    color: white;
+}
 
 .nav_logo{
     width: 200px;

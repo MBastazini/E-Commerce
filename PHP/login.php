@@ -37,7 +37,7 @@
         else{
             //Login efetuado com sucesso.
             Cookie('sessao', $session_id, 1440); //24 horas
-            $_SESSION['nome'] = $resultado2['nome'];
+            $_SESSION['nome'] = explode(" ", $resultado2['nome'])[0];
             $_SESSION['conectado'] = true;
             $_SESSION['cod_usuario'] = $resultado2['cod_usuario'];
             if ($resultado2['cod_usuario'] == 0)
