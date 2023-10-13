@@ -1498,7 +1498,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     .tela_log_cad > form div{
         width: 100%;
     }
-    .tela_log_cad > form > .inp > input{
+    .inp > input{
         width: 100%;
         height: 60px;
         border-radius: 5px;
@@ -1524,10 +1524,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     .senha_C.inp{
         grid-area: 3/2/3/3;
     }
-    .tela_log_cad > form > .inp > input:hover{
+    .inp > input:hover{
         box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
     }
-    .tela_log_cad > form > .inp > input:focus{
+    .inp > input:focus{
         border: 3px solid var(--cor_destaque);
         outline: none;
         transition: 0.2s;
@@ -1544,14 +1544,14 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #input-ativo-blur{
         color: rgba(0, 0, 0, 0.5);
     }
-    .tela_log_cad > form > .inp{
+    .inp{
         position: relative;
 
     }
     .tela_log_cad.login > form > .inp{
         margin-bottom: 50px;
     }
-    .tela_log_cad > form > .inp > p{
+    .inp > p{
         position: absolute;
         top: 50%;
         left: 50%;
@@ -2285,6 +2285,123 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         width: 100%;
         height: 100%;
         z-index: 2;
+    }
+
+        /*
+    ====================================================
+    ====================================================
+    ====================================================
+
+
+
+
+    ====================================================
+    Divisão pra ficar mais facil de achar ali na direita
+    ====================================================
+
+
+
+
+    ====================================================
+    ====================================================
+    ====================================================
+    */
+    /*FIM DA SEÇAO NAV E INICIO DA SEÇAO TELA INICIAL*/
+    /*
+    ====================================================
+    ====================================================
+    ====================================================
+
+
+
+
+    ====================================================
+    Divisão pra ficar mais facil de achar ali na direita
+    ====================================================
+
+
+
+
+    ====================================================
+    ====================================================
+    ====================================================
+    */
+    /*FIM DA SEÇAO NAV E INICIO DA SEÇAO TELA INICIAL*/
+    /*
+    ====================================================
+    ====================================================
+    ====================================================
+
+
+
+
+    ====================================================
+    Divisão pra ficar mais facil de achar ali na direita
+    ====================================================
+
+
+
+
+    ====================================================
+    ====================================================
+    ====================================================
+    */
+
+    #conta{
+        width: 100%;
+        background-color: var(--fundo_01);
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #conta > h1{
+        padding: 10px;
+        box-sizing: border-box;
+        font-size: 25px;
+        font-weight: 200;
+        width: 100%;
+        background-color: var(--destaque_01);
+    }
+    #conta > h2{
+        margin: 10px;
+        text-align: center;
+        font-size: 30px;
+    }
+    .info_conta{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+    .info_conta > div{
+        margin: 50px;
+    }
+    .edit_btn{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        width: fit-content;
+        justify-content: center;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: var(--destaque_texto);
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.3s;
+    }
+    .edit_btn:hover{
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+    .edit_btn > p{
+        font-size: 18px;
+        color: white;
+    }
+    .edit_btn > img{
+        width: 25px;
+    }
+    #logout{
+        background-color: var(--cor_destaque);
     }
         /*
 

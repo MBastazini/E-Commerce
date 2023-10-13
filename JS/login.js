@@ -30,7 +30,15 @@ function adicionarEventos(inputElement, textoElement) {
 
 document.addEventListener("DOMContentLoaded", function() {
     
-    const email = document.querySelector('.tela_log_cad > form > .email > input');
+    const inps = document.querySelectorAll('.inp');
+    inps.forEach((inp) => {
+      const input = inp.querySelector('input');
+      const texto = inp.querySelector('p');
+      adicionarEventos(input, texto);
+    });
+
+
+    /*const email = document.querySelector('.tela_log_cad > form > .email > input');
     const email_texto = document.querySelector('.tela_log_cad > form > .email > p');
 
     const senha = document.querySelector('.tela_log_cad > form > .senha > input');
@@ -55,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
       
       elementos.forEach(({ input, texto }) => {
         adicionarEventos(input, texto);
-      });
+      });*/
       
     
 });
