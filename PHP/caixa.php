@@ -16,8 +16,10 @@
   function inicioSessao(){
     if (isset($_COOKIE['sessao'])) {
         session_id($_COOKIE['sessao']);
+        
     } 
     session_start();
+    
   }
 
 
@@ -29,13 +31,11 @@
 
   function Cookie($nome, $valor, $min) 
   {
-      setcookie($nome, $valor, time() + $min * 60); 
+      setcookie($nome, $valor, time() + $min * 60, '/projetoscti14'); 
   }
 
   function usuarioNavegacao()
   {
-    inicioSessao();
-
     $conectado = false;
     if (isset($_SESSION['conectado'])){
         $conectado = $_SESSION['conectado'];

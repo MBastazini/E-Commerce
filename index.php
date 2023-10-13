@@ -1,3 +1,10 @@
+<?php 
+    ini_set ( 'display_errors' , 1); 
+    error_reporting (E_ALL);
+    include("PHP/caixa.php");
+    inicioSessao();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -11,6 +18,7 @@
 <body>
     <script src="JS/home.js" defer></script>
     <script src="JS/index.js" defer></script>
+    
 
     <div class="nav_nav nav_sobe container">
         <div class="nav_fundo nf_fixo"></div>
@@ -23,13 +31,8 @@
                     <input type="text" placeholder="Pesquisar...">
                 </div>
                 <div class="nav_p_resultados">
-
                 <?php 
-                    ini_set ( 'display_errors' , 1); 
-                    error_reporting (E_ALL);
-
-                    include("PHP/caixa.php");
-
+                    
 
                     $conn = coneccao();
                     $sql = "select * from tbl_produto";
@@ -45,6 +48,7 @@
                     }
 
                 ?>
+                
                 </div>
         </div>
         
@@ -76,7 +80,6 @@
             </a>
             <a href="PHP/usuario.php">
                 <?php 
-
                 usuarioNavegacao();
 
 
