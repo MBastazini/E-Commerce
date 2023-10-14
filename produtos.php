@@ -139,101 +139,19 @@
                 </div>
             </div>
         </div>
-
+        <div id="area_produtos">
         <?php
-
+        
         $sql = "select * from tbl_produto order by cod_produto";
         $select = $conn->query($sql);
-        
         while($dados = $select->fetch()){
-            $id = $dados['cod_produto'];
-
-            if($id == 1){
-                $cod1 = $dados['cod_produto'];
-                $nome1 = $dados['nome'];
-                $descricao1 = $dados['descricao'];
-                $preco1 = $dados['preco'];
-                $excluido1 = $dados['excluido'];
-            }
-            if($id == 2){
-                $cod2 = $dados['cod_produto'];
-                $nome2 = $dados['nome'];
-                $descricao2 = $dados['descricao'];
-                $preco2 = $dados['preco'];
-                $excluido3 = $dados['excluido'];
-            }
-            if($id == 3){
-                $cod3 = $dados['cod_produto'];
-                $nome3 = $dados['nome'];
-                $descricao3 = $dados['descricao'];
-                $preco3 = $dados['preco'];
-                $excluido3 = $dados['excluido'];
-            }
-            if($id == 4){
-                $cod4 = $dados['cod_produto'];
-                $nome4 = $dados['nome'];
-                $descricao4 = $dados['descricao'];
-                $preco4 = $dados['preco'];
-                $excluido4 = $dados['excluido'];
-            }
-            if($id == 5){
-                $cod5 = $dados['cod_produto'];
-                $nome5 = $dados['nome'];
-                $descricao5 = $dados['descricao'];
-                $preco5 = $dados['preco'];
-                $excluido5 = $dados['excluido'];
-            }
-            if($id == 6){
-                $cod6 = $dados['cod_produto'];
-                $nome6 = $dados['nome'];
-                $descricao6 = $dados['descricao'];
-                $preco6 = $dados['preco'];
-                $excluido6 = $dados['excluido'];
-            }
-            if($id == 7){
-                $cod7 = $dados['cod_produto'];
-                $nome7 = $dados['nome'];
-                $descricao7 = $dados['descricao'];
-                $preco7 = $dados['preco'];
-                $excluido7 = $dados['excluido'];
-            }
-            if($id == 8){
-                $cod8 = $dados['cod_produto'];
-                $nome8 = $dados['nome'];
-                $descricao8 = $dados['descricao'];
-                $preco8 = $dados['preco'];
-                $excluido8 = $dados['excluido'];
-            }
-            if($id == 9){
-                $cod9 = $dados['cod_produto'];
-                $nome9 = $dados['nome'];
-                $descricao9 = $dados['descricao'];
-                $preco9 = $dados['preco'];
-                $excluido9 = $dados['excluido'];
-            }
-            if($id == 10){
-                $cod10 = $dados['cod_produto'];
-                $nome10 = $dados['nome'];
-                $descricao10 = $dados['descricao'];
-                $preco10 = $dados['preco'];
-                $excluido10 = $dados['excluido'];
-            }
-        };
-
-        if($id >= 1){
-            echo" <div id='area_produtos'>
-            <!-- Neste caso o ID não é para estetica, mas indica que o id_produto é 1. -->
-            <div class='product' id='1'>
-                <img src='Icones/quadrados.png' alt='Produto'>
-
-                <div>
-                    <h1>$nome1</h1> <!-- Nome -> H1 -->
-                    <h2>R$ $preco1</h2> <!--- Preço -> H2 -->
-                    <h3>CTI</h3>
-                    <h3>INFORMATICA</h3> <!-- Filtro(s) -> H3-->
-                    <h3>Nenhum</h3>
-                    <p>$descricao1</p>
-                    <div class='product_botoes'>
+            echo "<div class='product' id='".$dados['cod_produto']."'>
+            <img src='Icones/quadrados.png' alt='Produto'>
+            <div>
+                <h1>". $dados['nome']."</h1>
+                <h2> R$". $dados['preco'] ."</h2>
+                <h3>Nenhum</h3>
+                <div class='product_botoes'>
                         <button>
                             <p>COMPRAR</p>
                         </button>
@@ -244,222 +162,15 @@
                             </button>
                         </form>
                     </div>
-                </div>
-            </div> ";
-
-        }
-           
-        if($id >= 2){
-                    echo"
-                    <div class='product' id='2'>
-                        <img src='Icones/quadrados.png' alt='Produto'>
-                        <div>
-                            <h1>$nome2</h1> <!-- Nome -> H1 -->
-                            <h2>R$ $preco2</h2> <!--- Preço -> H2 -->
-                            <h3>CTI</h3> <!-- Filtro(s) -> H3-->
-                            <h3>Nenhum</h3>
-                            <h3>MECANICA</h3>
-                            <p>$descricao2</p>
-                            <div class='product_botoes'>
-                                <button>
-                                    <p>COMPRAR</p>
-                                </button>
-                                <form action='#'>
-                                    <button type='submit' id='add-cart'>
-                                        <p>+</p>
-                                        <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                ";
-        }
-        if($id >= 3){
-                    echo"
-                    <div class='product' id='3'>
-                        <img src='Icones/quadrados.png' alt='Produto'>
-                        <div>
-                            <h1>$nome3</h1> <!-- Nome -> H1 -->
-                            <h2>R$ $preco3</h2> <!--- Preço -> H2 -->
-                            <h3>CTI</h3> <!-- Filtro(s) -> H3-->
-                            <h3>Nenhum</h3>
-                            <h3>ELETRONICA</h3>
-                            <p>$descricao3</p>
-                            <div class='product_botoes'>
-                                <button>
-                                    <p>COMPRAR</p>
-                                </button>
-                                <form action='#'>
-                                    <button type='submit' id='add-cart'>
-                                        <p>+</p>
-                                        <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>";
-        }if($id >= 4){
-                    echo"<div class='product' id='4'>
-                    <img src='Icones/quadrados.png' alt='Produto'>
-                    <div>
-                        <h1>$nome4</h1> <!-- Nome -> H1 -->
-                        <h2>R$ $preco4</h2> <!--- Preço -> H2 -->
-                        <h3>Nenhum</h3> <!-- Filtro(s) -> H3-->
-                        <p>$descricao4</p>
-                        <div class='product_botoes'>
-                            <button>
-                                <p>COMPRAR</p>
-                            </button>
-                            <form action='#'>
-                                <button type='submit' id='add-cart'>
-                                    <p>+</p>
-                                    <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>";
-        }
-        if($id >= 5){
-                    echo"<div class='product' id='5'>
-                    <img src='Icones/quadrados.png' alt='Produto'>
-                    <div>
-                        <h1>$nome5</h1> <!-- Nome -> H1 -->
-                        <h2>R$ $preco5</h2> <!--- Preço -> H2 -->
-                        <h3>Nenhum</h3> <!-- Filtro(s) -> H3-->
-                        <p>$descricao5</p>
-                        <div class='product_botoes'>
-                            <button>
-                                <p>COMPRAR</p>
-                            </button>
-                            <form action='#'>
-                                <button type='submit' id='add-cart'>
-                                    <p>+</p>
-                                    <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div> ";
-        }
-        if($id >= 6){
-                    echo"<div class='product' id='6'>
-                    <img src='Icones/quadrados.png' alt='Produto'>
-                    <div>
-                        <h1>$nome6</h1> <!-- Nome -> H1 -->
-                        <h2>R$ $preco6</h2> <!--- Preço -> H2 -->
-                        <h3>Nenhum</h3> <!-- Filtro(s) -> H3-->
-                        <p>$descricao6</p>
-                        <div class='product_botoes'>
-                            <button>
-                                <p>COMPRAR</p>
-                            </button>
-                            <form action='#'>
-                                <button type='submit' id='add-cart'>
-                                    <p>+</p>
-                                    <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div> ";
-        }
-        if($id >= 7){
-                    echo"<div class='product' id='7'>
-                    <img src='Icones/quadrados.png' alt='Produto'>
-                    <div>
-                        <h1>$nome7</h1> <!-- Nome -> H1 -->
-                        <h2>R$ $preco7</h2> <!--- Preço -> H2 -->
-                        <h3>Nenhum</h3> <!-- Filtro(s) -> H3-->
-                        <p>$descricao7</p>
-                        <div class='product_botoes'>
-                            <button>
-                                <p>COMPRAR</p>
-                            </button>
-                            <form action='#'>
-                                <button type='submit' id='add-cart'>
-                                    <p>+</p>
-                                    <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div> ";
-        }
-        if($id >= 8){
-                    echo"<div class='product' id='8'>
-                    <img src='Icones/quadrados.png' alt='Produto'>
-                    <div>
-                        <h1>$nome8</h1> <!-- Nome -> H1 -->
-                        <h2>R$ $preco8</h2> <!--- Preço -> H2 -->
-                        <h3>Nenhum</h3> <!-- Filtro(s) -> H3-->
-                        <p>$descricao8</p>
-                        <div class='product_botoes'>
-                            <button>
-                                <p>COMPRAR</p>
-                            </button>
-                            <form action='#'>
-                                <button type='submit' id='add-cart'>
-                                    <p>+</p>
-                                    <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div> ";
-        }
-        if($id >= 9){
-                    echo"<div class='product' id='9'>
-                    <img src='Icones/quadrados.png' alt='Produto'>
-                    <div>
-                        <h1>$nome9</h1> <!-- Nome -> H1 -->
-                        <h2>R$ $preco9</h2> <!--- Preço -> H2 -->
-                        <h3>Nenhum</h3> <!-- Filtro(s) -> H3-->
-                        <p>$descricao9</p>
-                        <div class='product_botoes'>
-                            <button>
-                                <p>COMPRAR</p>
-                            </button>
-                            <form action='#'>
-                                <button type='submit' id='add-cart'>
-                                    <p>+</p>
-                                    <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div> ";
-        }
-        if($id >= 10){
-                    echo"<div class='product' id='10'>
-                    <img src='Icones/quadrados.png' alt='Produto'>
-                    <div>
-                        <h1>$nome10</h1> <!-- Nome -> H1 -->
-                        <h2>R$ $preco10</h2> <!--- Preço -> H2 -->
-                        <h3>Nenhum</h3> <!-- Filtro(s) -> H3-->
-                        <p>$descricao10</p>
-                        <div class='product_botoes'>
-                            <button>
-                                <p>COMPRAR</p>
-                            </button>
-                            <form action='#'>
-                                <button type='submit' id='add-cart'>
-                                    <p>+</p>
-                                    <img src='Icones/carrinho_branco.svg' alt='carrinho'>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div> ";
-        }
-                
-echo"
+            
             </div>
-    </section>
-        ";
+            </div>";
 
-?>
+        };
+        ?>
+                
+        </div>
+    </section>
 
     <div id="produto_grande">
         <div id="pg_blur"></div>
