@@ -60,7 +60,7 @@
                 <img class="nav_icon" src="Icones/home_branco.svg">
                 <p>HOME</p>
             </div>
-            <a href="produtos.html">
+            <a href="produtos.php">
                 <div class="nav_produtos">
                     <img class="nav_icon" src="Icones/shopping_preto.svg">
                     <p>PRODUTOS</p>
@@ -104,7 +104,7 @@
                         por um cortador a laser, pequenininhos para qualquer situação!
                         'bonitinhos e baratinhos'
                     </p>
-                    <a href="produtos.html">
+                    <a href="produtos.php">
                         <div class="tela_botao">
                             <p>GARANTA O SEU!</p>
                         </div>
@@ -211,7 +211,7 @@
                                     <p>+ Carrinho</p>
                                 </div>
                             </a>
-                            <a href="produtos.html#1">
+                            <a href="produtos.php#1">
                                 <div>
                                     <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
                                     <p>Ver mais</p>
@@ -241,7 +241,7 @@
                                     <p>+ Carrinho</p>
                                 </div>
                             </a>
-                            <a href="produtos.html#2">
+                            <a href="produtos.php#2">
                                 <div>
                                     <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
                                     <p>Ver mais</p>
@@ -271,7 +271,7 @@
                                     <p>+ Carrinho</p>
                                 </div>
                             </a>
-                            <a href="produtos.html#3">
+                            <a href="produtos.php#3">
                                 <div>
                                     <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
                                     <p>Ver mais</p>
@@ -289,7 +289,7 @@
                             
                         </div>
                         <div class="produto_botao">
-                            <a href="produtos.html#4">
+                            <a href="produtos.php#4">
                                 <div>
                                     <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
                                     <p>Comprar</p>
@@ -301,7 +301,7 @@
                                     <p>+ Carrinho</p>
                                 </div>
                             </a>
-                            <a href="produtos.html#4">
+                            <a href="produtos.php#4">
                                 <div>
                                     <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
                                     <p>Ver mais</p>
