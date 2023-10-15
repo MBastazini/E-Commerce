@@ -146,10 +146,10 @@
         $select = $conn->query($sql);
         while($dados = $select->fetch()){
             echo "<div class='product' id='".$dados['cod_produto']."'>
-            <img src='Icones/quadrados.png' alt='Produto'>
+            <img src='Imagens/Produtos/". $dados['cod_produto'] ."/P1.png' alt='Produto'>
             <div>
                 <h1>". $dados['nome']."</h1>
-                <h2> R$". $dados['preco'] ."</h2>
+                <h2> R$ ". $dados['preco'] ."</h2>
                 <h3>Nenhum</h3>
                 <div class='product_botoes'>
                         <button>

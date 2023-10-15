@@ -169,20 +169,19 @@ function telaProduto(produto){
     const pg_info = document.getElementById('pg_info');
     pg_info.style.top = (window.scrollY + 50) + 'px';
     //Fazer aqui o codigo para carregar a pasta da imagem correta tambem.
+
+    let id = produto.getAttribute('id');
+    let src = 'Imagens/Produtos/' + id + '/';
+
+    const img_grande = document.getElementById('img_grande');
+    img_grande.src = src + 'P1.png';
+    const imagens_pequenas = document.querySelectorAll('.div_img_pequena > img');
+    let cont = 1;
+    imagens_pequenas.forEach((img) => {
+        img.src = src + 'P' + cont + '.png';
+        cont++;
+    });
 }   
-
-
-    // Função para verificar se um cookie específico existe
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    // Verifica se o cookie "fragmentRemoved" existe
-    const fragmentRemoved = getCookie("fragmentRemoved");
-
-    // Verifica se há um fragmento na URL quando a página é carregada
 
 document.addEventListener('DOMContentLoaded', function () {
     let url = window.location.href;
