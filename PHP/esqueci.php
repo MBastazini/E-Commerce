@@ -14,10 +14,7 @@ echo  "
 if(isset($_POST)){
    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $email = $_POST['email'];
-      echo"aaaa";
       enviaemail($email);
-      echo "bbbb";
-
    }
 }
 

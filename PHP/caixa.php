@@ -69,24 +69,26 @@
     }
   }
 
-
-  include 'PHPMailer-master/src/PHPMailer.php';
-  include 'PHPMailer-master/src/Exception.php';
-  include 'PHPMailer-master/src/SMTP.php';
-  
   use PHPMailer\PHPMailer\Exception;
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\SMTP;
 
-  function enviaemail($destinatario/*, $senha*/){
-       echo"ddddd";
+  require 'PHPMailer/src/Exception.php';
+  require 'PHPMailer/src/PHPMailer.php';
+  require 'PHPMailer/src/SMTP.php';
 
-     $mail = new PHPMailer();
+
+  function enviaemail($destinatario/*, $senha*/){
+
+    
+
+     $mail = new PHPMailer(true);
+
      try {
         //Server settings
         $mail->SMTPDebug = 2; //Habilita o debug do SMTP
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'projetoscti.com.br';                     //Set the SMTP server to send through
+        $mail->Host       = 'smtp.projetoscti.com.br';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'tinywood@projetoscti.com.br';                     //SMTP username
         $mail->Password   = 'Tiny#wood2023';    
@@ -107,25 +109,27 @@
 
         //Caso envie para outra página com alteração de usuario: 
         $mail->isHTML(true);                                  
-        $mail->Subject = 'Criação de nova senha para o ecommerce tinywood';
-        $mail->Body    = "<p>Link para alteração de senha: <a href='projetoscti.com.br/projetoscti14/PHP/alterasenha.php'>link</a></p>  ";
+        $mail->Subject = 'Esqueci minha senha para o ecommerce tinywood';
+        $mail->Body    = "<a href=http://200.145.153.91/luizsilva/Testes/PHP/alterasenha.php?email=".$destinatario.">Clique aqui para mudar sua senha</a>";
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-        echo"cccc";
+
 
         $enviado = $mail->send();
+
         if ($enviado) {
           echo "E-mail enviado com sucesso!";
         } else {
           echo "Não foi possível enviar o e-mail.";
           echo "<b>Informações do erro:</b> " . $mail->ErrorInfo;
         }
-  
+
         //Execeções da biblioteca PHPMailer e do PHP(Instaciamento da classe exception)
       } catch (Exception $e) {
         echo $e->errorMessage(); //mensagens de erro do PHPMailer 
       } catch (\Exception $e) {
         echo $e->getMessage(); //mensagens de erro do PHP
       }
+
   }
 
 
