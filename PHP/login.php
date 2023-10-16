@@ -36,7 +36,7 @@
         }
         else{
             //Login efetuado com sucesso.
-            Cookie('sessao', $session_id, 1440); //24 horas
+            setToken($resultado2['cod_usuario']);
             $_SESSION['nome'] = explode(" ", $resultado2['nome'])[0];
             $_SESSION['conectado'] = true;
             $_SESSION['cod_usuario'] = $resultado2['cod_usuario'];

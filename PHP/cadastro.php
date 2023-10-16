@@ -35,7 +35,7 @@
             $inclui = $conn->prepare($sql); 
             $inclui->execute($linha);
 
-            Cookie('sessao', $session_id, 1440); //24 horas
+            setToken($resultado['cod_usuario']);
             $_SESSION['nome'] = explode(" ", $linha['nome'])[0];
             $_SESSION['conectado'] = true;
             

@@ -1,5 +1,4 @@
 
-- rearranjar o SQL (tbm_compra_produto) -> acho q deu > fazer a view
 - filtros chegando de "categoria" do SQL
 - tabela de usuario com as compras efetuadas e/ou status
 - area de admin: (CRud de produtos e usuarios bonito com HTML/CSS)
@@ -11,7 +10,8 @@
 - area de admin responsiva
 - padronizar funções
 - tokens (SQL) -> para manter conecção mesmo quando desliga o computador.
-
+- arrumar login (email e senha icorreta)
+- fazer um verificador de senha no cadastro
 
 
 LUIZ:

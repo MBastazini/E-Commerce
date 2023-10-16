@@ -164,41 +164,61 @@
         <div id="info_compra">
             
             <?php 
-            
-                $sql2 = "SELECT * FROM tbl_compra WHERE status = 'finalizado'";
-                $select2 = $conn->prepare($sql2);
-                $select2->execute();
-                while ($resultado2 = $select2->fetch()){
-                    $nome_produto
-                    echo"<div>
-                        <p>". $nome_produto ."</p>
-                        <p>". $quantidade ."</p>
-                        <p>". $preco_total ."</p>
-                        <p>". $data_compra ."</p>
-                    </div>";
-                }
-
+                if ($conectado)
+                {
+                    $sql2 = "
+                    SELECT p.nome, p.preco, cp.quantidade, c.data_compra, c.status FROM tbl_compra_produto AS cp 
+                    INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto 
+                    INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
+                    WHERE c.status = 'finalizado';
+                    ";
+                    $select2 = $conn->prepare($sql2);
+                    $select2->execute();
+                    while ($resultado2 = $select2->fetch()){
+                        echo"<div>
+                            <p>". $resultado2['nome'] ."</p>
+                            <p>". $resultado2['quantidade'] ."</p>
+                            <p>". $resultado2['preco'] ."</p>
+                            <p>". $resultado2['data_compra'] ."</p>
+                        </div>";
+                    }
+                }   
             ?>
-            <div>
-                <p>Nome_Produto</p>
-                <p>Quantidade</p>
-                <p>Preço</p>
-                <p>Data</p>
-            </div>
+        </div>
 
-            <div>
-                <p>Nome_Produto</p>
-                <p>Quantidade</p>
-                <p>Preço</p>
-                <p>Data</p>
-            </div>
+        <h1>Sessões ativas</h1>
+        <div id="info_c_h" class="token">
+            <p>Data da criação</p>
+            <p>Ip da maquina de criação</p>
+            <p>Deletar / Apagar sessão</p>
+        </div>
+        <div id="info_compra" class="token">    
+            <?php 
+                if ($conectado)
+                {
+                    $sql_token = "SELECT * FROM tbl_token WHERE cod_usuario = :cod_usuario";
+                    $select_token = $conn->prepare($sql_token);
+                    $select_token->execute(['cod_usuario' => $_SESSION['cod_usuario']]);
+                    $info_token = $select_token->fetch();
 
-            <div>
-                <p>Nome_Produto</p>
-                <p>Quantidade</p>
-                <p>Preço</p>
-                <p>Data</p>
-            </div>
+                    if ($info_token != NULL){
+                        echo"
+                        <div> 
+                        <p>". $info_token['data_criacao'] ."</p>
+                        <p>". $info_token['ip_criacao'] ."</p>
+                        <form action='deletatoken.php' method='post'>
+                            <button type='submit' name='deletar' value='". $info_token['cod_token'] ."'>
+                                <img src='Icones/delete.svg'>
+                        </form>
+                        </div>";
+                    }
+                    else{
+                        echo"<p>Não há sessões ativas</p>";
+                    }
+                    
+                }
+            
+            ?>
         </div>
     </section>
 

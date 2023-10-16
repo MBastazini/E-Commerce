@@ -14,12 +14,50 @@
   }
   
   function inicioSessao(){
-    if (isset($_COOKIE['sessao'])) {
-        session_id($_COOKIE['sessao']);
-        
+    if (isset($_COOKIE['token'])) {
+        $conn = coneccao();
+        $gettoken = "SELECT cod_usuario FROM tbl_token WHERE token = :token";
+        $select = $conn->prepare($gettoken);
+        $select->execute(['token' => $_COOKIE['token']]);
+        $resultado = $select->fetch();
+
+        $nomeusuario = "SELECT nome FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
+        $select2 = $conn->prepare($nomeusuario);
+        $select2->execute(['cod_usuario' => $resultado['cod_usuario']]);
+        $resultado2 = $select2->fetch();
+
+        if ($resultado != NULL)
+        {
+            session_start();
+            $_SESSION['conectado'] = true;
+            if ($resultado2 != NULL)
+            {
+              $_SESSION['nome'] = explode(" ", $resultado2['nome'])[0];
+            }
+            else{
+              $_SESSION['nome'] = "Usuário";
+            }
+            $_SESSION['cod_usuario'] = $resultado['cod_usuario'];
+            if ($resultado['cod_usuario'] == 0)
+            {
+                $_SESSION['adm'] = true;
+            }
+            else{
+                $_SESSION['adm'] = false;
+            }
+
+        }
+        else{
+            session_start();
+            $_SESSION['conectado'] = false;
+        }
     } 
-    session_start();
+    else{
+        session_start();
+        $_SESSION['conectado'] = false;
+    }
     
+    return $_SESSION['conectado'];
   }
 
 
@@ -32,6 +70,26 @@
   function Cookie($nome, $valor, $min) 
   {
       setcookie($nome, $valor, time() + $min * 60, '/projetoscti14'); 
+  }
+
+  function setToken($cod_usuario)
+  {
+    $conn = coneccao();
+    $token = rand(100000000, 999999999);
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $data = date('Y-m-d');
+
+    $linha = [
+        'cod_usuario' => $cod_usuario,
+        'token' => $token,
+        'ip' => $ip,
+        'data' => $data
+    ];
+
+    $sql = "INSERT INTO tbl_token (cod_usuario, token, ip_criacao, data_criacao) VALUES (:cod_usuario, :token, :ip, :data)";
+    $insert = $conn->prepare($sql);
+    $insert->execute($linha);
+    Cookie('token', $token, 1440); //24 horas
   }
 
   function usuarioNavegacao()

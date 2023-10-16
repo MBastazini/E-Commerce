@@ -2454,12 +2454,16 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         box-sizing: border-box;
         padding: 10px;
         border: 2px solid var(--destaque_texto);
+        margin-bottom: 50px;
     }
     #info_compra > div, #info_c_h{
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         box-sizing: border-box;
+    }
+    #info_compra.token > div, #info_c_h.token{
+        grid-template-columns: 1fr 1fr 1fr;
     }
     #info_c_h{
         background-color: var(--destaque_texto);
@@ -2470,14 +2474,18 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         margin-top: 30px;
         padding: 5px;
     }
-    #info_compra > div > p{
+    #info_compra p{
         font-size: 20px;
         border-right: 3px solid var(--destaque_texto);
         height: 100%;
         padding: 5px;
         padding-left: 10px;
     }
-    #info_compra > div > p:last-child{
+    #info_compra a{
+        display: flex;
+        justify-content: center;
+    }
+    #info_compra p:last-child{
         border-right: none;
     }
     #info_compra div:nth-child(even){

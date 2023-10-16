@@ -12,6 +12,16 @@ CREATE TABLE tbl_produto(
 	imagem varchar not null,
 	categoria varchar(10) not null
 );
+/*ALTER TABLE tbl_produto ADD COLUMN categoria varchar(10);*/
+
+CREATE TABLE tbl_token(
+	cod_token serial PRIMARY KEY,
+	token varchar(100) not null,
+	data_criacao date not null,
+	ip_criacao varchar(15) not null,
+	cod_usuario serial,
+	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
+);
 
 CREATE TABLE tbl_compra(
 	cod_compra serial PRIMARY KEY,
@@ -36,6 +46,8 @@ CREATE TABLE tbl_compra_produto(
 	cod_compra serial,
 	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
 );
+/*ALTER TABLE tbl_compra_produto ADD COLUMN cod_compra serial;
+ALTER TABLE tbl_compra_produto ADD FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra);*/
 
 CREATE TABLE tbl_tmpcompra(
 	cod_compra serial PRIMARY KEY,
@@ -89,7 +101,10 @@ comp INNER JOIN tbl_usuario AS usu ON usu.cod_usuario = comp.cod_compra;
 SELECT comprod.cod_compra_produto ,comprod.quantidade , tmp.cod_compra FROM tbl_compra_produto AS 
 comprod INNER JOIN tbl_tmpcompra AS tmp ON tmp.cod_compra = comprod.cod_compra_produto;
 
-
+SELECT p.nome, p.preco, cp.quantidade, c.data_compra, c.status FROM tbl_compra_produto AS cp 
+INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto 
+INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
+WHERE c.status = 'finalizado';
 
 
 
