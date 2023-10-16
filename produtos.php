@@ -140,6 +140,7 @@
             </div>
         </div>
         <div id="area_produtos">
+            <p id='nenhum-produto-encontrado' style="display: none;">Nenhum produto encontrado com os filtros selecionados</p>
         <?php
         
         $sql = "select * from tbl_produto order by cod_produto";

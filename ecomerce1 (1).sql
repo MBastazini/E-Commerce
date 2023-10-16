@@ -9,7 +9,8 @@ CREATE TABLE tbl_produto(
 	custo numeric(10,2) not null,
 	margem_lucro numeric(10,2) not null,
 	icms numeric(10,2) not null,
-	imagem varchar not null
+	imagem varchar not null,
+	categoria varchar(10) not null
 );
 
 CREATE TABLE tbl_compra(
@@ -30,7 +31,10 @@ CREATE TABLE tbl_compra_produto(
 	cod_compra_produto serial PRIMARY KEY,
 	quantidade numeric (10) not null,
 	cod_produto serial,
-	FOREIGN KEY (cod_produto) REFERENCES tbl_produto(cod_produto)
+	FOREIGN KEY (cod_produto) REFERENCES tbl_produto(cod_produto),
+
+	cod_compra serial,
+	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
 );
 
 CREATE TABLE tbl_tmpcompra(
@@ -46,7 +50,7 @@ INSERT INTO tbl_produto VALUES
 (3,'chaveiro_elet','chaveiro de eletronica',5.90,false,'5-9-2023','chaveiro3',2.90, 2.00,1.00,'e' );
 
 INSERT INTO tbl_usuario VALUES
-(1,'Marcelo Oliveira', 'marcelo@gmail.com', 'Marcelo123', '5514123456789'),
+(0,'TinyWood', 'tinywoodcti@gmail.com', 'LLMMM2023', '5514123456789'),
 (2,'Roberto Silva', 'roberto@gmail.com', 'Roberto123',    '5514987654321'),
 (3,'Rodolfo Carlos', 'rodolfo@gmail.com', 'Rodolfo123',   '5514918273645');
 

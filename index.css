@@ -2075,6 +2075,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         width: 100%;
         padding-left: 50px;
         height: fit-content;
+        position: relative;
     }
     .product{
         width: 100%;
@@ -2086,6 +2087,12 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         background-color: var(--destaque_01);
         transition: 0.5s;
         align-items: center;
+    }
+    #nenhum-produto-encontrado{
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        font-size: large;
     }
     .product > div > p{
         display: none;
@@ -2384,13 +2391,45 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         justify-content: center;
         padding: 15px;
         border-radius: 10px;
-        background-color: var(--destaque_texto);
-        cursor: pointer;
+        background-color: rgb(122, 122, 122);
+
         margin: 10px;
         transition: 0.3s;
     }
-    .edit_btn:hover{
+    .edit_btn.disabled{
+        background-color: var(--destaque_texto);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .edit_btn.disabled:hover{
         transform: scale(1.05);
+        transition: 0.3s;
+    }
+    #conta_form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #btn_submit{
+        background-color: var(--destaque_texto);
+        color: white;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        text-align: center;
+        border-radius: 5px;
+        transition: 0.5s;
+        font-size: 20px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        display: none;
+    }
+    #btn_submit.enabled{
+        display: block;
+    }
+    .edit_btn:hover{
+        transform: scale(1);
         transition: 0.3s;
     }
     .edit_btn > p{
@@ -2837,6 +2876,17 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+
+        .info_conta{
+            grid-template-columns: 1fr;
+        }
+        #info_compra > div > p{
+            font-size: 15px;
+        }
+        #info_c_h{
+            font-size: 15px;
         }
     }
 
