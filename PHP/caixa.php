@@ -70,104 +70,65 @@
   }
 
 
-
-
-
-
-  function EnviaEmail ( $pEmailDestino, $pAssunto, $pHtml, $pRemetente )   
-  {
-   error_reporting(E_ALL);
-   ini_set("display_errors", 1);
-   
-   require "PHPMailer/PHPMailerAutoload.php";
-      
-   try {
+  include 'PHPMailer-master/src/PHPMailer.php';
+  include 'PHPMailer-master/src/Exception.php';
+  include 'PHPMailer-master/src/SMTP.php';
   
-   //cria instancia de phpmailer
-   echo "<br>Tentando enviar para ".$pEmailDestino."...";
-   $mail = new PHPMailer(); 
-   $mail->IsSMTP();  
-   
-   // servidor smtp
-   //$mail->SMTPDebug = SMTP::DEBUG_SERVER;   // use se tiver problemas, ele lista toda a transacao com o servidor
-   $mail->Host = "smtp....";
-   $mail->SMTPAuth = true;      // requer autenticacao com o servidor                         
-   $mail->SMTPSecure = 'tls';                            
-       
-   $mail-> SMTPOptions = array (
-     'ssl' => array (
-     'verificar_peer' => false,
-     'verify_peer_name' => false,
-     'allow_self_signed' => true ) );
-       
-   $mail->Port = 587;      
-      
-   $mail->Username = "...@..."; 
-   $mail->Password = "..."; 
-   $mail->From = "...@..."; 
-   $mail->FromName = "Suporte de senhas"; 
-   
-   $mail->AddAddress($pEmailDestino, "Usuario"); 
-   $mail->IsHTML(true); 
-   $mail->Subject = "Nova Senha !"; 
-   $mail->Body = $pHtml;
-   $enviado = $mail->Send(); 
-       
-   if (!$enviado) {
-      echo "<br>Erro: " . $mail->ErrorInfo;
-   } else {
-      echo "<br><b>Enviado!</b>";
-   }
-   return $enviado;         
-       
-   } catch (phpmailerException $e) {
-     echo $e->errorMessage(); // erros do phpmailer
-   } catch (Exception $e) {
-     echo $e->getMessage(); // erros da aplicação - gerais
-   }       
-   
+  use PHPMailer\PHPMailer\Exception;
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\SMTP;
+
+  function enviaemail($destinatario/*, $senha*/){
+       echo"ddddd";
+
+     $mail = new PHPMailer();
+     try {
+        //Server settings
+        $mail->SMTPDebug = 2; //Habilita o debug do SMTP
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'projetoscti.com.br';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'tinywood@projetoscti.com.br';                     //SMTP username
+        $mail->Password   = 'Tiny#wood2023';    
+        $mail->SMTPSecure = 'tls'; 
+        $mail->Port       = 587;     
+        $mail-> SMTPOptions = array (
+          'ssl' => array (
+          'verificar_peer' => false,
+          'verify_peer_name' => false,
+          'allow_self_signed' => true )); //Permite que o PHPMailer aceite certificados SSL não confiáveis                               //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+     
+        //Recipients
+        $mail->setFrom('tinywood@projetoscti.com.br');
+        $mail->addAddress($destinatario, 'Usuário');     
+        $mail->addReplyTo('tinywood@projetoscti.com.br');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+
+        //Caso envie para outra página com alteração de usuario: 
+        $mail->isHTML(true);                                  
+        $mail->Subject = 'Criação de nova senha para o ecommerce tinywood';
+        $mail->Body    = "<p>Link para alteração de senha: <a href='projetoscti.com.br/projetoscti14/PHP/alterasenha.php'>link</a></p>  ";
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        echo"cccc";
+
+        $enviado = $mail->send();
+        if ($enviado) {
+          echo "E-mail enviado com sucesso!";
+        } else {
+          echo "Não foi possível enviar o e-mail.";
+          echo "<b>Informações do erro:</b> " . $mail->ErrorInfo;
+        }
+  
+        //Execeções da biblioteca PHPMailer e do PHP(Instaciamento da classe exception)
+      } catch (Exception $e) {
+        echo $e->errorMessage(); //mensagens de erro do PHPMailer 
+      } catch (\Exception $e) {
+        echo $e->getMessage(); //mensagens de erro do PHP
+      }
   }
 
 
-
-
-  function ExecutaSQL( $paramConn, $paramSQL ) 
-  {
-   $linhas = $paramConn->exec($paramSQL);
-   
-   if ($linhas > 0) { 
-       return TRUE; 
-   } else { 
-       echo "<br><b>Erro SQL:</b>".$paramConn->errorInfo()."<br>";
-       return FALSE; 
-   }  
-  }   
-  
-
-
-
-  
-  function GeraSenha($tamanho = 8, $maiusculas = true, $numeros = true, $simbolos = false)
-  {
-  //$lmin = 'abcdefghijklmnopqrstuvwxyz';
-  $lmai = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  $num = '1234567890';
-  $simb = '!@#$%*-';
-  $retorno = '';
-  $caracteres = '';
-  
-  //$caracteres .= $lmin;
-  if ($maiusculas) $caracteres .= $lmai;
-  if ($numeros) $caracteres .= $num;
-  if ($simbolos) $caracteres .= $simb;
-  
-  $len = strlen($caracteres);
-  for ($n = 1; $n <= $tamanho; $n++) {
-  $rand = mt_rand(1, $len);
-  $retorno .= $caracteres[$rand-1];
-  }
-  return $retorno;
-  }
 
   
 
