@@ -1,6 +1,6 @@
 
-- rearranjar o SQL (tbm_compra_produto)
-- filtros chegando de "categoria" do SQL (adicionar categoria ao SQL)
+- rearranjar o SQL (tbm_compra_produto) -> acho q deu > fazer a view
+- filtros chegando de "categoria" do SQL
 - tabela de usuario com as compras efetuadas e/ou status
 - area de admin: (CRud de produtos e usuarios bonito com HTML/CSS)
 - tabela ocm todos os usuarios na area de admin
