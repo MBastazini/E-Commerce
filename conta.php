@@ -1,3 +1,12 @@
+<?php 
+    ini_set ( 'display_errors' , 1); 
+    error_reporting (E_ALL);
+    include("PHP/caixa.php");
+    inicioSessao();
+
+    $conn = coneccao();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -87,35 +96,64 @@
     <section class="container" id="conta">
         <h1>Sua conta</h1>
         <h2>Nomerson de Uzzuario</h2>
-        <form href="PHP/minhaconta.php" method="post" id="conta_form">
+        <form action="PHP/minhaconta.php" method="post" id="conta_form">
             <div class="edit_btn disabled">
                 <p>Editar informações</p>
                 <img src="Icones/edit.svg">
             </div>
+
             <div class="info_conta">
-                <div class="inp disabled">
-                    <input type="text" value="Nomerson de Uzzuario" disabled>
-                    <p>Nome</p>
-                </div>
-                <div class="inp disabled">
-                    <input type="email" value="nomersonuzzuario@gmail.com" disabled>
-                    <p>E-Mail</p>
-                </div>
-                <div class="inp disabled">
-                    <input type="tel" value="+55 (14) 98765-4321" disabled>
-                    <p>Telefone</p>
-                </div>
-                <div class="inp disabled">
-                    <input type="password" value="Nomerson de Uzzuario" disabled>
-                    <p>Senha</p>
-                </div>
+                <?php 
+                    if (isset($_SESSION['conectado'])){
+                        $conectado = true;
+                    }
+                    else{
+                        $conectado = false;
+                    }
+
+                    if ($conectado)
+                    {
+                        $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = ".$_SESSION['cod_usuario'];
+                        $select = $conn->prepare($sql);
+                        $select->execute();
+                        $resultado = $select->fetch();
+                        $nome = $resultado['nome'];
+                        $email = $resultado['email'];
+                        $telefone = $resultado['telefone'];
+                        $senha = $resultado['senha'];
+                        echo"<div class='inp disabled'>
+                        <input type='text' value='". $nome ."' disabled name='nome'>
+                        <p>Nome</p>
+                        </div>";
+
+                        echo"<div class='inp disabled'>
+                        <input type='email' value='". $email ."' disabled name='email'>
+                        <p>E-Mail</p>
+                        </div>";
+
+                        echo"<div class='inp disabled'>
+                        <input type='tel' value='". $telefone ."' disabled name='telefone'>
+                        <p>Telefone</p>
+                        </div>";
+
+                        echo"<div class='inp disabled'>
+                        <input type='password' value='". $senha ."' disabled name='senha'>
+                        <p>Senha</p>
+                        </div>";
+
+                        echo"<input type='hidden' value='". $_SESSION['cod_usuario'] ."' name='codigo'>";
+                    }
+                ?>
             </div>
             <input type="submit" value="Salvar alterações" id="btn_submit">
         </form>
-        <div class="edit_btn" id="logout">
-            <p>LOGOUT</p>
-            <img src="Icones/logout_branco.svg">
-        </div>
+        <a href="PHP/logout.php">
+            <div class="edit_btn" id="logout">
+                <p>LOGOUT</p>
+                <img src="Icones/logout_branco.svg">
+            </div>
+        </a>
+
         <h1>Informações de compras efetuadas</h1>
         <div id="info_c_h">
             <p>Nome do produto</p>
@@ -125,6 +163,22 @@
         </div>
         <div id="info_compra">
             
+            <?php 
+            
+                $sql2 = "SELECT * FROM tbl_compra WHERE status = 'finalizado'";
+                $select2 = $conn->prepare($sql2);
+                $select2->execute();
+                while ($resultado2 = $select2->fetch()){
+                    $nome_produto
+                    echo"<div>
+                        <p>". $nome_produto ."</p>
+                        <p>". $quantidade ."</p>
+                        <p>". $preco_total ."</p>
+                        <p>". $data_compra ."</p>
+                    </div>";
+                }
+
+            ?>
             <div>
                 <p>Nome_Produto</p>
                 <p>Quantidade</p>

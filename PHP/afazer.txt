@@ -1,0 +1,19 @@
+
+- rearranjar o SQL (tbm_compra_produto)
+- filtros chegando de "categoria" do SQL (adicionar categoria ao SQL)
+- tabela de usuario com as compras efetuadas e/ou status
+- area de admin: (CRud de produtos e usuarios bonito com HTML/CSS)
+- tabela ocm todos os usuarios na area de admin
+- carrinho (tudo)
+	- fazer somar / subtrair / compra efetuada / conexção com o BD
+	- area de produtos, carregamento com as imagens funcionando, vindo de outras paginas
+- produtos: botão de comprar agora
+- area de admin responsiva
+- padronizar funções
+- tokens (SQL) -> para manter conecção mesmo quando desliga o computador.
+
+
+
+LUIZ:
+- PHPmailer
+- FPDF (na hora da compra - relatorio)

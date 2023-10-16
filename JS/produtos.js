@@ -142,10 +142,11 @@ function checkFiltro(element)
 function mudaFiltro(){
     const produtos = document.querySelectorAll('.product');
     const filtros = document.querySelectorAll('#ativos > div');
+    const nenhum_produto = document.getElementById('nenhum-produto-encontrado'); 
+    nenhum_produto.style.display = 'block';
     produtos.forEach((produto) => {
         const p_filtros = produto.querySelectorAll('div > h3');
         produto.style.display = 'none';
-
         filtros.forEach((filtro) => {      
             if(filtro.style.display != 'none')
             {
@@ -153,11 +154,12 @@ function mudaFiltro(){
                     if (filtro.getAttribute('name') == p_filtro.innerText)
                     {
                         produto.style.display = 'flex';
+                        nenhum_produto.style.display = 'none';
                     }
                 });
             }   
         });
-
+        
     });
 }
 function telaProduto(produto){
