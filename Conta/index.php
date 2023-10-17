@@ -227,7 +227,11 @@
         </div>
     </section>
 
-    <footer>
+    <?php 
+        Footer('../', '#conta');
+    ?>
+    
+    <!--<footer>
         <div class="tela_scroll_down up">
             <a href="#telaInicio" class="a"> 
                 <h1>Voltar ao topo</h1> 
@@ -284,6 +288,6 @@
                 <a><p>sla2</p></a>
             </div>
         </div>
-    </footer>
+    </footer> -->
     </body>
 </html>

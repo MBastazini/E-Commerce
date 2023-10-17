@@ -209,7 +209,12 @@
             <p>Clique fora para fechar</p>
         </div>
     </div>
-    <footer>
+
+    <?php 
+        Footer('../', '#produtos');
+    ?>
+
+    <!--<footer>
         <div class="tela_scroll_down up">
             <a href="#produtos" class="a"> 
                 <h1>Voltar ao topo</h1> 
@@ -266,6 +271,6 @@
                 <a><p>sla2</p></a>
             </div>
         </div>
-    </footer>
+    </footer> -->
 </body>
 </html>

@@ -1,0 +1,58 @@
+ <footer>
+        <div class='tela_scroll_down up'>
+            <a href='#telaInicio' class='a'> 
+                <h1>Voltar ao topo</h1> 
+                <img src='Icones/arrow.svg'>
+            </a>
+        </div>
+        <div id='f_1'></div>
+        <div id='f_2'></div>
+        <div id='f_3'></div>
+        <div id='f_4'></div>
+        <div id='f_5'></div>
+
+        <div class='footer_logo'>
+            <img src='Icones/logo-bola-branco.svg' alt='Logo da Tiny Wood'>
+            <div class='footer_logo_info'>
+                <h1>TINY WOOD</h1>
+                <p>Alguimas informaçoes pq eu vi num lugar e 
+                    vou colocar
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vo
+                luptate quidem distinctio rerum assumenda quae aut, dicta c</p>
+                <div class='footer_logo_info_mais'>
+                    <div class='footer_logo_info_mais_botao' value='1'></div>
+                    <div class='footer_logo_info_mais_botao' value='2'></div>
+                    <div class='footer_logo_info_mais_botao' value='3'></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class='copyright'>
+            <p>All copyrights to &copy; TinyWood</p>
+        </div>
+        <div class='footer_info'>
+            <div class='footer_div'>
+                <h1>Desenvolvedores</h1>
+                <a href='sobre.html#leticia'><p>Leticia Garcia | N° 21</p></a>
+                <a href='sobre.html#luiz'><p>Luiz Felipe | N° 22</p></a>
+                <a href='sobre.html#mariana'><p>Mariana Senger | N° 23</p></a>
+                <a href='sobre.html#mateus'><p>Mateus Bastazini | N° 24</p></a>
+                <a href='sobre.html#matheus'><p>Matheus Trentini | N° 25</p></a>
+            </div>
+            <div class='footer_div'>
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+            <div class='footer_div'>
+                <h1>Contato</h1>
+                <a><p>E-mail</p></a>
+                <a><p>Telefone</p></a>
+                <a><p>sla1</p></a>
+                <a><p>sla2</p></a>
+            </div>
+        </div>
+    </footer>
