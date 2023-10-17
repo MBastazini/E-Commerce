@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="icon" type="image/x-icon" href="Icones/logo-bola-verde.svg">
-
-    <title>Cadastro - Tiny Wood</title>
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <link rel="icon" type="image/x-icon" href="../Icones/logo-bola-verde.svg">
+    
+    <title>Carrinho - Tiny Wood</title>
 </head>
 <body>
-    <script src="JS/index.js" defer></script>
-    <script src="JS/login.js" defer></script>
+    <script src="../JS/index.js" defer></script>
+    <script src="../JS/carrinho.js" defer></script>
     <div class="nav_nav container">
         <div class="nav_fundo"></div>
-        <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
+        <a href="index.html"><img src="../Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
 
 
         <div class="nav_div_pesquisa">
                 <div class="nav_pesquisa">
-                    <img src="Icones/pesquisa_cinza.svg" class="nav_icon">
+                    <img src="../Icones/pesquisa_cinza.svg" class="nav_icon">
                     <input type="text" placeholder="Pesquisar...">
                 </div>
 
@@ -47,90 +47,102 @@
                 </div>
         </div>
         
-        <img src="Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
+        <img src="../Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
         <div class="nav_elementos">
             <div class="nav_risco"></div>
-
             <a href="index.html">
                 <div class="nav_home">
-                    <img class="nav_icon" src="Icones/home_preto.svg">
+                    <img class="nav_icon" src="../Icones/home_preto.svg">
                     <p>HOME</p>
                 </div>
             </a>
-
+            
             <a href="produtos.html">
                 <div class="nav_produtos">
-                    <img class="nav_icon" src="Icones/shopping_preto.svg">
+                    <img class="nav_icon" src="../Icones/shopping_preto.svg">
                     <p>PRODUTOS</p>
                 </div>
             </a>
             
             <a href="sobre.html">
                 <div class="nav_sobre">
-                    <img class="nav_icon" src="Icones/sobre_preto.svg">
+                    <img class="nav_icon" src="../Icones/sobre_preto.svg">
                     <p>SOBRE</p>
                 </div>
             </a>
-           
+            
+            <div class="nav_info_lateral" id="nav_botao_ativo">
+                <img class="nav_icon2" src="../Icones/carrinho_branco.svg">
+                <p>CARRINHO</p>
+            </div>
 
-            <a href="cadastro.html">
-                <div class="nav_info_lateral">
-                    <img class="nav_icon2" src="Icones/carrinho_preto.svg">
-                    <p>CARRINHO</p>
+            <a href="login.html">
+                <div class="nav_info_lateral" >
+                    <img class="nav_icon2" src="../Icones/login_preto.svg">
+                    <p>LOGIN</p>
                 </div>
             </a>
-            
-            <div class="nav_info_lateral"  id="nav_botao_ativo">
-                <img class="nav_icon2" src="Icones/login_branco.svg">
-                <p>CADASTRO</p>
-            </div>
         </div>
         
     </div>
 
-    <section class="container sec_login">
-        <div class="cadastro tela_log_cad">
-            <h1>CADASTRAR-SE</h1>
-            <form action='PHP/cadastro.php' method='post'>
-                
-                <div class="nome inp">
-                    <input type="text" name="nome" maxlength="80">
-                    <p>Nome</p>
+    <section id="grid_carrinho" class="container">
+        <div id="produtos_compra">
+
+            <!-- Na cração disso com PHP atente-se em colocar o uma STRING concatenada como 'produto_' + $id_produto
+            Algo assim, ai o id_produto fica armasenado, mas não temos classes com o nome dela sendo apenas um numero solto -->
+            <div class="produto_compra"  id="Produto1">
+                <img src="../Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div class="produto_compra_div">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
                 </div>
-                <div class="email inp">
-                    <input type="email" name="email" maxlength="100">
-                    <p>E-mail</p>
+            </div>
+            
+            <div class="produto_compra">
+                <img src="../Icones/quadrado.svg" alt="Chaveiro 1">
+                <div>
+                    <p>Nome-Produto</p>
+                    <div class="produto_compra_div">
+                        <p id="quantidade">2</p>
+                    </div>
+                    <h1>R$ 30,00</h1>
                 </div>
-                <div class="telefone inp">
-                    <input type="text" name="telefone" maxlength="13">
-                    <p>Telefone</p>
+            </div>
+        </div>
+        <div id="compra_total">
+            <h1>CARRINHO</h1>
+            <div>
+                <div id="compras_efetuadas">
+                    <div class="compra_cabecalho">
+                        <h1>Quantidade</h1>
+                        <h1>Produto</h1>
+                        <h1>Preço</h1>
+                    </div>
+                    
                 </div>
-                <div class="senha inp">
-                    <input type="password" name="senha" maxlength="40">
-                    <p>Senha</p>
+                <div class="compras_total">
+                    <p>TOTAL</p>
+                    <h1 id="total">R$ 9,98</h1>
                 </div>
-                <div class="senha_c inp">
-                    <input type="password" name="senha_c" maxlength="40">
-                    <p>Confirmar senha</p>
+                <div class="finalizar_compra">
+                    <h1>FINALIZAR COMPRA</h1>
                 </div>
-                <div class="btn">
-                    <input type="submit" value="CADASTRE-SE">
-                </div>
-            </form>
-                <div class="troca_log_cad">
-                    <a href="login.html">
-                    <p id="black_text">Já possuí uma conta?</p>
-                    <p>Faça o login.</p>
-                </a>
-                </div>
-                <p>OU</p>
-                <div class="google">
-                    LOG-IN with (code above)
-                </div>
+            </div>  
         </div>
     </section>
-
+    
     <footer>
+        <div class="tela_scroll_down up">
+            <a href="#grid_carrinho" class="a"> 
+                <h1>Voltar ao topo</h1> 
+                <img src="../Icones/arrow.svg">
+            </a>
+        </div>
+
         <div id="f_1"></div>
         <div id="f_2"></div>
         <div id="f_3"></div>
@@ -138,7 +150,7 @@
         <div id="f_5"></div>
 
         <div class="footer_logo">
-            <img src="Icones/logo-bola-branco.svg" alt="Logo da Tiny Wood">
+            <img src="../Icones/logo-bola-branco.svg" alt="Logo da Tiny Wood">
             <div class="footer_logo_info">
                 <h1>TINY WOOD</h1>
                 <p>Alguimas informaçoes pq eu vi num lugar e 
@@ -184,19 +196,3 @@
     </footer>
 </body>
 </html>
-
-
-<!---<form action='cadastro.php' method='post'>
-                    <input class="cad_email" type="text" name="nome" placeholder="  Digite seu nome . . ." maxlength="80"> 
-                    <br>
-                        <p class="cad_email">E-mail</p>
-                        <input class="cad_email" type="email" name="email" placeholder="  Digite seu email . . ." maxlength="100"> 
-                    <br>
-                        <p class="cad_email">Telefone</p>
-                        <input class="cad_email" type="text" name="telefone" placeholder="  Digite seu Telefone . . ." maxlength="13"> 
-                    <br>
-                        <p class="cad_senha">Senha</p>
-                        <input class="cad_senha" type="password" name="senha" placeholder="  Digite sua senha . . ." maxlength="40"> 
-                    <br>
-                        <input class="cad_enviar" type="submit" action="cadastro.php" value="INICIAR SESSÃO">
-                </form> --->

@@ -2,7 +2,7 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
 
-    include("PHP/caixa.php");
+    include("../PHP/caixa.php");
 
     inicioSessao();
 
@@ -20,23 +20,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="icon" type="image/x-icon" href="Icones/logo-bola-verde.svg">
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <link rel="icon" type="image/x-icon" href="../Icones/logo-bola-verde.svg">
     
     <title>Produtos - Tiny Wood</title>
 </head>
 <body class="over_hid">
-    <script src="JS/produtos.js" defer></script>
-    <script src="JS/index.js" defer></script>
+    <script src="../JS/produtos.js" defer></script>
+    <script src="../JS/index.js" defer></script>
 
-    <div class="nav_nav container">
+    <!--<div class="nav_nav container">
         <div class="nav_fundo nf_fixo"></div>
-        <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
+        <a href="index.html"><img src="../Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
 
 
         <div class="nav_div_pesquisa">
                 <div class="nav_pesquisa">
-                    <img src="Icones/pesquisa_cinza.svg" class="nav_icon">
+                    <img src="../Icones/pesquisa_cinza.svg" class="nav_icon">
                     <input type="text" placeholder="Pesquisar...">
                 </div>
 
@@ -64,50 +64,54 @@
                 </div>
         </div>
         
-        <img src="Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
+        
+
+        <img src="../Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
         <div class="nav_elementos">
             <div class="nav_risco"></div>
             <a href="index.html">
                 <div class="nav_home">
-                    <img class="nav_icon" src="Icones/home_preto.svg">
+                    <img class="nav_icon" src="../Icones/home_preto.svg">
                     <p>HOME</p>
                 </div>
             </a>
             <div class="nav_produtos"  id="nav_botao_ativo">
-                <img class="nav_icon" src="Icones/shopping_branco.svg">
+                <img class="nav_icon" src="../Icones/shopping_branco.svg">
                 <p>PRODUTOS</p>
             </div>
             <a href="sobre.html">
                 <div class="nav_sobre">
-                    <img class="nav_icon" src="Icones/sobre_preto.svg">
+                    <img class="nav_icon" src="../Icones/sobre_preto.svg">
                     <p>SOBRE</p>
                 </div>
             </a>
 
             <a href="carrinho.html">
                 <div class="nav_info_lateral">
-                    <img class="nav_icon2" src="Icones/carrinho_preto.svg">
+                    <img class="nav_icon2" src="../Icones/carrinho_preto.svg">
                     <p>CARRINHO</p>
                 </div>
             </a>
             
-            <a href="PHP/usuario.php">
+            <a href="../PHP/usuario.php">
                 <div class="nav_info_lateral">
-                    <img class="nav_icon2" src="Icones/login_preto.svg">
+                    <img class="nav_icon2" src="../Icones/login_preto.svg">
                     <p>LOGIN</p>
                 </div>
             </a>
         </div>
         
-    </div>
+    </div> -->
 
-
+    <?php 
+        barraNavegacao('produtos', '../');
+    ?>
 
 
     <section id="produtos" class="container">
         <div id="filtro">
             <h1  onclick="abreFiltro()">FILTROS
-                <img src="Icones/Down.svg">
+                <img src="../Icones/Down.svg">
             </h1>
             
             <div>  
@@ -147,7 +151,7 @@
         $select = $conn->query($sql);
         while($dados = $select->fetch()){
             echo "<div class='product' id='".$dados['cod_produto']."'>
-            <img src='Imagens/Produtos/". $dados['cod_produto'] ."/P1.png' alt='Produto'>
+            <img src='../Imagens/Produtos/". $dados['cod_produto'] ."/P1.png' alt='Produto'>
             <div>
                 <h1>". $dados['nome']."</h1>
                 <h2> R$ ". $dados['preco'] ."</h2>
@@ -165,7 +169,7 @@
                         <form action='#'>
                             <button type='submit' id='add-cart'>
                                 <p>+</p>
-                                <img src='Icones/carrinho_branco.svg' alt='carrinho'>
+                                <img src='../Icones/carrinho_branco.svg' alt='carrinho'>
                             </button>
                         </form>
                     </div>
@@ -185,21 +189,21 @@
             <h1>CHAVEIRO CARRARO</h1>
             <div class="div_img_grande">
                 <div class="seta roda180" onclick="mudaImg(1)">
-                    <img src="Icones/Seta-img.svg">
+                    <img src="../Icones/Seta-img.svg">
                 </div>
                 
-                <img src="Imagens/Produtos/1/produto1.png" id="img_grande">
+                <img src="../Imagens/Produtos/1/produto1.png" id="img_grande">
 
                 <div class="seta" onclick="mudaImg(0)">
-                    <img src="Icones/Seta-img.svg">
+                    <img src="../Icones/Seta-img.svg">
                 </div>
             </div>
 
             <div class="div_img_pequena">
-                <img src="Imagens/Produtos/1/produto1.png" id="ativo" onclick="clickMudaImg(this)">
-                <img src="Imagens/Produtos/1/produto2.png" onclick="clickMudaImg(this)">
-                <img src="Imagens/Produtos/1/produto3.png" onclick="clickMudaImg(this)">
-                <img src="Imagens/Produtos/1/produto4.png" onclick="clickMudaImg(this)">
+                <img src="../Imagens/Produtos/1/produto1.png" id="ativo" onclick="clickMudaImg(this)">
+                <img src="../Imagens/Produtos/1/produto2.png" onclick="clickMudaImg(this)">
+                <img src="../Imagens/Produtos/1/produto3.png" onclick="clickMudaImg(this)">
+                <img src="../Imagens/Produtos/1/produto4.png" onclick="clickMudaImg(this)">
                 <div id="img_ativa" style="left: -10px"></div>
             </div>
             <p>Clique fora para fechar</p>
@@ -209,7 +213,7 @@
         <div class="tela_scroll_down up">
             <a href="#produtos" class="a"> 
                 <h1>Voltar ao topo</h1> 
-                <img src="Icones/arrow.svg">
+                <img src="../Icones/arrow.svg">
             </a>
         </div>
         <div id="f_1"></div>
@@ -219,7 +223,7 @@
         <div id="f_5"></div>
 
         <div class="footer_logo">
-            <img src="Icones/logo-bola-branco.svg" alt="Logo da Tiny Wood">
+            <img src="../Icones/logo-bola-branco.svg" alt="Logo da Tiny Wood">
             <div class="footer_logo_info">
                 <h1>TINY WOOD</h1>
                 <p>Alguimas informaçoes pq eu vi num lugar e 

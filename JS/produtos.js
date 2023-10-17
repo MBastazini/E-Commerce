@@ -96,7 +96,7 @@ function criaFiltro(filtro)
     div.setAttribute('name', filtro);
     div.setAttribute('onclick', 'removeFiltro(this)');
     let img = document.createElement('img');
-    img.src = 'Icones/Uncheck.svg';
+    img.src = '../Icones/Uncheck.svg';
     let texto = document.createElement('p');
     div.appendChild(img);
     div.appendChild(texto);

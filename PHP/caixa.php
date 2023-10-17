@@ -1,4 +1,73 @@
 <?php 
+
+  function barraNavegacao($tela, $src)
+  {
+     echo "<div class='nav_nav"; if ($tela == 'home'){echo" nav_sobe ";}  echo" container'>
+        <div class='nav_fundo nf_fixo'></div>
+        <a href='".$src."'><img src='".$src."Icones/logo-verde.svg' class='nav_logo' alt='Logo TINYWOOD'></a>
+
+
+        <div class='nav_div_pesquisa'>
+                <div class='nav_pesquisa'>
+                    <img src='".$src."Icones/pesquisa_cinza.svg' class='nav_icon'>
+                    <input type='text' placeholder='Pesquisar...'>
+                </div>
+                <div class='nav_p_resultados'>";
+                    $conn = coneccao();
+                    $sql = 'select * from tbl_produto';
+                    $produtos = $conn->query($sql);
+                    $a = 1;
+                    while ($produto = $produtos->fetch())
+                    {
+                        echo "<a href='produtos.html#".$produto['cod_produto']."'>";
+                        echo "<div>";
+                        echo "<p>".$produto['nome']."</p>";
+                        echo "</div>";
+                        echo "</a>";
+                    }
+                echo"
+                </div>
+        </div>
+        
+        <img src='".$src."Icones/menu-hamburguer.svg' class='nav_tres_risco' alt='Mais opções'>
+        <div class='nav_elementos'>
+            <div class='nav_risco'></div>
+
+            <a href='$src'>
+              <div class='nav_home' id='"; if($tela == 'home') {echo "nav_botao_ativo";} echo"'>
+                  <img class='nav_icon' src='".$src."Icones/home_"; echo ($tela == 'home') ? "branco" : "preto"; echo".svg'>
+                  <p>HOME</p>
+              </div>
+            </a>
+            <a href='".$src."Produtos'>
+                <div class='nav_produtos' id='"; if($tela == 'produtos') {echo "nav_botao_ativo";} echo"'>
+                    <img class='nav_icon' src='".$src."Icones/shopping_"; echo ($tela == 'produtos') ? "branco" : "preto"; echo".svg'>
+                    <p>PRODUTOS</p>
+                </div>
+            </a>
+            <a href='".$src."Sobre'>   
+                <div class='nav_sobre' id='"; if($tela == 'sobre') {echo "nav_botao_ativo";} echo"'>
+                    <img class='nav_icon' src='".$src."Icones/sobre_"; echo ($tela == 'sobre') ? "branco" : "preto"; echo".svg'>
+                    <p>SOBRE</p>
+                </div>
+            </a>
+
+            <a href='".$src."Carrinho'>
+                <div class='nav_info_lateral' id='"; if($tela == 'carrinho') {echo "nav_botao_ativo";} echo"'>
+                    <img class='nav_icon2' src='".$src."Icones/carrinho_"; echo ($tela == 'carrinho') ? "branco" : "preto"; echo".svg'>
+                    <p>CARRINHO</p>
+                </div>
+            </a>
+            <a href='PHP/usuario.php'>";
+                  $a = '../';
+                  if ($tela == 'home') {$a = '';}
+                  usuarioNavegacao($a);   
+            echo"</a>
+        </div>
+    </div>";
+  }
+
+  
   function coneccao ($para = "")  
   {
     if ($para == "") {
@@ -101,7 +170,7 @@
     Cookie('token', $token, 1440); //24 horas
   }
 
-  function usuarioNavegacao()
+  function usuarioNavegacao($src)
   {
     $conectado = false;
     if (isset($_SESSION['conectado'])){
@@ -112,24 +181,24 @@
     {
       if ($_SESSION['adm'])
       {
-        echo "<a href='PHP/usuario.php'>
+        echo "<a href='".$src."Conta'>
         <div class='nav_info_lateral logged_adm'>
-            <img class='nav_icon2' src='Icones/User-adm.svg'>
+            <img class='nav_icon2' src='".$src."Icones/User-adm.svg'>
             <p> Administrador </p>
         </div>";
       }
       else{
-        echo "<a href='PHP/usuario.php'>
+        echo "<a href='".$src."Conta'>
         <div class='nav_info_lateral logged'>
-            <img class='nav_icon2' src='Icones/User-branco.svg'>
+            <img class='nav_icon2' src='".$src."Icones/User-branco.svg'>
             <p>". $_SESSION['nome'] ."</p>
         </div>";
       }   
     }
     else{
-        echo "<a href='PHP/usuario.php'>
+        echo "<a href='".$src."Login'>
         <div class='nav_info_lateral'>
-            <img class='nav_icon2' src='Icones/login_preto.svg'>
+            <img class='nav_icon2' src='".$src."Icones/login_preto.svg'>
             <p>LOGIN</p>
         </div>
     </a>";

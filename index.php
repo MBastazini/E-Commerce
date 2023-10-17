@@ -20,7 +20,7 @@
     <script src="JS/index.js" defer></script>
     
 
-    <div class="nav_nav nav_sobe container">
+    <!--<div class="nav_nav nav_sobe container">
         <div class="nav_fundo nf_fixo"></div>
         <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
 
@@ -31,23 +31,7 @@
                     <input type="text" placeholder="Pesquisar...">
                 </div>
                 <div class="nav_p_resultados">
-                <?php 
-                    
 
-                    $conn = coneccao();
-                    $sql = "select * from tbl_produto";
-                    $produtos = $conn->query($sql);
-                    $a = 1;
-                    while ($produto = $produtos->fetch())
-                    {
-                        echo "<a href='produtos.html#".$produto['cod_produto']."'>";
-                        echo "<div>";
-                        echo "<p>".$produto['nome']."</p>";
-                        echo "</div>";
-                        echo "</a>";
-                    }
-
-                ?>
                 
                 </div>
         </div>
@@ -79,16 +63,15 @@
                 </div>
             </a>
             <a href="PHP/usuario.php">
-                <?php 
-                usuarioNavegacao();
-
-
-                ?>
                 
             </a>
         </div>
         
-    </div>
+    </div> -->
+
+    <?php 
+        barraNavegacao('home', '');
+    ?>
     <section id="telaInicio">
         <div class="tela_inicial_flex">
             <div class="tela_inicial container">
