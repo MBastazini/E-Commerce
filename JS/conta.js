@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             {
                 form.disabled = false;
                 form.parentElement.classList.remove('disabled');
-                edit_btn.classList.remove('disabled');
+                edit_btn.classList.add('enabled');
                 btn_submit.classList.add('enabled');
             }
         });

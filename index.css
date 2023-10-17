@@ -1546,10 +1546,24 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     }
     .inp{
         position: relative;
-
+    }
+    .lembrarme{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        gap: 10px;
+        align-items: center;
+    }
+    .lembrarme p{
+        font-size: 20px;
+    }
+    .lembrarme input{
+        width: 20px;
+        height: 20px;
     }
     .tela_log_cad.login > form > .inp{
-        margin-bottom: 50px;
+        margin-bottom: 30px;
     }
     .inp > p{
         position: absolute;
@@ -2362,7 +2376,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         flex-direction: column;
         align-items: center;
     }
-    #conta > h1{
+    #conta > h1, #area-adm{
         padding: 10px;
         box-sizing: border-box;
         font-size: 25px;
@@ -2391,22 +2405,21 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         justify-content: center;
         padding: 15px;
         border-radius: 10px;
-        background-color: rgb(122, 122, 122);
 
-        margin: 10px;
         transition: 0.3s;
+        background-color: var(--destaque_texto);
+        cursor: pointer;
+        margin: 10px;
     }
     #form-token{
         display: flex;
         justify-content: center;
     }
-    .edit_btn.disabled{
-        background-color: var(--destaque_texto);
-        transition: 0.3s;
-        cursor: pointer;
+    .edit_btn.enabled{
+        background-color: rgb(122, 122, 122);
     }
-    .edit_btn.disabled:hover{
-        transform: scale(1.05);
+    .edit_btn.enabled:hover{
+        transform: scale(1);
         transition: 0.3s;
     }
     #conta_form{
@@ -2433,7 +2446,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         display: block;
     }
     .edit_btn:hover{
-        transform: scale(1);
+        transform: scale(1.05);
         transition: 0.3s;
     }
     .edit_btn > p{
@@ -2453,6 +2466,8 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         background-color: var(--cor_destaque);
     }
 
+   
+
     #info_compra{
         width: 100%;
         box-sizing: border-box;
@@ -2465,6 +2480,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         box-sizing: border-box;
+        margin: 5px 0px;
     }
     #info_compra.token > div, #info_c_h.token{
         grid-template-columns: 1fr 1fr 1fr;
@@ -2495,6 +2511,26 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #info_compra div:nth-child(even){
         background-color: var(--destaque_01);
     }
+
+    #administrador{
+        width: 100%;
+        margin: 50px 0px;
+    }
+    #area_adm{
+        display: flex;
+        padding: 30px 0px;
+        background-color: white;
+        width: 100%;
+        justify-content: center;
+    }
+    #area-adm
+    {
+        background-color: var(--destaque_02) !important;
+    }
+    #area_adm #CRUD{
+        background-color: var(--cor_destaque);
+    }
+        
         /*
 
 

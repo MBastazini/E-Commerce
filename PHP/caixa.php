@@ -146,58 +146,75 @@
   }
   
   function inicioSessao(){
-    $conn = coneccao();
-    if (isset($_COOKIE['token'])) {
-        $check_token = "SELECT * FROM tbl_token WHERE token = :token";
-        $sel_token = $conn->prepare($check_token);
-        $sel_token->execute(['token' => $_COOKIE['token']]);
-        $res_token = $sel_token->fetch();
-
-        if ($res_token != NULL)
-        {
-          $check_user = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
-          $sel_user = $conn->prepare($check_user);
-          $sel_user->execute(['cod_usuario' => $res_token['cod_usuario']]);
-          $res_user = $sel_user->fetch();
-
-          if ($res_user != NULL)
-          {
-              session_start();
-              $_SESSION['conectado'] = true;
-              if ($res_user != NULL)
-              {
-                $_SESSION['nome'] = explode(" ", $res_user['nome'])[0];
-              }
-              else{
-                $_SESSION['nome'] = "Usuário";
-              }
-              $_SESSION['cod_usuario'] = $res_user['cod_usuario'];
-              if ($res_user['cod_usuario'] == 0)
-              {
-                  $_SESSION['adm'] = true;
-              }
-              else{
-                  $_SESSION['adm'] = false;
-              }
-
-              }
-              else{
-                  session_start();
-                  $_SESSION['conectado'] = false;
-              }
-        }
-        else{
-          unset($_COOKIE['token']);
-          session_start();
-          $_SESSION['conectado'] = false;
-        }
-        
-    } 
+    session_start();
+    echo $_SESSION['conectado'];
+    if (isset($_SESSION['conectado']))
+    {
+        $conectado = $_SESSION['conectado'];
+    }
     else{
-        session_start();
+        $conectado = false;
+    }
+
+
+
+    $conn = coneccao();
+    if ($conectado) //não funciona como todo o resto AAAAAA
+    {
+        if (isset($_COOKIE['token'])) {
+            $_SESSION['token'] = $_COOKIE['token'];
+            $check_token = "SELECT * FROM tbl_token WHERE token = :token";
+            $sel_token = $conn->prepare($check_token);
+            $sel_token->execute(['token' => $_COOKIE['token']]);
+            $res_token = $sel_token->fetch();
+    
+            if ($res_token != NULL)
+            {
+              $check_user = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
+              $sel_user = $conn->prepare($check_user);
+              $sel_user->execute(['cod_usuario' => $res_token['cod_usuario']]);
+              $res_user = $sel_user->fetch();
+    
+                if ($res_user != NULL)
+                {
+                    $_SESSION['conectado'] = true;
+                    if ($res_user != NULL)
+                    {
+                        $_SESSION['nome'] = explode(" ", $res_user['nome'])[0];
+                    }
+                    else{
+                        $_SESSION['nome'] = "Usuário";
+                    }
+                    $_SESSION['cod_usuario'] = $res_user['cod_usuario'];
+                    if ($res_user['cod_usuario'] == 0)
+                    {
+                        $_SESSION['adm'] = true;
+                    }
+                    else{
+                        $_SESSION['adm'] = false;
+                    }
+    
+                }
+                else{
+                    $_SESSION['conectado'] = false;
+                }
+            }
+            else{
+                setcookie('token', null, time() - 1, '/projetoscti14');
+                unset($_COOKIE['token']); //acho que isso aq n funciona
+                $_SESSION['conectado'] = false;
+            }
+            
+        } 
+        else{
+            
+            $_SESSION['conectado'] = false;
+        }    
+    }
+    else{
         $_SESSION['conectado'] = false;
     }
-    
+    echo "SESSAO: "; echo ($_SESSION['conectado']) ? "true" : "false"; echo "<br>";
     return $_SESSION['conectado'];
   }
 
@@ -216,7 +233,7 @@
   function setToken($cod_usuario)
   {
     $conn = coneccao();
-    $token = rand(100000000, 999999999);
+    $token = rand(1000, 9999);
     $ip = $_SERVER['REMOTE_ADDR'];
     $data = date('Y-m-d');
 

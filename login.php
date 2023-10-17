@@ -2,12 +2,10 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
 
-    $path = '/projetoscti14';
-    session_set_cookie_params(0, $path);
     session_start();        
     $session_id = session_id();
     
-    include("caixa.php");
+    include("PHP/caixa.php");
     
     $conn = coneccao();
 

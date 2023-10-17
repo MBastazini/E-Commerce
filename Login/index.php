@@ -1,3 +1,20 @@
+<?php 
+    ini_set ( 'display_errors' , 1); 
+    error_reporting (E_ALL);
+    include("../PHP/caixa.php");
+    //inicioSessao(); -> suponho que no login e cadastro não seja necessario executar.
+
+    $conn = coneccao();
+
+    if(isset($_GET['erro']))
+    {
+        $erro = $_GET['erro'];
+    }
+    else{
+        $erro = 0;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -12,7 +29,7 @@
 <body>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/login.js" defer></script>
-    <div class="nav_nav container">
+    <!---<div class="nav_nav container">
         <div class="nav_fundo"></div>
         <a href="index.html"><img src="../Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
 
@@ -86,28 +103,43 @@
             </div>
         </div>
         
-    </div>
+    </div>-->
+    <?php 
+        barraNavegacao('', '../');
+    ?>
 
-    <section class="container sec_login">
+    <section class="container sec_login" name='topo'>
         <div class="login tela_log_cad">
             <h1>INICIAR SESSÃO</h1>
 
-            <form action="login.html" method="post">
-                <p>E-mail incorreto</p>
+            <form action="../login.php" method="post">
+                <?php 
+                    if ($erro == 1)
+                    {
+                        echo "<p>E-mail incorreto</p>";
+                    }
+                ?>
                 <div class="email inp">
                     <input type="email" name="email" maxlength="100">
                     <p>E-mail</p>
                 </div>
                 
-                <p>Senha incorreto</p>
+                <?php 
+                    if ($erro == 2)
+                    {
+                        echo "<p>Senha Incorreta</p>";
+                    }
+                ?>
                 <div class="senha inp">
                     <input type="password" name="senha" maxlength="40">
                     <p>Senha</p>
                 </div>
+
                 <div class="lembrarme">
                     <input type="checkbox" name="lembrar" id="lembrar">
                     <p>Lembrar-me</p>
                 </div>
+
                 <div class="btn">
                     <input type="submit" value="INICIAR SESSÃO">
                 </div>
@@ -126,7 +158,11 @@
         </div>
     </section>
 
-    <footer>
+    <?php 
+        Footer('../', '#topo');
+    ?>
+
+    <!--<footer>
         <div id="f_1"></div>
         <div id="f_2"></div>
         <div id="f_3"></div>
@@ -177,6 +213,6 @@
                 <a><p>sla2</p></a>
             </div>
         </div>
-    </footer>
+    </footer> -->
 </body>
 </html>

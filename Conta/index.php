@@ -101,7 +101,7 @@
         <h1>Sua conta</h1>
         <h2>Nomerson de Uzzuario</h2>
         <form action="PHP/minhaconta.php" method="post" id="conta_form">
-            <div class="edit_btn disabled">
+            <div class="edit_btn">
                 <p>Editar informações</p>
                 <img src="../Icones/edit.svg">
             </div>
@@ -151,12 +151,45 @@
             </div>
             <input type="submit" value="Salvar alterações" id="btn_submit">
         </form>
-        <a href="PHP/logout.php">
+        <a href="../PHP/logout.php">
             <div class="edit_btn" id="logout">
                 <p>LOGOUT</p>
                 <img src="../Icones/logout_branco.svg">
             </div>
         </a>
+        
+        <?php 
+        if (isset($_SESSION['adm']))
+        {
+            $adm = $_SESSION['adm'];
+        }
+        else{
+            $adm = false;
+        }
+
+        if($adm)
+        {
+            echo "<div id='administrador'>
+            <h1 id='area-adm'>Opções de administrador</h1>
+            <div id='area_adm'>
+                <a href=''>
+                    <div class='edit_btn' id='CRUD'>
+                        <p>Tabela de produtos</p>
+                        <img src='../Icones/config.svg'>
+                    </div>
+                </a>
+                <a href=''>
+                    <div class='edit_btn' id='CRUD'>
+                        <p>Tabela de usuarios</p>
+                        <img src='../Icones/config.svg'>
+                    </div>
+                </a>
+            </div>
+            <h1 id='area-adm'>|</h1>
+            </div>";
+        }
+        
+        ?>
 
         <h1>Informações de compras efetuadas</h1>
         <div id="info_c_h">
@@ -175,7 +208,7 @@
                     INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto 
                     INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
                     WHERE c.status = 'finalizado';
-                    ";
+                    "; //conferir o codigo de usuario tbm
                     $select2 = $conn->prepare($sql2);
                     $select2->execute();
                     while ($resultado2 = $select2->fetch()){
@@ -200,27 +233,30 @@
             <?php 
                 if ($conectado)
                 {
+                    echo $_SESSION['cod_usuario'];
                     $sql_token = "SELECT * FROM tbl_token WHERE cod_usuario = :cod_usuario";
                     $select_token = $conn->prepare($sql_token);
                     $select_token->execute(['cod_usuario' => $_SESSION['cod_usuario']]);
-                    $info_token = $select_token->fetch();
-
-                    if ($info_token != NULL){
-                        echo"
-                        <div> 
-                        <p>". $info_token['data_criacao'] ."</p>
-                        <p>". $info_token['ip_criacao'] ."</p>
-                        <form action='PHP/deletatoken.php' method='post' id='form-token'>
-                            <button type='submit' name='deletar' value='". $info_token['cod_token'] ."'>
-                                <p>DELETAR</p>
-                            </button>
-                        </form>
-                        </div>";
+                    if ($select_token->fetch() == NULL)
+                    {
+                        echo "<p>Não há sessões ativas</p>";
                     }
                     else{
-                        echo"<p>Não há sessões ativas</p>";
+                        echo "AAHAHAA";
+                        while($info_token = $select_token->fetch()) //ent parou de funfa né
+                        {
+                            echo"
+                            <div> 
+                            <p>". $info_token['data_criacao'] ."</p>
+                            <p>". $info_token['ip_criacao'] ."</p>
+                            <form action='PHP/deletatoken.php' method='post' id='form-token'>
+                                <button type='submit' name='deletar' value='". $info_token['cod_token'] ."'>
+                                    <p>DELETAR</p>
+                                </button>
+                            </form>
+                            </div>";
+                        }
                     }
-                    
                 }
             
             ?>

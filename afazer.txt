@@ -7,7 +7,7 @@
 - area de produtos: vindo de outras paginas
 - produtos: botão de comprar agora
 - area de admin responsiva
-- arrumar login (email e senha icorreta)
+- arrumar login (botão de lembrar-me)
 - fazer um verificador de senha no cadastro
 - revisar o codigo php (padronizar funções).
 - trazer todas as telas para o PHP.
