@@ -39,13 +39,15 @@
         else{
             //Login efetuado com sucesso.
 
-            if (isset($_POST['lembrar']))
+            /*if (isset($_POST['lembrar']))
             {
                 setToken($resultado2['cod_usuario']);
-            }
+            }*/
+
+            setToken($resultado2['cod_usuario']);
             $_SESSION['nome'] = explode(" ", $resultado2['nome'])[0];
             $_SESSION['conectado'] = true;
-            echo $_SESSION['conectado'];
+            //echo $_SESSION['conectado'];
             $_SESSION['cod_usuario'] = $resultado2['cod_usuario'];
             if ($resultado2['cod_usuario'] == 0)
             {
@@ -54,7 +56,7 @@
             else{
                 $_SESSION['adm'] = false;
             }
-            //header('Location: ../');
+            header('Location: ../');
         }
     }
     /*$check = 0;

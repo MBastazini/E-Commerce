@@ -147,7 +147,7 @@
   
   function inicioSessao(){
     session_start();
-    echo $_SESSION['conectado'];
+    //echo $_SESSION['conectado'];
     if (isset($_SESSION['conectado']))
     {
         $conectado = $_SESSION['conectado'];
@@ -155,6 +155,7 @@
     else{
         $conectado = false;
     }
+    //echo $conectado;
 
 
 
@@ -214,7 +215,7 @@
     else{
         $_SESSION['conectado'] = false;
     }
-    echo "SESSAO: "; echo ($_SESSION['conectado']) ? "true" : "false"; echo "<br>";
+    //echo "SESSAO: "; echo ($_SESSION['conectado']) ? "true" : "false"; echo "<br>";
     return $_SESSION['conectado'];
   }
 

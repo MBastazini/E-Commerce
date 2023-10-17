@@ -112,7 +112,7 @@
         <div class="login tela_log_cad">
             <h1>INICIAR SESSÃO</h1>
 
-            <form action="../login.php" method="post">
+            <form action="../PHP/login.php" method="post">
                 <?php 
                     if ($erro == 1)
                     {
@@ -137,7 +137,7 @@
 
                 <div class="lembrarme">
                     <input type="checkbox" name="lembrar" id="lembrar">
-                    <p>Lembrar-me</p>
+                    <p>NAO FUNCIONAAAAAAAA</p>
                 </div>
 
                 <div class="btn">
