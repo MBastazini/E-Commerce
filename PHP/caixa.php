@@ -14,11 +14,12 @@
   }
   
   function inicioSessao(){
+    $conn = coneccao();
     if (isset($_COOKIE['token'])) {
         $check_token = "SELECT * FROM tbl_token WHERE token = :token";
         $sel_token = $conn->prepare($check_token);
         $sel_token->execute(['token' => $_COOKIE['token']]);
-        $res_token = $res_token->fetch();
+        $res_token = $sel_token->fetch();
 
         if ($res_token != NULL)
         {
@@ -31,7 +32,7 @@
           {
               session_start();
               $_SESSION['conectado'] = true;
-              if ($resultado2 != NULL)
+              if ($res_user != NULL)
               {
                 $_SESSION['nome'] = explode(" ", $res_user['nome'])[0];
               }
@@ -39,7 +40,7 @@
                 $_SESSION['nome'] = "Usuário";
               }
               $_SESSION['cod_usuario'] = $res_user['cod_usuario'];
-              if ($resultado['cod_usuario'] == 0)
+              if ($res_user['cod_usuario'] == 0)
               {
                   $_SESSION['adm'] = true;
               }
