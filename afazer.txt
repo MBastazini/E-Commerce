@@ -1,17 +1,17 @@
 
-- filtros chegando de "categoria" do SQL
-- tabela de usuario com as compras efetuadas e/ou status
 - area de admin: (CRud de produtos e usuarios bonito com HTML/CSS)
 - tabela ocm todos os usuarios na area de admin
 - carrinho (tudo)
 	- fazer somar / subtrair / compra efetuada / conexção com o BD
-	- area de produtos, carregamento com as imagens funcionando, vindo de outras paginas
+	- compra temporaria e fazer a checagem se o usuario esta logado
+- area de produtos, carregamento com as imagens funcionando, vindo de outras paginas
 - produtos: botão de comprar agora
 - area de admin responsiva
 - padronizar funções
 - tokens (SQL) -> para manter conecção mesmo quando desliga o computador.
 - arrumar login (email e senha icorreta)
 - fazer um verificador de senha no cadastro
+- revisar o codigo php.
 
 
 LUIZ:

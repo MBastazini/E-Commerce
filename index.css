@@ -2396,6 +2396,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         margin: 10px;
         transition: 0.3s;
     }
+    #form-token{
+        display: flex;
+        justify-content: center;
+    }
     .edit_btn.disabled{
         background-color: var(--destaque_texto);
         transition: 0.3s;

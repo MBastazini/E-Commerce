@@ -12,7 +12,7 @@ CREATE TABLE tbl_produto(
 	imagem varchar not null,
 	categoria varchar(10) not null
 );
-/*ALTER TABLE tbl_produto ADD COLUMN categoria varchar(10);*/
+ALTER TABLE tbl_produto ADD COLUMN categoria categorias;
 
 CREATE TABLE tbl_token(
 	cod_token serial PRIMARY KEY,
@@ -54,6 +54,9 @@ CREATE TABLE tbl_tmpcompra(
 	sessão varchar(100),
 	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
 );
+
+
+CREATE TYPE categorias AS ENUM ('INFORMATICA', 'MECANICA', 'ELETRONICA', 'CTI');
 
 
 INSERT INTO tbl_produto VALUES 

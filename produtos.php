@@ -151,6 +151,12 @@
             <div>
                 <h1>". $dados['nome']."</h1>
                 <h2> R$ ". $dados['preco'] ."</h2>
+                ";
+                if(isset($dados['categoria']))
+                {
+                    echo "<h3>". $dados['categoria'] ."</h3>";
+                } 
+                echo "
                 <h3>Nenhum</h3>
                 <div class='product_botoes'>
                         <button>
