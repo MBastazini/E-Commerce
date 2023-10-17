@@ -13,7 +13,61 @@
     } else { return $Conn; }
   }
   
-  
+  function inicioSessao(){
+    if (isset($_COOKIE['token'])) {
+        $check_token = "SELECT * FROM tbl_token WHERE token = :token";
+        $sel_token = $conn->prepare($check_token);
+        $sel_token->execute(['token' => $_COOKIE['token']]);
+        $res_token = $res_token->fetch();
+
+        if ($res_token != NULL)
+        {
+          $check_user = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
+          $sel_user = $conn->prepare($check_user);
+          $sel_user->execute(['cod_usuario' => $res_token['cod_usuario']]);
+          $res_user = $sel_user->fetch();
+
+          if ($res_user != NULL)
+          {
+              session_start();
+              $_SESSION['conectado'] = true;
+              if ($resultado2 != NULL)
+              {
+                $_SESSION['nome'] = explode(" ", $res_user['nome'])[0];
+              }
+              else{
+                $_SESSION['nome'] = "Usuário";
+              }
+              $_SESSION['cod_usuario'] = $res_user['cod_usuario'];
+              if ($resultado['cod_usuario'] == 0)
+              {
+                  $_SESSION['adm'] = true;
+              }
+              else{
+                  $_SESSION['adm'] = false;
+              }
+
+              }
+              else{
+                  session_start();
+                  $_SESSION['conectado'] = false;
+              }
+        }
+        else{
+          unset($_COOKIE['token']);
+          session_start();
+          $_SESSION['conectado'] = false;
+        }
+        
+    } 
+    else{
+        session_start();
+        $_SESSION['conectado'] = false;
+    }
+    
+    return $_SESSION['conectado'];
+  }
+
 
   function Login ($login, $senha, &$adm)  
   {
