@@ -25,9 +25,10 @@ CREATE TABLE tbl_token(
 
 CREATE TABLE tbl_compra(
 	cod_compra serial PRIMARY KEY,
-	status varchar(100),
+	status t_status not null,
 	data_compra date
 );
+
 
 CREATE TABLE tbl_usuario(
 	cod_usuario serial PRIMARY KEY,
@@ -44,7 +45,10 @@ CREATE TABLE tbl_compra_produto(
 	FOREIGN KEY (cod_produto) REFERENCES tbl_produto(cod_produto),
 
 	cod_compra serial,
-	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
+	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra),
+
+	cod_usuario serial,
+	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
 );
 /*ALTER TABLE tbl_compra_produto ADD COLUMN cod_compra serial;
 ALTER TABLE tbl_compra_produto ADD FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra);*/
@@ -57,6 +61,7 @@ CREATE TABLE tbl_tmpcompra(
 
 
 CREATE TYPE categorias AS ENUM ('INFORMATICA', 'MECANICA', 'ELETRONICA', 'CTI');
+CREATE TYPE t_status AS ENUM ('comprando', 'finalizado');
 
 
 INSERT INTO tbl_produto VALUES 

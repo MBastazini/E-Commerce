@@ -286,6 +286,39 @@
     }
   }
 
+  function adicionaCarrinho($cod_produto, $cod_usuario)
+  {
+    //Obtem a quantidade de dados em tbl_compra e quarda na variavel $codigo
+    $conn = coneccao();
+    $sql = "select count(*) from tbl_compra";
+    $select = $conn->prepare($sql);
+    $select->execute();
+    $codigo = $select->fetch();
+
+    //Insere uma nova compra na tbm_compra com o codigo da compra sendo o numero de dados + 1
+    $linha = [
+        'cod_compra' => $codigo[0] + 1,
+        'status' => 'comprando',
+        'data_compra' => NULL,
+    ];
+    $sql = "insert into tbl_compra (cod_compra, status, data_compra) values (:cod_compra, :status, :data_compra)";
+    $insert = $conn->prepare($sql);
+    $insert->execute($linha);
+
+    //Insere um dado na tbl_compra_produto usando o codigo da compra e o codigo do produto
+    $linha = [
+        'cod_compra' => $codigo[0] + 1,
+        'cod_produto' => $cod_produto,
+        'cod_usuario' => $cod_usuario,
+        'quantidade' => 1,
+    ];
+    $sql = "insert into tbl_compra_produto (cod_compra, cod_produto, cod_usuario, quantidade) values (:cod_compra, :cod_produto, :cod_usuario, :quantidade)";
+    $insert = $conn->prepare($sql);
+    $insert->execute($linha);
+
+    
+  }
+
   use PHPMailer\PHPMailer\Exception;
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\SMTP;
