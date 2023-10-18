@@ -350,6 +350,60 @@
   }
 
 
+  use Dompdf\Dompdf;
+
+  function gerapdf($html){
+
+    require "dompdf/autoload.inc.php";
+    require "dompdf/polyfill-mbstring-1.x/Mbstring.php";
+    
+    // instantiate and use the dompdf class
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+
+    // (Optional) Setup the paper size and orientation
+    $dompdf->setPaper('A4', 'landscape');
+
+    // Render the HTML as PDF
+    $dompdf->render();
+
+    // Output the generated PDF to Browser
+    $dompdf->stream();
+  }
+
+  /*
+  fpdf----------------
+  function gerapdf($html){
+    require('FPDF/fpdf.php');
+
+	$pdf = new FPDF();
+	$pdf->AddPage();
+	$pdf->SetFont('Arial','',12);
+    /*Cell(float w [, float h [, string txt [, mixed border [, int ln [, string align [, boolean fill [, mixed link]]]]]]])
+    w->width (if 0 extends up to the right margin)
+    h-> height
+    txt -> text
+    border -> 0: no border
+                1: frame
+                L: left
+                T: top
+                R: right
+                B: bottom
+    ln ->Indicates where the current position should go after the call. Possible values are:
+        0: to the right
+        1: to the beginning of the next line
+        2: below
+        Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value: 0.
+    align -> L or empty string: left align (default value)
+            C: center
+            R: right align
+    fill-> Indicates if the cell background must be painted (true) or transparent (false). Default value: false.
+    link -> URL or identifier returned by AddLink().
+ 
+	$pdf->Cell(0,10,$html);
+	$pdf->Output();
+  }
+    */
 
   
 
