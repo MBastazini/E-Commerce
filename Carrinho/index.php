@@ -2,7 +2,7 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
-    inicioSessao();
+    $conectado = inicioSessao();
 
     $conn = coneccao();
 ?>
@@ -103,7 +103,31 @@
 
     <section id="grid_carrinho" class="container">
         <div id="produtos_compra">
-
+            <?php 
+            if ($conectado)
+            {
+                $sql_produtos = "SELECT p.nome, p.cod_produto, p.preco, cp.quantidade, c.status FROM tbl_compra_produto AS cp
+                INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
+                INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
+                WHERE c.status = 'comprando' AND cp.cod_usuario = '1'";
+                $select_produtos = $conn->prepare($sql_produtos);
+                $select_produtos->execute();
+                while($produto = $select_produtos->fetch()){
+                    $cod_produto = $produto['cod_produto'];
+                    echo "<div class='produto_compra' id='produto_$cod_produto'>
+                            <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
+                            <div>
+                                <p>".$produto['nome']."</p>
+                                <div class='produto_compra_div'>
+                                    <p id='quantidade'>".$produto['quantidade']."</p>
+                                </div>
+                                <h1>R$ ".$produto['preco']."</h1>
+                            </div>
+                        </div>";
+                }
+            }
+            
+            ?>
             <!-- Na cração disso com PHP atente-se em colocar o uma STRING concatenada como 'produto_' + $id_produto
             Algo assim, ai o id_produto fica armasenado, mas não temos classes com o nome dela sendo apenas um numero solto -->
             <div class="produto_compra"  id="Produto1">

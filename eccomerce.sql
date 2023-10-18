@@ -114,6 +114,10 @@ INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
 INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
 WHERE c.status = 'finalizado';
 
+SELECT p.nome, p.preco, cp.quantidade, c.status FROM tbl_compra_produto AS cp
+INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
+INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
+WHERE c.status = 'comprando' AND cp.cod_usuario = '1';
 
 
 
