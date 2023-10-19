@@ -637,7 +637,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 }
 .info01_1 img{
     height: 80%;
+    aspect-ratio: 1;
+    object-fit: cover;
     margin-left: 15px;
+    border-radius: 10px;
 }
 
 .titulo02{
