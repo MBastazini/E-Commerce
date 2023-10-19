@@ -233,7 +233,6 @@
             <?php 
                 if ($conectado)
                 {
-                    echo $_SESSION['cod_usuario'];
                     $sql_token = "SELECT * FROM tbl_token WHERE cod_usuario = :cod_usuario";
                     $select_token = $conn->prepare($sql_token);
                     $select_token->execute(['cod_usuario' => $_SESSION['cod_usuario']]);
@@ -242,7 +241,6 @@
                         echo "<p>Não há sessões ativas</p>";
                     }
                     else{
-                        echo "AAHAHAA";
                         while($info_token = $select_token->fetch()) //ent parou de funfa né
                         {
                             echo"

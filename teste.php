@@ -1,5 +1,5 @@
 <?php 
-    include("PHP/caixa.php");
-    adicionaCarrinho(1, 1);
+    include("PHP/carrinho.php");
+    adicionaCarrinho(1, 4);
     echo "Adicionado ao carrinho";
 ?>

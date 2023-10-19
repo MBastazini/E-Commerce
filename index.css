@@ -1389,8 +1389,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 #quantidade{
     font-size: 30px;
 }
-#quantidade::before, #quantidade::after{
-    content: '-';
+.produto_compra_div > form > input{
     width: 40px;
     height: 40px;
     border-radius: 100%;
@@ -1400,9 +1399,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     text-align: center;
     margin: 0px 20px;
     cursor: pointer;
-}
-#quantidade::after{
-    content: '+';
+    border: none;
+    outline: none;
+    font-size: 25px;
+
 }
 
 
