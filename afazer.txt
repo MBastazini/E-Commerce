@@ -11,7 +11,7 @@
 - fazer um verificador de senha no cadastro
 - revisar o codigo php (padronizar funções).
 - trazer todas as telas para o PHP.
-
+- ver se esta excluido ou não
 
 - tokens (SQL) -> para manter conecção mesmo quando desliga o computador. (a ser confirmado com professores)
 

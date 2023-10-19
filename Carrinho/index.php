@@ -106,36 +106,38 @@
             <?php 
             if ($conectado)
             {
-                $cod_usuario = $_SESSION['cod_usuario'];
-                $sql_produtos = "SELECT p.nome, p.cod_produto, p.preco, cp.quantidade, c.status, cp.cod_compra_produto FROM tbl_compra_produto AS cp
-                INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
-                INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
-                WHERE c.status = 'comprando' AND cp.cod_usuario = '$cod_usuario'";
-                $select_produtos = $conn->prepare($sql_produtos);
-                $select_produtos->execute();
-                while($produto = $select_produtos->fetch()){
-                    $cod_produto = $produto['cod_produto'];
-                    $cod_compra_produto = $produto['cod_compra_produto'];
-                    echo "<div class='produto_compra' id='produto_$cod_produto'>
-                            <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
-                            <div>
-                                <p>".$produto['nome']."</p>
-                                <div class='produto_compra_div'>
-                                    <form action='../PHP/carrinho.php' method='post'>
-                                        <input type='hidden' name='cod_compra_produto' value='$cod_compra_produto'>
-                                        <input type='hidden' value='muda-' name='funcao'>
-                                        <input type='submit' value='-'>
-                                    </form>
-                                    <p id='quantidade'>".$produto['quantidade']."</p>
-                                    <form action='../PHP/carrinho.php' method='post'>
-                                        <input type='hidden' name='cod_compra_produto' value='$cod_compra_produto'>
-                                        <input type='hidden' value='muda+' name='funcao'>
-                                        <input type='submit' value='+'>
-                                    </form>
+                if ($_SESSION['usuario']['ativo'])
+                {
+                    $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+                    $sql_produtos = "SELECT p.nome, p.cod_produto, p.preco, cp.quantidade, c.status, cp.cod_compra_produto FROM tbl_compra_produto AS cp
+                    INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
+                    INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
+                    WHERE c.status = 'comprando' AND cp.cod_usuario = '$cod_usuario'";
+                    $select_produtos = executaSQL($sql_produtos, NULL);
+                    while($produto = $select_produtos->fetch()){
+                        $cod_produto = $produto['cod_produto'];
+                        $cod_compra_produto = $produto['cod_compra_produto'];
+                        echo "<div class='produto_compra' id='produto_$cod_produto'>
+                                <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
+                                <div>
+                                    <p>".$produto['nome']."</p>
+                                    <div class='produto_compra_div'>
+                                        <form action='../PHP/carrinho.php' method='post'>
+                                            <input type='hidden' name='cod_compra_produto' value='$cod_compra_produto'>
+                                            <input type='hidden' value='muda-' name='funcao'>
+                                            <input type='submit' value='-'>
+                                        </form>
+                                        <p id='quantidade'>".$produto['quantidade']."</p>
+                                        <form action='../PHP/carrinho.php' method='post'>
+                                            <input type='hidden' name='cod_compra_produto' value='$cod_compra_produto'>
+                                            <input type='hidden' value='muda+' name='funcao'>
+                                            <input type='submit' value='+'>
+                                        </form>
+                                    </div>
+                                    <h1>R$ ".$produto['preco']."</h1>
                                 </div>
-                                <h1>R$ ".$produto['preco']."</h1>
-                            </div>
-                        </div>";
+                            </div>";
+                    }
                 }
             }
             

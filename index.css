@@ -3198,7 +3198,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         #quantidade{
             font-size: 20px;
         }
-        #quantidade::before, #quantidade::after{
+        .produto_compra_div > form > input{
             width: 30px;
             height: 30px;
             margin: 0px 10px;

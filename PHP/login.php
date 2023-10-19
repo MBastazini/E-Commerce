@@ -1,96 +1,67 @@
 <?php 
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
-
-    $path = '/projetoscti14';
-    session_set_cookie_params(0, $path);
-    session_start();        
-    $session_id = session_id();
-    
     include("caixa.php");
-    
-    $conn = coneccao();
 
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
-
-    $sql_email = "select * from tbl_usuario where email = :email";
-
-    $select = $conn->prepare($sql_email);
-    $select->execute(['email' => $email]);
-    $resultado = $select->fetch();
-    if ($resultado == NULL)
+    $conectado = inicioSessao();
+    if ($conectado)
     {
-        header('Location: ../Login/index.php?erro=1');
-    }
-    else{
-        $linha = [
-            'email' => $email,
-            'senha' => $senha
-        ];
-        $sql_senha = "select * from tbl_usuario where email = :email and senha = :senha";
-        $select2 = $conn->prepare($sql_senha);
-        $select2->execute($linha);
-        $resultado2 = $select2->fetch();
-        if ($resultado2 == NULL)
+        if ($_SESSION['visitante']['ativo'])
         {
-            header('Location: ../Login/index.php?erro=2');
-        }
-        else{
-            //Login efetuado com sucesso.
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $conn = coneccao();
 
-            /*if (isset($_POST['lembrar']))
-            {
-                setToken($resultado2['cod_usuario']);
-            }*/
+                $email = $_POST['email'];
+                $senha = $_POST['senha'];
 
-            setToken($resultado2['cod_usuario']);
-            $_SESSION['nome'] = explode(" ", $resultado2['nome'])[0];
-            $_SESSION['conectado'] = true;
-            //echo $_SESSION['conectado'];
-            $_SESSION['cod_usuario'] = $resultado2['cod_usuario'];
-            if ($resultado2['cod_usuario'] == 0)
-            {
-                $_SESSION['adm'] = true;
+                $sql_email = "select * from tbl_usuario where email = :email";
+                $select = executaSQL($sql_email, ['email' => $email]);
+
+                $resultado = $select->fetch();
+                if ($resultado == NULL)
+                {
+                    //Não possui uma conta cadastrada com esse e-mail
+                    header('Location: ../Login/index.php?erro=1');
+                }
+                else{
+                    $linha = [
+                        'email' => $email,
+                        'senha' => $senha
+                    ];
+                    $sql_senha = "select * from tbl_usuario where email = :email and senha = :senha";
+                    $select2 = executaSQL($sql_senha, $linha);
+                    $resultado2 = $select2->fetch();
+                    if ($resultado2 == NULL)
+                    {
+                        //Senha incorreta
+                        header('Location: ../Login/index.php?erro=2');
+                    }
+                    else{
+                        //Login efetuado com sucesso.
+
+                        /*if (isset($_POST['lembrar']))
+                        {
+                            setToken($resultado2['cod_usuario']);
+                        }*/
+                        
+                        $_SESSION['visitante']['ativo'] = false;
+                        $_SESSION['usuario']['ativo'] = true;
+
+                        setToken($resultado2['cod_usuario']);
+                        $_SESSION['usuario']['nome'] = explode(" ", $resultado2['nome'])[0];
+                        //echo $_SESSION['conectado'];
+                        $_SESSION['usuario']['cod_usuario'] = $resultado2['cod_usuario'];
+                        if ($resultado2['cod_usuario'] == 0)
+                        {
+                            $_SESSION['usuario']['adm'] = true;
+                        }
+                        else{
+                            $_SESSION['usuario']['adm'] = false;
+                        }
+                        header('Location: ../');
+                    }
+                }
             }
-            else{
-                $_SESSION['adm'] = false;
-            }
-            header('Location: ../');
         }
     }
-    /*$check = 0;
-
-    while ($var = $select->fetch() )  
-    {
-        $varEmail  = $var['email'];
-        $varSenha = $var['senha'];
-        $varCod = $var['cod_usuario'];
-
-        if($varEmail == $email AND $varSenha != $senha){
-            $check = 1;
-        }
-
-        if($varEmail == $email AND $varSenha == $senha){
-            $check = 2;
-            $varEmail = $var['email'];
-            $varSenha = $var['senha'];
-
-            
-
-            echo "Caixa com confirmacao de login......";
-            header('Location: ../index.html'); 
-            break;
-        }
-    }
-
-    if($check == 0){
-        echo "html com caixa q NAO tem conta......";
-        header('Location: ../cadastro.html');
-    }
-    
-    if($check == 1){
-        echo "html com caixa senha incorreta";
-        header('Location: ../login.html');
-    }*/
 ?>

@@ -1,5 +1,4 @@
-<?php 
-
+<?php    
   function barraNavegacao($tela, $src)
   {
      echo "<div class='nav_nav"; if ($tela == 'home'){echo" nav_sobe ";}  echo" container'>
@@ -19,7 +18,7 @@
                     $a = 1;
                     while ($produto = $produtos->fetch())
                     {
-                        echo "<a href='produtos.html#".$produto['cod_produto']."'>";
+                        echo "<a href='".$src."Produtos/index.php#".$produto['cod_produto']."'>";
                         echo "<div>";
                         echo "<p>".$produto['nome']."</p>";
                         echo "</div>";
@@ -145,8 +144,12 @@
     } else { return $Conn; }
   }
   
+    
   function inicioSessao(){
-    session_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     //echo $_SESSION['conectado'];
     if (isset($_SESSION['conectado']))
     {
@@ -163,64 +166,68 @@
         if (isset($_COOKIE['token'])) {
             $_SESSION['token'] = $_COOKIE['token'];
             $check_token = "SELECT * FROM tbl_token WHERE token = :token";
-            $sel_token = $conn->prepare($check_token);
-            $sel_token->execute(['token' => $_COOKIE['token']]);
+            $res_token = executaSQL($check_token, ['token' => $_COOKIE['token']]);
             $res_token = $sel_token->fetch();
     
             if ($res_token != NULL)
             {
               $check_user = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
-              $sel_user = $conn->prepare($check_user);
-              $sel_user->execute(['cod_usuario' => $res_token['cod_usuario']]);
+              $res_user = executaSQL($check_user, ['cod_usuario' => $res_token['cod_usuario']]);
               $res_user = $sel_user->fetch();
     
                 if ($res_user != NULL)
                 {
                     $_SESSION['conectado'] = true;
-                    if ($res_user != NULL)
-                    {
-                        $_SESSION['nome'] = explode(" ", $res_user['nome'])[0];
-                    }
-                    else{
-                        $_SESSION['nome'] = "Usuário";
-                    }
-                    $_SESSION['cod_usuario'] = $res_user['cod_usuario'];
+                    $conectado = true;
+
+                    $_SESSION['usuario']['ativo'] = true;
+                    $_SESSION['visitante']['ativo'] = false;
+
+                    $_SESSION['usuario']['nome'] = explode(" ", $res_user['nome'])[0];
+                    $_SESSION['usuario']['cod_usuario'] = $res_user['cod_usuario'];
+
                     if ($res_user['cod_usuario'] == 0)
                     {
-                        $_SESSION['adm'] = true;
+                        $_SESSION['usuario']['adm'] = true;
                     }
                     else{
-                        $_SESSION['adm'] = false;
+                        $_SESSION['usuario']['adm'] = false;
                     }
     
                 }
                 else{
+                    //Há um codigo de usuario no token, mas esse usuario foi excluido, então o token é excluido
                     $_SESSION['conectado'] = false;
+                    $conectado = false;
+                    deletaToken($res_token['cod_token']);
                 }
             }
             else{
+                //Tinha o cookie mas o token foi excluido, apagando assim o cookie existente.
                 setcookie('token', null, time() - 1, '/projetoscti14');
                 unset($_COOKIE['token']); //acho que isso aq n funciona
-                $_SESSION['conectado'] = false;
+                $_SESSION['conectado'] = false; 
+                $conectado = false;
+                //Esse conectado será usado posteriormente, se ele ainda estiver como false, significa que não foi
+                //possivel recuperar uma sessão pelo token, e então ele abre a sessão de visitante.
             }
             
         } 
         else{
-            
-            $_SESSION['conectado'] = false;
+            $_SESSION['conectado'] = false; 
+            $conectado = false;
         }  
         
     }
 
+    //depois de ter passado por todo o codigo acima, o $conectado só retornará false se o usuario for usar a sessão de visitante
+    if (!$conectado){
+        $_SESSION['conectado'] = true;
+        $_SESSION['usuario']['ativo'] = false;
+        $_SESSION['visitante']['ativo'] = true;
+    }
     //echo "SESSAO: "; echo ($_SESSION['conectado']) ? "true" : "false"; echo "<br>";
     return $_SESSION['conectado'];
-  }
-
-
-  function Login ($login, $senha, &$adm)  
-  {
-   $adm = ($login == 'tinywoodcti@gmail.com' and $senha == 'LLMMM2023');
-   return true; 
   }
 
   function Cookie($nome, $valor, $min) 
@@ -231,7 +238,7 @@
   function setToken($cod_usuario)
   {
     $conn = coneccao();
-    $token = rand(1000, 9999);
+    $token = session_id(); //Se falhar o token olhar aqui
     $ip = $_SERVER['REMOTE_ADDR'];
     $data = date('Y-m-d');
 
@@ -243,47 +250,61 @@
     ];
 
     $sql = "INSERT INTO tbl_token (cod_usuario, token, ip_criacao, data_criacao) VALUES (:cod_usuario, :token, :ip, :data)";
-    $insert = $conn->prepare($sql);
-    $insert->execute($linha);
+    executaSQL($sql, $linha);
     Cookie('token', $token, 1440); //24 horas
+    $_SESSION['token'] = $token;
   }
 
   function usuarioNavegacao($src)
   {
-    $conectado = false;
-    if (isset($_SESSION['conectado'])){
-        $conectado = $_SESSION['conectado'];
-    }
+    $conectado = inicioSessao();
 
     if ($conectado)
     {
-      if ($_SESSION['adm'])
+      if ($_SESSION['usuario']['ativo'])
       {
-        echo "<a href='".$src."Conta'>
-        <div class='nav_info_lateral logged_adm'>
-            <img class='nav_icon2' src='".$src."Icones/User-adm.svg'>
-            <p> Administrador </p>
-        </div>";
-      }
-      else{
-        echo "<a href='".$src."Conta'>
-        <div class='nav_info_lateral logged'>
-            <img class='nav_icon2' src='".$src."Icones/User-branco.svg'>
-            <p>". $_SESSION['nome'] ."</p>
-        </div>";
-      }   
-    }
-    else{
+        if ($_SESSION['usuario']['adm'])
+        {
+            echo "<a href='".$src."Conta'>
+            <div class='nav_info_lateral logged_adm'>
+                <img class='nav_icon2' src='".$src."Icones/User-adm.svg'>
+                <p> Administrador </p>
+            </div>";
+        }
+        else{
+            echo "<a href='".$src."Conta'>
+            <div class='nav_info_lateral logged'>
+                <img class='nav_icon2' src='".$src."Icones/User-branco.svg'>
+                <p>". $_SESSION['usuario']['nome'] ."</p>
+            </div>";
+        }
+      } else if($_SESSION['visitante']['ativo'])
+      {
         echo "<a href='".$src."Login'>
         <div class='nav_info_lateral'>
             <img class='nav_icon2' src='".$src."Icones/login_preto.svg'>
             <p>LOGIN</p>
         </div>
-    </a>";
+        </a>";
+      }
     }
+
+    //Se a sessão de usuario e visitante esta fechada, há algo de errado no codigo, o mesmo vale para
+    //se $conectado for false.
   }
 
-  
+    function deletaToken($id){
+        $conn = coneccao();
+        $sql = "DELETE FROM tbl_token WHERE cod_token = :id";
+        executaSQL($sql, ['id' => $id]);
+    }
+  function executaSQL($sql, $linha)
+  {
+        $conn = coneccao();
+        $insert = $conn->prepare($sql);
+        $insert->execute($linha);
+        return $insert;
+  }
 
   use PHPMailer\PHPMailer\Exception;
   use PHPMailer\PHPMailer\PHPMailer;
