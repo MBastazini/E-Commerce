@@ -35,7 +35,7 @@
             $inclui = $conn->prepare($sql); 
             $inclui->execute($linha);
 
-            setToken($resultado['cod_usuario']);
+            
             $_SESSION['nome'] = explode(" ", $linha['nome'])[0];
             $_SESSION['conectado'] = true;
             
@@ -44,17 +44,26 @@
             $select2->execute(['email' => $linha['email'], 'senha' => $linha['senha']]);
             $resultado2 = $select2->fetch();
             $_SESSION['cod_usuario'] = $resultado2['cod_usuario'];
+            setToken($resultado['cod_usuario']);
             $_SESSION['adm'] = false;
 
-            header('Location: ../index.html');
+            header('Location: ../');
         }
         else{
-            header('Location: ../sobre.html');
+            Cookie('nome_tmp', $_POST['nome'], 1);
+            Cookie('email_tmp', $_POST['email'], 1);
+            Cookie('telefone_tmp', $_POST['telefone'], 1);
+
+            header('Location: ../Cadastro/index.php?erro=1');
         }
     }
     else{
         //Esse e-mail já possui conta
-        header('Location: ../carrinho.html');
+        Cookie('nome_tmp', $_POST['nome'], 1);
+        Cookie('email_tmp', $_POST['email'], 1);
+        Cookie('telefone_tmp', $_POST['telefone'], 1);
+
+        header('Location: ../Cadastro/index.php?erro=2');
     }
 
                 /*$check = 0;

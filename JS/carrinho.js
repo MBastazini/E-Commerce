@@ -45,6 +45,7 @@ function adicionarProdutosDaTabela() {
     // Itera sobre os elementos
     elementosProdutos.forEach(function(elemento) {
         // Extrai os dados do elemento atual
+        var id = elemento.id;
         var nomeProduto = elemento.querySelector('p').innerText;
         var quantidadeProduto = elemento.querySelector('#quantidade').innerText;
         var precoProduto = elemento.querySelector('h1').innerText;
@@ -53,7 +54,7 @@ function adicionarProdutosDaTabela() {
         precoProduto = parseFloat(precoProduto.replace('R$ ', '').replace(',', '.'));
 
         // Chama a função novoProduto para adicionar o produto à tabela
-        novoProduto('Produto1', nomeProduto, quantidadeProduto, precoProduto);
+        novoProduto(id, nomeProduto, quantidadeProduto, precoProduto);
     });
 }
 
