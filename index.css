@@ -341,11 +341,13 @@ a{
 #telaInicio{
     transition: 0.1s;
     width: 100%;
-    background-image: linear-gradient(rgba(150, 195, 121, 0.5), white);
+    background-image: url(Imagens/arvorefinal.jpeg);
+    background-repeat:no-repeat;
+    background-size: cover;
 }
 .tela_inicial{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 2fr 1fr;
     position: relative;
     grid-gap: 50px;
     height: auto;
@@ -356,7 +358,6 @@ a{
     font-style: normal;
     line-height: normal;
 }
-
 .texto_inicial p{
     font-size: 40px;
     font-style: normal;
@@ -364,6 +365,14 @@ a{
     line-height: normal;
     padding: 30px;
     padding-left: 0;
+}
+#gradiente{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(229, 255, 235, 0.77) 65%, rgba(150, 195, 121, 0.00) 100%);
 }
 .tela_botao{
     background-color: var(--cor_destaque);
@@ -935,7 +944,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     transition: 0.5s;
     
 }
-.produto_botao div{
+.produto_botao div, .produto_botao button{
     width: 40px;
     height: 40px;
     background-color: var(--destaque_02);
@@ -945,8 +954,11 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     display: flex;
     align-items: center;
     justify-content: center;
+    /*Tirar as caracteristicas padrões do botão*/
+    border: none;
+    outline: none;
 }
-.produto_botao div p{
+.produto_botao div p, .produto_botao button p{
     position: absolute;
     top: 0;
     width: fit-content;
@@ -960,12 +972,12 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     white-space: nowrap;
     color: black;
 }
-.produto_botao div img{
+.produto_botao div img, .produto_botao button img{
     width: 100%;
     box-sizing: border-box;
     padding: 5px;
 }
-.produto_botao div:hover p{
+.produto_botao div:hover p, .produto_botao button:hover p{
     transform: translateX(0%);
     opacity: 1;
     transition: 0.5s;

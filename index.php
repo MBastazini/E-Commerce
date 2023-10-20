@@ -2,7 +2,7 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("PHP/caixa.php");
-    inicioSessao();
+    $conectado = inicioSessao();
 ?>
 
 <!DOCTYPE html>
@@ -74,6 +74,7 @@
     ?>
     <section id="telaInicio">
         <div class="tela_inicial_flex">
+            <div id="gradiente"></div>
             <div class="tela_inicial container">
                 <div class="texto_inicial">
                     <h1>Chaveiros</h1>
@@ -89,10 +90,8 @@
                         <div class="tela_botao">
                             <p>GARANTA O SEU!</p>
                         </div>
-                    </a>
-                    <img src="Icones/quadrados.png" class="tela_inicial_img2" alt="Imagem dos produtos">
+                    </a>              
                 </div>
-                <img src="Icones/quadrados.png" class="tela_inicial_img" alt="Imagem dos produtos">
             </div>
         </div>
         <div class="tela_scroll_down">
@@ -111,7 +110,7 @@
             </div>
             <div class="info01_container hidden">
                 <div class="info01_1 inf1_e">
-                    <img src="Icones/quadrado.svg" alt="Imagem01">
+                    <img src="Imagens/tronco.jpg" alt="Imagem01">
                     <div class="info01_1_div">
                         <h1>Fase 3 - Viva CTI</h1>
                         <p>Por fim, o chaveiro Tiny wood está finalizado! 
@@ -119,7 +118,7 @@
                     </div>
                 </div>
                 <div class="info01_1 inf1_c">
-                    <img src="Icones/quadrados.png" alt="Imagem02">
+                    <img src="Imagens/lixa.jpg" alt="Imagem02">
                     <div class="info01_1_div">
                         <h1>Fase 1 - Urbanwood</h1>
                         <p>
@@ -128,7 +127,7 @@
                     </div>
                 </div>
                 <div class="info01_1 inf1_d">
-                    <img src="Icones/quadrado.svg" alt="Imagem03">
+                    <img src="Imagens/folha.jpg" alt="Imagem03">
                     <div class="info01_1_div">
                         <h1>Fase 2 - FabLab</h1>
                         <p>
@@ -167,6 +166,58 @@
         <div class="area_produtos container">
             <p>Passe o mouse por cima para mais informações</p>
             <div class="produtos_container hidden">
+                <?php 
+                    $sql = "SELECT * FROM tbl_produto";
+                    $res = executaSQL($sql, NULL);
+                    $funcao = "add-";
+                    $usuario = 1;
+                    if($conectado)
+                    {
+                        if($_SESSION['usuario']['ativo'])
+                        {
+                            $funcao = "add+";
+                            $usuario = $_SESSION['usuario']['cod_usuario'];
+                        }
+                    }
+                    while($produto = $res->fetch())
+                    {
+                        $cod_produto = $produto['cod_produto'];
+                        echo "<div class='produto'> 
+                            <div class='produto_info'>
+                                <div class='produto_texto'>
+                                    <p>". $produto['preco']."</p>
+                                    <h1>".$produto['nome']."</h1>
+                                </div>
+                                <div class='produto_botao'>
+                                    <a href='#'>
+                                        <div>
+                                            <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
+                                            <p>Comprar</p>
+                                        </div>
+                                    </a>
+                                    <form action='PHP/carrinho.php' method='post'>
+                                        <form action='../PHP/carrinho.php' method='post'>
+                                            <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                                            <input type='hidden' name='cod_usuario' value='". $usuario. "'>
+                                            <input type='hidden' name='funcao' value='$funcao'>
+                                        </form>
+                                        <button>
+                                            <img src='Icones/carrinho_branco.svg' alt='Carrinho de compras'>
+                                            <p>+ Carrinho</p>
+                                        </buttn>
+                                    </form>
+                                    <a href='Produtos/#produto_$cod_produto'>
+                                        <div>
+                                            <img src='Icones/sobre_branco.svg' alt='Carrinho de compras'>
+                                            <p>Ver mais</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>";
+                    }
+                
+                ?>
                 <div class="produto">
                     <div class="produto_info">
                         <div class="produto_texto">
