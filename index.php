@@ -183,38 +183,36 @@
                     {
                         $cod_produto = $produto['cod_produto'];
                         echo "<div class='produto'> 
-                            <div class='produto_info'>
-                                <div class='produto_texto'>
-                                    <p>". $produto['preco']."</p>
-                                    <h1>".$produto['nome']."</h1>
-                                </div>
-                                <div class='produto_botao'>
-                                    <a href='#'>
-                                        <div>
-                                            <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
-                                            <p>Comprar</p>
-                                        </div>
-                                    </a>
-                                    <form action='PHP/carrinho.php' method='post'>
-                                        <form action='../PHP/carrinho.php' method='post'>
+                                <div class='produto_info'>
+                                    <div class='produto_texto'>
+                                        <p>". $produto['preco']."</p>
+                                        <h1>".$produto['nome']."</h1>
+                                    </div>
+                                    <div class='produto_botao'>
+                                        <a href='#'>
+                                            <div>
+                                                <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
+                                                <p>Comprar</p>
+                                            </div>
+                                        </a>
+                                        <form action='PHP/carrinho.php' method='post'>
                                             <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
                                             <input type='hidden' name='cod_usuario' value='". $usuario. "'>
                                             <input type='hidden' name='funcao' value='$funcao'>
+                                            <button>
+                                                <img src='Icones/carrinho_branco.svg' alt='Carrinho de compras'>
+                                                <p>+ Carrinho</p>
+                                            </button>
                                         </form>
-                                        <button>
-                                            <img src='Icones/carrinho_branco.svg' alt='Carrinho de compras'>
-                                            <p>+ Carrinho</p>
-                                        </buttn>
-                                    </form>
-                                    <a href='Produtos/#produto_$cod_produto'>
-                                        <div>
-                                            <img src='Icones/sobre_branco.svg' alt='Carrinho de compras'>
-                                            <p>Ver mais</p>
-                                        </div>
-                                    </a>
+                                        <a href='Produtos/#produto_$cod_produto'>
+                                            <div>
+                                                <img src='Icones/sobre_branco.svg' alt='Carrinho de compras'>
+                                                <p>Ver mais</p>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>";
+                            </div>";
                     }
                 
                 ?>

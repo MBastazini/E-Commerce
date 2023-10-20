@@ -18,11 +18,11 @@ CREATE TABLE tbl_token(
 	cod_token serial PRIMARY KEY,
 	token varchar(100) not null,
 	data_criacao date not null,
-	ip_criacao varchar(15) not null,
+	ip_criacao varchar(15),
 	cod_usuario serial,
 	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
 );
-
+ALTER TABLE tbl_token ADD COLUMN ip_criacao varchar(15);
 CREATE TABLE tbl_compra(
 	cod_compra serial PRIMARY KEY,
 	status t_status not null,

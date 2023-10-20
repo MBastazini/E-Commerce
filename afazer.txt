@@ -13,9 +13,29 @@
 - trazer todas as telas para o PHP.
 - ver se esta excluido ou não
 
-- tokens (SQL) -> para manter conecção mesmo quando desliga o computador. (a ser confirmado com professores)
 
 
-LUIZ:
-- PHPmailer
-- FPDF (na hora da compra - relatorio)
+
+Coisas para hoje (noite boa kkk)
+- INDEX:
+- refazer a landing page
+- botao garanta o seu
+- area dos produtos lá em baixo
+- responsividade (na area de produtos)
+- TELA DE PRODUTOS:
+	- quando clica em com prar ou adicionar ao carrinho ele abre as imagens e depois carrega a paginas
+	(evitar isso)
+- CARRINHO
+- rever o JS (esta com erro)
+- checar a responsividade (acho que so buga pq tem dois scroll, e os scroll dos produtos é inutil)
+ -> PHP: Botão de comprar, soma dos produtos no carrinho em função, botão 
+ "finalizar compra" gerar um pdf com a compra efetuada.
+
+ - CONTA:
+ - ver pq o primeiro item do fetch nn aparece
+ - checar o que podemos colocar ao invez do ip
+ - enviar um aviso se nenhuma compra foi efetuada.
+
+
+ - Deixar o SIte inteiro com um modelo para celular.
+

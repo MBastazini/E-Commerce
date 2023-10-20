@@ -239,17 +239,17 @@
   {
     $conn = coneccao();
     $token = session_id(); //Se falhar o token olhar aqui
-    $ip = $_SERVER['REMOTE_ADDR'];
+    //$ip = $_SERVER['REMOTE_ADDR'];
     $data = date('Y-m-d');
 
     $linha = [
         'cod_usuario' => $cod_usuario,
         'token' => $token,
-        'ip' => $ip,
+        //'ip' => $ip,
         'data' => $data
     ];
 
-    $sql = "INSERT INTO tbl_token (cod_usuario, token, ip_criacao, data_criacao) VALUES (:cod_usuario, :token, :ip, :data)";
+    $sql = "INSERT INTO tbl_token (cod_usuario, token, data_criacao) VALUES (:cod_usuario, :token, :data)";
     executaSQL($sql, $linha);
     Cookie('token', $token, 1440); //24 horas
     $_SESSION['token'] = $token;

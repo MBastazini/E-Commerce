@@ -78,7 +78,6 @@ function novoValorTotal()
     total.innerText = `R$ ${valor_total}`;
 }
 
-
 document.addEventListener("DOMContentLoaded", function() {
     adicionarProdutosDaTabela();
 
