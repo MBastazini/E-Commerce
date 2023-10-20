@@ -2,7 +2,7 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
-    inicioSessao();
+    $conectado = inicioSessao();
 
     $conn = coneccao();
 ?>
@@ -100,7 +100,7 @@
     <section class="container" id="conta">
         <h1>Sua conta</h1>
         <h2>Nomerson de Uzzuario</h2>
-        <form action="PHP/minhaconta.php" method="post" id="conta_form">
+        <form action="../PHP/minhaconta.php" method="post" id="conta_form">
             <div class="edit_btn">
                 <p>Editar informações</p>
                 <img src="../Icones/edit.svg">
@@ -108,18 +108,11 @@
 
             <div class="info_conta">
                 <?php 
-                    if (isset($_SESSION['conectado'])){
-                        $conectado = $_SESSION['conectado'];
-                    }
-                    else{
-                        $conectado = false;
-                    }
 
                     if ($conectado)
                     {
-                        $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = ".$_SESSION['cod_usuario'];
-                        $select = $conn->prepare($sql);
-                        $select->execute();
+                        $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = ".$_SESSION['usuario']['cod_usuario'];
+                        $select = executaSQL($sql, NULL);
                         $resultado = $select->fetch();
                         $nome = $resultado['nome'];
                         $email = $resultado['email'];
@@ -145,7 +138,7 @@
                         <p>Senha</p>
                         </div>";
 
-                        echo"<input type='hidden' value='". $_SESSION['cod_usuario'] ."' name='codigo'>";
+                        echo"<input type='hidden' value='". $_SESSION['usuario']['cod_usuario'] ."' name='codigo'>";
                     }
                 ?>
             </div>
@@ -209,8 +202,7 @@
                     INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
                     WHERE c.status = 'finalizado';
                     "; //conferir o codigo de usuario tbm
-                    $select2 = $conn->prepare($sql2);
-                    $select2->execute();
+                    $select2 = executaSQL($sql2, NULL);
                     while ($resultado2 = $select2->fetch()){
                         echo"<div>
                             <p>". $resultado2['nome'] ."</p>
@@ -233,23 +225,20 @@
             <?php 
                 if ($conectado)
                 {
-                    echo $_SESSION['cod_usuario'];
                     $sql_token = "SELECT * FROM tbl_token WHERE cod_usuario = :cod_usuario";
-                    $select_token = $conn->prepare($sql_token);
-                    $select_token->execute(['cod_usuario' => $_SESSION['cod_usuario']]);
+                    $select_token = executaSQL($sql_token, ['cod_usuario' => $_SESSION['usuario']['cod_usuario']]);
                     if ($select_token->fetch() == NULL)
                     {
                         echo "<p>Não há sessões ativas</p>";
                     }
                     else{
-                        echo "AAHAHAA";
                         while($info_token = $select_token->fetch()) //ent parou de funfa né
                         {
                             echo"
                             <div> 
                             <p>". $info_token['data_criacao'] ."</p>
                             <p>". $info_token['ip_criacao'] ."</p>
-                            <form action='PHP/deletatoken.php' method='post' id='form-token'>
+                            <form action='../PHP/deletatoken.php' method='post' id='form-token'>
                                 <button type='submit' name='deletar' value='". $info_token['cod_token'] ."'>
                                     <p>DELETAR</p>
                                 </button>

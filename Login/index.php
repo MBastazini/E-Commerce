@@ -108,7 +108,7 @@
         barraNavegacao('', '../');
     ?>
 
-    <section class="container sec_login" name='topo'>
+    <section class="container sec_login" id='topo'>
         <div class="login tela_log_cad">
             <h1>INICIAR SESSÃO</h1>
 
@@ -146,7 +146,7 @@
                 
             </form>
             <div class="troca_log_cad">
-                <a href="cadastro.html">
+                <a href="../Cadastro">
                     <p id="black_text">Não possui uma conta?</p>
                     <p>Faça o cadastro.</p>
                 </a>

@@ -1,3 +1,14 @@
+<?php 
+    ini_set ( 'display_errors' , 1); 
+    error_reporting (E_ALL);
+    include("../PHP/caixa.php");
+    $conectado = inicioSessao();
+
+    $conn = coneccao();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,13 +17,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../index.css">
     <link rel="icon" type="image/x-icon" href="../Icones/logo-bola-verde.svg">
+    <!-- Diminuir a qualidade da logo-bola-verde (demora muito pra carregar) -->
     
     <title>Carrinho - Tiny Wood</title>
 </head>
 <body>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/carrinho.js" defer></script>
-    <div class="nav_nav container">
+    <!--<div class="nav_nav container">
         <div class="nav_fundo"></div>
         <a href="index.html"><img src="../Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
 
@@ -84,11 +96,53 @@
             </a>
         </div>
         
-    </div>
+    </div>-->
+
+    <?php 
+        barraNavegacao('carrinho', '../');
+    ?>
 
     <section id="grid_carrinho" class="container">
         <div id="produtos_compra">
-
+            <?php 
+            if ($conectado)
+            {
+                if ($_SESSION['usuario']['ativo'])
+                {
+                    $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+                    $sql_produtos = "SELECT p.nome, p.cod_produto, p.preco, cp.quantidade, c.status, cp.cod_compra_produto FROM tbl_compra_produto AS cp
+                    INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
+                    INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
+                    WHERE c.status = 'comprando' AND cp.cod_usuario = '$cod_usuario'";
+                    $select_produtos = executaSQL($sql_produtos, NULL);
+                    while($produto = $select_produtos->fetch()){
+                        $cod_produto = $produto['cod_produto'];
+                        $cod_compra_produto = $produto['cod_compra_produto'];
+                        echo "<div class='produto_compra' id='produto_$cod_produto'>
+                                <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
+                                <div>
+                                    <p>".$produto['nome']."</p>
+                                    <div class='produto_compra_div'>
+                                        <form action='../PHP/carrinho.php' method='post'>
+                                            <input type='hidden' name='cod_compra_produto' value='$cod_compra_produto'>
+                                            <input type='hidden' value='muda-' name='funcao'>
+                                            <input type='submit' value='-'>
+                                        </form>
+                                        <p id='quantidade'>".$produto['quantidade']."</p>
+                                        <form action='../PHP/carrinho.php' method='post'>
+                                            <input type='hidden' name='cod_compra_produto' value='$cod_compra_produto'>
+                                            <input type='hidden' value='muda+' name='funcao'>
+                                            <input type='submit' value='+'>
+                                        </form>
+                                    </div>
+                                    <h1>R$ ".$produto['preco']."</h1>
+                                </div>
+                            </div>";
+                    }
+                }
+            }
+            
+            ?>
             <!-- Na cração disso com PHP atente-se em colocar o uma STRING concatenada como 'produto_' + $id_produto
             Algo assim, ai o id_produto fica armasenado, mas não temos classes com o nome dela sendo apenas um numero solto -->
             <div class="produto_compra"  id="Produto1">
@@ -96,13 +150,7 @@
                 <div>
                     <p>Nome-Produto</p>
                     <div class="produto_compra_div">
-                        <form action="">
-                            <input type="submit" value="-">
-                        </form>
                         <p id="quantidade">2</p>
-                        <form action="">
-                            <input type="submit" value="+">
-                        </form>
                     </div>
                     <h1>R$ 30,00</h1>
                 </div>
@@ -141,7 +189,13 @@
         </div>
     </section>
     
-    <footer>
+
+    <?php 
+        Footer('../', '#grid_carrinho');
+    ?>
+
+
+    <!--<footer>
         <div class="tela_scroll_down up">
             <a href="#grid_carrinho" class="a"> 
                 <h1>Voltar ao topo</h1> 
@@ -199,6 +253,6 @@
                 <a><p>sla2</p></a>
             </div>
         </div>
-    </footer>
+    </footer> -->
 </body>
 </html>

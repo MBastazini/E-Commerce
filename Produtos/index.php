@@ -4,10 +4,18 @@
 
     include("../PHP/caixa.php");
 
-    inicioSessao();
+    $conectado = inicioSessao();
 
     $conn = coneccao();
-    
+    $ativo = false;
+    if ($conectado)
+    {
+        if ($_SESSION['usuario']['ativo']){
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+            $ativo = true;
+        }
+    }
+            
 ?>
 
 
@@ -150,6 +158,23 @@
         $sql = "select * from tbl_produto order by cod_produto";
         $select = $conn->query($sql);
         while($dados = $select->fetch()){
+            $icone = 'carrinho_branco.svg';
+            $funcao = 'add-';
+            if($ativo)
+            {
+                $funcao = 'add+';
+                $sql2 = "select * from tbl_compra_produto where cod_produto = :cod_produto and cod_usuario = :cod_usuario";
+                $select2 = executaSQL($sql2, ['cod_produto' => $dados['cod_produto'], 'cod_usuario' => $cod_usuario]);
+                $resultado = $select2->fetch();
+                if ($resultado != NULL)
+                {
+                    $icone = 'Check_branco.svg';
+                    $funcao = 'ver';
+                }
+            }
+                
+            
+
             echo "<div class='product' id='".$dados['cod_produto']."'>
             <img src='../Imagens/Produtos/". $dados['cod_produto'] ."/P1.png' alt='Produto'>
             <div>
@@ -166,10 +191,13 @@
                         <button>
                             <p>COMPRAR</p>
                         </button>
-                        <form action='#'>
+                        <form action='../PHP/carrinho.php' method='post'>
+                            <input type='hidden' name='cod_produto' value='". $dados['cod_produto'] ."'>
+                            <input type='hidden' name='cod_usuario' value='". $_SESSION['usuario']['cod_usuario']. "'>
+                            <input type='hidden' name='funcao' value='$funcao'>
                             <button type='submit' id='add-cart'>
                                 <p>+</p>
-                                <img src='../Icones/carrinho_branco.svg' alt='carrinho'>
+                                <img src='../Icones/$icone' alt='carrinho'>
                             </button>
                         </form>
                     </div>

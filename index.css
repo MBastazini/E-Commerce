@@ -543,7 +543,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 }
 
 .titulo.show > p{
-    animation: titulo_ani 1.5s 0.2s ease-in backwards;
+    animation: titulo_ani 1.5s 0.2s backwards;
 }
 
     @keyframes titulo_ani {
@@ -637,7 +637,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 }
 .info01_1 img{
     height: 80%;
+    aspect-ratio: 1;
+    object-fit: cover;
     margin-left: 15px;
+    border-radius: 10px;
 }
 
 .titulo02{
@@ -1386,8 +1389,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 #quantidade{
     font-size: 30px;
 }
-#quantidade::before, #quantidade::after{
-    content: '-';
+.produto_compra_div > form > input{
     width: 40px;
     height: 40px;
     border-radius: 100%;
@@ -1397,9 +1399,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     text-align: center;
     margin: 0px 20px;
     cursor: pointer;
-}
-#quantidade::after{
-    content: '+';
+    border: none;
+    outline: none;
+    font-size: 25px;
+
 }
 
 
@@ -1469,6 +1472,12 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     }
     .tela_log_cad.cadastro{
         width: 800px;
+    }
+    .tela_log_cad.cadastro > p{
+        text-align: center;
+        margin-bottom: 10px;
+        color: red;
+        font-size: medium;
     }
     .tela_log_cad > h1{
         font-size: 40px;
@@ -3189,7 +3198,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         #quantidade{
             font-size: 20px;
         }
-        #quantidade::before, #quantidade::after{
+        .produto_compra_div > form > input{
             width: 30px;
             height: 30px;
             margin: 0px 10px;

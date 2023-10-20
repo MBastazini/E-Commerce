@@ -45,15 +45,19 @@ function adicionarProdutosDaTabela() {
     // Itera sobre os elementos
     elementosProdutos.forEach(function(elemento) {
         // Extrai os dados do elemento atual
+        var id = elemento.id;
         var nomeProduto = elemento.querySelector('p').innerText;
         var quantidadeProduto = elemento.querySelector('#quantidade').innerText;
         var precoProduto = elemento.querySelector('h1').innerText;
         
         // Remove o "R$" do preço e converte para número
         precoProduto = parseFloat(precoProduto.replace('R$ ', '').replace(',', '.'));
-
+        quantidadeProduto = parseInt(quantidadeProduto);
+        precoProduto = precoProduto * quantidadeProduto;
         // Chama a função novoProduto para adicionar o produto à tabela
-        novoProduto('Produto1', nomeProduto, quantidadeProduto, precoProduto);
+        //Arredondar preço produto para duas casas decimais
+        precoProduto = precoProduto.toFixed(2);
+        novoProduto(id, nomeProduto, quantidadeProduto, precoProduto);
     });
 }
 
@@ -69,6 +73,7 @@ function novoValorTotal()
         texto_valor = texto_valor.replace('R$ ', ''); // Remove 'R$ '
         texto_valor = texto_valor.replace(',', '.');  // Substitui a vírgula por um ponto
         valor_total += (parseFloat(texto_valor));
+        valor_total = valor_total.toFixed(2);
     });
     total.innerText = `R$ ${valor_total}`;
 }

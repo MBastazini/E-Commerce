@@ -1,4 +1,5 @@
 <?php 
+    //Eu acho que nem uso mais esse arquivo
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
 
