@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../index.css">
     <link rel="icon" type="image/x-icon" href="../Icones/logo-bola-verde.svg">
+    <!-- Diminuir a qualidade da logo-bola-verde (demora muito pra carregar) -->
     
     <title>Carrinho - Tiny Wood</title>
 </head>

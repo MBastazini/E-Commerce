@@ -238,7 +238,7 @@
                             <div> 
                             <p>". $info_token['data_criacao'] ."</p>
                             <p>". $info_token['ip_criacao'] ."</p>
-                            <form action='PHP/deletatoken.php' method='post' id='form-token'>
+                            <form action='../PHP/deletatoken.php' method='post' id='form-token'>
                                 <button type='submit' name='deletar' value='". $info_token['cod_token'] ."'>
                                     <p>DELETAR</p>
                                 </button>

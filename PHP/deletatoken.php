@@ -7,5 +7,5 @@
         $id = $_POST["deletar"];
         deletaToken($id);
     }
-    header('Location: ../conta.php')
+    header('Location: ../Conta')
 ?>

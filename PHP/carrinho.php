@@ -5,7 +5,7 @@
         //Obtem a quantidade de dados em tbl_compra e quarda na variavel $codigo
         $conn = coneccao();
         $sql = "select count(*) from tbl_compra";
-        $codigo = executaSQL($sql, NULL);
+        $select = executaSQL($sql, NULL);
         $codigo = $select->fetch();
 
         //Insere uma nova compra na tbm_compra com o codigo da compra sendo o numero de dados + 1
@@ -81,14 +81,28 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $funcao = $_POST["funcao"];
-        $cod_compra_produto = $_POST["cod_compra_produto"];
+        
         if ($funcao == 'muda+')
         {
+            $cod_compra_produto = $_POST["cod_compra_produto"];
             mudaCarrinho($cod_compra_produto, '+');
         }
         else if ($funcao == 'muda-')
         {
+            $cod_compra_produto = $_POST["cod_compra_produto"];
             mudaCarrinho($cod_compra_produto, '-');
+        }
+        else if($funcao == 'add+')
+        {
+            $cod_produto = $_POST["cod_produto"];
+            $cod_usuario = $_POST["cod_usuario"];
+            adicionaCarrinho($cod_produto, $cod_usuario);
+            header('Location: ../Produtos');
+        }
+        else if($funcao == 'ver')
+        {
+            $cod_produto = $_POST["cod_produto"];
+            header('Location: ../Carrinho/');
         }
     }
 ?>

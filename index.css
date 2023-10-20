@@ -543,7 +543,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 }
 
 .titulo.show > p{
-    animation: titulo_ani 1.5s 0.2s ease-in backwards;
+    animation: titulo_ani 1.5s 0.2s backwards;
 }
 
     @keyframes titulo_ani {
