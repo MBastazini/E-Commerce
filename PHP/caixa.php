@@ -166,13 +166,13 @@
         if (isset($_COOKIE['token'])) {
             $_SESSION['token'] = $_COOKIE['token'];
             $check_token = "SELECT * FROM tbl_token WHERE token = :token";
-            $res_token = executaSQL($check_token, ['token' => $_COOKIE['token']]);
+            $sel_token = executaSQL($check_token, ['token' => $_COOKIE['token']]);
             $res_token = $sel_token->fetch();
     
             if ($res_token != NULL)
             {
               $check_user = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
-              $res_user = executaSQL($check_user, ['cod_usuario' => $res_token['cod_usuario']]);
+              $sel_user = executaSQL($check_user, ['cod_usuario' => $res_token['cod_usuario']]);
               $res_user = $sel_user->fetch();
     
                 if ($res_user != NULL)

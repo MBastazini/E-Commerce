@@ -413,28 +413,34 @@ a{
     @keyframes tela_verde {
     0%{
         content: '';
-}
-    15%{
-        content: 'L';
-}
-    30%{
-        content: 'LO';
-}
-    45%{
-        content: 'LOG';
-}
+    }   
+    12%{
+        content: 'T';
+    }
+    24%{
+        content: 'Ti';
+    }
+    36%{
+        content: 'Tin';
+    }
+    48%{
+        content: 'Tiny';
+    }
     60%{
-        content: 'LOGG';
-}
-    75%{
-        content: 'LOGGI';
-}
-    90%{
-        content: 'LOGGIN';
-}
+        content: 'TinyW';
+    }
+    72%{
+        content: 'TinyWo';
+    }
+    84%{
+        content: "TinyWoo";
+    }
+    96% {
+        content: 'TinyWood';
+    }
     100%{
-        content: "LOGGIN'";
-}
+        content: 'TinyWood';
+    }
 }
 
     @keyframes tela_verde_pisca {

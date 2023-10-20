@@ -76,16 +76,14 @@
         <div class="tela_inicial_flex">
             <div class="tela_inicial container">
                 <div class="texto_inicial">
-                    <h1>ARE YOU</h1>
+                    <h1>Chaveiros</h1>
                     <div class="tela_madeira">
                         <div class="tela_verde_esquerda">
                         </div>
                         <h1 class="hidden">_</h1>
                     </div>
-                    <h1>IN?</h1>
-                    <p>Chaveiros feitos de madeira canadense 100% natural, processados
-                        por um cortador a laser, pequenininhos para qualquer situação!
-                        'bonitinhos e baratinhos'
+                    <p>Adquira já! Uma lembrança única com um estilo natural, 
+                        ideal para todos os lugares, Tiny Wood,chaveiros de madeira!,
                     </p>
                     <a href="produtos.php">
                         <div class="tela_botao">
@@ -115,27 +113,27 @@
                 <div class="info01_1 inf1_e">
                     <img src="Icones/quadrado.svg" alt="Imagem01">
                     <div class="info01_1_div">
-                        <h1>Ola</h1>
-                        <p>Lorem ipstus neque eius 
-                        quae vitae exercitationem sapiente saepe quis!</p>
+                        <h1>Fase 3 - Viva CTI</h1>
+                        <p>Por fim, o chaveiro Tiny wood está finalizado! 
+                            Pronto para te conectar com a natureza em todos os momentos!</p>
                     </div>
                 </div>
                 <div class="info01_1 inf1_c">
                     <img src="Icones/quadrados.png" alt="Imagem02">
                     <div class="info01_1_div">
-                        <h1>Tudo bem?</h1>
-                        <p>Lorem!</p>
+                        <h1>Fase 1 - Urbanwood</h1>
+                        <p>
+                            A escolha cuidadosa da madeira é crucial para a qualidade do produto, 
+                            por isso confiamos à Urbanwood, que realiza uma extração ecologicamente sustentável.</p>
                     </div>
                 </div>
                 <div class="info01_1 inf1_d">
                     <img src="Icones/quadrado.svg" alt="Imagem03">
                     <div class="info01_1_div">
-                        <h1>Que bom</h1>
-                        <p>Lorem ipsum, dolor sit amet consectetur 
-                        adipisicing elit. Aperiam libero culpa, 
-                        quas, dolorum quod iusto doloremque architecto eaque, 
-                        autem id asperiores delectus neque eius 
-                        quae vitae exercitationem sapiente saepe quis!</p>
+                        <h1>Fase 2 - FabLab</h1>
+                        <p>
+                            após cortada, a peça de madeira será lixada, uma etapa essencial para realçar a textura e dar seu acabamento, 
+                            furada, gravada à laser na FabLab com nossos designs e por fim tratadas com óleo mineral. </p>
                     </div>
                 </div>
             </div>
@@ -144,16 +142,11 @@
         <div class="info_video container">
             <div id="risco"></div>
             <div class="video_texto">
-                <h1>Video</h1>
-                <p>
-                    (pensar em uma frase melhor)
-                    <br>
-
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                </p>
-                <p><br>Talvez eu deixe isso menor, se não houver texto
-                    suficiente pra ocupar tudo.<br>
-                    - adeus requiem
+                <h1>Os chaveiros</h1>
+                <p>A madeira é um material naturalmente belo, reflete a perfeição na 
+                simplicidade, cada peça com um tom e textura única para você! 
+                Oferecemos uma lembrança material acessível que te conecta com a natureza, 
+                juntamente de nossas identidades visuais para encantar os nossos chaveiros!
                 </p>
             </div>
             <div class="video_v">
