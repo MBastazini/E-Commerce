@@ -518,7 +518,7 @@ function finalizarCarrinho(){
                 executaSQL($sql, ['cod_compra' => $resultado['cod_compra']]);
             }
             $html = "
-            <h1>".$soma_total."</h1>
+            <h1>$soma_total</h1>
             ";
             gerapdf($html);
         }
@@ -629,7 +629,7 @@ function limparCarrinho(){
   }
 
 
-  function gerapdf($html){
+  function gerapdf($texto){
     require('FPDF/fpdf.php');
 
     class pdf extends FPDF
@@ -725,7 +725,7 @@ function limparCarrinho(){
     $pdf->SetFont('Arial','',20);
     //$pdf->SetLeftMargin(45);
     $pdf->SetFontSize(12);
-    $pdf->WriteHTML($html);
+    $pdf->WriteHTML($texto);
     $pdf->Output();
   }
     
