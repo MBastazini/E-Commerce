@@ -12,7 +12,7 @@
                 $conn = coneccao();
                 $email = $_POST['email'];
                 $sql_email = "select * from tbl_usuario where email = :email";
-                $resultado = executaSQL($sql_email, ['email' => $email]);
+                $select = executaSQL($sql_email, ['email' => $email]);
                 $resultado = $select->fetch();
 
                 //Guarda os valores preenchiods para o usuario não ter que redigita-los.
@@ -42,8 +42,20 @@
 
 
                         
-                        $_SESSION['visitante']['ativo'] = false;
+                        
                         $_SESSION['usuario']['ativo'] = true;
+                        $cod_usuario = $conn -> LastInsertId();
+                        $_SESSION['usuario']['cod_usuario'] = $cod_usuario;
+                        setToken($cod_usuario);
+                        $_SESSION['usuario']['adm'] = false;
+
+
+                         //Pega todas as compras feitas enquanto o usuário estava como visitante e as coloca no seu nome.
+                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                            adicionaCarrinho($cod_produto, $quantidade);
+                        }
+
+                        $_SESSION['visitante']['ativo'] = false;
                         //executar aqui, o codigo que carrega o carrinho apos o fim do cadastro.
 
                         $_SESSION['usuario']['nome'] = explode(" ", $linha['nome'])[0];
@@ -53,11 +65,8 @@
                         $resultado2 = executaSQL($sql_user, ['email' => $email]);
                         $resultado2 = $select2->fetch();*/
 
-                        $cod_usuario = $conn -> LastInsertId();
-                        $_SESSION['usuario']['cod_usuario'] = $cod_usuario
-                        setToken($cod_usuario);
-                        $_SESSION['usuario']['adm'] = false;
-
+                        
+                        
                         header('Location: ../');
                     }
                     else{

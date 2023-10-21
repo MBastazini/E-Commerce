@@ -171,7 +171,7 @@
                     $sql = "SELECT * FROM tbl_produto";
                     $res = executaSQL($sql, NULL);
                     $funcao = "add-";
-                    $usuario = 1;
+                    $cod_usuario = NULL;
                     if($conectado)
                     {
                         if($_SESSION['usuario']['ativo'])
@@ -210,16 +210,18 @@
                         }
                         else if ($visitante)
                         {
-                            foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                                if ($cod_produto == $dados['cod_produto'])
-                                {
-                                    $icone = 'Check_branco.svg';
-                                    $funcao = 'ver';
+                            if (isset($_SESSION['visitante']['carrinho'])) {
+                                foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                                    if ($cod_produto == $produto['cod_produto'])
+                                    {
+                                        $icone = 'Check_branco.svg';
+                                        $funcao = 'ver';
+                                    }
+                                    else{
+                                        $icone = 'carrinho_branco.svg';
+                                    }
                                 }
-                                else{
-                                    $icone = 'carrinho_branco.svg';
-                                }
-                            }
+                            }  
                         }
                         $cod_produto = $produto['cod_produto'];
                         echo "<div class='produto'> 

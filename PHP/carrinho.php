@@ -88,19 +88,21 @@
         {
             $cod_tmpcompra = $_POST["cod_tmpcompra"];
             mudaCarrinho($cod_tmpcompra, '+');
+            header('Location: ../Carrinho/');
             //função de compra.php
         }
         else if ($funcao == 'muda-')
         {
             $cod_tmpcompra = $_POST["cod_tmpcompra"];
             mudaCarrinho($cod_tmpcompra, '-');
+            header('Location: ../Carrinho/');
         }
 
-        else if($funcao == 'add+' || $funcao == 'add++')
+        else if($funcao == 'add' || $funcao == 'add++')
         {
             $cod_produto = $_POST["cod_produto"];
             adicionaCarrinho($cod_produto, 1);
-            if ($funcao == 'add+')
+            if ($funcao == 'add')
             {
                 header('Location: ../Produtos/#'.$cod_produto);
             }

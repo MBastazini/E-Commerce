@@ -8,13 +8,14 @@
 
     $conn = coneccao();
     $ativo = false;
+    $cod_usuario = NULL;
+    $funcao = 'add';
     if ($conectado)
     {
         if ($_SESSION['usuario']['ativo']){
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
             $ativo = true;
             $visitante = false;
-            $funcao = 'add+';
         }
         else if ($_SESSION['visitante']['ativo']){
             $visitante = true;
@@ -168,7 +169,8 @@
         $select = $conn->query($sql);
         while($dados = $select->fetch()){
             $icone = 'carrinho_branco.svg';
-            $funcao = 'add-';
+            $funcao = 'add';
+            
             if($ativo)
             {               
                 $sql2 = "select * from tbl_compra_produto where cod_produto = :cod_produto and cod_usuario = :cod_usuario";
@@ -182,13 +184,17 @@
             }
             else if ($visitante)
             {
-                foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                    if ($cod_produto == $dados['cod_produto'])
-                    {
-                        $icone = 'Check_branco.svg';
-                        $funcao = 'ver';
+                if(isset($_SESSION['visitante']['carrinho']))
+                {
+                    foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                        if ($cod_produto == $dados['cod_produto'])
+                        {
+                            $icone = 'Check_branco.svg';
+                            $funcao = 'ver';
+                        }
                     }
                 }
+                
             }
                 
             

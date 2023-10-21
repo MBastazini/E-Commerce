@@ -340,10 +340,10 @@
             }
         }
         else{
-            //header('Location: ../pornogay');
+            header('Location: ../pornogay');
         }
     }else{
-        //header('Location: ../throsper');
+        header('Location: ../throsper');
     }
 }
 

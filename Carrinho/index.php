@@ -2,7 +2,6 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
-    include("../PHP/compra.php");
     $conectado = inicioSessao();
 
     $conn = coneccao();
@@ -144,37 +143,40 @@
                 }
                 else if ($_SESSION['visitante']['ativo'])
                 {
-                    foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                        $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
-                        $select = $conn->executaSQL($sql, ['cod_produto' => $cod_produto]);
-                        $resultado = $select->fetch();
-
-                        $nome = $resultado['nome'];
-                        $quantidade = $quantidade;
-                        $cod_produto = $resultado['cod_produto'];
-
-                        echo"
-                        <div class='produto_compra' id='produto_$cod_produto'>
-                            <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
-                            <div>
-                                <p>$nome</p>
-                                <div class='produto_compra_div'>
-                                    <form action='../PHP/carrinho.php' method='post'>
-                                        <input type='hidden' name='cod_produto' value='$cod_produto'>
-                                        <input type='hidden' value='muda-' name='funcao'>
-                                        <input type='submit' value='-'>
-                                    </form>
-                                    <p id='quantidade'>$quantidade</p>
-                                    <form action='../PHP/carrinho.php' method='post'>
-                                        <input type='hidden' name='cod_produto' value='$cod_produto'>
-                                        <input type='hidden' value='muda+' name='funcao'>
-                                        <input type='submit' value='+'>
-                                    </form>
+                    if(isset($_SESSION['visitante']['carrinho']))
+                    {
+                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                            //Posso só pegar o nome
+                            $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
+                            $select = executaSQL($sql, ['cod_produto' => $cod_produto]);
+                            $resultado = $select->fetch();
+    
+                            $nome = $resultado['nome'];
+    
+                            echo"
+                            <div class='produto_compra' id='produto_$cod_produto'>
+                                <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
+                                <div>
+                                    <p>$nome</p>
+                                    <div class='produto_compra_div'>
+                                        <form action='../PHP/carrinho.php' method='post'>
+                                            <input type='hidden' name='cod_tmpcompra' value='$cod_produto'>
+                                            <input type='hidden' value='muda-' name='funcao'>
+                                            <input type='submit' value='-'>
+                                        </form>
+                                        <p id='quantidade'>$quantidade</p>
+                                        <form action='../PHP/carrinho.php' method='post'>
+                                            <input type='hidden' name='cod_tmpcompra' value='$cod_produto'>
+                                            <input type='hidden' value='muda+' name='funcao'>
+                                            <input type='submit' value='+'>
+                                        </form>
+                                    </div>
+                                    <h1>R$ ".$resultado['preco']."</h1>
                                 </div>
-                                <h1>R$ ".$resultado['preco']."</h1>
-                            </div>
-                        ";
+                            </div>";
+                        }
                     }
+                    
                 }
             }
             

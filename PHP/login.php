@@ -46,11 +46,6 @@
                         
                         $_SESSION['usuario']['ativo'] = true;
 
-                        //Pega todas as compras feitas enquanto o usuário estava como visitante e as coloca no seu nome.
-                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                            adicionaCarrinho($cod_produto, $quantidade);
-                        }
-
                         $_SESSION['visitante']['ativo'] = false;
 
 
