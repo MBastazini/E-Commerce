@@ -119,20 +119,20 @@
                     $produto = verCarrinho();
                     while($produto){
                         $cod_produto = $produto['cod_produto'];
-                        $cod_compra_produto = $produto['cod_compra_produto'];
+                        $cod_tmpcompra = $produto['cod_tmpcompra'];
                         echo "<div class='produto_compra' id='produto_$cod_produto'>
                                 <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
                                 <div>
                                     <p>".$produto['nome']."</p>
                                     <div class='produto_compra_div'>
                                         <form action='../PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_compra_produto' value='$cod_compra_produto'>
+                                            <input type='hidden' name='cod_compra_produto' value='$cod_tmpcompra'>
                                             <input type='hidden' value='muda-' name='funcao'>
                                             <input type='submit' value='-'>
                                         </form>
                                         <p id='quantidade'>".$produto['quantidade']."</p>
                                         <form action='../PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_compra_produto' value='$cod_compra_produto'>
+                                            <input type='hidden' name='cod_compra_produto' value='$cod_tmcompra'>
                                             <input type='hidden' value='muda+' name='funcao'>
                                             <input type='submit' value='+'>
                                         </form>
@@ -142,12 +142,46 @@
                             </div>";
                     }
                 }
+                else if ($_SESSION['visitante']['ativo'])
+                {
+                    foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                        $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
+                        $select = $conn->executaSQL($sql, ['cod_produto' => $cod_produto]);
+                        $resultado = $select->fetch();
+
+                        $nome = $resultado['nome'];
+                        $quantidade = $quantidade;
+                        $cod_produto = $resultado['cod_produto'];
+
+                        echo"
+                        <div class='produto_compra' id='produto_$cod_produto'>
+                            <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
+                            <div>
+                                <p>$nome</p>
+                                <div class='produto_compra_div'>
+                                    <form action='../PHP/carrinho.php' method='post'>
+                                        <input type='hidden' name='cod_produto' value='$cod_produto'>
+                                        <input type='hidden' value='muda-' name='funcao'>
+                                        <input type='submit' value='-'>
+                                    </form>
+                                    <p id='quantidade'>$quantidade</p>
+                                    <form action='../PHP/carrinho.php' method='post'>
+                                        <input type='hidden' name='cod_produto' value='$cod_produto'>
+                                        <input type='hidden' value='muda+' name='funcao'>
+                                        <input type='submit' value='+'>
+                                    </form>
+                                </div>
+                                <h1>R$ ".$resultado['preco']."</h1>
+                            </div>
+                        ";
+                    }
+                }
             }
             
             ?>
             <!-- Na cração disso com PHP atente-se em colocar o uma STRING concatenada como 'produto_' + $id_produto
             Algo assim, ai o id_produto fica armasenado, mas não temos classes com o nome dela sendo apenas um numero solto -->
-            <div class="produto_compra"  id="Produto1">
+            <!--<div class="produto_compra"  id="Produto1">
                 <img src="../Icones/quadrado.svg" alt="Chaveiro 1">
                 <div>
                     <p>Nome-Produto</p>
@@ -167,7 +201,7 @@
                     </div>
                     <h1>R$ 30,00</h1>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div id="compra_total">
             <h1>CARRINHO</h1>

@@ -1,6 +1,9 @@
 <?php  
     include("caixa.php");
-    function adicionaCarrinho($cod_produto, $cod_usuario)
+    include("compra.php");
+    $conectado = inicioSessao();
+
+    /*function adicionaCarrinho($cod_produto, $cod_usuario)
     {
         //Obtem a quantidade de dados em tbl_compra e quarda na variavel $codigo
         $conn = coneccao();
@@ -76,7 +79,7 @@
         executaSQL($sql, ['cod_compra' => $cod_compra[0]]);
 
         header('Location: ../Carrinho');
-    }
+    }*/
 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -84,13 +87,14 @@
         
         if ($funcao == 'muda+')
         {
-            $cod_compra_produto = $_POST["cod_compra_produto"];
-            mudaCarrinho($cod_compra_produto, '+');
+            $cod_tmpcompra = $_POST["cod_tmpcompra"];
+            mudaCarrinho($cod_tmpcompra, '+');
+            //função de compra.php
         }
         else if ($funcao == 'muda-')
         {
-            $cod_compra_produto = $_POST["cod_compra_produto"];
-            mudaCarrinho($cod_compra_produto, '-');
+            $cod_tmpcompra = $_POST["cod_tmpcompra"];
+            mudaCarrinho($cod_tmpcompra, '-');
         }
 
         else if($funcao == 'add+' || $funcao == 'add++')

@@ -178,10 +178,18 @@
                         {
                             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
                             $ativo = true;
+                            $visitante = false;
+                        }
+                        else if($_SESSION['visitante']['ativo'])
+                        {
+                            $ativo = false;
+                            $visitante = true;
+                            $funcao = 'add--';
                         }
                     }
+                    
                     $icone = 'carrinho_branco.svg';
-                    $funcao = 'add--';
+                    
 
                     while($produto = $res->fetch())
                     {
@@ -198,6 +206,19 @@
                             }
                             else{
                                 $icone = 'carrinho_branco.svg';
+                            }
+                        }
+                        else if ($visitante)
+                        {
+                            foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                                if ($cod_produto == $dados['cod_produto'])
+                                {
+                                    $icone = 'Check_branco.svg';
+                                    $funcao = 'ver';
+                                }
+                                else{
+                                    $icone = 'carrinho_branco.svg';
+                                }
                             }
                         }
                         $cod_produto = $produto['cod_produto'];

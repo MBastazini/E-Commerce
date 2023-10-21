@@ -13,6 +13,15 @@
         if ($_SESSION['usuario']['ativo']){
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
             $ativo = true;
+            $visitante = false;
+            $funcao = 'add+';
+        }
+        else if ($_SESSION['visitante']['ativo']){
+            $visitante = true;
+            $ativo = false;
+        }
+        else{
+            header('Location: ../ERRO');
         }
     }
             
@@ -157,14 +166,11 @@
         
         $sql = "select * from tbl_produto order by cod_produto";
         $select = $conn->query($sql);
-        $usuario = 1;
         while($dados = $select->fetch()){
             $icone = 'carrinho_branco.svg';
             $funcao = 'add-';
             if($ativo)
-            {
-                //acho que pode ficar pra fora fetch
-                $funcao = 'add+';
+            {               
                 $sql2 = "select * from tbl_compra_produto where cod_produto = :cod_produto and cod_usuario = :cod_usuario";
                 $select2 = executaSQL($sql2, ['cod_produto' => $dados['cod_produto'], 'cod_usuario' => $cod_usuario]);
                 $resultado = $select2->fetch();
@@ -172,6 +178,16 @@
                 {
                     $icone = 'Check_branco.svg';
                     $funcao = 'ver';
+                }
+            }
+            else if ($visitante)
+            {
+                foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                    if ($cod_produto == $dados['cod_produto'])
+                    {
+                        $icone = 'Check_branco.svg';
+                        $funcao = 'ver';
+                    }
                 }
             }
                 

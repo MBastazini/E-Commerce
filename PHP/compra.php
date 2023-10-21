@@ -121,19 +121,22 @@
                 $select = $conn->executaSQL($sql, ['cod_compra' => $cod_compra]);
                 $quantidade = $select->fetch();
 
-                //Atualiza a quantidade de produtos na compra
-                $sql = "UPDATE tbl_compra_produto SET quantidade = :quantidade WHERE cod_compra = :cod_compra";
-                $conn->executaSQL($sql, ['quantidade' => $quantidade + $s, 'cod_compra' => $cod_compra]);
+                if ($quantidade + $s == 0)
+                {
+                    deletaCarrinho($cod_tmpcompra);
+                }
+                else{
+                    //Atualiza a quantidade de produtos na compra
+                    $sql = "UPDATE tbl_compra_produto SET quantidade = :quantidade WHERE cod_compra = :cod_compra";
+                    $conn->executaSQL($sql, ['quantidade' => $quantidade + $s, 'cod_compra' => $cod_compra]);
+                }
             }
             else if ($_SESSION['visitante']['ativo'])
             {
-                if ($s == 1)
+                $_SESSION['visitante']['carrinho'][$cod_tmpcompra] += $s;
+                if ($_SESSION['visitante']['carrinho'][$cod_tmpcompra] == 0)
                 {
-                    $_SESSION['visitante']['carrinho'][$cod_tmpcompra] += 1;
-                }
-                else if ($s == -1)
-                {
-                    $_SESSION['visitante']['carrinho'][$cod_tmpcompra] -= 1;
+                    deletaCarrinho($cod_tmpcompra);
                 }
             }
             else{
