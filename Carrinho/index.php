@@ -2,6 +2,7 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
+    include("../PHP/compra.php");
     $conectado = inicioSessao();
 
     $conn = coneccao();
@@ -109,13 +110,14 @@
             {
                 if ($_SESSION['usuario']['ativo'])
                 {
-                    $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+                    /*$cod_usuario = $_SESSION['usuario']['cod_usuario'];
                     $sql_produtos = "SELECT p.nome, p.cod_produto, p.preco, cp.quantidade, c.status, cp.cod_compra_produto FROM tbl_compra_produto AS cp
                     INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
                     INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
                     WHERE c.status = 'comprando' AND cp.cod_usuario = '$cod_usuario'";
-                    $select_produtos = executaSQL($sql_produtos, NULL);
-                    while($produto = $select_produtos->fetch()){
+                    $select_produtos = executaSQL($sql_produtos, NULL);*/
+                    $produto = verCarrinho();
+                    while($produto){
                         $cod_produto = $produto['cod_produto'];
                         $cod_compra_produto = $produto['cod_compra_produto'];
                         echo "<div class='produto_compra' id='produto_$cod_produto'>

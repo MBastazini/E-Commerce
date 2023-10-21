@@ -29,29 +29,28 @@ CREATE TABLE tbl_compra(
 	cod_compra serial PRIMARY KEY,
 	status t_status not null,
 	data_compra date
+
+	cod_usuario serial,
+	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
 );
 
 
 CREATE TABLE tbl_compra_produto(
-	cod_compra_produto serial PRIMARY KEY,
 	quantidade numeric (10) not null,
 	cod_produto serial,
 	FOREIGN KEY (cod_produto) REFERENCES tbl_produto(cod_produto),
 
 	cod_compra serial,
-	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra),
-
-	cod_usuario serial,
-	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
+	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra),	
 );
 /*ALTER TABLE tbl_compra_produto ADD COLUMN cod_compra serial;
 ALTER TABLE tbl_compra_produto ADD FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra);*/
 
 
 CREATE TABLE tbl_tmpcompra(
-	cod_compra serial PRIMARY KEY,
-	sessão varchar(100),
-	FOREIGN KEY (cod_compra) REFERENCES tbl_compra_produto(cod_compra_produto)
+	cod_tmpcompra serial PRIMARY KEY,
+	cod_compra serial,
+	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
 );
 
 CREATE TABLE tbl_usuario(

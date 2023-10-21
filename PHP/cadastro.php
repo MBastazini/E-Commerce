@@ -49,13 +49,13 @@
                         $_SESSION['usuario']['nome'] = explode(" ", $linha['nome'])[0];
 
                         
-                        $sql_user = "select cod_usuario from tbl_usuario where email = :email";
+                        /*$sql_user = "select cod_usuario from tbl_usuario where email = :email";
                         $resultado2 = executaSQL($sql_user, ['email' => $email]);
-                        $resultado2 = $select2->fetch();
+                        $resultado2 = $select2->fetch();*/
 
-
-                        $_SESSION['usuario']['cod_usuario'] = $resultado2['cod_usuario'];
-                        setToken($resultado['cod_usuario']);
+                        $cod_usuario = $conn -> LastInsertId();
+                        $_SESSION['usuario']['cod_usuario'] = $cod_usuario
+                        setToken($cod_usuario);
                         $_SESSION['usuario']['adm'] = false;
 
                         header('Location: ../');
