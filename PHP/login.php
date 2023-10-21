@@ -2,7 +2,7 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("caixa.php");
-
+    include("compra.php");
     $conectado = inicioSessao();
     if ($conectado)
     {
@@ -44,8 +44,16 @@
                             setToken($resultado2['cod_usuario']);
                         }*/
                         
-                        $_SESSION['visitante']['ativo'] = false;
+                        
                         $_SESSION['usuario']['ativo'] = true;
+
+                        //Pega todas as compras feitas enquanto o usuário estava como visitante e as coloca no seu nome.
+                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                            adicionaCarrinho($cod_produto, $quantidade);
+                        }
+
+                        $_SESSION['visitante']['ativo'] = false;
+
 
                         setToken($resultado2['cod_usuario']);
                         $_SESSION['usuario']['nome'] = explode(" ", $resultado2['nome'])[0];

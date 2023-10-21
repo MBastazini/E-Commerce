@@ -5,7 +5,7 @@
 
     //Esse codigo segue o mapa conceitual dado pelo Prof. José Vieira
 
-    function adicionaCarrinho($cod_produto){
+    function adicionaCarrinho($cod_produto, $quantidade){
         if ($conectado)
         {
             if ($_SESSION['usuario']['ativo'])
@@ -19,7 +19,7 @@
                 //compra deve linkar-se com um produto
                 $cod_compra = $conn->LastInsertId();
                 $new_compra_produto = "INSERT INTO tbl_compra_produto VALUES (:quantidade, :cod_produto, :cod_compra)";
-                $conn->executaSQL($new_compra_produto, ['quantidade' => 1, 'cod_produto' => $cod_produto, 'cod_compra' => $cod_compra]);
+                $conn->executaSQL($new_compra_produto, ['quantidade' => $quantidade, 'cod_produto' => $cod_produto, 'cod_compra' => $cod_compra]);
 
                 //Compra registra uma compraTemporaria (que aparecerá no carrinho)
                 $new_compra_temporaria = "INSERT INTO tbl_tmpcompra VALUES (:cod_compra)";
@@ -29,7 +29,7 @@
             {
                 if (!isset($_SESSION['visitante']['carrinho'][$cod_produto]))
                 {
-                    $_SESSION['visitante']['carrinho'][$cod_produto] = 1;
+                    $_SESSION['visitante']['carrinho'][$cod_produto] = $quantidade;
                 }
             }
             else{

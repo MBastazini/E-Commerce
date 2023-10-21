@@ -218,9 +218,10 @@
                     <p>TOTAL</p>
                     <h1 id="total">R$ 9,98</h1>
                 </div>
-                <div class="finalizar_compra">
-                    <h1>FINALIZAR COMPRA</h1>
-                </div>
+                <form class="finalizar_compra" action='../PHP/carrinho.php' method='post'>
+                    <input type='hidden' name='funcao' value='finalizar'>
+                    <button><h1>FINALIZAR COMPRA</h1></button>
+                </form>
             </div>  
         </div>
     </section>

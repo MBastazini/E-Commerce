@@ -100,8 +100,7 @@
         else if($funcao == 'add+' || $funcao == 'add++')
         {
             $cod_produto = $_POST["cod_produto"];
-            $cod_usuario = $_POST["cod_usuario"];
-            adicionaCarrinho($cod_produto, $cod_usuario);
+            adicionaCarrinho($cod_produto, 1);
             if ($funcao == 'add+')
             {
                 header('Location: ../Produtos/#'.$cod_produto);
@@ -115,6 +114,10 @@
         {
             $cod_produto = $_POST["cod_produto"];
             header('Location: ../Carrinho/');
+        }
+        else if($funcao == 'finalizar')
+        {
+            finalizarCarrinho();
         }
     }
 ?>

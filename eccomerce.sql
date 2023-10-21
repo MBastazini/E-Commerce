@@ -34,7 +34,6 @@ CREATE TABLE tbl_compra(
 	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
 );
 
-
 CREATE TABLE tbl_compra_produto(
 	quantidade numeric (10) not null,
 	cod_produto serial,
@@ -43,9 +42,6 @@ CREATE TABLE tbl_compra_produto(
 	cod_compra serial,
 	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra),	
 );
-/*ALTER TABLE tbl_compra_produto ADD COLUMN cod_compra serial;
-ALTER TABLE tbl_compra_produto ADD FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra);*/
-
 
 CREATE TABLE tbl_tmpcompra(
 	cod_tmpcompra serial PRIMARY KEY,
