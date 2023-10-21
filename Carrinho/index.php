@@ -115,8 +115,8 @@
                     INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
                     WHERE c.status = 'comprando' AND cp.cod_usuario = '$cod_usuario'";
                     $select_produtos = executaSQL($sql_produtos, NULL);*/
-                    $produto = verCarrinho();
-                    while($produto){
+                    $produtos = verCarrinho();
+                    while($produto = $produtos->fetch()){
                         $cod_produto = $produto['cod_produto'];
                         $cod_tmpcompra = $produto['cod_tmpcompra'];
                         echo "<div class='produto_compra' id='produto_$cod_produto'>
@@ -125,13 +125,13 @@
                                     <p>".$produto['nome']."</p>
                                     <div class='produto_compra_div'>
                                         <form action='../PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_compra_produto' value='$cod_tmpcompra'>
+                                            <input type='hidden' name='cod_tmpcompra' value='$cod_tmpcompra'>
                                             <input type='hidden' value='muda-' name='funcao'>
                                             <input type='submit' value='-'>
                                         </form>
                                         <p id='quantidade'>".$produto['quantidade']."</p>
                                         <form action='../PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_compra_produto' value='$cod_tmcompra'>
+                                            <input type='hidden' name='cod_tmpcompra' value='$cod_tmpcompra'>
                                             <input type='hidden' value='muda+' name='funcao'>
                                             <input type='submit' value='+'>
                                         </form>
@@ -220,9 +220,9 @@
                     <p>TOTAL</p>
                     <h1 id="total">R$ 9,98</h1>
                 </div>
-                <form class="finalizar_compra" action='../PHP/carrinho.php' method='post'>
+                <form action='../PHP/carrinho.php' method='post'>
                     <input type='hidden' name='funcao' value='finalizar'>
-                    <button><h1>FINALIZAR COMPRA</h1></button>
+                    <button class="finalizar_compra"><h1>FINALIZAR COMPRA</h1></button>
                 </form>
             </div>  
         </div>

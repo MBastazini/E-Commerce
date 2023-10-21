@@ -173,7 +173,10 @@
             
             if($ativo)
             {               
-                $sql2 = "select * from tbl_compra_produto where cod_produto = :cod_produto and cod_usuario = :cod_usuario";
+                $sql2 = "SELECT * FROM tbl_tmpcompra 
+                INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
+                INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
+                WHERE tbl_compra.cod_usuario = :cod_usuario AND tbl_compra_produto.cod_produto = :cod_produto";
                 $select2 = executaSQL($sql2, ['cod_produto' => $dados['cod_produto'], 'cod_usuario' => $cod_usuario]);
                 $resultado = $select2->fetch();
                 if ($resultado != NULL)

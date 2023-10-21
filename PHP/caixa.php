@@ -313,6 +313,7 @@
   function adicionaCarrinho($cod_produto, $quantidade){
     $conectado = inicioSessao();
     $conn = coneccao();
+
     if ($conectado)
     {
         if ($_SESSION['usuario']['ativo'])
@@ -320,16 +321,17 @@
             //Usuario efetua uma compra
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
             $data_hoje = date("Y/m/d");
-            $new_compra = "INSERT INTO tbl_compra VALUES (:status, :data_compra, :cod_usuario)";
-            executaSQL($new_compra, ['status' => 'Pendente', 'data_compra' => $data_hoje, 'cod_usuario' => $cod_usuario]);
+            $new_compra = "INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES (:status, :data_compra, :cod_usuario)";
+            $select = $conn->prepare($new_compra);
+            $select->execute(['status' => 'Pendente', 'data_compra' => $data_hoje, 'cod_usuario' => $cod_usuario]);
 
             //compra deve linkar-se com um produto
             $cod_compra = $conn->LastInsertId();
-            $new_compra_produto = "INSERT INTO tbl_compra_produto VALUES (:quantidade, :cod_produto, :cod_compra)";
+            $new_compra_produto = "INSERT INTO tbl_compra_produto (quantidade, cod_produto, cod_compra) VALUES (:quantidade, :cod_produto, :cod_compra)";
             executaSQL($new_compra_produto, ['quantidade' => $quantidade, 'cod_produto' => $cod_produto, 'cod_compra' => $cod_compra]);
 
             //Compra registra uma compraTemporaria (que aparecerá no carrinho)
-            $new_compra_temporaria = "INSERT INTO tbl_tmpcompra VALUES (:cod_compra)";
+            $new_compra_temporaria = "INSERT INTO tbl_tmpcompra (cod_compra) VALUES (:cod_compra)";
             executaSQL($new_compra_temporaria, ['cod_compra' => $cod_compra]);
         }
         else if ($_SESSION['visitante']['ativo'])
@@ -354,12 +356,13 @@ function verCarrinho(){
         if ($_SESSION['usuario']['ativo'])
         {
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            $sql = "SELECT * FROM tbl_tmpcompra WHERE cod_compra IN (SELECT cod_compra FROM tbl_compra WHERE cod_usuario = :cod_usuario)
-            INNER JOIN tbl_compra_produto ON tbl_tmpcompra.cod_compra = tbl_compra_produto.cod_compra
-            INNER JOIN tbl_produto ON tbl_compra_produto.cod_produto = tbl_produto.cod_produto";
+            $sql = "SELECT * FROM tbl_tmpcompra 
+            INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
+            INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
+            INNER JOIN tbl_produto ON tbl_compra_produto.cod_produto = tbl_produto.cod_produto
+            WHERE tbl_compra.cod_usuario = :cod_usuario";
             $select = executaSQL($sql, ['cod_usuario' => $cod_usuario]);
-            $resultado = $select->fetch();
-            return $resultado;
+            return $select;
         }
         else{
             header('Location: ../ERRO');
@@ -425,11 +428,13 @@ function mudaCarrinho($cod_tmpcompra, $signal){
             $sql = "SELECT cod_compra FROM tbl_tmpcompra WHERE cod_tmpcompra = :cod_tmpcompra";
             $select = executaSQL($sql, ['cod_tmpcompra' => $cod_tmpcompra]);
             $cod_compra = $select->fetch();
+            $cod_compra = $cod_compra[0];
 
             //Obtem a quantidade de produtos na compra
             $sql = "SELECT quantidade FROM tbl_compra_produto WHERE cod_compra = :cod_compra";
             $select = executaSQL($sql, ['cod_compra' => $cod_compra]);
             $quantidade = $select->fetch();
+            $quantidade = $quantidade[0];
 
             if ($quantidade + $s == 0)
             {
@@ -494,17 +499,28 @@ function finalizarCarrinho(){
         if ($_SESSION['usuario']['ativo']){
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
             //Seleciona todos os registros de tmpcompra e define o status da compra como concluida, alem disso apaga os registros de tmpCompra
-            $sql = "SELECT * FROM tbl_tmpcompra WHERE cod_compra IN (SELECT cod_compra FROM tbl_compra WHERE cod_usuario = :cod_usuario)";
+            $sql = "SELECT * FROM tbl_tmpcompra
+            INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
+            INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
+            INNER JOIN tbl_produto ON tbl_compra_produto.cod_produto = tbl_produto.cod_produto
+            WHERE tbl_compra.cod_usuario = :cod_usuario";
             $select = executaSQL($sql, ['cod_usuario' => $cod_usuario]);
-            $resultado = $select->fetch();
+            $soma_total = 0;
+            while($resultado = $select->fetch())
+            {
+                $soma_total += $resultado['preco'] * $resultado['quantidade'];
 
 
-            foreach ($resultado as $linha){
                 $sql = "UPDATE tbl_compra SET status = :status WHERE cod_compra = :cod_compra";
-                executaSQL($sql, ['status' => 'Concluida', 'cod_compra' => $linha['cod_compra']]);
+                executaSQL($sql, ['status' => 'Concluida', 'cod_compra' => $resultado['cod_compra']]);
+
                 $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
-                executaSQL($sql, ['cod_compra' => $linha['cod_compra']]);
+                executaSQL($sql, ['cod_compra' => $resultado['cod_compra']]);
             }
+            $html = "
+            <h1>".$soma_total."</h1>
+            ";
+            gerapdf($html);
         }
         else{
             header('Location: ../Login');

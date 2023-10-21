@@ -27,11 +27,11 @@ ALTER TABLE tbl_token ADD COLUMN ip_criacao varchar(15);
 /*Compra já efetuada*/
 CREATE TABLE tbl_compra(
 	cod_compra serial PRIMARY KEY,
-	status t_status not null,
+	status compra_status not null,
 	data_compra date,
 
 	cod_usuario serial,
-	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario),
+	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
 
 
 );
@@ -62,7 +62,7 @@ CREATE TABLE tbl_usuario(
 );
 
 CREATE TYPE categorias AS ENUM ('INFORMATICA', 'MECANICA', 'ELETRONICA', 'CTI');
-CREATE TYPE t_status AS ENUM ('Concluida', 'Pendende', 'Cancelada');
+CREATE TYPE compra_status AS ENUM ('Concluida', 'Pendente', 'Cancelada');
 
 
 INSERT INTO tbl_produto VALUES 
@@ -120,11 +120,23 @@ INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
 INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
 WHERE c.status = 'comprando' AND cp.cod_usuario = '1';
 
+SELECT * FROM tbl_tmpcompra 
+INNER JOIN tbl_compra_produto ON tbl_tmpcompra.cod_compra = tbl_compra_produto.cod_compra
+INNER JOIN tbl_produto ON tbl_compra_produto.cod_produto = tbl_produto.cod_produto
+INNER JOIN tbl_compra ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
+WHERE tbl_compra.cod_usuario = '1';
+
+SELECT * FROM tbl_tmpcompra 
+INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
+INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
+WHERE tbl_compra.cod_usuario = '1' AND tbl_compra_produto.cod_produto = '1';
 
 
+INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES ('comprando', '2023-10-01', '1');
 
+INSERT INTO tbl_compra_produto (quantidade, cod_produto, cod_compra) VALUES ('1', '1', '1');
 
-
+INSERT INTO tbl_tmpcompra (cod_compra) VALUES ('1');
 
 
 

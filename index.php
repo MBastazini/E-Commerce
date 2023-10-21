@@ -196,9 +196,12 @@
                         {
                             $funcao = 'add++';
                             //Checa se há um produto em tbl_tmpcompra que o cod_produto e o cod_usuario sejam iguais ao $cod_produto e $cod_usuario
-                            $sql = "SELECT * FROM tbl_tmpcompra WHERE cod_compra IN (SELECT cod_compra FROM tbl_compra WHERE cod_usuario = :cod_usuario
-                            AND cod_compra IN (SELECT cod_compra FROM tbl_compra_produto WHERE cod_produto = :cod_produto))";
-                            $resultado = executaSQL($sql, ['cod_usuario' => $cod_usuario, 'cod_produto' => $produto['cod_produto']]);
+                            $sql2 = "SELECT * FROM tbl_tmpcompra 
+                            INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
+                            INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
+                            WHERE tbl_compra.cod_usuario = :cod_usuario AND tbl_compra_produto.cod_produto = :cod_produto";
+                            $select2 = executaSQL($sql2, ['cod_produto' => $produto['cod_produto'], 'cod_usuario' => $cod_usuario]);
+                            $resultado = $select2->fetch();
                             if ($resultado != NULL)
                             {
                                 $icone = 'Check_branco.svg';

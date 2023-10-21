@@ -1388,9 +1388,11 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     border-radius: 3px;
     margin: 30px 0px;
 }
-
-.finalizar_compra{
+.compra_total > div > form{
     width: 80%;
+}
+.finalizar_compra{
+    width: 100%;
     background-color: var(--cor_destaque);
     color: white;
     display: flex;
@@ -1401,6 +1403,9 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     transition: 0.5s;
     position: relative;
     box-sizing: border-box;
+    /*Remove as caracteristicas padrões do botão*/
+    border: none;
+    outline: none;
 }
 .finalizar_compra:hover{
     transform: scale(1.05);
