@@ -84,7 +84,7 @@
                         <h1 class="hidden">_</h1>
                     </div>
                     <p>Adquira já! Uma lembrança única com um estilo natural, 
-                        ideal para todos os lugares, Tiny Wood,chaveiros de madeira!,
+                        ideal para todos os lugares, <br> Tiny Wood, chaveiros de madeira!
                     </p>
                     <a href="produtos.php">
                         <div class="tela_botao">
@@ -161,11 +161,12 @@
 
     <section class="produtos">
         <div class="titulo t_esquerda hidden">
-            <p>PRODUTOS</p>
+            <p id='hrefprod'>PRODUTOS</p>
         </div>
         <div class="area_produtos container">
             <p>Passe o mouse por cima para mais informações</p>
             <div class="produtos_container hidden">
+                <span id="produto_padding"></span>
                 <?php 
                     $sql = "SELECT * FROM tbl_produto";
                     $res = executaSQL($sql, NULL);
@@ -175,17 +176,35 @@
                     {
                         if($_SESSION['usuario']['ativo'])
                         {
-                            $funcao = "add+";
-                            $usuario = $_SESSION['usuario']['cod_usuario'];
+                            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+                            $ativo = true;
                         }
                     }
+                    $icone = 'carrinho_branco.svg';
+                    $funcao = 'add--';
+
                     while($produto = $res->fetch())
                     {
+                        if($ativo)
+                        {
+                            $funcao = 'add++';
+                            $sql2 = "select * from tbl_compra_produto where cod_produto = :cod_produto and cod_usuario = :cod_usuario";
+                            $select2 = executaSQL($sql2, ['cod_produto' => $produto['cod_produto'], 'cod_usuario' => $cod_usuario]);
+                            $resultado = $select2->fetch();
+                            if ($resultado != NULL)
+                            {
+                                $icone = 'Check_branco.svg';
+                                $funcao = 'ver';
+                            }
+                            else{
+                                $icone = 'carrinho_branco.svg';
+                            }
+                        }
                         $cod_produto = $produto['cod_produto'];
                         echo "<div class='produto'> 
                                 <div class='produto_info'>
                                     <div class='produto_texto'>
-                                        <p>". $produto['preco']."</p>
+                                        <p> R$ ". $produto['preco']."</p>
                                         <h1>".$produto['nome']."</h1>
                                     </div>
                                     <div class='produto_botao'>
@@ -197,10 +216,10 @@
                                         </a>
                                         <form action='PHP/carrinho.php' method='post'>
                                             <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                                            <input type='hidden' name='cod_usuario' value='". $usuario. "'>
+                                            <input type='hidden' name='cod_usuario' value='". $cod_usuario. "'>
                                             <input type='hidden' name='funcao' value='$funcao'>
-                                            <button>
-                                                <img src='Icones/carrinho_branco.svg' alt='Carrinho de compras'>
+                                            <button onclick='addCart()'>
+                                                <img src='Icones/$icone' alt='Carrinho de compras'>
                                                 <p>+ Carrinho</p>
                                             </button>
                                         </form>
@@ -216,131 +235,6 @@
                     }
                 
                 ?>
-                <div class="produto">
-                    <div class="produto_info">
-                        <div class="produto_texto">
-                            <p>R$ 10,99</p>
-                            <h1>Chaveiro Engines</h1>
-                            
-                        </div>
-                        <div class="produto_botao">
-                            <a href="#">
-                                <div>
-                                    <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
-                                    <p>Comprar</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div>
-                                    <img src="Icones/carrinho_branco.svg" alt="Carrinho de compras">
-                                    <p>+ Carrinho</p>
-                                </div>
-                            </a>
-                            <a href="produtos.php#1">
-                                <div>
-                                    <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
-                                    <p>Ver mais</p>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="produto">
-                    <div class="produto_info">
-                        <div class="produto_texto">
-                            <p>R$ 10,99</p>
-                            <h1>Chaveiro Lampada</h1>
-                            
-                        </div>
-                        <div class="produto_botao">
-                            <a href="#">
-                                <div>
-                                    <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
-                                    <p>Comprar</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div>
-                                    <img src="Icones/carrinho_branco.svg" alt="Carrinho de compras">
-                                    <p>+ Carrinho</p>
-                                </div>
-                            </a>
-                            <a href="produtos.php#2">
-                                <div>
-                                    <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
-                                    <p>Ver mais</p>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="produto">
-                    <div class="produto_info">
-                        <div class="produto_texto">
-                            <p>R$ 10,99</p>
-                            <h1>Chaveiro CPU</h1>
-                            
-                        </div>
-                        <div class="produto_botao">
-                            <a href="#">
-                                <div>
-                                    <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
-                                    <p>Comprar</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div>
-                                    <img src="Icones/carrinho_branco.svg" alt="Carrinho de compras">
-                                    <p>+ Carrinho</p>
-                                </div>
-                            </a>
-                            <a href="produtos.php#3">
-                                <div>
-                                    <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
-                                    <p>Ver mais</p>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="produto">
-                    <div class="produto_info">
-                        <div class="produto_texto">
-                            <p>R$ 10,99</p>
-                            <h1>Chaveiro CTI</h1>
-                            
-                        </div>
-                        <div class="produto_botao">
-                            <a href="produtos.php#4">
-                                <div>
-                                    <img src="Icones/shopping_branco.svg" alt="Carrinho de compras">
-                                    <p>Comprar</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div>
-                                    <img src="Icones/carrinho_branco.svg" alt="Carrinho de compras">
-                                    <p>+ Carrinho</p>
-                                </div>
-                            </a>
-                            <a href="produtos.php#4">
-                                <div>
-                                    <img src="Icones/sobre_branco.svg" alt="Carrinho de compras">
-                                    <p>Ver mais</p>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                
-               
-               
-                
                 <span id="produto_padding"></span>
             </div>
         </div>

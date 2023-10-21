@@ -35,6 +35,24 @@ function ajusteTelaInicial(altura_a_descer = 0){
     return porcentagem_blur/20;
 }*/
 
+const produtos_container = document.querySelector('.produtos_container');
+
+produtos_container.addEventListener("wheel", (e) => {
+  const delta = e.deltaY || e.detail || e.wheelDelta;
+
+  // Ajuste a velocidade da rolagem conforme necessário
+  const scrollSpeed = 2;
+
+  // Mude a posição da div horizontalmente com base na rolagem do mouse
+  produtos_container.scrollLeft += delta * scrollSpeed;
+
+  // Impedir a rolagem padrão da página
+  e.preventDefault();
+});
+
+function addCart(){
+    alert('Produto adicionado ao carrinho!');
+}
 
 function muda_info01(el_1){
     const el_direita = document.querySelector('.inf1_d');

@@ -92,12 +92,20 @@
             $cod_compra_produto = $_POST["cod_compra_produto"];
             mudaCarrinho($cod_compra_produto, '-');
         }
-        else if($funcao == 'add+')
+
+        else if($funcao == 'add+' || $funcao == 'add++')
         {
             $cod_produto = $_POST["cod_produto"];
             $cod_usuario = $_POST["cod_usuario"];
             adicionaCarrinho($cod_produto, $cod_usuario);
-            header('Location: ../Produtos');
+            if ($funcao == 'add+')
+            {
+                header('Location: ../Produtos/#'.$cod_produto);
+            }
+            else if ($funcao == 'add++')
+            {
+                header('Location: ../#hrefprod');
+            }
         }
         else if($funcao == 'ver')
         {

@@ -204,7 +204,7 @@
             }
             else{
                 //Tinha o cookie mas o token foi excluido, apagando assim o cookie existente.
-                setcookie('token', null, time() - 1, '/projetoscti14');
+                setcookie('token', '', time() - 1, '/projetoscti14');
                 unset($_COOKIE['token']); //acho que isso aq n funciona
                 $_SESSION['conectado'] = false; 
                 $conectado = false;

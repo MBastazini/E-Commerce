@@ -57,6 +57,9 @@ function mudaImg(a){
         
 }
 
+function addCart(event) {
+    event.stopPropagation();
+}
 
 function removeFiltro(element)
 {

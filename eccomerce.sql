@@ -23,20 +23,14 @@ CREATE TABLE tbl_token(
 	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
 );
 ALTER TABLE tbl_token ADD COLUMN ip_criacao varchar(15);
+
+/*Compra já efetuada*/
 CREATE TABLE tbl_compra(
 	cod_compra serial PRIMARY KEY,
 	status t_status not null,
 	data_compra date
 );
 
-
-CREATE TABLE tbl_usuario(
-	cod_usuario serial PRIMARY KEY,
-	nome varchar(120) not null,
-	email varchar(100) not null,
-	senha varchar(40) not null,
-	telefone varchar(13) not null
-);
 
 CREATE TABLE tbl_compra_produto(
 	cod_compra_produto serial PRIMARY KEY,
@@ -53,15 +47,23 @@ CREATE TABLE tbl_compra_produto(
 /*ALTER TABLE tbl_compra_produto ADD COLUMN cod_compra serial;
 ALTER TABLE tbl_compra_produto ADD FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra);*/
 
+
 CREATE TABLE tbl_tmpcompra(
 	cod_compra serial PRIMARY KEY,
 	sessão varchar(100),
-	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
+	FOREIGN KEY (cod_compra) REFERENCES tbl_compra_produto(cod_compra_produto)
 );
 
+CREATE TABLE tbl_usuario(
+	cod_usuario serial PRIMARY KEY,
+	nome varchar(120) not null,
+	email varchar(100) not null,
+	senha varchar(40) not null,
+	telefone varchar(13) not null
+);
 
 CREATE TYPE categorias AS ENUM ('INFORMATICA', 'MECANICA', 'ELETRONICA', 'CTI');
-CREATE TYPE t_status AS ENUM ('comprando', 'finalizado');
+CREATE TYPE t_status AS ENUM ('Concluida', 'Pendende', 'Cancelada');
 
 
 INSERT INTO tbl_produto VALUES 

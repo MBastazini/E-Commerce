@@ -163,11 +163,11 @@
             $funcao = 'add-';
             if($ativo)
             {
+                //acho que pode ficar pra fora fetch
                 $funcao = 'add+';
                 $sql2 = "select * from tbl_compra_produto where cod_produto = :cod_produto and cod_usuario = :cod_usuario";
                 $select2 = executaSQL($sql2, ['cod_produto' => $dados['cod_produto'], 'cod_usuario' => $cod_usuario]);
                 $resultado = $select2->fetch();
-                $usuario = $_SESSION['usuario']['cod_usuario'];
                 if ($resultado != NULL)
                 {
                     $icone = 'Check_branco.svg';
@@ -195,9 +195,9 @@
                         </button>
                         <form action='../PHP/carrinho.php' method='post'>
                             <input type='hidden' name='cod_produto' value='". $dados['cod_produto'] ."'>
-                            <input type='hidden' name='cod_usuario' value='". $usuario. "'>
+                            <input type='hidden' name='cod_usuario' value='". $cod_usuario. "'>
                             <input type='hidden' name='funcao' value='$funcao'>
-                            <button type='submit' id='add-cart'>
+                            <button type='submit' id='add-cart' onclick='addCart(event)'>
                                 <p>+</p>
                                 <img src='../Icones/$icone' alt='carrinho'>
                             </button>
