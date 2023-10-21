@@ -28,11 +28,14 @@ ALTER TABLE tbl_token ADD COLUMN ip_criacao varchar(15);
 CREATE TABLE tbl_compra(
 	cod_compra serial PRIMARY KEY,
 	status t_status not null,
-	data_compra date
+	data_compra date,
 
 	cod_usuario serial,
-	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
+	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario),
+
+
 );
+
 
 CREATE TABLE tbl_compra_produto(
 	quantidade numeric (10) not null,
@@ -40,8 +43,9 @@ CREATE TABLE tbl_compra_produto(
 	FOREIGN KEY (cod_produto) REFERENCES tbl_produto(cod_produto),
 
 	cod_compra serial,
-	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra),	
+	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
 );
+
 
 CREATE TABLE tbl_tmpcompra(
 	cod_tmpcompra serial PRIMARY KEY,

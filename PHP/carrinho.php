@@ -1,6 +1,5 @@
 <?php  
     include("caixa.php");
-    include("compra.php");
     $conectado = inicioSessao();
 
     /*function adicionaCarrinho($cod_produto, $cod_usuario)

@@ -187,7 +187,6 @@
                             $funcao = 'add--';
                         }
                     }
-                    
                     $icone = 'carrinho_branco.svg';
                     
 
@@ -196,9 +195,10 @@
                         if($ativo)
                         {
                             $funcao = 'add++';
-                            $sql2 = "select * from tbl_compra_produto where cod_produto = :cod_produto and cod_usuario = :cod_usuario";
-                            $select2 = executaSQL($sql2, ['cod_produto' => $produto['cod_produto'], 'cod_usuario' => $cod_usuario]);
-                            $resultado = $select2->fetch();
+                            //Checa se há um produto em tbl_tmpcompra que o cod_produto e o cod_usuario sejam iguais ao $cod_produto e $cod_usuario
+                            $sql = "SELECT * FROM tbl_tmpcompra WHERE cod_compra IN (SELECT cod_compra FROM tbl_compra WHERE cod_usuario = :cod_usuario
+                            AND cod_compra IN (SELECT cod_compra FROM tbl_compra_produto WHERE cod_produto = :cod_produto))";
+                            $resultado = executaSQL($sql, ['cod_usuario' => $cod_usuario, 'cod_produto' => $produto['cod_produto']]);
                             if ($resultado != NULL)
                             {
                                 $icone = 'Check_branco.svg';
