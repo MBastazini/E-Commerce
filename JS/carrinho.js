@@ -32,7 +32,7 @@ function novoProduto(id, nome, quantidade, preco) {
 
     const aba_produto_compras = document.getElementById('compras_efetuadas');
     aba_produto_compras.appendChild(produto_compra);
-    novoValorTotal();
+    //novoValorTotal();
 }
 
 
@@ -40,10 +40,8 @@ function novoProduto(id, nome, quantidade, preco) {
 // Função para extrair os dados de cada elemento e chamar novoProduto
 function adicionarProdutosDaTabela() {
     // Obtém todos os elementos com a classe "produto_compra"
-    var elementosProdutos = document.querySelectorAll('.produto_compra');
-    
-    // Itera sobre os elementos
-    elementosProdutos.forEach(function(elemento) {
+    const elementosProdutos = document.querySelectorAll('.produto_compra');
+    elementosProdutos.forEach(elemento => {
         // Extrai os dados do elemento atual
         var id = elemento.id;
         var nomeProduto = elemento.querySelector('p').innerText;
@@ -59,29 +57,34 @@ function adicionarProdutosDaTabela() {
         precoProduto = precoProduto.toFixed(2);
         novoProduto(id, nomeProduto, quantidadeProduto, precoProduto);
     });
+    
+    // Itera sobre os elementos
 }
 
 // Exemplo de chamada da função adicionarProdutosDaTabela
-function novoValorTotal()
+/*function novoValorTotal()
 {
     const total = document.getElementById('total');
     var valor_total = 0;
 
     const compras_efetuadas = document.querySelectorAll('.compra_efetuada > h1');
     compras_efetuadas.forEach(element => {
+        alert(element.innerText);
         var texto_valor = element.innerText;
         texto_valor = texto_valor.replace('R$ ', ''); // Remove 'R$ '
         texto_valor = texto_valor.replace(',', '.');  // Substitui a vírgula por um ponto
         valor_total += (parseFloat(texto_valor));
         valor_total = valor_total.toFixed(2);
+        alert(valor_total);
     });
     total.innerText = `R$ ${valor_total}`;
-}
+}*/
 
 document.addEventListener("DOMContentLoaded", function() {
     adicionarProdutosDaTabela();
+    //novoValorTotal();
 
-    const produtos_compra = document.querySelector('#produtos_compra');
-    const compra_total = document.querySelector('#compra_total');
-    produtos_compra.style.maxHeight = `${compra_total.offsetHeight - 100}px`;
+    //const produtos_compra = document.querySelector('#produtos_compra');
+    //const compra_total = document.querySelector('#compra_total');
+    //produtos_compra.style.maxHeight = `${compra_total.offsetHeight - 100}px`;
 });

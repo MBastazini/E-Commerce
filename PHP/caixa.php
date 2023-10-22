@@ -117,13 +117,6 @@
                   <a><p>sla1</p></a>
                   <a><p>sla2</p></a>
               </div>
-              <div class='footer_div'>
-                  <h1>Contato</h1>
-                  <a><p>E-mail</p></a>
-                  <a><p>Telefone</p></a>
-                  <a><p>sla1</p></a>
-                  <a><p>sla2</p></a>
-              </div>
           </div>
       </footer>";
   }
@@ -161,7 +154,7 @@
     //echo $conectado;
 
     $conn = coneccao();
-    if (!$conectado) //não funciona como todo o resto AAAAAA
+    if (!$conectado)
     {
         if (isset($_COOKIE['token'])) {
             $_SESSION['token'] = $_COOKIE['token'];

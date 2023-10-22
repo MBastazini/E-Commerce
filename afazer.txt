@@ -39,3 +39,5 @@ Coisas para hoje (noite boa kkk)
 
  - Deixar o SIte inteiro com um modelo para celular.
 
+-> separar os bd's em classes
+-> não carregar tudo

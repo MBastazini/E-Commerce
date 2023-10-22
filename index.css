@@ -328,6 +328,8 @@ a{
     justify-content: center;
     align-items: center;
     transition: 1s;
+    position: relative;
+    padding: 20px 0px;
 }
 .tela_inicial_img{
     width: auto;
@@ -344,6 +346,8 @@ a{
     background-image: url(Imagens/arvorefinal.jpeg);
     background-repeat:no-repeat;
     background-size: cover;
+    position: relative;
+    background-position: right;
 }
 .tela_inicial{
     display: grid;
@@ -468,7 +472,7 @@ a{
 .tela_scroll_down{
     position: absolute;
     left: 50%;
-    bottom: 2%;
+    bottom: 6%;
     transform: translateX(-50%);
     cursor: pointer;
     display: flex;
@@ -651,7 +655,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     margin: 15px;
 }
 .info01_1 img{
-    height: 80%;
+    height: 180px;
     aspect-ratio: 1;
     object-fit: cover;
     margin-left: 15px;
@@ -1083,6 +1087,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     gap: 20px;
     align-items: flex-start;
 }
+.footer_logo img{
+    width: 250px;
+    height: 250px;
+}
 .footer_logo h1{
     color: white;
     font-size: 30px;
@@ -1154,7 +1162,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 }
 .footer_info{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
 .footer_logo_info *:not(.footer_logo_info_mais){
@@ -1761,6 +1769,9 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     .info_tiny_wood > #contato{
         margin-bottom: 40px;
         font-size: 40px;
+    }
+    .info_tiny_wood > p{
+        font-size: 20px;
     }
     #tela_sobre > p{
         font-size: 30px;
@@ -2565,6 +2576,15 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #area_adm #CRUD{
         background-color: var(--cor_destaque);
     }
+
+    .google > a{
+        text-align: center;
+        display: block;
+        margin-top: 10px;
+        width: 100%;
+        font-size: 20px;
+        color: #0000EE;
+    }
         
         /*
 
@@ -2683,6 +2703,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
         .product > div h2{
             font-size: 22px;
+        }
+
+        .footer_div h1{
+            font-size: 28px;
         }
 }
 
@@ -2803,6 +2827,12 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #pg_info{
         width: 600px;
     }
+
+
+    .footer_logo img{
+        width: 200px;
+        height: 200px;
+    }
 }
 
     @media (max-width: 1024px) {
@@ -2857,6 +2887,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         .info01_1 img{
                 margin-left: 0px;
                 margin-top: 15px;
+                height: 150px;
         }
         .info01_1_div{
                 background-color: white;
@@ -2970,6 +3001,13 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
         #info_c_h{
             font-size: 15px;
+        }
+
+        #gradiente{
+            background-image: none;
+            background-color: var(--destaque_01);
+            width: 100%;
+            opacity: 60%;
         }
     }
 
@@ -3177,7 +3215,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
                 right: 15px;
                 top: 50px;
                 background-color: var(--fundo_01);
-                transform: translateY(0%);
+                transform: translateY(-100%);
                 opacity: 1;
                 height: auto;
                 z-index: -2;
@@ -3200,9 +3238,6 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
 
         /*Parte info01*/
-        .info01_1 img{
-                height: 50px;
-        }
 
         .tela_log_cad{
             width: 300px;
@@ -3342,35 +3377,272 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 
     /*CELULAR */
     @media (max-width: 475px) {
-.container{
-        max-width: 100%;
-}
 
-.nav_logo{
-        width: 40px;
-        padding-left: 10px;
-        min-width: 10px;
-}
+        .texto_inicial p{
+            font-size: 20px;
+            padding: 10px;
+        }
+        .texto_inicial h1{
+            font-size: 40px;
+            padding: 10px;
+        }
+        .tela_botao{
+            padding: 15px;
+        }
+        .info01_1 img{
+            height: 100px;
+        }
+        .info01_1 p{
+            font-size: 10px;
+        }
+        .info01_1 h1{
+            font-size: 15px;
+        }
+        .video_texto p{
+            font-size: 15px;
+            padding: 5px;
+        }
+        .video_texto h1{
+            font-size: 25px;
+        }
+        .video_v iframe{
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-.texto_inicial h1{
-        font-size: 50px;
-}
+        .t_esquerda{
+            margin-left: 0;
+        }
+        .titulo{
+            width: 100%;
+        }
+        .titulo p{
+            text-align: center;
+            font-size: 30px;
+        }
+        .titulo.show > p{
+            animation: none;
+        }
+        .area_produtos > p{
+            font-size: 15px;
+        }
 
-.texto_inicial p{
-        font-size: 25px;
-}
-.tela_botao p{
-        font-size: 20px !important;
-}
-.tela_botao{
-        margin: auto;
-}
 
-.adm{
-    justify-content: center;
-    align-items: center;
-}
+        .produto{
+            width: 150px;
+            height: 150px;
+        }
+        .produto_info{
+            filter: opacity(1);
+        }
+        .produto_texto h1{
+            font-size: 12px;
+        }
+        .produto_texto p{
+            font-size: 10px;
+        }
+        .produto_botao{
+            transform: translateY(0%);
+        }
+        .produto_botao div, .produto_botao button{
+            width: 20px;
+            height: 20px;
+        }
 
-}
+
+        .sobre p{
+            font-size: 15px;
+            padding: 5px;
+        }
+        .sobre h1{
+            font-size: 25px;
+            text-align: center;
+        }
+        .container{
+                max-width: 100%;
+        }
+
+
+        .footer_logo{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer_logo img{
+            width: 100px;
+            height: 100px;
+        }
+        .footer_logo h1{
+            font-size: 15px;
+        }
+        .footer_logo p{
+            font-size: 10px;
+        }
+        .footer_logo_info_mais_botao{
+            width: 30px;
+            height: 30px;
+        }
+        .nav_logo{
+                width: 40px;
+                padding-left: 10px;
+                min-width: 10px;
+        }
+        .footer_div h1{
+            font-size: 20px;
+        }
+        .texto_inicial h1{
+                font-size: 50px;
+        }
+        .footer_div p{
+            font-size: 12px;
+        }
+
+        .copyright p{
+            font-size: 10px;
+        }
+        #filtro{
+            position: relative;
+        }
+        #filtro > h1{
+            font-size: 15px;
+            padding: 5px;
+        }
+        #filtro > h1 > img{
+            width: 20px;
+        }
+        #filtro > div{
+            border: none;
+            top: 30px;
+        }
+        .filtro_opcoes{
+            grid-template-columns: 1fr;
+        }
+        #filtro > div h1{
+            font-size: 15px;
+        }
+        .filtro_opcoes > div > p{
+            font-size: 15px;
+        }
+        .filtro_opcoes > div{
+            padding: 5px;
+            font-size: 15px;
+        }
+        #ativos > div, #ativos > span{
+            font-size: 10px;
+        }
+        .texto_inicial p{
+                font-size: 25px;
+        }
+        .tela_botao p{
+                font-size: 20px !important;
+        }
+        .tela_botao{
+                margin: auto;
+        }
+
+        .adm{
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info_tiny_wood > p{
+            font-size: 15px;
+            margin: 10px;
+        }
+        .info_tiny_wood:hover > h1{
+            width: 100%;
+        }
+        .titulo{
+            transform: none;
+        }
+        .info_tiny_wood > #contato{
+            font-size: 20px;
+        }
+        #sobre_contato > div > p{
+            font-size: 20px;
+        }
+        #sobre_contato > div > h1{
+            font-size: 12px;
+            text-align: center;
+        }
+        #sobre_contato > div > img{
+            display: none;
+        }
+        #tela_sobre > h1{
+            font-size: 30px;
+        }
+        #tela_sobre > p{
+            font-size: 18px;
+        }
+
+        .dev#mateus{
+            top: 20px;
+            left: 70px;
+        }
+        .dev#luiz{
+            top: 350px;
+            left: 70px;
+        }
+        .dev#leticia{
+            top: 650px;
+            left: 70px;
+        }
+        .dev#mariana{
+            top: 950px;
+            left: 70px;
+        }
+        .dev#matheus{
+            top: 1250px;
+            left: 70px;
+        }
+        #sobre_devs{
+            height: 1500px;
+        }
+        .info_tiny_wood > p{
+            font-size: 15px;
+        }
+
+
+        #grid_carrinho{
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+        }
+
+        .tela_log_cad > h1{
+            font-size: 20px;
+        }
+
+        .tela_log_cad > .troca_log_cad > a{
+            font-size: 15px;
+        }
+        .tela_log_cad > form > .btn > input{
+            font-size: 15px;
+            padding: 10px;
+        }
+        .inp > input{
+            font-size: 15px;
+            padding: 10px;
+            height: 45px;
+        }
+        #input-ativo, #input-ativo-blur{
+            font-size: 15px;
+        }
+        .tela_log_cad > form > p, .tela_log_cad.cadastro > p{
+            font-size: 12px;
+        }
+
+        .google > a{
+            font-size: 15px;
+        }
+        .tela_log_cad #ou{
+            font-size: 15px;
+        }
+
+        .tela_log_cad #ou::after, .tela_log_cad #ou::before {
+            height: 1px;
+        }
+    }
 
 

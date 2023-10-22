@@ -184,7 +184,7 @@
                     </p>
                 </div>
             </div>
-            <p style="font-size: 20px;">P. S. O primeiro desenvolvedor esta torto, não acha?<br>
+            <p>P. S. O primeiro desenvolvedor esta torto, não acha?<br>
             porque não dá uma ajeitada?</p>
         </div>
         

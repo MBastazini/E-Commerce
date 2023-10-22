@@ -15,12 +15,10 @@ function ajusteTelaInicial(altura_a_descer = 0){
     if (alturaElemento > alturaTela) {
         tela_inicial_flex.style.alignItems = 'flex-start';
         tela_inicial_flex.style.height = 'auto';
-        tela_inicial_flex.style.marginTop = '20px';
         altura_a_descer = alturaElemento - alturaTela;
     }
     else{ 
         tela_inicial_flex.style.alignItems = 'center';
-        tela_inicial_flex.style.marginTop = '0px';
         tela_inicial_flex.style.height = '100vh';
         altura_a_descer = 0;
     }
