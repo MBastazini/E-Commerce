@@ -52,49 +52,9 @@ include("insereDadosCarrinho.php");
         }
     }
 
-    function setToken($cod_usuario)
-        {
-            $user = CheckUser();
-            if ($user == 1)
-            {
-                $conn = coneccao();
-            $token = session_id(); //Se falhar o token olhar aqui
-            //$ip = $_SERVER['REMOTE_ADDR'];
-            $data = date('Y-m-d');
+    
 
-            $linha = [
-                'cod_usuario' => $cod_usuario,
-                'token' => $token,
-                //'ip' => $ip,
-                'data' => $data
-            ];
-
-            $sql = "INSERT INTO tbl_token (cod_usuario, token, data_criacao) VALUES (:cod_usuario, :token, :data)";
-            $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':cod_usuario', $linha['cod_usuario'], PDO::PARAM_INT);
-            $stmt -> bindParam(':token', $linha['token'], PDO::PARAM_STR);
-            //$stmt -> bindParam(':ip', $linha['ip'], PDO::PARAM_STR);
-            $stmt -> bindParam(':data', $linha['data'], PDO::PARAM_STR);
-            $stmt -> execute();
-
-            Cookie('token', $token, 1440); //24 horas
-            $_SESSION['token'] = $token;
-
-            $conn = null;
-            $stmt = null;
-            }
-    }
-
-    function deletaToken($id){
-        $conn = coneccao();
-        $sql = "DELETE FROM tbl_token WHERE cod_token = :id";
-        $stmt = $conn->prepare($sql);
-        $stmt -> bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt -> execute();
-
-        $conn = null;
-        $stmt = null;
-    }
+    
 
     function editaUsuario()
     {

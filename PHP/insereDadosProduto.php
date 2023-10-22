@@ -49,7 +49,7 @@ include("sessao.php");
                 'custo'         => $_POST['custo'],
                 'icms'          => $_POST['icms'],
                 'cod_produto'   => $_POST['cod_produto']
-            ]
+            ];
         
             $sql = "UPDATE tbl_produto SET nome = :nome, descricao = :descricao, preco = :preco, categoria = :categoria, custo = :custo, icms = :icms WHERE cod_produto = :cod_produto";
             $stmt = $conn->prepare($sql);

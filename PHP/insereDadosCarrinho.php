@@ -6,14 +6,15 @@
 
         if ($user == 1)
         {
-            $conn = coneccao()
+            $conn = coneccao();
 
             //Usuario efetua uma compra
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
             $data_hoje = date("Y/m/d");
+            $status = 'Pendente';
             $sql = "INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES (:status, :data_compra, :cod_usuario)";
             $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':status', 'Temporaria', PDO::PARAM_STR);
+            $stmt -> bindParam(':status', $status, PDO::PARAM_STR);
             $stmt -> bindParam(':data_compra', $data_hoje, PDO::PARAM_STR);
             $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
             $stmt -> execute();
@@ -109,8 +110,9 @@
             else{
                 //Atualiza a quantidade de produtos na compra
                 $sql = "UPDATE tbl_compra_produto SET quantidade = :quantidade WHERE cod_compra = :cod_compra";
+                $quantidade += $s;
                 $stmt = $conn->prepare($sql);
-                $stmt -> bindParam(':quantidade', $quantidade + $s, PDO::PARAM_INT);
+                $stmt -> bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
                 $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
                 $stmt -> execute();
             }
@@ -137,17 +139,19 @@
             para o usuario, sem passar por tmpCompra */
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
             $data_hoje = date("Y/m/d");
+            $status = 'Concluida';
             $sql = "INSERT INTO tbl_compra VALUES (:status, :data_compra, :cod_usuario)";
             $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':status', 'Concluida', PDO::PARAM_STR);
+            $stmt -> bindParam(':status', $status, PDO::PARAM_STR);
             $stmt -> bindParam(':data_compra', $data_hoje, PDO::PARAM_STR);
             $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
             $stmt -> execute();
 
             $cod_compra = $conn->LastInsertId();
+            $quantidade = 1;
             $sql = "INSERT INTO tbl_compra_produto VALUES (:quantidade, :cod_produto, :cod_compra)";
             $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':quantidade', 1, PDO::PARAM_INT);
+            $stmt -> bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
             $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
             $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
             $stmt -> execute();
@@ -173,10 +177,11 @@
             while($compra = $stmt->fetch(PDO::FETCH_ASSOC))
             {
                 $cod_compra = $compra['cod_compra'];
+                $status = 'Concluida';
                 //Atualiza o status da compra
                 $sql = "UPDATE tbl_compra SET status = :status WHERE cod_compra = :cod_compra";
                 $stmt = $conn->prepare($sql);
-                $stmt -> bindParam(':status', 'Concluida', PDO::PARAM_STR);
+                $stmt -> bindParam(':status', $status, PDO::PARAM_STR);
                 $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
                 $stmt -> execute();
 

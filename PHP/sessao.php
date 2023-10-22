@@ -36,6 +36,51 @@
     {
         setcookie($nome, $valor, time() + $min * 60, '/projetoscti14'); 
     }
+
+    function setToken($cod_usuario)
+        {
+            $user = CheckUser();
+            if ($user == 1)
+            {
+                $conn = coneccao();
+            $token = session_id(); //Se falhar o token olhar aqui
+            //$ip = $_SERVER['REMOTE_ADDR'];
+            $data = date('Y-m-d');
+
+            $linha = [
+                'cod_usuario' => $cod_usuario,
+                'token' => $token,
+                //'ip' => $ip,
+                'data' => $data
+            ];
+
+            $sql = "INSERT INTO tbl_token (cod_usuario, token, data_criacao) VALUES (:cod_usuario, :token, :data)";
+            $stmt = $conn->prepare($sql);
+            $stmt -> bindParam(':cod_usuario', $linha['cod_usuario'], PDO::PARAM_INT);
+            $stmt -> bindParam(':token', $linha['token'], PDO::PARAM_STR);
+            //$stmt -> bindParam(':ip', $linha['ip'], PDO::PARAM_STR);
+            $stmt -> bindParam(':data', $linha['data'], PDO::PARAM_STR);
+            $stmt -> execute();
+
+            Cookie('token', $token, 1440); //24 horas
+            $_SESSION['token'] = $token;
+
+            $conn = null;
+            $stmt = null;
+            }
+    }
+
+    function deletaToken($id){
+        $conn = coneccao();
+        $sql = "DELETE FROM tbl_token WHERE cod_token = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt -> bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt -> execute();
+
+        $conn = null;
+        $stmt = null;
+    }
+
     function inicioSessao(){
         if(!isset($_SESSION)) 
         { 
@@ -65,19 +110,21 @@
                 }
 
                 $_SESSION['token'] = $_COOKIE['token'];
-                $check_token = "SELECT * FROM tbl_token WHERE token = :token";
-                $check_token -> bindParam(':token', $_SESSION['token'], PDO::PARAM_STR);
-                $check_token -> execute();
-                $res_token = $check_token->fetch();
+                $token = $_COOKIE['token'];
+                $sql = "SELECT * FROM tbl_token WHERE token = :token";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(":token", $token, PDO::PARAM_STR);
+                $resultado = $stmt -> fetch(PDO::FETCH_ASSOC);
         
-                if ($res_token != NULL)
+                if ($resultado != NULL)
                 {
-                    $check_user = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
-                    $check_user -> bindParam(':cod_usuario', $res_token['cod_usuario'], PDO::PARAM_INT);
-                    $check_user -> execute();
-                    $res_user = $check_user->fetch();
+                    $cod_usuario = $resultado["cod_usuario"];
+                    $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(":cod_usuario", $cod_usuario, PDO::PARAM_INT);
+                    $resultado2 = $stmt -> fetch(PDO::FETCH_ASSOC);
         
-                    if ($res_user != NULL)
+                    if ($resultado2 != NULL)
                     {
                         $_SESSION['conectado'] = true;
                         $conectado = true;
@@ -85,10 +132,10 @@
                         $_SESSION['usuario']['ativo'] = true;
                         $_SESSION['visitante']['ativo'] = false;
     
-                        $_SESSION['usuario']['nome'] = explode(" ", $res_user['nome'])[0];
-                        $_SESSION['usuario']['cod_usuario'] = $res_user['cod_usuario'];
+                        $_SESSION['usuario']['nome'] = explode(" ", $resultado2['nome'])[0];
+                        $_SESSION['usuario']['cod_usuario'] = $resultado2['cod_usuario'];
     
-                        if ($res_user['cod_usuario'] == 0)
+                        if ($resultado2['cod_usuario'] == 0)
                         {
                             $_SESSION['usuario']['adm'] = true;
                         }
@@ -101,7 +148,7 @@
                         //Há um codigo de usuario no token, mas esse usuario foi excluido, então o token é excluido
                         $_SESSION['conectado'] = false;
                         $conectado = false;
-                        deletaToken($res_token['cod_token']);
+                        deletaToken($resultado['cod_token']);
                     }
                 }
                 else{
@@ -131,10 +178,6 @@
         //echo "SESSAO: "; echo ($_SESSION['conectado']) ? "true" : "false"; echo "<br>";
 
         $conn = null;
-        $check_token = null;
-        $res_token = null;
-        $check_user = null;
-        $res_user = null;
 
         return $_SESSION['conectado'];
       }

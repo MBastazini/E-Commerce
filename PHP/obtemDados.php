@@ -70,7 +70,7 @@
             $stmt->execute();
     
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $tokens[] = new Token($row['cod_token'], $row['token'], $row['cod_usuario']);
+                $tokens[] = new Token($row['cod_token'], $row['token'], $row['data_criacao'], $row['ip_criacao'], $row['cod_usuario']);
             }
     
             $conn = null;
@@ -111,7 +111,7 @@
 
     function tblCarrinho()
     {
-        $carrinhos = array();
+        $carrinho = array();
     
         $user = CheckUser();
         if ($user == 1)
@@ -130,7 +130,7 @@
             $stmt->execute();
     
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $carrinhos[] = new Carrinho($row['nome'], $row['preco'], $row['quantidade'], $row['cod_produto'], $row['cod_tmpcompra']);
+                $carrinho[] = new Carrinho($row['nome'], $row['preco'], $row['quantidade'], $row['cod_produto'], $row['cod_tmpcompra']);
             }
     
             $conn = null;
@@ -141,13 +141,13 @@
             foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
                 $conn = coneccao();
 
-                $sql = "SELECT nome, custo FROM tbl_produto WHERE cod_produto = :cod_produto";
+                $sql = "SELECT nome, preco FROM tbl_produto WHERE cod_produto = :cod_produto";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
                 $stmt->execute();
                 $resultado = $stmt->fetch();
 
-                $carrinho[] = new Carrinho($resultado['nome'], $resultado['custo'], $quantidade, $cod_produto);
+                $carrinho[] = new Carrinho($resultado['nome'], $resultado['preco'], $quantidade, $cod_produto, $cod_produto);
 
                 $conn = null;
                 $stmt = null;
@@ -156,7 +156,7 @@
         }
         
 
-        return $carrinhos;
+        return $carrinho;
     } 
 
     function estaNoCarrinho($cod_produto){
