@@ -219,4 +219,38 @@
     }
 
 
+
+    if($_SERVER['RESQUEST_METHOD'] == 'POST')
+    {
+        $funcao = $_POST['funcao'];
+        if($funcao == 'muda+')
+        {
+            $cod_tmpcompra = $_POST['cod_tmpcompra'];
+            mudaCarrinho($cod_tmpcompra, 1);
+            header('Location: ../Carrinho/');
+        }
+        else if ($funcao == 'muda-')
+        {
+            $cod_tmpcompra = $_POST['cod_tmpcompra'];
+            mudaCarrinho($cod_tmpcompra, -1);
+            header('Location: ../Carrinho/');
+        }
+        else if($funcao == 'add' || $funcao == 'add++')
+        {
+            $cod_produto = $_POST["cod_produto"];
+            adicionaCarrinho($cod_produto, 1);
+            if ($funcao == 'add')
+            {
+                header('Location: ../Produtos/#'.$cod_produto);
+            }
+            else if ($funcao == 'add++')
+            {
+                header('Location: ../#hrefprod');
+            }
+        }
+        else if($funcao == 'finalizar')
+        {
+            finalizarCarrinho();
+        }
+    }
 ?>
