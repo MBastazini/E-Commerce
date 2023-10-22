@@ -1,0 +1,121 @@
+<?php 
+//include("sessao.php"); -> insereDadosCarrinho já faz.
+include("insereDadosCarrinho.php");
+
+function novoUsuario()
+{
+    
+    $user = CheckUser();
+
+    if($user == 2)
+    {
+        $conn = coneccao();
+        $linha = [ 
+            'nome'      => $_POST['nome'],   
+            'email'     => $_POST['email'],
+            'telefone'  => $_POST['telefone'], 
+            'senha'     => $_POST['senha']
+        ];
+    
+        $sql = "INSERT INTO tbl_usuario (nome, email, telefone, senha) VALUES (:nome, :email, :telefone, :senha)";
+        $stmt = $conn->prepare($sql);
+        $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
+        $stmt -> bindParam(':email', $linha['email'], PDO::PARAM_STR);
+        $stmt -> bindParam(':telefone', $linha['telefone'], PDO::PARAM_STR);
+        $stmt -> bindParam(':senha', $linha['senha'], PDO::PARAM_STR);
+        $stmt -> execute();
+    
+    
+        
+        
+        $_SESSION['usuario']['ativo'] = true;
+        $cod_usuario = $conn -> LastInsertId();
+        $_SESSION['usuario']['cod_usuario'] = $cod_usuario;
+        setToken($cod_usuario);
+        $_SESSION['usuario']['adm'] = false;
+    
+    
+        //Pega todas as compras feitas enquanto o usuário estava como visitante e as coloca no seu nome.
+        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+            adicionaCarrinho($cod_produto, $quantidade);
+        }
+    
+        $_SESSION['visitante']['ativo'] = false;
+    
+        $_SESSION['usuario']['nome'] = explode(" ", $linha['nome'])[0];
+    
+         
+        header('Location: ../');
+
+        $conn = null;
+        $stmt = null;
+    }
+}
+
+function setToken($cod_usuario)
+    {
+        $user = CheckUser();
+        if ($user == 1)
+        {
+            $conn = coneccao();
+        $token = session_id(); //Se falhar o token olhar aqui
+        //$ip = $_SERVER['REMOTE_ADDR'];
+        $data = date('Y-m-d');
+
+        $linha = [
+            'cod_usuario' => $cod_usuario,
+            'token' => $token,
+            //'ip' => $ip,
+            'data' => $data
+        ];
+
+        $sql = "INSERT INTO tbl_token (cod_usuario, token, data_criacao) VALUES (:cod_usuario, :token, :data)";
+        $stmt = $conn->prepare($sql);
+        $stmt -> bindParam(':cod_usuario', $linha['cod_usuario'], PDO::PARAM_INT);
+        $stmt -> bindParam(':token', $linha['token'], PDO::PARAM_STR);
+        //$stmt -> bindParam(':ip', $linha['ip'], PDO::PARAM_STR);
+        $stmt -> bindParam(':data', $linha['data'], PDO::PARAM_STR);
+        $stmt -> execute();
+
+        Cookie('token', $token, 1440); //24 horas
+        $_SESSION['token'] = $token;
+
+        $conn = null;
+        $stmt = null;
+        }
+}
+
+function deletaToken($id){
+    $conn = coneccao();
+    $sql = "DELETE FROM tbl_token WHERE cod_token = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt -> bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt -> execute();
+
+    $conn = null;
+    $stmt = null;
+}
+
+function editaUsuario($nome, $email, $telefone, $senha)
+{
+    $user = CheckUser();
+    if ($user == 1)
+    {
+        $conn = coneccao();
+        $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+        $sql = "UPDATE tbl_usuario SET nome = :nome, email = :email, telefone = :telefone, senha = :senha WHERE cod_usuario = :cod_usuario";
+        $stmt = $conn->prepare($sql);
+        $stmt -> bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt -> bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt -> bindParam(':telefone', $telefone, PDO::PARAM_STR);
+        $stmt -> bindParam(':senha', $senha, PDO::PARAM_STR);
+        $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+        $stmt -> execute();
+
+        $_SESSION['usuario']['nome'] = explode(" ", $nome)[0];
+
+        $conn = null;
+        $stmt = null;
+    }
+}
+?>

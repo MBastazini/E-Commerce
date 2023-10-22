@@ -27,47 +27,7 @@
                     $csenha = $_POST['senha_c'];
 
                     if($senha == $csenha){
-                        $linha = [ 
-                            'nome'      => $_POST['nome'],   
-                            'email'     => $_POST['email'],
-                            'telefone'  => $_POST['telefone'], 
-                            'senha'     => $_POST['senha']
-                        ];
-
-
-                        $sql = " insert into tbl_usuario (nome,email,telefone,senha)  
-                                    values (:nome,:email,:telefone,:senha) ";
-                        //Não recebe o retorno (se der um erro, olhar por aqui)
-                        executaSQL($sql, $linha);
-
-
                         
-                        
-                        $_SESSION['usuario']['ativo'] = true;
-                        $cod_usuario = $conn -> LastInsertId();
-                        $_SESSION['usuario']['cod_usuario'] = $cod_usuario;
-                        setToken($cod_usuario);
-                        $_SESSION['usuario']['adm'] = false;
-
-
-                         //Pega todas as compras feitas enquanto o usuário estava como visitante e as coloca no seu nome.
-                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                            adicionaCarrinho($cod_produto, $quantidade);
-                        }
-
-                        $_SESSION['visitante']['ativo'] = false;
-                        //executar aqui, o codigo que carrega o carrinho apos o fim do cadastro.
-
-                        $_SESSION['usuario']['nome'] = explode(" ", $linha['nome'])[0];
-
-                        
-                        /*$sql_user = "select cod_usuario from tbl_usuario where email = :email";
-                        $resultado2 = executaSQL($sql_user, ['email' => $email]);
-                        $resultado2 = $select2->fetch();*/
-
-                        
-                        
-                        header('Location: ../');
                     }
                     else{
                         //Senhas não conferem

@@ -3,29 +3,19 @@
     error_reporting (E_ALL);
 
     include("../PHP/caixa.php");
+    include("../PHP/obtemDados.php");
 
     $conectado = inicioSessao();
 
-    $conn = coneccao();
-    $ativo = false;
-    $cod_usuario = NULL;
-    $funcao = 'add';
+    $produtos = array();
+    $produtos = tblProduto();
     if ($conectado)
     {
-        if ($_SESSION['usuario']['ativo']){
+        if($_SESSION['usuario']['ativo'])
+        {
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            $ativo = true;
-            $visitante = false;
         }
-        else if ($_SESSION['visitante']['ativo']){
-            $visitante = true;
-            $ativo = false;
-        }
-        else{
-            header('Location: ../ERRO');
-        }
-    }
-            
+    }        
 ?>
 
 
@@ -165,7 +155,55 @@
             <p id='nenhum-produto-encontrado' style="display: none;">Nenhum produto encontrado com os filtros selecionados</p>
         <?php
         
-        $sql = "select * from tbl_produto order by cod_produto";
+        foreach ($produtos as $produto)
+        {
+            $icone = 'carrinho_branco.svg';
+            $funcao = 'add';
+            
+
+            $cod_produto = $produto->getCodProduto();
+            $nome = $produto->getNome();
+            $preco = $produto->getPreco();
+            $categoria = $produto->getCategoria();
+
+            if (estaNoCarrinho($cod_produto, $cod_usuario))
+            {
+                $icone = 'Check_branco.svg';
+                $funcao = 'ver';
+            }
+            
+            echo "<div class='product' id='".$cod_produto."'>
+            <img src='../Imagens/Produtos/". $cod_produto ."/P1.png' alt='Produto'>
+            <div>
+                <h1>". $nome."</h1>
+                <h2> R$ ". $preco ."</h2>
+                ";
+                if(isset($categoria))
+                {
+                    echo "<h3>". $categoria ."</h3>";
+                } 
+                echo "
+                <h3>Nenhum</h3>
+                <div class='product_botoes'>
+                        <button>
+                            <p>COMPRAR</p>
+                        </button>
+                        <form action='../PHP/carrinho.php' method='post'>
+                            <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                            <input type='hidden' name='cod_usuario' value='1'>
+                            <input type='hidden' name='funcao' value='$funcao'>
+                            <button type='submit' id='add-cart' onclick='addCart(event)'>
+                                <p>+</p>
+                                <img src='../Icones/$icone' alt='carrinho'>
+                            </button>
+                        </form>
+                    </div>
+            
+            </div>
+            </div>";
+        }
+
+        /*$sql = "select * from tbl_produto order by cod_produto";
         $select = $conn->query($sql);
         while($dados = $select->fetch()){
             $icone = 'carrinho_branco.svg';
@@ -232,7 +270,7 @@
             </div>
             </div>";
 
-        };
+        };*/
         ?>
                 
         </div>

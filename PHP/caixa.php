@@ -121,133 +121,6 @@
       </footer>";
   }
 
-
-
-  function coneccao ($para = "")  
-  {
-    if ($para == "") {
-        $para="pgsql:host=pgsql.projetoscti.com.br ; dbname=projetoscti26 ; user=projetoscti26 ; 
-                 password=721526";
-    }
-
-    $Conn = new PDO($para);
-
-    if (!$Conn) {  
-        echo "Nao foi possivel conectar";
-    } else { return $Conn; }
-  }
-  
-    
-  function inicioSessao(){
-    if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-    //echo $_SESSION['conectado'];
-    if (isset($_SESSION['conectado']))
-    {
-        $conectado = $_SESSION['conectado'];
-    }
-    else{
-        $conectado = false;
-    }
-    //echo $conectado;
-
-    $conn = coneccao();
-    if (!$conectado)
-    {
-        if (isset($_COOKIE['token'])) {
-            $_SESSION['token'] = $_COOKIE['token'];
-            $check_token = "SELECT * FROM tbl_token WHERE token = :token";
-            $sel_token = executaSQL($check_token, ['token' => $_COOKIE['token']]);
-            $res_token = $sel_token->fetch();
-    
-            if ($res_token != NULL)
-            {
-              $check_user = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
-              $sel_user = executaSQL($check_user, ['cod_usuario' => $res_token['cod_usuario']]);
-              $res_user = $sel_user->fetch();
-    
-                if ($res_user != NULL)
-                {
-                    $_SESSION['conectado'] = true;
-                    $conectado = true;
-
-                    $_SESSION['usuario']['ativo'] = true;
-                    $_SESSION['visitante']['ativo'] = false;
-
-                    $_SESSION['usuario']['nome'] = explode(" ", $res_user['nome'])[0];
-                    $_SESSION['usuario']['cod_usuario'] = $res_user['cod_usuario'];
-
-                    if ($res_user['cod_usuario'] == 0)
-                    {
-                        $_SESSION['usuario']['adm'] = true;
-                    }
-                    else{
-                        $_SESSION['usuario']['adm'] = false;
-                    }
-    
-                }
-                else{
-                    //Há um codigo de usuario no token, mas esse usuario foi excluido, então o token é excluido
-                    $_SESSION['conectado'] = false;
-                    $conectado = false;
-                    deletaToken($res_token['cod_token']);
-                }
-            }
-            else{
-                //Tinha o cookie mas o token foi excluido, apagando assim o cookie existente.
-                setcookie('token', '', time() - 1, '/projetoscti14');
-                unset($_COOKIE['token']); //acho que isso aq n funciona
-                $_SESSION['conectado'] = false; 
-                $conectado = false;
-                //Esse conectado será usado posteriormente, se ele ainda estiver como false, significa que não foi
-                //possivel recuperar uma sessão pelo token, e então ele abre a sessão de visitante.
-            }
-            
-        } 
-        else{
-            $_SESSION['conectado'] = false; 
-            $conectado = false;
-        }  
-        
-    }
-
-    //depois de ter passado por todo o codigo acima, o $conectado só retornará false se o usuario for usar a sessão de visitante
-    if (!$conectado){
-        $_SESSION['conectado'] = true;
-        $_SESSION['usuario']['ativo'] = false;
-        $_SESSION['visitante']['ativo'] = true;
-    }
-    //echo "SESSAO: "; echo ($_SESSION['conectado']) ? "true" : "false"; echo "<br>";
-    return $_SESSION['conectado'];
-  }
-
-  function Cookie($nome, $valor, $min) 
-  {
-      setcookie($nome, $valor, time() + $min * 60, '/projetoscti14'); 
-  }
-
-  function setToken($cod_usuario)
-  {
-    $conn = coneccao();
-    $token = session_id(); //Se falhar o token olhar aqui
-    //$ip = $_SERVER['REMOTE_ADDR'];
-    $data = date('Y-m-d');
-
-    $linha = [
-        'cod_usuario' => $cod_usuario,
-        'token' => $token,
-        //'ip' => $ip,
-        'data' => $data
-    ];
-
-    $sql = "INSERT INTO tbl_token (cod_usuario, token, data_criacao) VALUES (:cod_usuario, :token, :data)";
-    executaSQL($sql, $linha);
-    Cookie('token', $token, 1440); //24 horas
-    $_SESSION['token'] = $token;
-  }
-
   function usuarioNavegacao($src)
   {
     $conectado = inicioSessao();
@@ -285,278 +158,6 @@
     //Se a sessão de usuario e visitante esta fechada, há algo de errado no codigo, o mesmo vale para
     //se $conectado for false.
   }
-
-    function deletaToken($id){
-        $conn = coneccao();
-        $sql = "DELETE FROM tbl_token WHERE cod_token = :id";
-        executaSQL($sql, ['id' => $id]);
-    }
-  function executaSQL($sql, $linha)
-  {
-        $conn = coneccao();
-        $insert = $conn->prepare($sql);
-        $insert->execute($linha);
-        return $insert;
-  }
-
-
-
-  //funções do BD (compra.php)
-
-  function adicionaCarrinho($cod_produto, $quantidade){
-    $conectado = inicioSessao();
-    $conn = coneccao();
-
-    if ($conectado)
-    {
-        if ($_SESSION['usuario']['ativo'])
-        {
-            //Usuario efetua uma compra
-            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            $data_hoje = date("Y/m/d");
-            $new_compra = "INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES (:status, :data_compra, :cod_usuario)";
-            $select = $conn->prepare($new_compra);
-            $select->execute(['status' => 'Pendente', 'data_compra' => $data_hoje, 'cod_usuario' => $cod_usuario]);
-
-            //compra deve linkar-se com um produto
-            $cod_compra = $conn->LastInsertId();
-            $new_compra_produto = "INSERT INTO tbl_compra_produto (quantidade, cod_produto, cod_compra) VALUES (:quantidade, :cod_produto, :cod_compra)";
-            executaSQL($new_compra_produto, ['quantidade' => $quantidade, 'cod_produto' => $cod_produto, 'cod_compra' => $cod_compra]);
-
-            //Compra registra uma compraTemporaria (que aparecerá no carrinho)
-            $new_compra_temporaria = "INSERT INTO tbl_tmpcompra (cod_compra) VALUES (:cod_compra)";
-            executaSQL($new_compra_temporaria, ['cod_compra' => $cod_compra]);
-        }
-        else if ($_SESSION['visitante']['ativo'])
-        {
-            if (!isset($_SESSION['visitante']['carrinho'][$cod_produto]))
-            {
-                $_SESSION['visitante']['carrinho'][$cod_produto] = $quantidade;
-            }
-        }
-        else{
-            header('Location: ../pornogay');
-        }
-    }else{
-        header('Location: ../throsper');
-    }
-}
-
-function verCarrinho(){
-    $conectado = inicioSessao();
-    if ($conectado)
-    {
-        if ($_SESSION['usuario']['ativo'])
-        {
-            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            $sql = "SELECT * FROM tbl_tmpcompra 
-            INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
-            INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
-            INNER JOIN tbl_produto ON tbl_compra_produto.cod_produto = tbl_produto.cod_produto
-            WHERE tbl_compra.cod_usuario = :cod_usuario";
-            $select = executaSQL($sql, ['cod_usuario' => $cod_usuario]);
-            return $select;
-        }
-        else{
-            header('Location: ../ERRO');
-        }
-    }else{
-        header('Location: ../ERRO');
-    }
-}
-/* Ver carrinho visitante:
-foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
-                $select = $conn->executaSQL($sql, ['cod_produto' => $cod_produto]);
-                $resultado = $select->fetch();
-            } */
-function deletaCarrinho($cod_tmpcompra){
-    $conectado = inicioSessao();
-    if ($conectado)
-    {
-        if ($_SESSION['usuario']['ativo'])
-        {
-            //Obtem o codigo da compra por tmpcompra
-            $sql = "SELECT cod_compra FROM tbl_tmpcompra WHERE cod_tmpcompra = :cod_tmpcompra";
-            $select = executaSQL($sql, ['cod_tmpcompra' => $cod_tmpcompra]);
-            $cod_compra = $select->fetch();
-
-            //Deleta a compra temporaria
-            $sql = "DELETE FROM tbl_tmpcompra WHERE cod_tmpcompra = :cod_tmpcompra";
-            executaSQL($sql, ['cod_tmpcompra' => $cod_tmpcompra]);
-
-            //Deleta a compra
-            $sql = "DELETE FROM tbl_compra WHERE cod_compra = :cod_compra";
-            executaSQL($sql, ['cod_compra' => $cod_compra]);            
-        }
-        else if ($_SESSION['visitante']['ativo'])
-        {
-            //Quando se chama a função para o visitante, o parametro é o codigo do produto
-            unset($_SESSION['visitante']['carrinho'][$cod_tmpcompra]);
-        }
-        else{
-            header('Location: ../ERRO');
-        }
-    }else{
-        header('Location: ../ERRO');
-    }
-}
-
-function mudaCarrinho($cod_tmpcompra, $signal){
-    $conectado = inicioSessao();
-    if ($signal == '+')
-    {
-        $s = 1;
-    }
-    else if ($signal == '-'){
-        $s = -1;
-    }
-    if ($conectado)
-    {
-        if ($_SESSION['usuario']['ativo'])
-        {
-            
-
-            //Obtem o codigo da compra por tmpcompra
-            $sql = "SELECT cod_compra FROM tbl_tmpcompra WHERE cod_tmpcompra = :cod_tmpcompra";
-            $select = executaSQL($sql, ['cod_tmpcompra' => $cod_tmpcompra]);
-            $cod_compra = $select->fetch();
-            $cod_compra = $cod_compra[0];
-
-            //Obtem a quantidade de produtos na compra
-            $sql = "SELECT quantidade FROM tbl_compra_produto WHERE cod_compra = :cod_compra";
-            $select = executaSQL($sql, ['cod_compra' => $cod_compra]);
-            $quantidade = $select->fetch();
-            $quantidade = $quantidade[0];
-
-            if ($quantidade + $s == 0)
-            {
-                deletaCarrinho($cod_tmpcompra);
-            }
-            else{
-                //Atualiza a quantidade de produtos na compra
-                $sql = "UPDATE tbl_compra_produto SET quantidade = :quantidade WHERE cod_compra = :cod_compra";
-                executaSQL($sql, ['quantidade' => $quantidade + $s, 'cod_compra' => $cod_compra]);
-            }
-        }
-        else if ($_SESSION['visitante']['ativo'])
-        {
-            $_SESSION['visitante']['carrinho'][$cod_tmpcompra] += $s;
-            if ($_SESSION['visitante']['carrinho'][$cod_tmpcompra] == 0)
-            {
-                deletaCarrinho($cod_tmpcompra);
-            }
-        }
-        else{
-            header('Location: ../ERRO');
-        }
-    }
-    else{
-        header('Location: ../ERRO');
-    }
-}
-
-function comprar($cod_produto)
-{
-    $conectado = inicioSessao();
-    $conn = coneccao();
-    if ($conectado)
-    {
-        if ($_SESSION['usuario']['ativo'])
-        {
-            /* Aqui o usuario ja cria uma compra com status concluida, e gera um pdf das informações da compra (unitaria)
-            para o usuario, sem passar por tmpCompra */
-            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-
-            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            $data_hoje = date("Y/m/d");
-            $new_compra = "INSERT INTO tbl_compra VALUES (:status, :data_compra, :cod_usuario)";
-            executaSQL($new_compra, ['status' => 'Concluida', 'data_compra' => $data_hoje, 'cod_usuario' => $cod_usuario]);
-
-            $cod_compra = $conn->LastInsertId();
-            $new_compra_produto = "INSERT INTO tbl_compra_produto VALUES (:quantidade, :cod_produto, :cod_compra)";
-            executaSQL($new_compra_produto, ['quantidade' => 1, 'cod_produto' => $cod_produto, 'cod_compra' => $cod_compra]);
-        }
-        else{
-            header('Location: ../Login');
-        }
-    }
-    else{
-        header('Location: ../ERRO');
-    }
-}
-
-function finalizarCarrinho(){
-    $conectado = inicioSessao();
-    if ($conectado){
-        if ($_SESSION['usuario']['ativo']){
-            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            //Seleciona todos os registros de tmpcompra e define o status da compra como concluida, alem disso apaga os registros de tmpCompra
-            $sql = "SELECT * FROM tbl_tmpcompra
-            INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
-            INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
-            INNER JOIN tbl_produto ON tbl_compra_produto.cod_produto = tbl_produto.cod_produto
-            WHERE tbl_compra.cod_usuario = :cod_usuario";
-            $select = executaSQL($sql, ['cod_usuario' => $cod_usuario]);
-            $soma_total = 0;
-            while($resultado = $select->fetch())
-            {
-                $soma_total += $resultado['preco'] * $resultado['quantidade'];
-
-
-                $sql = "UPDATE tbl_compra SET status = :status WHERE cod_compra = :cod_compra";
-                executaSQL($sql, ['status' => 'Concluida', 'cod_compra' => $resultado['cod_compra']]);
-
-                $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
-                executaSQL($sql, ['cod_compra' => $resultado['cod_compra']]);
-            }
-            $html = "
-            <h1>$soma_total</h1>
-            ";
-            gerapdf($html);
-        }
-        else{
-            header('Location: ../Login');
-        }
-    }   
-    else{
-        header('Location: ../ERRO');
-    }
-}
-
-function limparCarrinho(){
-    $conectado = inicioSessao();
-    if ($conectado)
-    {
-        if ($_SESSION['usuario']['ativo'])
-        {
-            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            //Seleciona todos os registros de tbmCompra e apaga os registros de tmpCompra
-            $sql = "SELECT * FROM tbl_tmpcompra WHERE cod_compra IN (SELECT cod_compra FROM tbl_compra WHERE cod_usuario = :cod_usuario)";
-            $select = executaSQL($sql, ['cod_usuario' => $cod_usuario]);
-            $resultado = $select->fetch();
-
-            foreach ($resultado as $linha){
-                $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
-                executaSQL($sql, ['cod_compra' => $linha['cod_compra']]);
-                $sql = "DELETE FROM tbl_compra WHERE cod_compra = :cod_compra";
-                executaSQL($sql, ['cod_compra' => $linha['cod_compra']]);
-            }
-        }
-        else if ($_SESSION['visitante']['ativo'])
-        {
-            unset($_SESSION['visitante']['carrinho']);
-        }
-        else{
-            header('Location: ../ERRO');
-        }
-    }else{
-        header('Location: ../ERRO');
-    }
-}
-
-
-
 
   use PHPMailer\PHPMailer\Exception;
   use PHPMailer\PHPMailer\PHPMailer;
@@ -722,7 +323,398 @@ function limparCarrinho(){
     $pdf->Output();
   }
     
+    /*function coneccao ($para = "")  
+  {
+    if ($para == "") {
+        $para="pgsql:host=pgsql.projetoscti.com.br ; dbname=projetoscti26 ; user=projetoscti26 ; 
+                 password=721526";
+    }
 
+    $Conn = new PDO($para);
+
+    if (!$Conn) {  
+        echo "Nao foi possivel conectar";
+    } else { return $Conn; }
+  }
+  
+    
+  function inicioSessao(){
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+    //echo $_SESSION['conectado'];
+    if (isset($_SESSION['conectado']))
+    {
+        $conectado = $_SESSION['conectado'];
+    }
+    else{
+        $conectado = false;
+    }
+    //echo $conectado;
+
+    $conn = coneccao();
+    if (!$conectado)
+    {
+        if (isset($_COOKIE['token'])) {
+            $_SESSION['token'] = $_COOKIE['token'];
+            $check_token = "SELECT * FROM tbl_token WHERE token = :token";
+            $sel_token = executaSQL($check_token, ['token' => $_COOKIE['token']]);
+            $res_token = $sel_token->fetch();
+    
+            if ($res_token != NULL)
+            {
+              $check_user = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
+              $sel_user = executaSQL($check_user, ['cod_usuario' => $res_token['cod_usuario']]);
+              $res_user = $sel_user->fetch();
+    
+                if ($res_user != NULL)
+                {
+                    $_SESSION['conectado'] = true;
+                    $conectado = true;
+
+                    $_SESSION['usuario']['ativo'] = true;
+                    $_SESSION['visitante']['ativo'] = false;
+
+                    $_SESSION['usuario']['nome'] = explode(" ", $res_user['nome'])[0];
+                    $_SESSION['usuario']['cod_usuario'] = $res_user['cod_usuario'];
+
+                    if ($res_user['cod_usuario'] == 0)
+                    {
+                        $_SESSION['usuario']['adm'] = true;
+                    }
+                    else{
+                        $_SESSION['usuario']['adm'] = false;
+                    }
+    
+                }
+                else{
+                    //Há um codigo de usuario no token, mas esse usuario foi excluido, então o token é excluido
+                    $_SESSION['conectado'] = false;
+                    $conectado = false;
+                    deletaToken($res_token['cod_token']);
+                }
+            }
+            else{
+                //Tinha o cookie mas o token foi excluido, apagando assim o cookie existente.
+                setcookie('token', '', time() - 1, '/projetoscti14');
+                unset($_COOKIE['token']); //acho que isso aq n funciona
+                $_SESSION['conectado'] = false; 
+                $conectado = false;
+                //Esse conectado será usado posteriormente, se ele ainda estiver como false, significa que não foi
+                //possivel recuperar uma sessão pelo token, e então ele abre a sessão de visitante.
+            }
+            
+        } 
+        else{
+            $_SESSION['conectado'] = false; 
+            $conectado = false;
+        }  
+        
+    }
+
+    //depois de ter passado por todo o codigo acima, o $conectado só retornará false se o usuario for usar a sessão de visitante
+    if (!$conectado){
+        $_SESSION['conectado'] = true;
+        $_SESSION['usuario']['ativo'] = false;
+        $_SESSION['visitante']['ativo'] = true;
+    }
+    //echo "SESSAO: "; echo ($_SESSION['conectado']) ? "true" : "false"; echo "<br>";
+    return $_SESSION['conectado'];
+  }
+
+  function Cookie($nome, $valor, $min) 
+  {
+      setcookie($nome, $valor, time() + $min * 60, '/projetoscti14'); 
+  }
+
+  function setToken($cod_usuario)
+  {
+    $conn = coneccao();
+    $token = session_id(); //Se falhar o token olhar aqui
+    //$ip = $_SERVER['REMOTE_ADDR'];
+    $data = date('Y-m-d');
+
+    $linha = [
+        'cod_usuario' => $cod_usuario,
+        'token' => $token,
+        //'ip' => $ip,
+        'data' => $data
+    ];
+
+    $sql = "INSERT INTO tbl_token (cod_usuario, token, data_criacao) VALUES (:cod_usuario, :token, :data)";
+    executaSQL($sql, $linha);
+    Cookie('token', $token, 1440); //24 horas
+    $_SESSION['token'] = $token;
+  }
+
+  
+
+    
+  function executaSQL($sql, $linha)
+  {
+        $conn = coneccao();
+        $insert = $conn->prepare($sql);
+        $insert->execute($linha);
+        return $insert;
+  }
+
+
+
+  //funções do BD (compra.php)
+
+  function adicionaCarrinho($cod_produto, $quantidade){
+    $conectado = inicioSessao();
+    $conn = coneccao();
+
+    if ($conectado)
+    {
+        if ($_SESSION['usuario']['ativo'])
+        {
+            //Usuario efetua uma compra
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+            $data_hoje = date("Y/m/d");
+            $new_compra = "INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES (:status, :data_compra, :cod_usuario)";
+            $select = $conn->prepare($new_compra);
+            $select->execute(['status' => 'Pendente', 'data_compra' => $data_hoje, 'cod_usuario' => $cod_usuario]);
+
+            //compra deve linkar-se com um produto
+            $cod_compra = $conn->LastInsertId();
+            $new_compra_produto = "INSERT INTO tbl_compra_produto (quantidade, cod_produto, cod_compra) VALUES (:quantidade, :cod_produto, :cod_compra)";
+            executaSQL($new_compra_produto, ['quantidade' => $quantidade, 'cod_produto' => $cod_produto, 'cod_compra' => $cod_compra]);
+
+            //Compra registra uma compraTemporaria (que aparecerá no carrinho)
+            $new_compra_temporaria = "INSERT INTO tbl_tmpcompra (cod_compra) VALUES (:cod_compra)";
+            executaSQL($new_compra_temporaria, ['cod_compra' => $cod_compra]);
+        }
+        else if ($_SESSION['visitante']['ativo'])
+        {
+            if (!isset($_SESSION['visitante']['carrinho'][$cod_produto]))
+            {
+                $_SESSION['visitante']['carrinho'][$cod_produto] = $quantidade;
+            }
+        }
+        else{
+            header('Location: ../pornogay');
+        }
+    }else{
+        header('Location: ../throsper');
+    }
+}
+
+function verCarrinho(){
+    $conectado = inicioSessao();
+    if ($conectado)
+    {
+        if ($_SESSION['usuario']['ativo'])
+        {
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+            $sql = "SELECT * FROM tbl_tmpcompra 
+            INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
+            INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
+            INNER JOIN tbl_produto ON tbl_compra_produto.cod_produto = tbl_produto.cod_produto
+            WHERE tbl_compra.cod_usuario = :cod_usuario";
+            $select = executaSQL($sql, ['cod_usuario' => $cod_usuario]);
+            return $select;
+        }
+        else{
+            header('Location: ../ERRO');
+        }
+    }else{
+        header('Location: ../ERRO');
+    }
+}
+/* Ver carrinho visitante:
+foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
+                $select = $conn->executaSQL($sql, ['cod_produto' => $cod_produto]);
+                $resultado = $select->fetch();
+            } */
+            /*
+function deletaCarrinho($cod_tmpcompra){
+    $conectado = inicioSessao();
+    if ($conectado)
+    {
+        if ($_SESSION['usuario']['ativo'])
+        {
+            //Obtem o codigo da compra por tmpcompra
+            $sql = "SELECT cod_compra FROM tbl_tmpcompra WHERE cod_tmpcompra = :cod_tmpcompra";
+            $select = executaSQL($sql, ['cod_tmpcompra' => $cod_tmpcompra]);
+            $cod_compra = $select->fetch();
+
+            //Deleta a compra temporaria
+            $sql = "DELETE FROM tbl_tmpcompra WHERE cod_tmpcompra = :cod_tmpcompra";
+            executaSQL($sql, ['cod_tmpcompra' => $cod_tmpcompra]);
+
+            //Deleta a compra
+            $sql = "DELETE FROM tbl_compra WHERE cod_compra = :cod_compra";
+            executaSQL($sql, ['cod_compra' => $cod_compra]);            
+        }
+        else if ($_SESSION['visitante']['ativo'])
+        {
+            //Quando se chama a função para o visitante, o parametro é o codigo do produto
+            unset($_SESSION['visitante']['carrinho'][$cod_tmpcompra]);
+        }
+        else{
+            header('Location: ../ERRO');
+        }
+    }else{
+        header('Location: ../ERRO');
+    }
+}
+
+function mudaCarrinho($cod_tmpcompra, $signal){
+    $conectado = inicioSessao();
+    if ($signal == '+')
+    {
+        $s = 1;
+    }
+    else if ($signal == '-'){
+        $s = -1;
+    }
+    if ($conectado)
+    {
+        if ($_SESSION['usuario']['ativo'])
+        {
+            
+
+            //Obtem o codigo da compra por tmpcompra
+            $sql = "SELECT cod_compra FROM tbl_tmpcompra WHERE cod_tmpcompra = :cod_tmpcompra";
+            $select = executaSQL($sql, ['cod_tmpcompra' => $cod_tmpcompra]);
+            $cod_compra = $select->fetch();
+            $cod_compra = $cod_compra[0];
+
+            //Obtem a quantidade de produtos na compra
+            $sql = "SELECT quantidade FROM tbl_compra_produto WHERE cod_compra = :cod_compra";
+            $select = executaSQL($sql, ['cod_compra' => $cod_compra]);
+            $quantidade = $select->fetch();
+            $quantidade = $quantidade[0];
+
+            if ($quantidade + $s == 0)
+            {
+                deletaCarrinho($cod_tmpcompra);
+            }
+            else{
+                //Atualiza a quantidade de produtos na compra
+                $sql = "UPDATE tbl_compra_produto SET quantidade = :quantidade WHERE cod_compra = :cod_compra";
+                executaSQL($sql, ['quantidade' => $quantidade + $s, 'cod_compra' => $cod_compra]);
+            }
+        }
+        else if ($_SESSION['visitante']['ativo'])
+        {
+            $_SESSION['visitante']['carrinho'][$cod_tmpcompra] += $s;
+            if ($_SESSION['visitante']['carrinho'][$cod_tmpcompra] == 0)
+            {
+                deletaCarrinho($cod_tmpcompra);
+            }
+        }
+        else{
+            header('Location: ../ERRO');
+        }
+    }
+    else{
+        header('Location: ../ERRO');
+    }
+}
+
+function comprar($cod_produto)
+{
+    $conectado = inicioSessao();
+    $conn = coneccao();
+    if ($conectado)
+    {
+        if ($_SESSION['usuario']['ativo'])
+        {
+            /* Aqui o usuario ja cria uma compra com status concluida, e gera um pdf das informações da compra (unitaria)
+            para o usuario, sem passar por tmpCompra 
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+            $data_hoje = date("Y/m/d");
+            $new_compra = "INSERT INTO tbl_compra VALUES (:status, :data_compra, :cod_usuario)";
+            executaSQL($new_compra, ['status' => 'Concluida', 'data_compra' => $data_hoje, 'cod_usuario' => $cod_usuario]);
+
+            $cod_compra = $conn->LastInsertId();
+            $new_compra_produto = "INSERT INTO tbl_compra_produto VALUES (:quantidade, :cod_produto, :cod_compra)";
+            executaSQL($new_compra_produto, ['quantidade' => 1, 'cod_produto' => $cod_produto, 'cod_compra' => $cod_compra]);
+        }
+        else{
+            header('Location: ../Login');
+        }
+    }
+    else{
+        header('Location: ../ERRO');
+    }
+}
+
+function finalizarCarrinho(){
+    $conectado = inicioSessao();
+    if ($conectado){
+        if ($_SESSION['usuario']['ativo']){
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+            //Seleciona todos os registros de tmpcompra e define o status da compra como concluida, alem disso apaga os registros de tmpCompra
+            $sql = "SELECT * FROM tbl_tmpcompra
+            INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
+            INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
+            INNER JOIN tbl_produto ON tbl_compra_produto.cod_produto = tbl_produto.cod_produto
+            WHERE tbl_compra.cod_usuario = :cod_usuario";
+            $select = executaSQL($sql, ['cod_usuario' => $cod_usuario]);
+            $soma_total = 0;
+            while($resultado = $select->fetch())
+            {
+                $soma_total += $resultado['preco'] * $resultado['quantidade'];
+
+
+                $sql = "UPDATE tbl_compra SET status = :status WHERE cod_compra = :cod_compra";
+                executaSQL($sql, ['status' => 'Concluida', 'cod_compra' => $resultado['cod_compra']]);
+
+                $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
+                executaSQL($sql, ['cod_compra' => $resultado['cod_compra']]);
+            }
+            $html = "
+            <h1>$soma_total</h1>
+            ";
+            gerapdf($html);
+        }
+        else{
+            header('Location: ../Login');
+        }
+    }   
+    else{
+        header('Location: ../ERRO');
+    }
+}
+
+function limparCarrinho(){
+    $conectado = inicioSessao();
+    if ($conectado)
+    {
+        if ($_SESSION['usuario']['ativo'])
+        {
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+            //Seleciona todos os registros de tbmCompra e apaga os registros de tmpCompra
+            $sql = "SELECT * FROM tbl_tmpcompra WHERE cod_compra IN (SELECT cod_compra FROM tbl_compra WHERE cod_usuario = :cod_usuario)";
+            $select = executaSQL($sql, ['cod_usuario' => $cod_usuario]);
+            $resultado = $select->fetch();
+
+            foreach ($resultado as $linha){
+                $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
+                executaSQL($sql, ['cod_compra' => $linha['cod_compra']]);
+                $sql = "DELETE FROM tbl_compra WHERE cod_compra = :cod_compra";
+                executaSQL($sql, ['cod_compra' => $linha['cod_compra']]);
+            }
+        }
+        else if ($_SESSION['visitante']['ativo'])
+        {
+            unset($_SESSION['visitante']['carrinho']);
+        }
+        else{
+            header('Location: ../ERRO');
+        }
+    }else{
+        header('Location: ../ERRO');
+    }
+}*/
   
 
 ?>

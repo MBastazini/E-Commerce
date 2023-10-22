@@ -4,11 +4,11 @@ CREATE TABLE tbl_produto(
 	descricao text not null,
 	preco numeric(10,2) not null,
 	excluido boolean not null,
-	data_exclusao timestamp not null,
-	codigovisual varchar(50) not null,
+	data_exclusao timestamp not null, /* precisa? */
+	codigovisual varchar(50) not null, /* que porra e essa e qual a diferença de 'imagem'*/
 	custo numeric(10,2) not null,
-	margem_lucro numeric(10,2) not null,
-	icms numeric(10,2) not null,
+	margem_lucro numeric(10,2) not null, /* é so caucula na hora */
+	icms numeric(10,2) not null, 
 	imagem varchar not null,
 	categoria varchar(10) not null
 );
