@@ -32,8 +32,6 @@ CREATE TABLE tbl_compra(
 
 	cod_usuario serial,
 	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
-
-
 );
 
 
@@ -138,6 +136,10 @@ INSERT INTO tbl_compra_produto (quantidade, cod_produto, cod_compra) VALUES ('1'
 
 INSERT INTO tbl_tmpcompra (cod_compra) VALUES ('1');
 
-
+SELECT p.nome, p.preco, p.cod_produto, cp.quantidade FROM tbl_tmpcompra
+INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
+INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
+INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
+WHERE tbl_compra.cod_usuario = '1';
 
 
