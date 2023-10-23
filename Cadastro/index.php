@@ -173,6 +173,10 @@
                     <input type="password" name="senha_c" maxlength="40">
                     <p>Confirmar senha</p>
                 </div>
+                <div class="lembrarme">
+                    <input type="radio" name="lembrar" id="lembrar" value='1'>
+                    <p>Lembrar-me</p>
+                </div>
                 <div class="btn">
                     <input type="submit" value="CADASTRE-SE">
                 </div>

@@ -31,7 +31,11 @@ include("insereDadosCarrinho.php");
             $_SESSION['usuario']['ativo'] = true;
             $cod_usuario = $conn -> LastInsertId();
             $_SESSION['usuario']['cod_usuario'] = $cod_usuario;
-            setToken($cod_usuario);
+
+            if(isset($_POST['lembrar']))
+            {
+                setToken($cod_usuario);
+            }
             $_SESSION['usuario']['adm'] = false;
         
         
@@ -166,15 +170,18 @@ include("insereDadosCarrinho.php");
                     else{
                         //Login efetuado com sucesso.
 
-                        /*if (isset($_POST['lembrar']))
-                        {
-                            setToken($resultado2['cod_usuario']);
-                        }*/
+                        
                         
                         
                         $_SESSION['usuario']['ativo'] = true;
 
-                        setToken($resultado['cod_usuario']);
+                        //setToken($resultado['cod_usuario']);
+                        //header('Location: ../ERRO');
+                        
+                        if (isset($_POST['lembrar']))
+                        {
+                            setToken($resultado['cod_usuario']);
+                        }
                         $_SESSION['usuario']['nome'] = explode(" ", $resultado['nome'])[0];
                         //echo $_SESSION['conectado'];
                         $_SESSION['usuario']['cod_usuario'] = $resultado['cod_usuario'];

@@ -110,10 +110,12 @@
                 }
 
                 $_SESSION['token'] = $_COOKIE['token'];
-                $token = $_COOKIE['token'];
+                $token = $_SESSION['token'];
+                
                 $sql = "SELECT * FROM tbl_token WHERE token = :token";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(":token", $token, PDO::PARAM_STR);
+                $stmt->execute();
                 $resultado = $stmt -> fetch(PDO::FETCH_ASSOC);
         
                 if ($resultado != NULL)
@@ -122,6 +124,7 @@
                     $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
                     $stmt = $conn->prepare($sql);
                     $stmt->bindParam(":cod_usuario", $cod_usuario, PDO::PARAM_INT);
+                    $stmt->execute();
                     $resultado2 = $stmt -> fetch(PDO::FETCH_ASSOC);
         
                     if ($resultado2 != NULL)
@@ -152,6 +155,7 @@
                     }
                 }
                 else{
+                    
                     //Tinha o cookie mas o token foi excluido, apagando assim o cookie existente.
                     setcookie('token', '', time() - 1, '/projetoscti14');
                     unset($_COOKIE['token']); //acho que isso aq n funciona

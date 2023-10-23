@@ -135,8 +135,8 @@
                 </div>
 
                 <div class="lembrarme">
-                    <input type="checkbox" name="lembrar" id="lembrar">
-                    <p>NAO FUNCIONAAAAAAAA</p>
+                    <input type="radio" name="lembrar" id="lembrar" value='1'>
+                    <p>Lembrar-me</p>
                 </div>
 
                 <div class="btn">

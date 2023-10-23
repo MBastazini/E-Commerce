@@ -3,6 +3,7 @@ include('obtemDados.php');
 
   function barraNavegacao($tela, $src)
   {
+    $user = CheckUser();
     $produtos = tblProduto(); //Obtem os produtos para a barra de pesquisa
      echo "<div class='nav_nav"; if ($tela == 'home'){echo" nav_sobe ";}  echo" container'>
         <div class='nav_fundo nf_fixo'></div>
