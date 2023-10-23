@@ -9,7 +9,6 @@ CREATE TABLE tbl_produto(
 	custo numeric(10,2) not null,
 	margem_lucro numeric(10,2) not null, /* é so caucula na hora */
 	icms numeric(10,2) not null, 
-	imagem varchar not null,
 	categoria varchar(10) not null
 );
 ALTER TABLE tbl_produto ADD COLUMN categoria categorias;
@@ -142,4 +141,16 @@ INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
 INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
 WHERE tbl_compra.cod_usuario = '1';
 
+INSERT INTO tbl_produto (nome, descricao, preco, excluido, data_exclusao, codigovisual, custo, margem_lucro, icms, categoria) VALUES 
+('Chaveiro CPU','Chaveiro com o simbolo de um processador (CPU), representando o curso de informatica.',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00 ,'INFORMATICA'),
+('Chaveiro ENGINE','Chaveiro com a imagem de uma engrenagem, representando o curso de Mecânica.',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00 ,'MECANICA'),
+('Chaveiro LAMPADA','Chaveiro com a imagem de uma lampada, represenando o curso de Eletronica',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00 ,'ELETRONICA'),
+('Chaveiro CTI','Chaveiro com a logo do CTI',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00 ,'CTI');
+
+INSERT INTO tbl_produto (nome, descricao, preco, excluido, data_exclusao, codigovisual, custo, margem_lucro, icms) VALUES 
+('Chaveiro lua','Chaveiro com a imagem de uma lua e estrelas',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00),
+('Chaveiro pato','Chaveiro com a imagem de um pato estiloso',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00),
+('Chaveiro cartas','Chaveiro com a imagem de duas cartas de baralho',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00),
+('Chaveiro sol','Chaveiro com a imagem de um sol',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00),
+('Chaveiro gatinho','Chaveiro com a imagem de um gatinho fofinho',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00);
 

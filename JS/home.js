@@ -150,7 +150,12 @@ document.addEventListener("DOMContentLoaded", function() {
          altura_a_descer = ajusteTelaInicial(altura_a_descer);
      });
      
-     
+    const produtos = document.querySelectorAll('.produto');
+    produtos.forEach(produto => {
+        const img = produto.querySelector('h2');
+        var caminho = img.innerHTML;
+        produto.style.backgroundImage = 'url(' + caminho + ')';
+    });
  
  
  

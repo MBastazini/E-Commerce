@@ -148,11 +148,9 @@
                 </p>
             </div>
             <div class="video_v">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/jWOetWUeAts?si=M14RkQutcYtTMVAM" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen></iframe>            
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Kz1i3PdUyyc?si=XXZGf6NJxd8r4pWN" 
+                title="YouTube video player" frameborder="0" allow="accelerometer; 
+                autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>           
             </div>
 
         </div>
@@ -188,6 +186,7 @@
                                 <div class='produto_texto'>
                                     <p> R$ ". $preco."</p>
                                     <h1>".$nome."</h1>
+                                    <h2>Imagens/Produtos/$cod_produto.jpg</h2>
                                 </div>
                                 <div class='produto_botao'>
                                     <a href='#'>

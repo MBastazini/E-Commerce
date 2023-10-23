@@ -165,7 +165,7 @@
             }
 
             echo "<div class='product' id='".$cod_produto."'>
-            <img src='../Imagens/Produtos/". $cod_produto ."/P1.png' alt='Produto'>
+            <img src='../Imagens/Produtos/". $cod_produto .".jpg' alt='Produto'>
             <div>
                 <h1>". $nome."</h1>
                 <h2> R$ ". $preco ."</h2>

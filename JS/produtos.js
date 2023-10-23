@@ -176,14 +176,14 @@ function telaProduto(produto){
     //Fazer aqui o codigo para carregar a pasta da imagem correta tambem.
 
     let id = produto.getAttribute('id');
-    let src = 'Imagens/Produtos/' + id + '/';
+    let src = '../Imagens/Produtos/' + id + '.jpg';
 
     const img_grande = document.getElementById('img_grande');
-    img_grande.src = src + 'P1.png';
+    img_grande.src = src;
     const imagens_pequenas = document.querySelectorAll('.div_img_pequena > img');
     let cont = 1;
     imagens_pequenas.forEach((img) => {
-        img.src = src + 'P' + cont + '.png';
+        img.src = src;
         cont++;
     });
 }   

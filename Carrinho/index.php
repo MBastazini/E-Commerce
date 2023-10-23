@@ -112,7 +112,7 @@
                     $preco_total = $preco * $quantidade;
                     echo"
                             <div class='produto_compra' id='produto_$cod_produto'>
-                                <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
+                                <img src='../Imagens/Produtos/$cod_produto.jpg' alt='Chaveiro img'>
                                 <div>
                                     <p>$nome</p>
                                     <div class='produto_compra_div'>
