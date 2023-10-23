@@ -163,7 +163,7 @@
                 $icone = 'shopping_branco.svg';
                 $funcao = 'add';
             }
-            
+
             echo "<div class='product' id='".$cod_produto."'>
             <img src='../Imagens/Produtos/". $cod_produto ."/P1.png' alt='Produto'>
             <div>
@@ -177,18 +177,22 @@
                 echo "
                 <h3>Nenhum</h3>
                 <div class='product_botoes'>
-                        <button>
+                    <form action'../PHP/insereDadosCarrinho.php' method='post'>
+                        <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                        <input type='hidden' name='funcao' value='comprar'>
+                        <button type='submit'>
                             <p>COMPRAR</p>
                         </button>
-                        <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                            <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                            <input type='hidden' name='funcao' value='$funcao'>
-                            <button type='submit' id='add-cart' onclick='addCart(event)'>
-                                <p>+</p>
-                                <img src='../Icones/$icone' alt='carrinho'>
-                            </button>
-                        </form>
-                    </div>
+                    </form>
+                    <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                        <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                        <input type='hidden' name='funcao' value='$funcao'>
+                        <button type='submit' id='add-cart' onclick='addCart(event)'>
+                            <p>+</p>
+                            <img src='../Icones/$icone' alt='carrinho'>
+                        </button>
+                    </form>
+                </div>
             
             </div>
             </div>";

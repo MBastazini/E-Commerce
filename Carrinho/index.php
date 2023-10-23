@@ -172,7 +172,7 @@
                     <p>TOTAL</p>
                     <h1 id="total">R$ 0,00</h1>
                 </div>
-                <form action='../PHP/carrinho.php' method='post'>
+                <form action='../PHP/insereDadosCarrinho.php' method='post'>
                     <input type='hidden' name='funcao' value='finalizar'>
                     <button class="finalizar_compra"><h1>FINALIZAR COMPRA</h1></button>
                 </form>

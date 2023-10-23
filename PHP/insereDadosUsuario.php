@@ -174,14 +174,7 @@ include("insereDadosCarrinho.php");
                         
                         $_SESSION['usuario']['ativo'] = true;
 
-                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                            adicionaCarrinho($cod_produto, $quantidade);
-                        }
-                        
-                        $_SESSION['visitante']['ativo'] = false;
-
-
-                        setToken($resultado2['cod_usuario']);
+                        setToken($resultado['cod_usuario']);
                         $_SESSION['usuario']['nome'] = explode(" ", $resultado['nome'])[0];
                         //echo $_SESSION['conectado'];
                         $_SESSION['usuario']['cod_usuario'] = $resultado['cod_usuario'];
@@ -192,6 +185,13 @@ include("insereDadosCarrinho.php");
                         else{
                             $_SESSION['usuario']['adm'] = false;
                         }
+
+                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                            adicionaCarrinho($cod_produto, $quantidade);
+                        }
+                        
+                        $_SESSION['visitante']['ativo'] = false;
+ 
                         header('Location: ../');
                     }
                 }

@@ -48,7 +48,7 @@
     function deletaCarrinho($cod_tmpcompra){
         $user = CheckUser();
 
-        if ($user = 1)
+        if ($user == 1)
         {
             $conn = coneccao();
 
@@ -81,9 +81,9 @@
     }
 
     function mudaCarrinho($cod_tmpcompra, $s){
-        $User = CheckUser();
+        $user = CheckUser();
 
-        if ($user = 1)
+        if ($user == 1)
         {
             $conn = coneccao();
 
@@ -158,6 +158,10 @@
 
             $conn = null;
             $stmt = null;
+            header('Location: ../');
+        }
+        else{
+            header('Location: ../Login/');
         }
     }
 
@@ -165,6 +169,7 @@
         $user = CheckUser();
         if ($user == 1)
         {
+            echo "bem vindo";
             $conn = coneccao();
 
             //Obtem o codigo da compra por tmpcompra
@@ -179,21 +184,25 @@
                 $cod_compra = $compra['cod_compra'];
                 $status = 'Concluida';
                 //Atualiza o status da compra
-                $sql = "UPDATE tbl_compra SET status = :status WHERE cod_compra = :cod_compra";
-                $stmt = $conn->prepare($sql);
-                $stmt -> bindParam(':status', $status, PDO::PARAM_STR);
-                $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
-                $stmt -> execute();
-
+                $sql2 = "UPDATE tbl_compra SET status = :status WHERE cod_compra = :cod_compra";
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2 -> bindParam(':status', $status, PDO::PARAM_STR);
+                $stmt2 -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
+                $stmt2 -> execute();
                 //Deleta a compra temporaria
-                $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
-                $stmt = $conn->prepare($sql);
-                $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
-                $stmt -> execute();
+                $sql2 = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2 -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
+                $stmt2 -> execute(); 
             }
 
             $conn = null;
             $stmt = null;
+            $stmt2 = null;
+            header('Location: ../');
+        }
+        else{
+            header('Location: ../Login/');
         }
     }
 
@@ -260,6 +269,11 @@
         else if($funcao == 'finalizar')
         {
             finalizarCarrinho();
+        }
+        else if($funcao = 'comprar')
+        {
+            $cod_produto = $_POST['cod_produto'];
+            comprar($cod_produto);
         }
     }
 ?>
