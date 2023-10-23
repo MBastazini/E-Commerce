@@ -253,6 +253,10 @@
                 header('Location: ../#hrefprod');
             }
         }
+        else if($funcao == 'ver')
+        {
+            header('Location: ../Carrinho/');
+        }
         else if($funcao == 'finalizar')
         {
             finalizarCarrinho();

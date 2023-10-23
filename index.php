@@ -2,7 +2,7 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("PHP/caixa.php");
-    $conectado = inicioSessao();
+    include("PHP/obtemDados.php")
 ?>
 
 <!DOCTYPE html>
@@ -168,98 +168,54 @@
             <div class="produtos_container hidden">
                 <span id="produto_padding"></span>
                 <?php 
-                    $sql = "SELECT * FROM tbl_produto";
-                    $res = executaSQL($sql, NULL);
-                    $funcao = "add-";
-                    $cod_usuario = NULL;
-                    if($conectado)
-                    {
-                        if($_SESSION['usuario']['ativo'])
-                        {
-                            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-                            $ativo = true;
-                            $visitante = false;
-                        }
-                        else if($_SESSION['visitante']['ativo'])
-                        {
-                            $ativo = false;
-                            $visitante = true;
-                            $funcao = 'add--';
-                        }
-                    }
-                    $icone = 'carrinho_branco.svg';
+                    $produtos = tblProduto();
                     
-
-                    while($produto = $res->fetch())
+                    foreach($produtos as $produto)
                     {
-                        if($ativo)
+                        $cod_produto = $produto->getCodProduto();
+                        $nome = $produto->getNome();
+                        $preco = $produto->getPreco();
+                        if(estaNoCarrinho($cod_produto))
                         {
+                            $icone = 'Check_branco.svg';
+                            $funcao = 'ver';
+                        }
+                        else{
+                            $icone = 'shopping_branco.svg';
                             $funcao = 'add++';
-                            //Checa se há um produto em tbl_tmpcompra que o cod_produto e o cod_usuario sejam iguais ao $cod_produto e $cod_usuario
-                            $sql2 = "SELECT * FROM tbl_tmpcompra 
-                            INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
-                            INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
-                            WHERE tbl_compra.cod_usuario = :cod_usuario AND tbl_compra_produto.cod_produto = :cod_produto";
-                            $select2 = executaSQL($sql2, ['cod_produto' => $produto['cod_produto'], 'cod_usuario' => $cod_usuario]);
-                            $resultado = $select2->fetch();
-                            if ($resultado != NULL)
-                            {
-                                $icone = 'Check_branco.svg';
-                                $funcao = 'ver';
-                            }
-                            else{
-                                $icone = 'carrinho_branco.svg';
-                            }
                         }
-                        else if ($visitante)
-                        {
-                            if (isset($_SESSION['visitante']['carrinho'])) {
-                                foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                                    if ($cod_produto == $produto['cod_produto'])
-                                    {
-                                        $icone = 'Check_branco.svg';
-                                        $funcao = 'ver';
-                                    }
-                                    else{
-                                        $icone = 'carrinho_branco.svg';
-                                    }
-                                }
-                            }  
-                        }
-                        $cod_produto = $produto['cod_produto'];
                         echo "<div class='produto'> 
-                                <div class='produto_info'>
-                                    <div class='produto_texto'>
-                                        <p> R$ ". $produto['preco']."</p>
-                                        <h1>".$produto['nome']."</h1>
-                                    </div>
-                                    <div class='produto_botao'>
-                                        <a href='#'>
-                                            <div>
-                                                <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
-                                                <p>Comprar</p>
-                                            </div>
-                                        </a>
-                                        <form action='PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                                            <input type='hidden' name='cod_usuario' value='". $cod_usuario. "'>
-                                            <input type='hidden' name='funcao' value='$funcao'>
-                                            <button onclick='addCart()'>
-                                                <img src='Icones/$icone' alt='Carrinho de compras'>
-                                                <p>+ Carrinho</p>
-                                            </button>
-                                        </form>
-                                        <a href='Produtos/#produto_$cod_produto'>
-                                            <div>
-                                                <img src='Icones/sobre_branco.svg' alt='Carrinho de compras'>
-                                                <p>Ver mais</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                            <div class='produto_info'>
+                                <div class='produto_texto'>
+                                    <p> R$ ". $preco."</p>
+                                    <h1>".$nome."</h1>
                                 </div>
-                            </div>";
+                                <div class='produto_botao'>
+                                    <a href='#'>
+                                        <div>
+                                            <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
+                                            <p>Comprar</p>
+                                        </div>
+                                    </a>
+                                    <form action='PHP/insereDadosCarrinho.php' method='post'>
+                                        <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                                        <input type='hidden' name='funcao' value='$funcao'>
+                                        <button onclick='addCart()'>
+                                            <img src='Icones/$icone' alt='Carrinho de compras'>
+                                            <p>+ Carrinho</p>
+                                        </button>
+                                    </form>
+                                    <a href='Produtos/#produto_$cod_produto'>
+                                        <div>
+                                            <img src='Icones/sobre_branco.svg' alt='Carrinho de compras'>
+                                            <p>Ver mais</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>";  
                     }
-                
+                    
                 ?>
                 <span id="produto_padding"></span>
             </div>

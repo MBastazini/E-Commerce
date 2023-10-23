@@ -2,9 +2,7 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
-    $conectado = inicioSessao();
-
-    $conn = coneccao();
+    include("../PHP/obtemDados.php");
 ?>
 
 
@@ -105,81 +103,36 @@
     <section id="grid_carrinho" class="container">
         <div id="produtos_compra">
             <?php 
-            if ($conectado)
-            {
-                if ($_SESSION['usuario']['ativo'])
-                {
-                    /*$cod_usuario = $_SESSION['usuario']['cod_usuario'];
-                    $sql_produtos = "SELECT p.nome, p.cod_produto, p.preco, cp.quantidade, c.status, cp.cod_compra_produto FROM tbl_compra_produto AS cp
-                    INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto
-                    INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
-                    WHERE c.status = 'comprando' AND cp.cod_usuario = '$cod_usuario'";
-                    $select_produtos = executaSQL($sql_produtos, NULL);*/
-                    $produtos = verCarrinho();
-                    while($produto = $produtos->fetch()){
-                        $cod_produto = $produto['cod_produto'];
-                        $cod_tmpcompra = $produto['cod_tmpcompra'];
-                        echo "<div class='produto_compra' id='produto_$cod_produto'>
-                                <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
-                                <div>
-                                    <p>".$produto['nome']."</p>
-                                    <div class='produto_compra_div'>
-                                        <form action='../PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_tmpcompra' value='$cod_tmpcompra'>
-                                            <input type='hidden' value='muda-' name='funcao'>
-                                            <input type='submit' value='-'>
-                                        </form>
-                                        <p id='quantidade'>".$produto['quantidade']."</p>
-                                        <form action='../PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_tmpcompra' value='$cod_tmpcompra'>
-                                            <input type='hidden' value='muda+' name='funcao'>
-                                            <input type='submit' value='+'>
-                                        </form>
-                                    </div>
-                                    <h1>R$ ".$produto['preco']."</h1>
-                                </div>
-                            </div>";
-                    }
-                }
-                else if ($_SESSION['visitante']['ativo'])
-                {
-                    if(isset($_SESSION['visitante']['carrinho']))
-                    {
-                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                            //Posso só pegar o nome
-                            $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
-                            $select = executaSQL($sql, ['cod_produto' => $cod_produto]);
-                            $resultado = $select->fetch();
-    
-                            $nome = $resultado['nome'];
-    
-                            echo"
+                $carrinho = tblCarrinho();
+                foreach($carrinho as $c) {
+                    $cod_produto = $c->getCodProduto();
+                    $cod_tmpcompra = $c->getCodTmpCompra();
+                    $nome = $c->getNome();
+                    $quantidade = $c->getQuantidade();
+                    $preco = $c->getPreco();
+                    $preco_total = $preco * $quantidade;
+                    echo"
                             <div class='produto_compra' id='produto_$cod_produto'>
                                 <img src='../Imagens/$cod_produto/P1' alt='Chaveiro 1'>
                                 <div>
                                     <p>$nome</p>
                                     <div class='produto_compra_div'>
-                                        <form action='../PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_tmpcompra' value='$cod_produto'>
+                                        <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                                            <input type='hidden' name='cod_tmpcompra' value='$cod_tmpcompra'>
                                             <input type='hidden' value='muda-' name='funcao'>
                                             <input type='submit' value='-'>
                                         </form>
                                         <p id='quantidade'>$quantidade</p>
-                                        <form action='../PHP/carrinho.php' method='post'>
-                                            <input type='hidden' name='cod_tmpcompra' value='$cod_produto'>
+                                        <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                                            <input type='hidden' name='cod_tmpcompra' value='$cod_tmpcompra'>
                                             <input type='hidden' value='muda+' name='funcao'>
                                             <input type='submit' value='+'>
                                         </form>
                                     </div>
-                                    <h1>R$ ".$resultado['preco']."</h1>
+                                    <h1>R$ ".$preco_total."</h1>
                                 </div>
-                            </div>";
-                        }
-                    }
-                    
-                }
-            }
-            
+                            </div>";   
+                }  
             ?>
             <!-- Na cração disso com PHP atente-se em colocar o uma STRING concatenada como 'produto_' + $id_produto
             Algo assim, ai o id_produto fica armasenado, mas não temos classes com o nome dela sendo apenas um numero solto -->

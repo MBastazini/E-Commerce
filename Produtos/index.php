@@ -5,17 +5,7 @@
     include("../PHP/caixa.php");
     include("../PHP/obtemDados.php");
 
-    $conectado = inicioSessao();
-
-    $produtos = array();
-    $produtos = tblProduto();
-    if ($conectado)
-    {
-        if($_SESSION['usuario']['ativo'])
-        {
-            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-        }
-    }        
+    $produtos = tblProduto();    
 ?>
 
 
@@ -157,20 +147,21 @@
         
         foreach ($produtos as $produto)
         {
-            $icone = 'carrinho_branco.svg';
-            $funcao = 'add';
+            if(estaNoCarrinho($cod_produto))
+            {
+                $icone = 'Check_branco.svg';
+                $funcao = 'ver';
+            }
+            else{
+                $icone = 'shopping_branco.svg';
+                $funcao = 'add';
+            }
             
 
             $cod_produto = $produto->getCodProduto();
             $nome = $produto->getNome();
             $preco = $produto->getPreco();
             $categoria = $produto->getCategoria();
-
-            if (estaNoCarrinho($cod_produto, $cod_usuario))
-            {
-                $icone = 'Check_branco.svg';
-                $funcao = 'ver';
-            }
             
             echo "<div class='product' id='".$cod_produto."'>
             <img src='../Imagens/Produtos/". $cod_produto ."/P1.png' alt='Produto'>
@@ -188,9 +179,8 @@
                         <button>
                             <p>COMPRAR</p>
                         </button>
-                        <form action='../PHP/carrinho.php' method='post'>
+                        <form action='../PHP/insereDadosCarrinho.php' method='post'>
                             <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                            <input type='hidden' name='cod_usuario' value='1'>
                             <input type='hidden' name='funcao' value='$funcao'>
                             <button type='submit' id='add-cart' onclick='addCart(event)'>
                                 <p>+</p>

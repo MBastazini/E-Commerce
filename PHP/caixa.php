@@ -1,6 +1,9 @@
-<?php    
+<?php   
+include('obtemDados.php');
+
   function barraNavegacao($tela, $src)
   {
+    $produtos = tblProduto(); //Obtem os produtos para a barra de pesquisa
      echo "<div class='nav_nav"; if ($tela == 'home'){echo" nav_sobe ";}  echo" container'>
         <div class='nav_fundo nf_fixo'></div>
         <a href='".$src."'><img src='".$src."Icones/logo-verde.svg' class='nav_logo' alt='Logo TINYWOOD'></a>
@@ -12,15 +15,11 @@
                     <input type='text' placeholder='Pesquisar...'>
                 </div>
                 <div class='nav_p_resultados'>";
-                    $conn = coneccao();
-                    $sql = 'select * from tbl_produto';
-                    $produtos = $conn->query($sql);
-                    $a = 1;
-                    while ($produto = $produtos->fetch())
+                    foreach ($produtos as $produto)
                     {
-                        echo "<a href='".$src."Produtos/index.php#".$produto['cod_produto']."'>";
+                        echo "<a href='".$src."Produtos/index.php#".$produto->getCodProduto()."'>";
                         echo "<div>";
-                        echo "<p>".$produto['nome']."</p>";
+                        echo "<p>".$produto->getNome()."</p>";
                         echo "</div>";
                         echo "</a>";
                     }

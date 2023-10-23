@@ -52,10 +52,6 @@ include("insereDadosCarrinho.php");
         }
     }
 
-    
-
-    
-
     function editaUsuario()
     {
         $user = CheckUser();
@@ -178,6 +174,10 @@ include("insereDadosCarrinho.php");
                         
                         $_SESSION['usuario']['ativo'] = true;
 
+                        foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                            adicionaCarrinho($cod_produto, $quantidade);
+                        }
+                        
                         $_SESSION['visitante']['ativo'] = false;
 
 

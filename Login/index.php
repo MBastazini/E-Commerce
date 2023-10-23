@@ -4,8 +4,6 @@
     include("../PHP/caixa.php");
     //inicioSessao(); -> suponho que no login e cadastro não seja necessario executar.
 
-    $conn = coneccao();
-
     if(isset($_GET['erro']))
     {
         $erro = $_GET['erro'];

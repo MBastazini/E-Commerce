@@ -120,7 +120,7 @@
 
             $conn = coneccao();
     
-            $sql = "SELECT p.nome, p.custo, p.cod_produto, cp.quantidade, tmp.cod_tmpcompra FROM tbl_tmpcompra AS tmp
+            $sql = "SELECT p.nome, p.preco, p.cod_produto, cp.quantidade, tmp.cod_tmpcompra FROM tbl_tmpcompra AS tmp
             INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
             INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
             INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto

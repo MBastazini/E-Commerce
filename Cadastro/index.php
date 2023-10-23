@@ -3,8 +3,6 @@
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
 
-    $conn = coneccao();
-
     if(isset($_COOKIE['nome_tmp']))
     {
         $nome_tmp = $_COOKIE['nome_tmp'];
