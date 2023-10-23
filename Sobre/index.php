@@ -96,19 +96,18 @@
     ?>
 
     <section class="container" id="tela_sobre">
-        <h1>A TINY WOOD</h1>
-        <p>"Alguma mensagem / spot pequena"</p>
+        <h1>TINY WOOD</h1>
+        <p>“Conectado com a natureza em todos os lugares“</p>
         <div class="sobre_img">
             <img src="../Icones/foto-teste.png">
         </div>
         <div class="info_tiny_wood">
             <h1 class="titulo t_centro">SOBRE NÓS</h1>
-            <p>Nos somos algo e fazemos tipo, alguma coisa, mensagem não é meu trabalho e não espero que seja tambem
-                Eu, tipo, sla, escrevo e tipo, sla, não sei o que escrever, mas tipo, sla, eu vou escrever, tipo, sla,
-                ah é o copilot que ta escrevendo, copilot é um programa que escreve por vc, sla, eu não sei o que escrever
-                mas tipo, sla, eu vou escrever, tipo, sla, ah é o copilot que ta escrevendo, copilot é um programa que escreve por vc, sla, eu não sei o que escrever
-                mas tipo, sla, eu vou escrever, tipo, sla, ah é o copilot que ta escrevendo, copilot é um programa que escreve por vc, sla, eu não sei o que escrever
-                ele e meio burro, repitiu a mesma coisa 4 vezes, mas tudo bem, tem bastante msg.
+            <p>A Tiny Wood é uma empresa LTDA composta por alunos do ensino médio do Colégio Técnico Industrial de Bauru, 
+                desenvolvida como um projeto de startup com cunho didático, orientada por nossos professores 
+                Jovita Mercedes, Marcelo Cabello, Débora Aires e José Vieira. Confeccionado artesanalmente a 
+                criação do produto final e seu canal de vendas online, associados à tecnologia, inovação e 
+                sustentabilidade.
             </p>
             <div>
                 
@@ -118,12 +117,12 @@
                 <div onclick="CopyMessage(this)">
                     <img src="../Icones/copy.svg">
                      <p>Telefone</p>
-                     <h1>+55 (14) 98144-4444</h1>
+                     <h1>+55 (14) 99794-3704</h1>
                 </div>
                 <div onclick="CopyMessage(this)">
                     <img src="../Icones/copy.svg">
                      <p>E-mail</p>
-                     <h1>tinywood@gmail.com</h1>
+                     <h1>tinywood@projetoscti.com.br</h1>
                  </div>
              </div>
         </div>
@@ -156,7 +155,7 @@
                     <div class="dev_btn"></div>
                     <h1>Leticia Garcia<br>N°21</h1>
                     <div class="dev_img"></div>
-                    <p> ______, responsavel, juntamente com a Mariana, pelos mapas
+                    <p> Qualidade, responsavel, juntamente com a Mariana, pelos mapas
                         conceituais e logicos do banco de dados, alem de ajudar
                         na obtenção dos metais para os chaveiros, lixação e no corte a laser.
 
@@ -164,9 +163,9 @@
                 </div>
                 <div class="dev enabled" id="mariana">
                     <div class="dev_btn"></div>
-                    <h1>Mriana Senger<br>N°23</h1>
+                    <h1>Mariana Senger<br>N°23</h1>
                     <div class="dev_img"></div>
-                    <p> _______, responsavel, juntamente com a Leticia, pelos mapas
+                    <p> Produção, responsavel, juntamente com a Leticia, pelos mapas
                         conceituais e logicos do banco de dados, alem de montar o design dos chaveiros
                         e ajudar com a lixação.
 
@@ -174,7 +173,7 @@
                 </div>
                 <div class="dev enabled" id="matheus">
                     <div class="dev_btn"></div>
-                    <h1>Matheus Trantini<br>N°25</h1>
+                    <h1>Matheus Trentini<br>N°25</h1>
                     <div class="dev_img"></div>
                     <p> Marketing, montou o documento necessario para o envio do projeto e conseguiu um patrocinio.
 

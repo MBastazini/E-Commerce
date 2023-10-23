@@ -2,7 +2,7 @@
     @import url('https://fonts.nav_googleapis.nav_com/css2?family=Poppins&display=swap');
     
     /*mencionar @slayingthedragon*/
-    *{
+*{
     padding: 0px;
     margin: 0px;
     font-family: 'Poppins', sans-serif;
@@ -651,6 +651,9 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     margin: 0 !important;
     width: 100%;
 }
+.info01_1_div > p{
+    text-align: justify;
+}
 .info01_1 *:not(.info01_1 img){
     margin: 15px;
 }
@@ -1103,6 +1106,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     color: white;
     font-size: 20px;
     font-weight: 100;
+    text-align: justify;
 }
 #f_1{
     position: absolute;
@@ -1162,6 +1166,14 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     transform: scale(1.1);
     filter: opacity(100%);
     transition: 0.1s;
+}
+.footer_logo_info_mais_botao > img{
+
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    padding: 5px;
+    box-sizing: border-box;
 }
 .footer_info{
     display: grid;
@@ -1768,6 +1780,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         font-weight: 400;
         line-height: 1.2;
         margin-bottom: 10px;
+        text-align: justify;
     }
     #tela_sobre > h1{
         font-size: 60px;
@@ -1910,10 +1923,31 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         z-index: 3;
     }
     .dev > .dev_img{
-        width: 100%;
+        width: 80%;
         height: 50%;
         background-image: url(Icones/quadrados.svg);
         background-size: cover;
+        background-position: center;
+    }
+    .dev#mateus > .dev_img
+    {
+        background-image: url(Imagens/mateus.jpg);
+    }
+    .dev#luiz > .dev_img
+    {
+        background-image: url(Imagens/luiz.jpg);
+    }
+    .dev#leticia > .dev_img
+    {
+        background-image: url(Imagens/leticia.jpg);
+    }
+    .dev#mariana > .dev_img
+    {
+        background-image: url(Imagens/mariana.jpg);
+    }
+    .dev#matheus > .dev_img
+    {
+        background-image: url(Imagens/matheus.jpg);
     }
     .dev h1{
         font-size: 40px;
@@ -1937,6 +1971,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         font-weight: 400;
         line-height: 1.2;
         margin-bottom: 10px;
+        text-align: justify;
     }
 
     /*Organização posocional dos desenvolvedores*/

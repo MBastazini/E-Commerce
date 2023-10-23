@@ -85,14 +85,24 @@ include('obtemDados.php');
               <img src='".$src."Icones/logo-bola-branco.svg' alt='Logo da Tiny Wood'>
               <div class='footer_logo_info'>
                   <h1>TINY WOOD</h1>
-                  <p>Alguimas informaçoes pq eu vi num lugar e 
-                      vou colocar
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vo
-                  luptate quidem distinctio rerum assumenda quae aut, dicta c</p>
+                  <p>Somos uma empresa de referência ambiental, que reutiliza  árvores por meio do licenciamento 
+                  urbano para transformar em um adereço estiloso e acessível. Conectado com a natureza em todos os lugares.</p>
                   <div class='footer_logo_info_mais'>
-                      <div class='footer_logo_info_mais_botao' value='1'></div>
-                      <div class='footer_logo_info_mais_botao' value='2'></div>
-                      <div class='footer_logo_info_mais_botao' value='3'></div>
+                    <a href='https://mail.google.com/mail/?view=cm&fs=1&to=tinywood@projetoscti.com.br' target='_blank'>
+                        <div class='footer_logo_info_mais_botao' value='1'>
+                            <img src='".$src."Icones/email.svg'>
+                        </div>
+                    </a>
+                    <a href='https://instagram.com/tiny.wood?igshid=MzRlODBiNWFlZA==' target='_blank'>
+                        <div class='footer_logo_info_mais_botao' value='2'>
+                            <img src='".$src."Icones/instegrem.svg'>
+                        </div>
+                    </a>
+                    <a href='https://www.youtube.com/channel/UCaNZ0fq69Qrlq9f8W9WydTg' target='_blank'>
+                        <div class='footer_logo_info_mais_botao' value='3'>
+                            <img src='".$src."Icones/yeutebe.svg'>
+                        </div>
+                    </a>
 
                   </div>
               </div>
@@ -111,11 +121,9 @@ include('obtemDados.php');
                   <a href='sobre.html#matheus'><p>Matheus Trentini | N° 25</p></a>
               </div>
               <div class='footer_div'>
-                  <h1>Contato</h1>
-                  <a><p>E-mail</p></a>
-                  <a><p>Telefone</p></a>
-                  <a><p>sla1</p></a>
-                  <a><p>sla2</p></a>
+                  <h1>Colegio</h1>
+                  <a href='https://cti.feb.unesp.br'><p>CTI - Unesp (Campus Bauru)</p></a>
+                  <a href='https://www.bauru.unesp.br'><p>UNESP Bauru</p></a>
               </div>
           </div>
       </footer>";

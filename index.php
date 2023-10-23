@@ -225,12 +225,11 @@
         </div>
         <div class="sobre container">
             <h1>A TINY WOOD</h1>
-            <p>A tiny wood é com muoi=to orgulhoema dbela mensgam amla escreita eu ti socm osmeno bnoa quero ter aiula
-                isso e so um teste de mensagem nção queria usar o lorem poderia/ claro que sim mas nãio querioa
-                depois que mudo uisso se achar que ta m uot grande tambem, nem sei se tem tyanha coisa pras ecsrveer mesmo.
-                <br><br>
-                Honestamente, nem sei o que por aqui, e se repitir la no footer? fica estranho e a seção é 
-                muito pequena, vou seguindo e da pra mudar dps, tudo dá.
+            <p>A Tiny Wood é uma empresa LTDA que se dedica à produção de chaveiros de madeira 
+                feitos artesanalmente. Procedendo nossos recursos, 
+                procedimentos e resultados aos segmentos do produto final, articulando nossa conformidade com a natureza
+
+
             </p>
         </div>
     </section>
