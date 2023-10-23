@@ -114,11 +114,11 @@ include('obtemDados.php');
           <div class='footer_info'>
               <div class='footer_div'>
                   <h1>Desenvolvedores</h1>
-                  <a href='sobre.html#leticia'><p>Leticia Garcia | N° 21</p></a>
-                  <a href='sobre.html#luiz'><p>Luiz Felipe | N° 22</p></a>
-                  <a href='sobre.html#mariana'><p>Mariana Senger | N° 23</p></a>
-                  <a href='sobre.html#mateus'><p>Mateus Bastazini | N° 24</p></a>
-                  <a href='sobre.html#matheus'><p>Matheus Trentini | N° 25</p></a>
+                  <a href='Sobre/#leticia'><p>Leticia Garcia | N° 21</p></a>
+                  <a href='Sobre/#luiz'><p>Luiz Felipe | N° 22</p></a>
+                  <a href='Sobre/#mariana'><p>Mariana Senger | N° 23</p></a>
+                  <a href='Sobre/#mateus'><p>Mateus Bastazini | N° 24</p></a>
+                  <a href='Sobre/#matheus'><p>Matheus Trentini | N° 25</p></a>
               </div>
               <div class='footer_div'>
                   <h1>Colegio</h1>
@@ -328,7 +328,7 @@ include('obtemDados.php');
     //$pdf->SetLeftMargin(45);
     $pdf->SetFontSize(12);
     $pdf->WriteHTML($texto);
-    $pdf->Output();
+    $pdf->Output('D', 'Compra_tinywood.pdf');
   }
     
     /*function coneccao ($para = "")  

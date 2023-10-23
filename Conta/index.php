@@ -214,8 +214,9 @@
                 <div> 
                 <p>". $data_criacao ."</p>
                 <p>". $ip_criacao ."</p>
-                <form action='../PHP/deletatoken.php' method='post' id='form-token'>
-                    <button type='submit' name='deletar' value='". $cod_token ."'>
+                <form action='../PHP/insereDadosUsuario.php' method='post' id='form-token'>
+                    <input type='hidden' name='funcao' value='deltoken'>
+                    <button type='submit' name='id' value='". $cod_token ."'>
                         <p>DELETAR</p>
                     </button>
                 </form>

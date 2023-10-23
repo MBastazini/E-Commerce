@@ -85,7 +85,7 @@
                     <p>Adquira já! Uma lembrança única com um estilo natural, 
                         ideal para todos os lugares, <br> Tiny Wood, chaveiros de madeira!
                     </p>
-                    <a href="produtos.php">
+                    <a href="Produtos">
                         <div class="tela_botao">
                             <p>GARANTA O SEU!</p>
                         </div>
@@ -111,7 +111,7 @@
                 <div class="info01_1 inf1_e">
                     <img src="Imagens/tronco.jpg" alt="Imagem01">
                     <div class="info01_1_div">
-                        <h1>Fase 3 - Viva CTI</h1>
+                        <h1>Finalização</h1>
                         <p>Por fim, o chaveiro Tiny wood está finalizado! 
                             Pronto para te conectar com a natureza em todos os momentos!</p>
                     </div>
@@ -119,7 +119,7 @@
                 <div class="info01_1 inf1_c">
                     <img src="Imagens/lixa.jpg" alt="Imagem02">
                     <div class="info01_1_div">
-                        <h1>Fase 1 - Urbanwood</h1>
+                        <h1>Recorte</h1>
                         <p>
                             A escolha cuidadosa da madeira é crucial para a qualidade do produto, 
                             por isso confiamos à Urbanwood, que realiza uma extração ecologicamente sustentável.</p>
@@ -128,7 +128,7 @@
                 <div class="info01_1 inf1_d">
                     <img src="Imagens/folha.jpg" alt="Imagem03">
                     <div class="info01_1_div">
-                        <h1>Fase 2 - FabLab</h1>
+                        <h1>acabamento</h1>
                         <p>
                             após cortada, a peça de madeira será lixada, uma etapa essencial para realçar a textura e dar seu acabamento, 
                             furada, gravada à laser na FabLab com nossos designs e por fim tratadas com óleo mineral. </p>
@@ -178,7 +178,7 @@
                             $funcao = 'ver';
                         }
                         else{
-                            $icone = 'shopping_branco.svg';
+                            $icone = 'carrinho_branco.svg';
                             $funcao = 'add++';
                         }
                         echo "<div class='produto'> 
@@ -189,12 +189,14 @@
                                     <h2>Imagens/Produtos/$cod_produto.jpg</h2>
                                 </div>
                                 <div class='produto_botao'>
-                                    <a href='#'>
-                                        <div>
+                                    <form action='PHP/insereDadosCarrinho.php' method='post'>
+                                        <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                                        <input type='hidden' name='funcao' value='comprar'>
+                                        <button>
                                             <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
                                             <p>Comprar</p>
-                                        </div>
-                                    </a>
+                                        </button>
+                                    </form>
                                     <form action='PHP/insereDadosCarrinho.php' method='post'>
                                         <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
                                         <input type='hidden' name='funcao' value='$funcao'>

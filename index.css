@@ -1093,7 +1093,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     gap: 20px;
     align-items: flex-start;
 }
-.footer_logo img{
+.footer_logo > img{
     width: 250px;
     height: 250px;
 }
@@ -2874,7 +2874,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     }
 
 
-    .footer_logo img{
+    .footer_logo > img{
         width: 200px;
         height: 200px;
     }
@@ -3062,7 +3062,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
 
         .nav_logo{
-                content: url('logo-bola.svg');
+                content: url('Icones/logo-bola-verde.svg');
                 width: 50px;
                 min-width: 50px;
         }
@@ -3515,7 +3515,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             justify-content: center;
             align-items: center;
         }
-        .footer_logo img{
+        .footer_logo > img{
             width: 100px;
             height: 100px;
         }

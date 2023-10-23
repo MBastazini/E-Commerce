@@ -177,7 +177,7 @@
                 echo "
                 <h3>Nenhum</h3>
                 <div class='product_botoes'>
-                    <form action'../PHP/insereDadosCarrinho.php' method='post'>
+                    <form action='../PHP/insereDadosCarrinho.php' method='post'>
                         <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
                         <input type='hidden' name='funcao' value='comprar'>
                         <button type='submit'>
