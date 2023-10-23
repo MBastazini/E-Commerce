@@ -1,10 +1,16 @@
 <?php
     session_start();
     //Apagando o token do banco de dados
-    include("caixa.php");
+    include("sessao.php");
     $conn = coneccao();
+    $token = $_SESSION['token'];
     $sql = "DELETE FROM tbl_token WHERE token = :token";
-    executaSQL($sql, ['token' => $_SESSION['token']]);
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":token", $token, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $conn = null;
+    $stmt = null;
 
 
     $_SESSION['conectado'] = false; //Talvez desnecessario, o de baixo tbm
