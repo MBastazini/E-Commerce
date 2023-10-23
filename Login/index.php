@@ -110,7 +110,8 @@
         <div class="login tela_log_cad">
             <h1>INICIAR SESSÃO</h1>
 
-            <form action="../PHP/login.php" method="post">
+            <form action="../PHP/insereDadosUsuario.php" method="post">
+                <input type='hidden' value="login" name="funcao">
                 <?php 
                     if ($erro == 1)
                     {

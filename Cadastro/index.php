@@ -145,8 +145,8 @@
             }
             ?>
 
-            <form action='../PHP/cadastro.php' method='post'>
-                
+            <form action='../PHP/insereDadosUsuario.php' method='post'>
+                <input type='hidden' name='funcao' value='cadastro'>
                 <div class="nome inp">
                     <?php 
                      echo "<input type='text' name='nome' maxlength='80' value=$nome_tmp>";

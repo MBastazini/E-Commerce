@@ -3,7 +3,6 @@
     error_reporting (E_ALL);
 
     include("../PHP/caixa.php");
-    include("../PHP/obtemDados.php");
 
     $produtos = tblProduto();    
 ?>
@@ -147,6 +146,14 @@
         
         foreach ($produtos as $produto)
         {
+            
+            
+
+            $cod_produto = $produto->getCodProduto();
+            $nome = $produto->getNome();
+            $preco = $produto->getPreco();
+            $categoria = $produto->getCategoria();
+            
             if(estaNoCarrinho($cod_produto))
             {
                 $icone = 'Check_branco.svg';
@@ -156,12 +163,6 @@
                 $icone = 'shopping_branco.svg';
                 $funcao = 'add';
             }
-            
-
-            $cod_produto = $produto->getCodProduto();
-            $nome = $produto->getNome();
-            $preco = $produto->getPreco();
-            $categoria = $produto->getCategoria();
             
             echo "<div class='product' id='".$cod_produto."'>
             <img src='../Imagens/Produtos/". $cod_produto ."/P1.png' alt='Produto'>

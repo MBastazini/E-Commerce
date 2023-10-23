@@ -225,7 +225,7 @@
 
 
 
-    if($_SERVER['RESQUEST_METHOD'] == 'POST')
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') 
     {
         $funcao = $_POST['funcao'];
         if($funcao == 'muda+')

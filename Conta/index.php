@@ -2,9 +2,6 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
-    $conectado = inicioSessao();
-
-    $conn = coneccao();
 ?>
 
 <!DOCTYPE html>
@@ -108,38 +105,33 @@
 
             <div class="info_conta">
                 <?php 
+                    $usuario = tblUsuario();
+                    $nome = $usuario[0] -> getNome();
+                    $email = $usuario[0] -> getEmail();
+                    $telefone = $usuario[0] -> getTelefone();
+                    $senha = $usuario[0] -> getSenha();
+                    $cod_usuario = $usuario[0] -> getCodUsuario();
+                    echo"<div class='inp disabled'>
+                    <input type='text' value='". $nome ."' disabled name='nome'>
+                    <p>Nome</p>
+                    </div>";
 
-                    if ($conectado)
-                    {
-                        $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = ".$_SESSION['usuario']['cod_usuario'];
-                        $select = executaSQL($sql, NULL);
-                        $resultado = $select->fetch();
-                        $nome = $resultado['nome'];
-                        $email = $resultado['email'];
-                        $telefone = $resultado['telefone'];
-                        $senha = $resultado['senha'];
-                        echo"<div class='inp disabled'>
-                        <input type='text' value='". $nome ."' disabled name='nome'>
-                        <p>Nome</p>
-                        </div>";
+                    echo"<div class='inp disabled'>
+                    <input type='email' value='". $email ."' disabled name='email'>
+                    <p>E-Mail</p>
+                    </div>";
 
-                        echo"<div class='inp disabled'>
-                        <input type='email' value='". $email ."' disabled name='email'>
-                        <p>E-Mail</p>
-                        </div>";
+                    echo"<div class='inp disabled'>
+                    <input type='tel' value='". $telefone ."' disabled name='telefone'>
+                    <p>Telefone</p>
+                    </div>";
 
-                        echo"<div class='inp disabled'>
-                        <input type='tel' value='". $telefone ."' disabled name='telefone'>
-                        <p>Telefone</p>
-                        </div>";
+                    echo"<div class='inp disabled'>
+                    <input type='password' value='". $senha ."' disabled name='senha'>
+                    <p>Senha</p>
+                    </div>";
 
-                        echo"<div class='inp disabled'>
-                        <input type='password' value='". $senha ."' disabled name='senha'>
-                        <p>Senha</p>
-                        </div>";
-
-                        echo"<input type='hidden' value='". $_SESSION['usuario']['cod_usuario'] ."' name='codigo'>";
-                    }
+                    echo"<input type='hidden' value='". $cod_usuario ."' name='codigo'>";
                 ?>
             </div>
             <input type="submit" value="Salvar alterações" id="btn_submit">
@@ -152,15 +144,8 @@
         </a>
         
         <?php 
-        if (isset($_SESSION['adm']))
-        {
-            $adm = $_SESSION['adm'];
-        }
-        else{
-            $adm = false;
-        }
 
-        if($adm)
+        if($_SESSION['usuario']['adm'])
         {
             echo "<div id='administrador'>
             <h1 id='area-adm'>Opções de administrador</h1>
@@ -194,24 +179,20 @@
         <div id="info_compra">
             
             <?php 
-                if ($conectado)
+                $compras = tblCompra();
+                foreach ($compras as $compra)
                 {
-                    $sql2 = "
-                    SELECT p.nome, p.preco, cp.quantidade, c.data_compra, c.status FROM tbl_compra_produto AS cp 
-                    INNER JOIN tbl_produto AS p ON p.cod_produto = cp.cod_produto 
-                    INNER JOIN tbl_compra AS c ON c.cod_compra = cp.cod_compra
-                    WHERE c.status = 'finalizado';
-                    "; //conferir o codigo de usuario tbm
-                    $select2 = executaSQL($sql2, NULL);
-                    while ($resultado2 = $select2->fetch()){
-                        echo"<div>
-                            <p>". $resultado2['nome'] ."</p>
-                            <p>". $resultado2['quantidade'] ."</p>
-                            <p>". $resultado2['preco'] ."</p>
-                            <p>". $resultado2['data_compra'] ."</p>
-                        </div>";
-                    }
-                }   
+                    $quantidade = $compra -> getQuantidade();
+                    $preco_total = ($compra -> getPreco() * $quantidade);
+                    $data_compra = $compra -> getDataCompra();
+                    $nome_produto = $compra -> getNome();
+                    echo "<div>
+                    <p>". $nome_produto ."</p>
+                    <p>". $quantidade ."</p>
+                    <p>". $preco_total ."</p>
+                    <p>". $data_compra ."</p>
+                    </div>";
+                }
             ?>
         </div>
 
@@ -223,31 +204,24 @@
         </div>
         <div id="info_compra" class="token">    
             <?php 
-                if ($conectado)
-                {
-                    $sql_token = "SELECT * FROM tbl_token WHERE cod_usuario = :cod_usuario";
-                    $select_token = executaSQL($sql_token, ['cod_usuario' => $_SESSION['usuario']['cod_usuario']]);
-                    if ($select_token->fetch() == NULL)
-                    {
-                        echo "<p>Não há sessões ativas</p>";
-                    }
-                    else{
-                        while($info_token = $select_token->fetch()) //ent parou de funfa né
-                        {
-                            echo"
-                            <div> 
-                            <p>". $info_token['data_criacao'] ."</p>
-                            <p>". $info_token['ip_criacao'] ."</p>
-                            <form action='../PHP/deletatoken.php' method='post' id='form-token'>
-                                <button type='submit' name='deletar' value='". $info_token['cod_token'] ."'>
-                                    <p>DELETAR</p>
-                                </button>
-                            </form>
-                            </div>";
-                        }
-                    }
-                }
-            
+            $tokens = tblToken();
+            foreach ($tokens as $token)
+            {
+                $data_criacao = $token -> getDataCriacao();
+                $ip_criacao = $token -> getIpCriacao();
+                $cod_token = $token -> getCodToken();
+                echo"
+                <div> 
+                <p>". $data_criacao ."</p>
+                <p>". $ip_criacao ."</p>
+                <form action='../PHP/deletatoken.php' method='post' id='form-token'>
+                    <button type='submit' name='deletar' value='". $cod_token ."'>
+                        <p>DELETAR</p>
+                    </button>
+                </form>
+                </div>";   
+            }
+                     
             ?>
         </div>
     </section>
