@@ -1306,6 +1306,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     padding: 20px;
     box-sizing: border-box;
     transition: 0.2s;
+    scroll-margin: 100px;
 }
 .produto_compra_div{
     display: flex;

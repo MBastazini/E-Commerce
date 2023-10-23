@@ -1,4 +1,4 @@
-function novoProduto(id, nome, quantidade, preco) {
+/*function novoProduto(id, nome, quantidade, preco) {
     var produto_compra = document.createElement('a');
     produto_compra.classList.add('compra_efetuada');
     produto_compra.href = `#${id}`;
@@ -7,15 +7,7 @@ function novoProduto(id, nome, quantidade, preco) {
     const Produto1 = document.getElementById(`${id}`);
     Produto1.style.scrollMargin = '500px';
 
-    produto_compra.onclick = function() {
-        var produto = document.getElementById(`${id}`);
-        produto.style.backgroundColor = 'rgba(150, 195, 121, 0.6)';
-        produto.style.transform = 'scale(1.03)';
-        setTimeout(function() {
-            produto.style.backgroundColor = '#D4EBC6';
-            produto.style.transform = 'scale(1)';
-        }, 300);
-    }
+    
 
     var nomeElement = document.createElement("p");
     nomeElement.innerText = nome;
@@ -81,7 +73,21 @@ function adicionarProdutosDaTabela() {
 }*/
 
 document.addEventListener("DOMContentLoaded", function() {
-    adicionarProdutosDaTabela();
+    const produtos_compra = document.querySelectorAll('.compra_efetuada');
+    produtos_compra.forEach(produto_compra => {
+        produto_compra.addEventListener('click', function() {
+            var id = produto_compra.getAttribute('href');
+            //Remover o # do href
+            id = id.replace('#', '');
+            var produto = document.getElementById(id);
+            produto.style.backgroundColor = 'rgba(150, 195, 121, 0.6)';
+            produto.style.transform = 'scale(1.03)';
+            setTimeout(function() {
+                produto.style.backgroundColor = '#D4EBC6';
+                produto.style.transform = 'scale(1)';
+            }, 300);
+        });
+    });
     //novoValorTotal();
 
     //const produtos_compra = document.querySelector('#produtos_compra');

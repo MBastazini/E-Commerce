@@ -165,6 +165,58 @@
         return $carrinho;
     } 
 
+    function getValorTotal()
+    {
+        $user = CheckUser();
+        if ($user == 1)
+        {
+            $soma = 0;
+
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+
+            $conn = coneccao();
+
+            $sql = 'SELECT SUM(preco*quantidade) FROM tbl_tmpcompra AS tmp
+            INNER JOIN tbl_compra ON tmp.cod_compra = tbl_compra.cod_compra
+            INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
+            INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
+            WHERE tbl_compra.cod_usuario = :cod_usuario';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+            $stmt->execute();
+            $resultado = $stmt->fetch();
+            $soma = $resultado['sum'];
+
+            $conn = null;
+            $stmt = null;
+
+            return $soma;
+        }
+        else if ($user == 2)
+        {
+            $soma = 0;
+            if (isset($_SESSION['visitante']['carrinho']))
+            {
+                foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                    $conn = coneccao();
+    
+                    $sql = "SELECT preco FROM tbl_produto WHERE cod_produto = :cod_produto";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
+                    $stmt->execute();
+                    $resultado = $stmt->fetch();
+    
+                    $soma += $resultado['preco'] * $quantidade;
+    
+                    $conn = null;
+                    $stmt = null;
+                    $resultado = null;
+                }
+            }
+            return $soma;
+        }
+        
+    }
     function estaNoCarrinho($cod_produto){
         $carrinhos = tblCarrinho();
         $estaNoCarrinho = false;

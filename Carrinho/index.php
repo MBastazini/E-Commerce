@@ -167,10 +167,32 @@
                         <h1>Preço</h1>
                     </div>
                     
+                    <?php 
+                    $carrinho = tblCarrinho();
+                    foreach($carrinho as $c) {
+                        $cod_produto = $c->getCodProduto();
+                        $nome = $c->getNome();
+                        $quantidade = $c->getQuantidade();
+                        $preco = $c->getPreco();
+                        $preco_total = $preco * $quantidade;
+                        echo"
+                            <a class='compra_efetuada' href='#produto_$cod_produto'>
+                            <p>". $quantidade."x</p>
+                            <p>$nome</p>
+                            <h1>R$ ".$preco_total."</h1>
+                            </a>        
+                        ";   
+                    }  
+                    ?>
                 </div>
                 <div class="compras_total">
                     <p>TOTAL</p>
-                    <h1 id="total">R$ 0,00</h1>
+                    <h1 id="total">R$ 
+                        <?php 
+                        $soma = getValorTotal();
+                        echo $soma;
+                        ?>
+                    </h1>
                 </div>
                 <form action='../PHP/insereDadosCarrinho.php' method='post'>
                     <input type='hidden' name='funcao' value='finalizar'>
