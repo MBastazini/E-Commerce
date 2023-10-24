@@ -3688,6 +3688,15 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         .tela_log_cad #ou::after, .tela_log_cad #ou::before {
             height: 1px;
         }
+        .area_produtos > p{
+            display: none;
+        }
+        .area_produtos{
+            margin-top: 15px;
+        }
+        .produto:hover{
+            min-width: none;
+        }
     }
 
 

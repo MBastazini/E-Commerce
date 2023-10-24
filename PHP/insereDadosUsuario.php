@@ -100,11 +100,6 @@ include("insereDadosCarrinho.php");
                 $stmt -> bindParam(':email', $email, PDO::PARAM_STR);
                 $stmt -> execute();
                 $resultado = $stmt->fetch();
-                
-                //Guarda os valores preenchiods para o usuario não ter que redigita-los.
-                Cookie('nome_tmp', $_POST['nome'], 1);
-                Cookie('email_tmp', $_POST['email'], 1);
-                Cookie('telefone_tmp', $_POST['telefone'], 1);
 
                 $conn = null;
                 $stmt = null;

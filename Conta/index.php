@@ -96,7 +96,20 @@
 
     <section class="container" id="conta">
         <h1>Sua conta</h1>
-        <h2>Nomerson de Uzzuario</h2>
+        <h2>
+            <?php 
+            $user = CheckUser();
+            if($user == 1)
+            {
+                $usuario = tblUsuario();
+                $nome = $usuario[0] -> getNome();
+                echo $nome;
+            }
+            else{
+                header('Location: ../');
+            }
+            ?>
+        </h2>
         <form action="../PHP/minhaconta.php" method="post" id="conta_form">
             <div class="edit_btn">
                 <p>Editar informações</p>
@@ -105,8 +118,8 @@
 
             <div class="info_conta">
                 <?php 
-                    $usuario = tblUsuario();
-                    $nome = $usuario[0] -> getNome();
+                $user = CheckUser();
+                if($user == 1) {
                     $email = $usuario[0] -> getEmail();
                     $telefone = $usuario[0] -> getTelefone();
                     $senha = $usuario[0] -> getSenha();
@@ -131,7 +144,12 @@
                     <p>Senha</p>
                     </div>";
 
-                    echo"<input type='hidden' value='". $cod_usuario ."' name='codigo'>";
+                    echo"<input type='hidden' value='". $cod_usuario ."' name='codigo'>";   
+                }   
+                else{
+                    header('Location: ../');
+                }
+                    
                 ?>
             </div>
             <input type="submit" value="Salvar alterações" id="btn_submit">

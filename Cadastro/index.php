@@ -2,38 +2,6 @@
     ini_set ( 'display_errors' , 1); 
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
-
-    if(isset($_COOKIE['nome_tmp']))
-    {
-        $nome_tmp = $_COOKIE['nome_tmp'];
-    }
-    else{
-        $nome_tmp = '';
-    }
-
-    if(isset($_COOKIE['email_tmp']))
-    {
-        $email_tmp = $_COOKIE['email_tmp'];
-    }
-    else{
-        $email_tmp = '';
-    }
-
-    if(isset($_COOKIE['telefone_tmp']))
-    {
-        $telefone_tmp = $_COOKIE['telefone_tmp'];
-    }
-    else{
-        $telefone_tmp = '';
-    }
-
-    if(isset($_GET['erro']))
-    {
-        $erro = $_GET['erro'];
-    }
-    else{
-        $erro = 0;
-    }
     
 ?>
 
