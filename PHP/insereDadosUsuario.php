@@ -40,9 +40,13 @@ include("insereDadosCarrinho.php");
         
         
             //Pega todas as compras feitas enquanto o usuário estava como visitante e as coloca no seu nome.
-            foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                adicionaCarrinho($cod_produto, $quantidade);
+            if (isset($_SESSION['visitante']['carrinho']))
+            {
+                foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                    adicionaCarrinho($cod_produto, $quantidade);
+                }
             }
+            
         
             $_SESSION['visitante']['ativo'] = false;
         
@@ -123,6 +127,9 @@ include("insereDadosCarrinho.php");
                     header('Location: ../Cadastro/index.php?erro=2');
                 }
             }
+            else{
+                header('Location: ../');
+            }
                  
         }
         else if($funcao == 'login')
@@ -197,6 +204,9 @@ include("insereDadosCarrinho.php");
                         header('Location: ../');
                     }
                 }
+            }
+            else{
+                header('Location: ../');
             }
         } 
         else if ($funcao == 'edit')

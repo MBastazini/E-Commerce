@@ -3,6 +3,14 @@
     error_reporting (E_ALL);
     include("../PHP/caixa.php");
     
+    
+    if (isset($_GET['erro']))
+    {
+        $erro = $_GET['erro'];
+    }
+    else{
+        $erro = 0;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -117,19 +125,19 @@
                 <input type='hidden' name='funcao' value='cadastro'>
                 <div class="nome inp">
                     <?php 
-                     echo "<input type='text' name='nome' maxlength='80' value=$nome_tmp>";
+                     echo "<input type='text' name='nome' maxlength='80'>";
                     ?>
                     <p>Nome</p>
                 </div>
                 <div class="email inp">
                     <?php 
-                        echo "<input type='email' name='email' maxlength='100' value=$email_tmp>";
+                        echo "<input type='email' name='email' maxlength='100'>";
                     ?>
                     <p>E-mail</p>
                 </div>
                 <div class="telefone inp">
                     <?php 
-                        echo "<input type='tel' name='telefone' maxlength='13' value=$telefone_tmp>";
+                        echo "<input type='tel' name='telefone' maxlength='13'>";
                     ?>
                     <p>Telefone</p>
                 </div>
