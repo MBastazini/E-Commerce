@@ -2630,6 +2630,138 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         font-size: 20px;
         color: #0000EE;
     }
+
+
+
+
+
+    /*CRUD*/
+
+    #crud > form{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 40px 0px;
+        margin-top: 20px;
+    }
+    #crud > form > button{
+        background-color: var(--destaque_texto);
+        color: white;
+        padding: 15px;
+        font-size: 20px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        transition: 0.5s;
+        opacity: 70%;
+    }
+    #crud > form > button > img{
+        width: 25px;
+    }
+    #crud > form > button:hover{
+        transform: scale(1.05);
+        transition: 0.5s;
+        cursor: pointer;
+        width: 55%;
+        opacity: 100%;
+    }
+    #crud{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--fundo_01);
+        padding: 20px;
+    }
+    #crud > .elemento:nth-child(even)
+    {
+        background-color: var(--destaque_01);
+    }
+    #crud > .elemento{
+        display: grid;
+        grid-template-columns: 160px 5fr 1fr;
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        align-items: center;
+    }
+    #crud > .elemento > .info{
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 3fr 1fr;
+        grid-template-rows: auto auto;
+    }
+    #crud > .elemento > .info > div{
+        margin: 5px;
+        padding: 20px;
+        padding-bottom: 15px;
+        border: 1px solid var(--destaque_texto);
+        font-size: 18px;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        align-items:end;
+        overflow: auto;
+    }
+    #crud > .elemento > .info > div > p{
+        top: 5px;
+        left: 10px;
+        position: absolute;
+        font-weight: 100;
+        color: #424242;
+        white-space: nowrap;
+    }
+    #crud > .elemento > .info > div > h1{
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        white-space: nowrap;
+        
+    }
+    #crud > .elemento > img{
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: 5px;
+    }
+    #crud > .elemento > .acoes{
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 20px;
+        padding: 15px;
+    }
+    #crud > .elemento > .acoes button{
+        background-color: var(--destaque_02);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: 0.5s;
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+    #crud > .elemento > .acoes button#del:hover{
+        background-color: #aa0e0e;
+    }
+    #crud > .elemento > .acoes button > img{
+        width: 22px;
+    }
+    #crud > .elemento > .acoes button:hover{
+        transform: scale(1.1);
+        background-color: var(--cor_destaque);
+        transition: 0.5s;
+    }
         
         /*
 
@@ -2752,6 +2884,18 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 
         .footer_div h1{
             font-size: 28px;
+        }
+
+
+        #crud > .elemento > .info > div > h1{
+            font-size: 18px;
+        }
+        #crud > .elemento > .info > div > p{
+            font-size: 15px;
+        }
+
+        #crud > .elemento > .info > div{
+            padding: 15px;
         }
 }
 
@@ -2877,6 +3021,13 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     .footer_logo > img{
         width: 200px;
         height: 200px;
+    }
+
+    #crud > .elemento > .info > div{
+        padding: 10px;
+    }
+    #crud > .elemento > .info{
+        grid-template-columns: 1.5fr 1fr 1fr 2fr 1fr;
     }
 }
 
@@ -3053,6 +3204,24 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             background-color: var(--destaque_01);
             width: 100%;
             opacity: 60%;
+        }
+
+        #crud > .elemento > .info{
+            grid-template-columns: 1.5fr 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            height: 100%;
+        }
+        #crud > .elemento{
+            height: 250px;
+        }
+        #crud > .elemento > .acoes{
+            height: 60%;
+        }
+        #crud > .elemento > .acoes button{
+            font-size: 15px;
+        }
+        #crud > .elemento > .acoes button > img{
+            width: 18px;
         }
     }
 
@@ -3241,6 +3410,13 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             width: 50px;
             height: 50px;
         }
+
+        #crud > .elemento > .info > div > h1{
+            font-size: 15px;
+        }
+        #crud > .elemento > .info > div > p{
+            font-size: 12px;
+        }
     }
 
     
@@ -3406,6 +3582,18 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
         #pg_info{
             width: 400px;
+        }
+
+        #crud > .elemento > img{
+            width: 100px;
+            height: 100px;
+        
+        }
+        #crud > .elemento{
+            grid-template-columns: 110px 5fr 1fr;
+        }
+        #crud > .elemento > .acoes button{
+            flex-direction: column;
         }
 }
 
@@ -3696,6 +3884,23 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
         .produto:hover{
             min-width: none;
+        }
+
+
+        #crud > .elemento{
+            display: flex;
+            flex-direction: column;
+            height: auto;
+        }
+        #crud > .elemento > .acoes{
+            display: flex;
+        }
+        #crud{
+            padding: 0;
+        }
+        #crud > .elemento > .info > div{
+            padding: 20px;
+            padding-bottom: 10px;
         }
     }
 
