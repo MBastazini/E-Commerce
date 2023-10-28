@@ -22,8 +22,9 @@ class Produto{
     private $custo = null;
     private $excluido = null;
     private $icms = null;
+    private $quantidade = null;
 
-    public function __construct($cod_produto, $nome, $descricao, $preco, $categoria, $custo, $excluido, $icms){
+    public function __construct($cod_produto, $nome, $descricao, $preco, $categoria, $custo, $excluido, $icms, $quantidade){
         $this->cod_produto = $cod_produto;
         $this->nome = $nome;
         $this->descricao = $descricao;
@@ -32,6 +33,7 @@ class Produto{
         $this->custo = $custo;
         $this->excluido = $excluido;
         $this->icms = $icms;
+        $this->quantidade = $quantidade;
     }
 
     public function getCodProduto(){
@@ -64,6 +66,14 @@ class Produto{
 
     public function getIcms(){
         return $this->icms;
+    }
+
+    public function getQuantidade(){
+        return $this->quantidade;
+    }
+
+    public function setCodProduto($cod_produto){
+        $this->cod_produto = $cod_produto;
     }
     
 }

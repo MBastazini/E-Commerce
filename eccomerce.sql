@@ -10,6 +10,7 @@ CREATE TABLE tbl_produto(
 	margem_lucro numeric(10,2) not null, /* é so caucula na hora */
 	icms numeric(10,2) not null, 
 	categoria varchar(10) not null
+	quantidade integer not null
 );
 ALTER TABLE tbl_produto ADD COLUMN categoria categorias;
 

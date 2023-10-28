@@ -15,10 +15,12 @@ include("sessao.php");
                 'preco'         => $_POST['preco'], 
                 'categoria'     => $_POST['categoria'],
                 'custo'         => $_POST['custo'],
-                'icms'          => $_POST['icms']
+                'icms'          => $_POST['icms'],
+                'quantidade'    => $_POST['quantidade']
             ];
         
-            $sql = "INSERT INTO tbl_produto (nome, descricao, preco, categoria, custo, icms) VALUES (:nome, :descricao, :preco, :categoria, :custo, :icms)";
+            $sql = "INSERT INTO tbl_produto (nome, descricao, preco, categoria, custo, icms, quantidade) 
+            VALUES (:nome, :descricao, :preco, :categoria, :custo, :icms, :quantidade)";
             $stmt = $conn->prepare($sql);
             $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
             $stmt -> bindParam(':descricao', $linha['descricao'], PDO::PARAM_STR);
@@ -26,6 +28,7 @@ include("sessao.php");
             $stmt -> bindParam(':categoria', $linha['categoria'], PDO::PARAM_STR);
             $stmt -> bindParam(':custo', $linha['custo'], PDO::PARAM_STR);
             $stmt -> bindParam(':icms', $linha['icms'], PDO::PARAM_STR);
+            $stmt -> bindParam(':quantidade', $linha['quantidade'], PDO::PARAM_INT);
             $stmt -> execute();
         
             $conn = null;
@@ -48,10 +51,13 @@ include("sessao.php");
                 'categoria'     => $_POST['categoria'],
                 'custo'         => $_POST['custo'],
                 'icms'          => $_POST['icms'],
-                'cod_produto'   => $_POST['cod_produto']
+                'cod_produto'   => $_POST['cod_produto'],
+                'quantidade'   => $_POST['quantidade']
             ];
         
-            $sql = "UPDATE tbl_produto SET nome = :nome, descricao = :descricao, preco = :preco, categoria = :categoria, custo = :custo, icms = :icms WHERE cod_produto = :cod_produto";
+            $sql = "UPDATE tbl_produto SET nome = :nome, descricao = :descricao, 
+            preco = :preco, categoria = :categoria, custo = :custo, icms = :icms, quantidade = :quantidade
+            WHERE cod_produto = :cod_produto";
             $stmt = $conn->prepare($sql);
             $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
             $stmt -> bindParam(':descricao', $linha['descricao'], PDO::PARAM_STR);
@@ -60,6 +66,7 @@ include("sessao.php");
             $stmt -> bindParam(':custo', $linha['custo'], PDO::PARAM_STR);
             $stmt -> bindParam(':icms', $linha['icms'], PDO::PARAM_STR);
             $stmt -> bindParam(':cod_produto', $linha['cod_produto'], PDO::PARAM_INT);
+            $stmt -> bindParam(':quantidade', $linha['quantidade'], PDO::PARAM_INT);
             $stmt -> execute();
         
             $conn = null;

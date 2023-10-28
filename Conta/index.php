@@ -168,7 +168,7 @@
             echo "<div id='administrador'>
             <h1 id='area-adm'>Opções de administrador</h1>
             <div id='area_adm'>
-                <a href=''>
+                <a href='crudProdutos.php'>
                     <div class='edit_btn' id='CRUD'>
                         <p>Tabela de produtos</p>
                         <img src='../Icones/config.svg'>
