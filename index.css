@@ -2804,6 +2804,17 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         background-color: var(--cor_destaque);
         transition: 0.5s;
     }
+
+    #crud > .elemento#excluido:nth-child(even)
+    {
+        background-color: #72727278;
+    }
+    #excluido{
+        background-color: #ababab78;
+    }
+    #excluido > .info > div{
+        border: 1px solid #000000 !important;
+    }
         
         /*
 

@@ -16,6 +16,16 @@ include("sessao.php");
             else{
                 $categoria = $_POST['categoria'];
             }
+
+            if ($_POST['quantidade'] <= 0)
+            {
+                $quantidade = $_POST['quantidade'] = 0;
+            }
+            else{
+                $quantidade = $_POST['quantidade'];
+            }
+
+            $excluido = isset($_POST['excluido']) && $_POST['excluido'] == 1;
             $margem_lucro = ($_POST['preco'] - $_POST['custo']) / $_POST['custo'];
             $linha = [ 
                 'nome'          => $_POST['nome_produto'],   
@@ -24,8 +34,8 @@ include("sessao.php");
                 'categoria'     => $categoria,
                 'custo'         => $_POST['custo'],
                 'icms'          => $_POST['icms'],
-                'quantidade'    => $_POST['quantidade'],
-                'excluido'      => $_POST['excluido'],
+                'quantidade'    => $quantidade,
+                'excluido'      => $excluido,
                 'margem_lucro'  => $margem_lucro
 
             ];
@@ -63,23 +73,43 @@ include("sessao.php");
         if($user == 1)
         {
             $conn = coneccao();
+
+            if ($_POST['categoria'] == '')
+            {
+                $categoria = NULL;
+            }
+            else{
+                $categoria = $_POST['categoria'];
+            }
+
             $margem_lucro = ($_POST['preco'] - $_POST['custo']) / $_POST['custo'];
+            $excluido = isset($_POST['excluido']) && $_POST['excluido'] == 1;
+            echo $excluido;
+            if ($_POST['quantidade'] <= 0)
+            {
+                $quantidade = $_POST['quantidade'] = 0;
+            }
+            else{
+                $quantidade = $_POST['quantidade'];
+            }
+
             $linha = [
                 'nome'          => $_POST['nome_produto'],   
                 'descricao'     => $_POST['descricao'],
                 'preco'         => $_POST['preco'], 
-                'categoria'     => $_POST['categoria'],
+                'categoria'     => $categoria,
                 'custo'         => $_POST['custo'],
                 'icms'          => $_POST['icms'],
                 'cod_produto'   => $_POST['cod_produto'],
-                'quantidade'   => $_POST['quantidade'],
+                'quantidade'    => $quantidade,
+                'excluido'      => $excluido,
                 'margem_lucro'  => $margem_lucro
             ];
-        
+            
             try{
                 $sql = "UPDATE tbl_produto SET nome = :nome, descricao = :descricao, 
                 preco = :preco, categoria = :categoria, custo = :custo, icms = :icms, 
-                quantidade = :quantidade, margem_lucro = :margem_lucro
+                quantidade = :quantidade, margem_lucro = :margem_lucro, excluido = :excluido
                 WHERE cod_produto = :cod_produto";
                 $stmt = $conn->prepare($sql);
                 $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
@@ -91,6 +121,7 @@ include("sessao.php");
                 $stmt -> bindParam(':cod_produto', $linha['cod_produto'], PDO::PARAM_INT);
                 $stmt -> bindParam(':quantidade', $linha['quantidade'], PDO::PARAM_INT);
                 $stmt -> bindParam(':margem_lucro', $linha['margem_lucro'], PDO::PARAM_STR);
+                $stmt -> bindParam(':excluido', $linha['excluido'], PDO::PARAM_INT);
                 $stmt -> execute();
             }
             catch(PDOException $e){

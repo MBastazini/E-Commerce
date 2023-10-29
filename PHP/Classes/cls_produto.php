@@ -62,7 +62,14 @@ class Produto{
     }
 
     public function getExcluido(){
-        return $this->excluido;
+        if ($this->excluido == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public function getIcms(){

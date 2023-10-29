@@ -10,7 +10,7 @@
     $custo = null;
     $categoria = null;
     $icms = null;
-    $excluido = null;
+    $excluido = false;
     $cod_produto = null;
     $funcao = $_POST['funcao'];
     if ($funcao == 'edit')
@@ -22,7 +22,7 @@
         $custo = $_POST['custo'];
         $categoria = $_POST['categoria'];
         $icms = $_POST['icms'];
-        $excluido = $_POST['excluido'];
+        $excluido = isset($_POST['excluido']) && $_POST['excluido'] == 1;
         $cod_produto = $_POST['cod_produto'];
     }
 ?>
