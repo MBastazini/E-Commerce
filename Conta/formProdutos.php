@@ -108,10 +108,10 @@
                     ?>
                     <p>ICMS</p>
                 </div>
-                <div class="inp">
+                <div class="inp excluido">
                     <?php 
-                        echo "<input type='radio' name='excluido' value='1' " . ($excluido ? "checked" : "") . "> Sim";
-                        echo "<input type='radio' name='excluido' value='0' " . (!$excluido ? "checked" : "") . "> Não";
+                        echo "<div> <input type='radio' name='excluido' value='1' " . ($excluido ? "checked" : "") . "> Sim </div>";
+                        echo "<div> <input type='radio' name='excluido' value='0' " . (!$excluido ? "checked" : "") . "> Não </div>";
                     ?>
                     <p>Excluido</p>
                 </div>
@@ -119,8 +119,7 @@
                 <input type='hidden' name='cod_produto' value=<?php echo $cod_produto; ?>>
                 <input type='hidden' name='funcao' value=<?php echo $funcao; ?>>
                 <div class="btn">
-                    <input type="submit" value="
-                    <?php 
+                    <input type="submit" value="<?php 
                     if ($funcao == 'add')
                     {
                         echo "ADICIONAR";
@@ -129,14 +128,11 @@
                     {
                         echo "ALTERAR";
                     }
-                    ?>
-                    ">
+                    ?>">
                 </div>
             </form>
             <div class="btn">
-                <a href='crudProdutos.php'>
-                    VOLTAR
-                </a>
+                <a href='crudProdutos.php'> VOLTAR </a>
             </div>
         </div>
     </section>
