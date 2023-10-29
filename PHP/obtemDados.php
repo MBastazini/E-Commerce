@@ -14,13 +14,13 @@
     
             $conn = coneccao();
 
-            $sql = "SELECT * FROM tbl_produto";
+            $sql = "SELECT * FROM tbl_produto ORDER BY cod_produto";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
 
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                 $produtos[] = new Produto($row['cod_produto'], $row['nome'], $row['descricao'], 
-                $row['preco'], $row['categoria'], $row['custo'], $row['excluido'], $row['icms'], $row['quantidade']);
+                $row['preco'], $row['categoria'], $row['custo'], $row['excluido'], $row['icms'], $row['quantidade'], $row['margem_lucro']);
             }
 
             $conn = null;
@@ -46,7 +46,7 @@
                 $sql = "SELECT * FROM tbl_compra 
                 INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
                 INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
-                WHERE cod_usuario = :cod_usuario";
+                WHERE cod_usuario = :cod_usuario ORDER BY tbl_compra.cod_compra";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
                 $stmt->execute();
@@ -77,7 +77,7 @@
 
                 $conn = coneccao();
         
-                $sql = "SELECT * FROM tbl_token WHERE cod_usuario = :cod_usuario";
+                $sql = "SELECT * FROM tbl_token WHERE cod_usuario = :cod_usuario ORDER BY cod_token";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
                 $stmt->execute();
@@ -107,7 +107,7 @@
                 $cod_usuario = $_SESSION['usuario']['cod_usuario'];
                 $conn = coneccao();
         
-                $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
+                $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario ORDER BY cod_usuario";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(":cod_usuario", $cod_usuario, PDO::PARAM_INT);
                 $stmt->execute();
@@ -140,7 +140,7 @@
                 INNER JOIN tbl_compra ON tmp.cod_compra = tbl_compra.cod_compra
                 INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
                 INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
-                WHERE tbl_compra.cod_usuario = :cod_usuario";
+                WHERE tbl_compra.cod_usuario = :cod_usuario ORDER BY tmp.cod_tmpcompra";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
                 $stmt->execute();
@@ -189,11 +189,11 @@
 
             $conn = coneccao();
 
-            $sql = 'SELECT SUM(preco*quantidade) FROM tbl_tmpcompra AS tmp
-            INNER JOIN tbl_compra ON tmp.cod_compra = tbl_compra.cod_compra
-            INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
+            $sql = 'SELECT SUM(p.preco*cp.quantidade) FROM tbl_tmpcompra AS tmp
+            INNER JOIN tbl_compra AS c ON tmp.cod_compra = c.cod_compra
+            INNER JOIN tbl_compra_produto AS cp ON c.cod_compra = cp.cod_compra
             INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
-            WHERE tbl_compra.cod_usuario = :cod_usuario';
+            WHERE c.cod_usuario = :cod_usuario';
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
             $stmt->execute();

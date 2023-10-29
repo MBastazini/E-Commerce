@@ -82,6 +82,10 @@
                                     <p>Excluido</p>
                                     <h1>'.$produto->getExcluido().'</h1>
                                 </div>
+                                <div>
+                                    <p>Margin lucro</p>
+                                    <h1>'.$produto->getMarginLucro().'</h1>
+                                </div>
                             </div>
                             
                         <div class="acoes">
@@ -97,6 +101,7 @@
                                 <input type="hidden" name="categoria" value="'.$produto->getCategoria().'">
                                 <input type="hidden" name="icms" value="'.$produto->getIcms().'">
                                 <input type="hidden" name="excluido" value="'.$produto->getExcluido().'">
+                                <input type="hidden" name="margin_lucro" value="'.$produto->getMarginLucro().'">
 
                                 <input type="hidden" name="funcao" value="edit">
                                 

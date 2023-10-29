@@ -17,43 +17,49 @@ include("insereDadosCarrinho.php");
                 'senha'     => $_POST['senha']
             ];
         
-            $sql = "INSERT INTO tbl_usuario (nome, email, telefone, senha) VALUES (:nome, :email, :telefone, :senha)";
-            $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
-            $stmt -> bindParam(':email', $linha['email'], PDO::PARAM_STR);
-            $stmt -> bindParam(':telefone', $linha['telefone'], PDO::PARAM_STR);
-            $stmt -> bindParam(':senha', $linha['senha'], PDO::PARAM_STR);
-            $stmt -> execute();
-        
-        
+            try{
+                $sql = "INSERT INTO tbl_usuario (nome, email, telefone, senha) VALUES (:nome, :email, :telefone, :senha)";
+                $stmt = $conn->prepare($sql);
+                $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
+                $stmt -> bindParam(':email', $linha['email'], PDO::PARAM_STR);
+                $stmt -> bindParam(':telefone', $linha['telefone'], PDO::PARAM_STR);
+                $stmt -> bindParam(':senha', $linha['senha'], PDO::PARAM_STR);
+                $stmt -> execute();
             
             
-            $_SESSION['usuario']['ativo'] = true;
-            $cod_usuario = $conn -> LastInsertId();
-            $_SESSION['usuario']['cod_usuario'] = $cod_usuario;
+                
+                
+                $_SESSION['usuario']['ativo'] = true;
+                $cod_usuario = $conn -> LastInsertId();
+                $_SESSION['usuario']['cod_usuario'] = $cod_usuario;
 
-            if(isset($_POST['lembrar']))
-            {
-                setToken($cod_usuario);
-            }
-            $_SESSION['usuario']['adm'] = false;
-        
-        
-            //Pega todas as compras feitas enquanto o usuário estava como visitante e as coloca no seu nome.
-            if (isset($_SESSION['visitante']['carrinho']))
-            {
-                foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                    adicionaCarrinho($cod_produto, $quantidade);
+                if(isset($_POST['lembrar']))
+                {
+                    setToken($cod_usuario);
                 }
+                $_SESSION['usuario']['adm'] = false;
+            
+            
+                //Pega todas as compras feitas enquanto o usuário estava como visitante e as coloca no seu nome.
+                if (isset($_SESSION['visitante']['carrinho']))
+                {
+                    foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
+                        adicionaCarrinho($cod_produto, $quantidade);
+                    }
+                }
+                
+            
+                $_SESSION['visitante']['ativo'] = false;
+            
+                $_SESSION['usuario']['nome'] = explode(" ", $linha['nome'])[0];
+            
+                
+                header('Location: ../');
+            }
+            catch(PDOException $e){
+                echo "<script>alert('Erro ao adicionar usuário!');</script>";
             }
             
-        
-            $_SESSION['visitante']['ativo'] = false;
-        
-            $_SESSION['usuario']['nome'] = explode(" ", $linha['nome'])[0];
-        
-            
-            header('Location: ../');
 
             $conn = null;
             $stmt = null;
@@ -72,16 +78,23 @@ include("insereDadosCarrinho.php");
 
             $conn = coneccao();
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            $sql = "UPDATE tbl_usuario SET nome = :nome, email = :email, telefone = :telefone, senha = :senha WHERE cod_usuario = :cod_usuario";
-            $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':nome', $nome, PDO::PARAM_STR);
-            $stmt -> bindParam(':email', $email, PDO::PARAM_STR);
-            $stmt -> bindParam(':telefone', $telefone, PDO::PARAM_STR);
-            $stmt -> bindParam(':senha', $senha, PDO::PARAM_STR);
-            $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
-            $stmt -> execute();
 
-            $_SESSION['usuario']['nome'] = explode(" ", $nome)[0];
+            try{
+                $sql = "UPDATE tbl_usuario SET nome = :nome, email = :email, telefone = :telefone, senha = :senha WHERE cod_usuario = :cod_usuario";
+                $stmt = $conn->prepare($sql);
+                $stmt -> bindParam(':nome', $nome, PDO::PARAM_STR);
+                $stmt -> bindParam(':email', $email, PDO::PARAM_STR);
+                $stmt -> bindParam(':telefone', $telefone, PDO::PARAM_STR);
+                $stmt -> bindParam(':senha', $senha, PDO::PARAM_STR);
+                $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                $stmt -> execute();
+
+                $_SESSION['usuario']['nome'] = explode(" ", $nome)[0];
+            }
+            catch(PDOException $e){
+                echo "<script>alert('Erro ao editar usuário!');</script>";
+            }
+            
 
             $conn = null;
             $stmt = null;
