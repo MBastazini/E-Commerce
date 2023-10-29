@@ -92,20 +92,33 @@ include("sessao.php");
     }
 
 
-    if($_SERVER["RESQUEST_METHOD"] == "POST")
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $funcao = $_POST['funcao'];
-        if($funcao == 'add')
+        $user = CheckUser();
+        if ($user == 1) //ADM
         {
-            adicionaProduto();
+            if($_SESSION['usuario']['adm'])
+            {
+                $funcao = $_POST['funcao'];
+                if($funcao == 'add')
+                {
+                    adicionaProduto();
+                    header("location: ../Conta/crudProdutos.php");
+                }
+                else if($funcao == 'edit')
+                {
+                    editaProduto();
+                    header("location: ../Conta/crudProdutos.php");
+                }
+                else if($funcao == 'del')
+                {
+                    deletaProduto($_POST['cod_produto']);
+                    header("location: ../Conta/crudProdutos.php");
+                }
+            }  
         }
-        else if($funcao == 'edit')
-        {
-            editaProduto();
-        }
-        else if($funcao == 'del')
-        {
-            deletaProduto($_POST['cod_produto']);
+        else{
+            header("location: ../");
         }
     }
 ?>

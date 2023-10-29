@@ -97,9 +97,9 @@
     function tblUsuario()
     {
         
-        if(!(isset($usuarios)))
+        if(!(isset($usuario)))
         {
-            $usuarios = array();
+            $usuario = array();
             $user = CheckUser();
 
             if ($user == 1)
@@ -113,7 +113,7 @@
                 $stmt->execute();
         
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    $usuarios[] = new Usuario($row['cod_usuario'], $row['nome'], $row['email'], $row['senha'], $row['telefone']);
+                    $usuario[] = new Usuario($row['cod_usuario'], $row['nome'], $row['email'], $row['senha'], $row['telefone']);
                 }
         
                 $conn = null;
@@ -121,7 +121,7 @@
             }
         }
         
-        return $usuarios;
+        return $usuario;
     }
 
     function tblCarrinho()

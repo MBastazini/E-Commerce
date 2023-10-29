@@ -25,127 +25,105 @@
     ?>
 
     <div id="crud" class="container">
-        <form action="#" method="post">
+        <form action="formProdutos.php" method="post">
+            <input type="hidden" name="funcao" value="add">
             <button type="submit">
                 <img src="../Icones/add.svg">
                 Adicionar produto</button>
         </form>
-        <div class="elemento">
-            <img src="../Imagens/Produtos/2.jpg">
-            <div class="info">
-                <div>
-                    <p>Nome</p>
-                    <h1>JOSOARES</h1>
-                </div>
-                
-                <div>
-                    <p>Preco</p>
-                    <h1>10000000</h1>
-                </div>
-                <div>
-                    <p>Quantidade em estoque</p>
-                    <h1>josoarres</h1>
-                </div>
-                <div>
-                    <p>Descricao</p>
-                    <h1>josoares</h1>
-                </div>
-                <div>
-                    <p>Custo</p>
-                    <h1>joseees</h1>
-                </div>
-                <div>
-                    <p>Codigo</p>
-                    <h1>putinha</h1>
-                </div>
-                <div>
-                    <p>Categoria</p>
-                    <h1>capivara</h1>
-                </div>
-                <div>
-                    <p>ICMS</p>
-                    <h1>qporraeessaaaaaaaaaaaaaaaa</h1>
-                </div>
-                <div>
-                    <p>Excluido</p>
-                    <h1>nao</h1>
-                </div>
-            </div>
-            
-            <div class="acoes">
-                <form action="#" method="post">
-                    
-                    <button type="submit" name="editar" value="1">
-                        <img src="../Icones/edit.svg">
-                        Editar</button>
-                </form>
-                <form action="#" method="post">
-                    <button type="submit" name="excluir" value="1" id="del">
-                        <img src="../Icones/delete.svg">
-                        Excluir</button>
-            </div>
-        </div>
 
         <?php 
         
-        $produtos = tblProduto();
-        foreach($produtos as $produto)
+        $user = CheckUser();
+        if ($user == 1)
         {
-            echo '<div class="elemento">
-                    <img src="../Imagens/Produtos/2.jpg">
-                    <div class="info">
-                        <div>
-                            <p>Nome</p>
-                            <h1>'.$produto->getNome().'</h1>
+            if ($_SESSION['usuario']['adm'])
+            {
+                $produtos = tblProduto();
+                foreach($produtos as $produto)
+                {
+                    echo '<div class="elemento">
+                            <img src="../Imagens/Produtos/2.jpg">
+                            <div class="info">
+                                <div>
+                                    <p>Nome</p>
+                                    <h1>'.$produto->getNome().'</h1>
+                                </div>
+                                
+                                <div>
+                                    <p>Preco</p>
+                                    <h1>'.$produto->getPreco().'</h1>
+                                </div>
+                                <div>
+                                    <p>Quantidade em estoque</p>
+                                    <h1>'.$produto->getQuantidade().'</h1>
+                                </div>
+                                <div>
+                                    <p>Descricao</p>
+                                    <h1>'.$produto->getDescricao().'</h1>
+                                </div>
+                                <div>
+                                    <p>Custo</p>
+                                    <h1>'.$produto->getCusto().'</h1>
+                                </div>
+                                <div>
+                                    <p>Codigo</p>
+                                    <h1>'.$produto->getCodProduto().'</h1>
+                                </div>
+                                <div>
+                                    <p>Categoria</p>
+                                    <h1>'.$produto->getCategoria().'</h1>
+                                </div>
+                                <div>
+                                    <p>ICMS</p>
+                                    <h1>'.$produto->getIcms().'</h1>
+                                </div>
+                                <div>
+                                    <p>Excluido</p>
+                                    <h1>'.$produto->getExcluido().'</h1>
+                                </div>
+                            </div>
+                            
+                        <div class="acoes">
+                            <form></form>
+                            <form action="formProdutos.php" method="post">
+
+                                <input type="hidden" name="cod_produto" value="'.$produto->getCodProduto().'">
+                                <input type="hidden" name="nome_produto" value="'.$produto->getNome().'">    
+                                <input type="hidden" name="preco" value="'.$produto->getPreco().'">
+                                <input type="hidden" name="quantidade" value="'.$produto->getQuantidade().'">
+                                <input type="hidden" name="descricao" value="'.$produto->getDescricao().'">
+                                <input type="hidden" name="custo" value="'.$produto->getCusto().'">
+                                <input type="hidden" name="categoria" value="'.$produto->getCategoria().'">
+                                <input type="hidden" name="icms" value="'.$produto->getIcms().'">
+                                <input type="hidden" name="excluido" value="'.$produto->getExcluido().'">
+
+                                <input type="hidden" name="funcao" value="edit">
+                                
+                                <button type="submit" name="editar" value="1">
+                                    <img src="../Icones/edit.svg">
+                                    Editar
+                                </button>
+
+                            </form>
+
+                            <form action="../PHP/insereDadosProduto.php" method="post">
+
+                                <input type="hidden" name="cod_produto" value="'.$produto->getCodProduto().'">
+                                <input type="hidden" name="funcao" value="del">
+                                <button type="submit" name="excluir" value="1" id="del">
+                                    <img src="../Icones/delete.svg">
+                                    Excluir
+                                </button>
+
+                            </form>
                         </div>
-                        
-                        <div>
-                            <p>Preco</p>
-                            <h1>'.$produto->getPreco().'</h1>
-                        </div>
-                        <div>
-                            <p>Quantidade em estoque</p>
-                            <h1>'.$produto->getQuantidade().'</h1>
-                        </div>
-                        <div>
-                            <p>Descricao</p>
-                            <h1>'.$produto->getDescricao().'</h1>
-                        </div>
-                        <div>
-                            <p>Custo</p>
-                            <h1>'.$produto->getCusto().'</h1>
-                        </div>
-                        <div>
-                            <p>Codigo</p>
-                            <h1>'.$produto->getCodProduto().'</h1>
-                        </div>
-                        <div>
-                            <p>Categoria</p>
-                            <h1>'.$produto->getCategoria().'</h1>
-                        </div>
-                        <div>
-                            <p>ICMS</p>
-                            <h1>'.$produto->getIcms().'</h1>
-                        </div>
-                        <div>
-                            <p>Excluido</p>
-                            <h1>'.$produto->getExcluido().'</h1>
-                        </div>
-                    </div>
-                    
-                <div class="acoes">
-                    <form action="#" method="post">
-                        
-                        <button type="submit" name="editar" value="1">
-                            <img src="../Icones/edit.svg">
-                            Editar</button>
-                    </form>
-                    <form action="#" method="post">
-                        <button type="submit" name="excluir" value="1" id="del">
-                            <img src="../Icones/delete.svg">
-                            Excluir</button>
-                </div>
-            </div>';
+                    </div>';
+                }
+            }
+        }
+        else{
+            echo "<h1>Você não tem permissão para acessar essa página!</h1>";
         }
         ?>
 
