@@ -46,7 +46,6 @@ CREATE TABLE tbl_compra_produto(
 
 
 CREATE TABLE tbl_tmpcompra(
-	cod_tmpcompra serial PRIMARY KEY,
 	cod_compra serial,
 	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
 );
