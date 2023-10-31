@@ -102,39 +102,38 @@
         {
             $conn = coneccao();
 
-            /* Aqui o usuario ja cria uma compra com status concluida, e gera um pdf das informações da compra (unitaria)
-            para o usuario, sem passar por tmpCompra */
-            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
-            $nome_usuario = $_SESSION['usuario']['nome'];
-            $data_hoje = date("Y/m/d");
-            $status = 'Concluida';
-            $sql = "INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES (:status, :data_compra, :cod_usuario)";
-            $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':status', $status, PDO::PARAM_STR);
-            $stmt -> bindParam(':data_compra', $data_hoje, PDO::PARAM_STR);
-            $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
-            $stmt -> execute();
+            try{
+                /* Aqui o usuario ja cria uma compra com status concluida, e gera um pdf das informações da compra (unitaria)
+                para o usuario, sem passar por tmpCompra */
+                $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+                $nome_usuario = $_SESSION['usuario']['nome'];
+                $data_hoje = date("Y/m/d");
+                $status = 'Concluida';
+                $sql = "INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES (:status, :data_compra, :cod_usuario)";
+                $stmt = $conn->prepare($sql);
+                $stmt -> bindParam(':status', $status, PDO::PARAM_STR);
+                $stmt -> bindParam(':data_compra', $data_hoje, PDO::PARAM_STR);
+                $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                $stmt -> execute();
 
-            $cod_compra = $conn->LastInsertId();
-            $quantidade = 1;
-            $sql = "INSERT INTO tbl_compra_produto VALUES (:quantidade, :cod_produto, :cod_compra)";
-            $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
-            $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
-            $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
-            $stmt -> execute();
+                $cod_compra = $conn->LastInsertId();
+                $quantidade = 1;
+                $sql = "INSERT INTO tbl_compra_produto VALUES (:quantidade, :cod_produto, :cod_compra)";
+                $stmt = $conn->prepare($sql);
+                $stmt -> bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
+                $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
+                $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
+                $stmt -> execute();
 
-            $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
-            $stmt = $conn->prepare($sql);
-            $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
-            $stmt -> execute();
-            $produto = $stmt->fetch(PDO::FETCH_ASSOC);
-            $preco = $produto['preco'];
-            $nome = $produto['nome'];
+                $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
+                $stmt = $conn->prepare($sql);
+                $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
+                $stmt -> execute();
+                $produto = $stmt->fetch(PDO::FETCH_ASSOC);
+                $preco = $produto['preco'];
+                $nome = $produto['nome'];
 
-            $conn = null;
-            $stmt = null;
-            $html= "
+                $html= "
                         <h1>TINYWOOD - Viva CTI 2023<h1><br><br>
 
                         <h1>Compra finalizada</h1><br>
@@ -147,8 +146,17 @@
                         <h2>".$nome." ||| 1 ||| R$ ".$preco ."</h2><br>
                         <br>
                         <h1>Valor total da compra: R$ ". $preco ."</h1>
-            ";
-            gerapdf($html);
+                ";
+                gerapdf($html);
+            }
+            catch(PDOException $e){
+                echo "<script>alert('Erro ao adicionar produto!');</script>";
+            }
+            
+
+            $conn = null;
+            $stmt = null;
+            
             //header('Location: ../');
         }
         else{
@@ -170,14 +178,14 @@
             $html= "
                         <h1>TINYWOOD - Viva CTI 2023<h1><br><br>
 
-                        <h1>Compra finalizada</h1><br>
-                        <h2>Nome: $nome_usuario</h2><br>
-                        <h2>Codigo do usuario: $cod_usuario</h2><br>
-                        <br>
-                        <br>
-                        <h1>Compras efetuadas:</h1><br>
-                        <h1> Produto | Quantidade | Preço </h1><br><br>
-                    ";
+                            <h1>Compra finalizada</h1><br>
+                            <h2>Nome: $nome_usuario</h2><br>
+                            <h2>Codigo do usuario: $cod_usuario</h2><br>
+                            <br>
+                            <br>
+                            <h1>Compras efetuadas:</h1><br>
+                            <h1> Produto | Quantidade | Preço </h1><br><br>
+                        ";
 
             $valor_total = 0;
 
@@ -206,16 +214,12 @@
                             <h2>$nome ||| $quantidade ||| $preco </h2><br>
                         ";
             }
-
+            
             $conn = null;
             $stmt = null;
             $stmt2 = null;
             
-            $html .= "
-                        <br>
-                        <h1>Valor total da compra: R$ ". $valor_total ."</h1>
-                        ";
-            gerapdf($html);
+            
             //header('Location: ../');
         }
         else{

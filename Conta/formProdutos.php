@@ -10,9 +10,8 @@
     $custo = null;
     $categoria = null;
     $icms = null;
-    $excluido = null;
+    $excluido = false;
     $cod_produto = null;
-
     $funcao = $_POST['funcao'];
     if ($funcao == 'edit')
     {
@@ -23,7 +22,7 @@
         $custo = $_POST['custo'];
         $categoria = $_POST['categoria'];
         $icms = $_POST['icms'];
-        $excluido = $_POST['excluido'];
+        $excluido = isset($_POST['excluido']) && $_POST['excluido'] == 1;
         $cod_produto = $_POST['cod_produto'];
     }
 ?>
@@ -68,43 +67,43 @@
                 <input type='hidden' name='funcao' value='cadastro'>
                 <div class="inp">
                     <?php 
-                     echo "<input type='text' name='nome_produto' maxlength='80' value=".$nome_produto.">";
+                     echo "<input type='text' name='nome_produto' maxlength='80' value='".$nome_produto."'>";
                     ?>
                     <p>Nome do produto</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' name='preco' maxlength='100' value=".$preco.">";
+                        echo "<input type='number' name='preco' maxlength='100' value='".$preco."'>";
                     ?>
                     <p>Preço</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' name='quantidade' maxlength='100' value=".$quantidade.">";
+                        echo "<input type='number' name='quantidade' maxlength='100' value='".$quantidade."'>";
                     ?>
                     <p>Quantidade em estoque</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='text' name='descricao' maxlength='100' value=".$descricao.">";
+                        echo "<input type='text' name='descricao' maxlength='100' value='".$descricao."'>";
                     ?>
                     <p>Descrição</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' name='custo' maxlength='100' value=".$custo.">";
+                        echo "<input type='number' name='custo' maxlength='100' value='".$custo."'>";
                     ?>
                     <p>Custo</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='text' name='categoria' maxlength='100' value=".$categoria.">";
+                        echo "<input type='text' name='categoria' maxlength='100' value='".$categoria."'>";
                     ?>
                     <p>Categoria</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' name='icms' maxlength='100' value=".$icms.">";
+                        echo "<input type='number' name='icms' maxlength='100' value='".$icms."'>";
                     ?>
                     <p>ICMS</p>
                 </div>
@@ -131,7 +130,7 @@
                     ?>">
                 </div>
             </form>
-            <div class="btn">
+            <div class="crud_voltar">
                 <a href='crudProdutos.php'> VOLTAR </a>
             </div>
         </div>

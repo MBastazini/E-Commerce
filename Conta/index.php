@@ -19,77 +19,6 @@
     <script src="../JS/index.js" defer></script>
     <script src="../JS/login.js" defer></script>
 
-    <!--<div class="nav_nav container">
-        <div class="nav_fundo nf_fixo"></div>
-        <a href="index.html"><img src="../Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
-
-
-        <div class="nav_div_pesquisa">
-                <div class="nav_pesquisa">
-                    <img src="../Icones/pesquisa_cinza.svg" class="nav_icon">
-                    <input type="text" placeholder="Pesquisar...">
-                </div>
-
-                <div class="nav_p_resultados">
-                    <a href="produtos.html#1">
-                        <div>
-                            <p>Chaveiro Engines</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#2">
-                        <div>
-                            <p>Chaveiro Lampada</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#3">
-                        <div>
-                            <p>Chaveiro CPU</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#4">
-                        <div>
-                            <p>Chaveiro CTI</p>
-                        </div>
-                    </a>
-                </div>
-        </div>
-        
-        <img src="../Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
-        <div class="nav_elementos">
-            <div class="nav_risco"></div>
-     
-            <div class="nav_home">
-                <img class="nav_icon" src="../Icones/home_preto.svg">
-                <p>HOME</p>
-            </div>
-            <a href="produtos.html">
-                <div class="nav_produtos">
-                    <img class="nav_icon" src="../Icones/shopping_preto.svg">
-                    <p>PRODUTOS</p>
-                </div>
-            <a href="sobre.html">   
-                <div class="nav_sobre">
-                    <img class="nav_icon" src="../Icones/sobre_preto.svg">
-                    <p>SOBRE</p>
-                </div>
-            </a>
-
-            <a href="carrinho.html">
-                <div class="nav_info_lateral">
-                    <img class="nav_icon2" src="../Icones/carrinho_preto.svg">
-                    <p>CARRINHO</p>
-                </div>
-            </a>
-            <a href="PHP/usuario.php">
-                <div class="nav_info_lateral" id="nav_botao_ativo">
-                    <img class="nav_icon2" src="../Icones/login_branco.svg">
-                    <p>LOGIN</p>
-                </div>
-            </a>
-        </div>
-        
-    </div> -->
-
     <?php 
         barraNavegacao('', '../');
     ?>
@@ -110,7 +39,7 @@
             }
             ?>
         </h2>
-        <form action="../PHP/minhaconta.php" method="post" id="conta_form">
+        <form action="../PHP/insereDadosUsuario.php" method="post" id="conta_form">
             <div class="edit_btn">
                 <p>Editar informações</p>
                 <img src="../Icones/edit.svg">
@@ -152,6 +81,7 @@
                     
                 ?>
             </div>
+            <input type="hidden" name="funcao" value="edit">
             <input type="submit" value="Salvar alterações" id="btn_submit">
         </form>
         <a href="../PHP/logout.php">
@@ -168,7 +98,7 @@
             if ($_SESSION['usuario']['adm'])
             {
                 echo "<div id='administrador'>
-                <h1 id='area-adm'>Opções de administrador</h1>
+                <h1 id='area-adm'>| Opções de administrador</h1>
                 <div id='area_adm'>
                     <a href='crudProdutos.php'>
                         <div class='edit_btn' id='CRUD'>

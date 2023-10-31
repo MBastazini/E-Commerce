@@ -23,8 +23,8 @@ class Produto{
     private $excluido = null;
     private $icms = null;
     private $quantidade = null;
-
-    public function __construct($cod_produto, $nome, $descricao, $preco, $categoria, $custo, $excluido, $icms, $quantidade){
+    private $margem_lucro = null;
+    public function __construct($cod_produto, $nome, $descricao, $preco, $categoria, $custo, $excluido, $icms, $quantidade, $margem_lucro){
         $this->cod_produto = $cod_produto;
         $this->nome = $nome;
         $this->descricao = $descricao;
@@ -34,6 +34,7 @@ class Produto{
         $this->excluido = $excluido;
         $this->icms = $icms;
         $this->quantidade = $quantidade;
+        $this->margem_lucro = $margem_lucro;
     }
 
     public function getCodProduto(){
@@ -61,7 +62,14 @@ class Produto{
     }
 
     public function getExcluido(){
-        return $this->excluido;
+        if ($this->excluido == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public function getIcms(){
@@ -76,6 +84,45 @@ class Produto{
         $this->cod_produto = $cod_produto;
     }
     
+    public function setNome($nome){
+        $this->nome = $nome;
+    }
+
+    public function setDescricao($descricao){
+        $this->descricao = $descricao;
+    }
+
+    public function setPreco($preco){
+        $this->preco = $preco;
+    }
+
+    public function setCategoria($categoria){
+        $this->categoria = $categoria;
+    }
+
+    public function setCusto($custo){
+        $this->custo = $custo;
+    }
+
+    public function setExcluido($excluido){
+        $this->excluido = $excluido;
+    }
+
+    public function setIcms($icms){
+        $this->icms = $icms;
+    }
+
+    public function setQuantidade($quantidade){
+        $this->quantidade = $quantidade;
+    }
+
+    public function getMarginLucro(){
+        return $this->margem_lucro;
+    }
+
+    public function setMarginLucro($margem_lucro){
+        $this->margem_lucro = $margem_lucro;
+    }
 }
 
 ?>

@@ -1,5 +1,5 @@
 
-    @import url('https://fonts.nav_googleapis.nav_com/css2?family=Poppins&display=swap');
+    /*@import url('https://fonts.nav_googleapis.nav_com/css2?family=Poppins&display=swap');
     
     /*mencionar @slayingthedragon*/
 *{
@@ -1534,6 +1534,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     */
     .sec_login{
         margin: 100px 0px;
+        min-height: 100vh;
     }
     .tela_log_cad{
         width: 500px;
@@ -1542,7 +1543,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         border-radius: 15px;  
     }
     .tela_log_cad.cadastro{
-        width: 800px;
+        width: 1000px;
     }
     .tela_log_cad.cadastro > p{
         text-align: center;
@@ -1608,6 +1609,21 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         display: flex;
         align-items: center;
     }
+    .excluido.inp > div > input[type="radio"]{
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    .excluido.inp > div{
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+    }
+    .crud_voltar{
+        justify-content: center;
+        display: flex;
+        margin-top: 10px;
+    }
     .inp > input:hover{
         box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
     }
@@ -1661,7 +1677,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         pointer-events: none;
         user-select: none;
     }
-    .tela_log_cad > form > .btn > input{
+    .btn > input{
         background-color: var(--destaque_texto);
         color: white;
         width: 100%;
@@ -1674,14 +1690,14 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         border: none;
         outline: none;
     }
-    .tela_log_cad > form > .btn{
+    .btn{
         grid-area: 5/1/5/3; 
         width: 80%;
     }
     .tela_log_cad.cadastro > form > .btn{
         margin-top: -40px;
     }
-    .tela_log_cad > form > .btn > input:hover{
+    .btn > input:hover{
         background-color: var(--cor_destaque);
         transition: 0.5s;
         cursor: pointer;
@@ -1693,7 +1709,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         width: 100%;
         justify-content: center;
         font-size: 25px;
-        color: #0000EE
+        color: rgb(0, 102, 204);
 
     }
     #black_text{
@@ -2702,6 +2718,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         width: 100%;
         background-color: var(--fundo_01);
         padding: 20px;
+        margin-top: 100px;
     }
     #crud > .elemento:nth-child(even)
     {
@@ -2786,6 +2803,72 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         transform: scale(1.1);
         background-color: var(--cor_destaque);
         transition: 0.5s;
+    }
+
+    #crud > .elemento#excluido:nth-child(even)
+    {
+        background-color: #72727278;
+    }
+    #excluido{
+        background-color: #ababab78;
+    }
+    #excluido > .info > div{
+        border: 1px solid #000000 !important;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    #esqueci{
+        width: 100%;
+
+    }
+    #esqueci > form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #esqueci > form > div.inp{
+        margin-top: 50px;
+        width: 100%;
+    }
+    #esqueci > form > div.inp > input{
+        text-align: center;
+    }
+
+    #esqueci > form > div.btn{
+        margin-top: 20px;
+        width: 50%;    
+    }
+
+    #nova_Senha{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-top: 50px;
+    }
+    #nova_Senha > form{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--fundo_01);
+        padding: 20px;
+        margin: 30px 0px;
+    }
+    #nova_Senha > form > div{
+        width: 100%;
+        margin: 20px;
     }
         
         /*
@@ -3875,7 +3958,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         .tela_log_cad > .troca_log_cad > a{
             font-size: 15px;
         }
-        .tela_log_cad > form > .btn > input{
+        .btn > input{
             font-size: 15px;
             padding: 10px;
         }

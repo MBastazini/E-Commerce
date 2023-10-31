@@ -42,7 +42,30 @@
                 $produtos = tblProduto();
                 foreach($produtos as $produto)
                 {
-                    echo '<div class="elemento">
+                    if ($produto->getExcluido() == 1)
+                    {
+                        $excluido = "Sim";
+                    }
+                    else{
+                        $excluido = "Não";
+                    }
+
+                    if (null !== $produto->getCategoria())
+                    {
+                        $categoria = $produto->getCategoria();
+                    }
+                    else{
+                        $categoria = "Nenhuma";
+                    }
+                    echo '<div class="elemento" id="';
+                    if ($produto->getExcluido() == 1)
+                    {
+                        echo"excluido";
+                    }
+                    else{
+                        echo"";
+                    }
+                    echo'">
                             <img src="../Imagens/Produtos/2.jpg">
                             <div class="info">
                                 <div>
@@ -72,7 +95,7 @@
                                 </div>
                                 <div>
                                     <p>Categoria</p>
-                                    <h1>'.$produto->getCategoria().'</h1>
+                                    <h1>'.$categoria.'</h1>
                                 </div>
                                 <div>
                                     <p>ICMS</p>
@@ -80,7 +103,11 @@
                                 </div>
                                 <div>
                                     <p>Excluido</p>
-                                    <h1>'.$produto->getExcluido().'</h1>
+                                    <h1>'.$excluido.'</h1>
+                                </div>
+                                <div>
+                                    <p>Margin lucro</p>
+                                    <h1>'.$produto->getMarginLucro().'</h1>
                                 </div>
                             </div>
                             
@@ -97,6 +124,7 @@
                                 <input type="hidden" name="categoria" value="'.$produto->getCategoria().'">
                                 <input type="hidden" name="icms" value="'.$produto->getIcms().'">
                                 <input type="hidden" name="excluido" value="'.$produto->getExcluido().'">
+                                <input type="hidden" name="margin_lucro" value="'.$produto->getMarginLucro().'">
 
                                 <input type="hidden" name="funcao" value="edit">
                                 

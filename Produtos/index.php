@@ -146,56 +146,62 @@
         
         foreach ($produtos as $produto)
         {
-            
-            
-
-            $cod_produto = $produto->getCodProduto();
-            $nome = $produto->getNome();
-            $preco = $produto->getPreco();
-            $categoria = $produto->getCategoria();
-            
-            if(estaNoCarrinho($cod_produto))
+            $excluido = $produto->getExcluido();
+            if(!$excluido)
             {
-                $icone = 'Check_branco.svg';
-                $funcao = 'ver';
-            }
-            else{
-                $icone = 'shopping_branco.svg';
-                $funcao = 'add';
-            }
-
-            echo "<div class='product' id='".$cod_produto."'>
-            <img src='../Imagens/Produtos/". $cod_produto .".jpg' alt='Produto'>
-            <div>
-                <h1>". $nome."</h1>
-                <h2> R$ ". $preco ."</h2>
-                ";
-                if(isset($categoria))
+                $quantidade = $produto->getQuantidade();
+                if ($quantidade > 0)
                 {
-                    echo "<h3>". $categoria ."</h3>";
-                } 
-                echo "
-                <h3>Nenhum</h3>
-                <div class='product_botoes'>
-                    <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                        <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                        <input type='hidden' name='funcao' value='comprar'>
-                        <button type='submit'>
-                            <p>COMPRAR</p>
-                        </button>
-                    </form>
-                    <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                        <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                        <input type='hidden' name='funcao' value='$funcao'>
-                        <button type='submit' id='add-cart' onclick='addCart(event)'>
-                            <p>+</p>
-                            <img src='../Icones/$icone' alt='carrinho'>
-                        </button>
-                    </form>
-                </div>
+                    $cod_produto = $produto->getCodProduto();
+                    $nome = $produto->getNome();
+                    $preco = $produto->getPreco();
+                    $categoria = $produto->getCategoria();
+                    
+                    if(estaNoCarrinho($cod_produto))
+                    {
+                        $icone = 'Check_branco.svg';
+                        $funcao = 'ver';
+                    }
+                    else{
+                        $icone = 'shopping_branco.svg';
+                        $funcao = 'add';
+                    }
+
+                    echo "<div class='product' id='".$cod_produto."'>
+                    <img src='../Imagens/Produtos/". $cod_produto .".jpg' alt='Produto'>
+                    <div>
+                        <h1>". $nome."</h1>
+                        <h2> R$ ". $preco ."</h2>
+                        ";
+                        if(isset($categoria))
+                        {
+                            echo "<h3>". $categoria ."</h3>";
+                        } 
+                        echo "
+                        <h3>Nenhum</h3>
+                        <div class='product_botoes'>
+                            <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                                <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                                <input type='hidden' name='funcao' value='comprar'>
+                                <button type='submit'>
+                                    <p>COMPRAR</p>
+                                </button>
+                            </form>
+                            <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                                <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                                <input type='hidden' name='funcao' value='$funcao'>
+                                <button type='submit' id='add-cart' onclick='addCart(event)'>
+                                    <p>+</p>
+                                    <img src='../Icones/$icone' alt='carrinho'>
+                                </button>
+                            </form>
+                        </div>
+                    
+                    </div>
+                    </div>";
+                }
+            }
             
-            </div>
-            </div>";
         }
 
         /*$sql = "select * from tbl_produto order by cod_produto";
