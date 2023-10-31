@@ -79,49 +79,13 @@ class Produto{
     public function getQuantidade(){
         return $this->quantidade;
     }
-
-    public function setCodProduto($cod_produto){
-        $this->cod_produto = $cod_produto;
-    }
     
-    public function setNome($nome){
-        $this->nome = $nome;
-    }
-
-    public function setDescricao($descricao){
-        $this->descricao = $descricao;
-    }
-
-    public function setPreco($preco){
-        $this->preco = $preco;
-    }
-
-    public function setCategoria($categoria){
-        $this->categoria = $categoria;
-    }
-
-    public function setCusto($custo){
-        $this->custo = $custo;
-    }
-
-    public function setExcluido($excluido){
-        $this->excluido = $excluido;
-    }
-
-    public function setIcms($icms){
-        $this->icms = $icms;
-    }
-
     public function setQuantidade($quantidade){
         $this->quantidade = $quantidade;
     }
 
     public function getMarginLucro(){
         return $this->margem_lucro;
-    }
-
-    public function setMarginLucro($margem_lucro){
-        $this->margem_lucro = $margem_lucro;
     }
 }
 

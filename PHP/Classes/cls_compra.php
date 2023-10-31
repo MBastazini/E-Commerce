@@ -12,14 +12,13 @@ class Compra{
     private $cod_compra = null;
     private $status = null;
     private $data_compra = null;
-    private $cod_usuario = null;
+    private $valor_total = null;
 
     private $compras = array();
-    public function __construct($cod_compra, $status, $data_compra, $cod_usuario){
+    public function __construct($cod_compra, $status, $data_compra){
         $this->cod_compra = $cod_compra;
         $this->status = $status;
         $this->data_compra = $data_compra;
-        $this->cod_usuario = $cod_usuario;
     }
 
     public function getCod_compra(){
@@ -34,9 +33,6 @@ class Compra{
         return $this->data_compra;
     }
 
-    public function getCod_usuario(){
-        return $this->cod_usuario;
-    }
 
     public function createCompra($cod_produto, $quantidade, $nome, $preco){
         $compra_produto = new Compra_produto($cod_produto, $quantidade, $nome, $preco);
@@ -45,6 +41,14 @@ class Compra{
 
     public function getCompras(){
         return $this->compras;
+    }
+
+    public function getValor_total(){
+        return $this->valor_total;
+    }
+
+    public function setValor_total($valor_total){
+        $this->valor_total = $valor_total;
     }
 }
 ?>

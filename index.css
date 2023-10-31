@@ -2610,9 +2610,28 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #info_compra > div, #info_c_h{
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 60px 1fr 1fr 1fr 1fr;
         box-sizing: border-box;
         margin: 5px 0px;
+        transition: 0.5s;
+        padding: 5px 0px;
+        grid-template-rows: auto auto;
+    }
+    #info_compra > div.compra:hover{
+        cursor: pointer;
+        background-color: white;
+        transition: 0.5s;
+    }
+    #info_compra > div > div{
+        grid-area: 2/2/2/8;
+    }
+    #info_c_h.inside, #info_compra.inside > div{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin: 0;
+        padding: 0;
+    }
+    #info_compra.inside{
+        margin: 0;
     }
     #info_compra.token > div, #info_c_h.token{
         grid-template-columns: 1fr 1fr 1fr;
@@ -2626,12 +2645,19 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         margin-top: 30px;
         padding: 5px;
     }
-    #info_compra p{
+    #info_compra p, #info_compra img{
         font-size: 20px;
         border-right: 3px solid var(--destaque_texto);
         height: 100%;
         padding: 5px;
         padding-left: 10px;
+        box-sizing: border-box;
+    }
+    #info_compra > div > img{
+        width: 30px;
+        height: auto;
+        padding: 0px 10px;
+        box-sizing: content-box;
     }
     #info_compra a{
         display: flex;
@@ -2643,6 +2669,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #info_compra div:nth-child(even){
         background-color: var(--destaque_01);
     }
+    
 
     #administrador{
         width: 100%;

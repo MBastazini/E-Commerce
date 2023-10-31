@@ -44,7 +44,7 @@ include("insereDadosCarrinho.php");
                 if (isset($_SESSION['visitante']['carrinho']))
                 {
                     foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                        adicionaCarrinho($cod_produto, $quantidade);
+                        adicionaNoCarrinho($cod_produto, $quantidade);
                     }
                 }
                 
@@ -209,7 +209,7 @@ include("insereDadosCarrinho.php");
                         }
 
                         foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                            adicionaCarrinho($cod_produto, $quantidade);
+                            adicionaNoCarrinho($cod_produto, $quantidade);
                         }
                         
                         $_SESSION['visitante']['ativo'] = false;

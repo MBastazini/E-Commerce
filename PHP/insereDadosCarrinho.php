@@ -199,7 +199,7 @@
                 $quantidade = $compra['quantidade'];
                 
                 $sql2 = "SELECT p.nome, p.preco FROM tbl_compra_produto AS cp
-                INNER JOIN tbl_produto AS p IN cp.cod_produto = p.cod_produto
+                INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
                 WHERE cp.cod_compra = :cod_compra";
                 $stmt2 = $conn->prepare($sql2);
                 $stmt2 -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
@@ -215,12 +215,28 @@
                         ";
             }
             
+            //Deleta a tmpcompra
+            $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
+            $stmt = $conn->prepare($sql);
+            $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
+            $stmt -> execute();
+
+            //Muda o status da compra para 'concluido' e a data para agora
+            $data_hoje = date("Y/m/d");
+            $status = 'Concluida';
+            $sql = "UPDATE tbl_compra SET status = :status, data_compra = :data_compra WHERE cod_compra = :cod_compra";
+            $stmt = $conn->prepare($sql);
+            $stmt -> bindParam(':status', $status, PDO::PARAM_STR);
+            $stmt -> bindParam(':data_compra', $data_hoje, PDO::PARAM_STR);
+            $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
+            $stmt -> execute();
+
             $conn = null;
             $stmt = null;
             $stmt2 = null;
             
             
-            //header('Location: ../');
+            header('Location: ../');
         }
         else{
             header('Location: ../Login/');

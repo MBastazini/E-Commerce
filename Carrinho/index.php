@@ -22,79 +22,6 @@
 <body>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/carrinho.js" defer></script>
-    <!--<div class="nav_nav container">
-        <div class="nav_fundo"></div>
-        <a href="index.html"><img src="../Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
-
-
-        <div class="nav_div_pesquisa">
-                <div class="nav_pesquisa">
-                    <img src="../Icones/pesquisa_cinza.svg" class="nav_icon">
-                    <input type="text" placeholder="Pesquisar...">
-                </div>
-
-                <div class="nav_p_resultados">
-                    <a href="produtos.html#1">
-                        <div>
-                            <p>Chaveiro Engines</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#2">
-                        <div>
-                            <p>Chaveiro Lampada</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#3">
-                        <div>
-                            <p>Chaveiro CPU</p>
-                        </div>
-                    </a>
-                    <a href="produtos.html#4">
-                        <div>
-                            <p>Chaveiro CTI</p>
-                        </div>
-                    </a>
-                </div>
-        </div>
-        
-        <img src="../Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
-        <div class="nav_elementos">
-            <div class="nav_risco"></div>
-            <a href="index.html">
-                <div class="nav_home">
-                    <img class="nav_icon" src="../Icones/home_preto.svg">
-                    <p>HOME</p>
-                </div>
-            </a>
-            
-            <a href="produtos.html">
-                <div class="nav_produtos">
-                    <img class="nav_icon" src="../Icones/shopping_preto.svg">
-                    <p>PRODUTOS</p>
-                </div>
-            </a>
-            
-            <a href="sobre.html">
-                <div class="nav_sobre">
-                    <img class="nav_icon" src="../Icones/sobre_preto.svg">
-                    <p>SOBRE</p>
-                </div>
-            </a>
-            
-            <div class="nav_info_lateral" id="nav_botao_ativo">
-                <img class="nav_icon2" src="../Icones/carrinho_branco.svg">
-                <p>CARRINHO</p>
-            </div>
-
-            <a href="login.html">
-                <div class="nav_info_lateral" >
-                    <img class="nav_icon2" src="../Icones/login_preto.svg">
-                    <p>LOGIN</p>
-                </div>
-            </a>
-        </div>
-        
-    </div>-->
 
     <?php 
         barraNavegacao('carrinho', '../');
@@ -106,7 +33,6 @@
                 $carrinho = tblCarrinho();
                 foreach($carrinho as $c) {
                     $cod_produto = $c->getCodProduto();
-                    $cod_tmpcompra = $c->getCodTmpCompra();
                     $nome = $c->getNome();
                     $quantidade = $c->getQuantidade();
                     $preco = $c->getPreco();
@@ -118,13 +44,13 @@
                                     <p>$nome</p>
                                     <div class='produto_compra_div'>
                                         <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                                            <input type='hidden' name='cod_tmpcompra' value='$cod_tmpcompra'>
+                                            <input type='hidden' name='cod_produto' value='$cod_produto'>
                                             <input type='hidden' value='muda-' name='funcao'>
                                             <input type='submit' value='-'>
                                         </form>
                                         <p id='quantidade'>$quantidade</p>
                                         <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                                            <input type='hidden' name='cod_tmpcompra' value='$cod_tmpcompra'>
+                                            <input type='hidden' name='cod_produto' value='$cod_produto'>
                                             <input type='hidden' value='muda+' name='funcao'>
                                             <input type='submit' value='+'>
                                         </form>

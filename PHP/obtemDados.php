@@ -93,16 +93,21 @@
                 $stmt->bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
                 $stmt->execute();
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra'], $row['cod_usuario']);
+                    $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra']);
                     $sql2 = 'SELECT p.cod_produto, cp.quantidade, p.nome, p.preco FROM tbl_compra_produto AS cp
                     INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
                     WHERE cp.cod_compra = :cod_compra';
                     $stmt2 = $conn->prepare($sql2);
                     $stmt2->bindParam(':cod_compra', $row['cod_compra'], PDO::PARAM_INT);
                     $stmt2->execute();
+
+                    $valor_total = 0;
                     while($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
                         $compra->createCompra($row2['cod_produto'], $row2['quantidade'], $row2['nome'], $row2['preco']);
+                        $valor_total += $row2['preco'] * $row2['quantidade'];
                     }
+                    $compra->setValor_total($valor_total);
+                    $compras[] = $compra;
                 }
         
                 $conn = null;
@@ -185,17 +190,19 @@
 
                 $conn = coneccao();
         
-                $sql = "SELECT p.nome, p.preco, p.cod_produto, cp.quantidade, tmp.cod_tmpcompra FROM tbl_tmpcompra AS tmp
-                INNER JOIN tbl_compra ON tmp.cod_compra = tbl_compra.cod_compra
-                INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
+                $cod_compra = getCodCompra();
+                //Talvez nem precise do usuario
+                $sql = "SELECT * FROM tbl_compra_produto AS cp
                 INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
-                WHERE tbl_compra.cod_usuario = :cod_usuario ORDER BY tmp.cod_tmpcompra";
+                INNER JOIN tbl_compra AS c ON cp.cod_compra = c.cod_compra
+                WHERE c.cod_usuario = :cod_usuario AND c.cod_compra = :cod_compra";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                $stmt->bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
                 $stmt->execute();
         
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    $carrinho[] = new Carrinho($row['nome'], $row['preco'], $row['quantidade'], $row['cod_produto'], $row['cod_tmpcompra']);
+                    $carrinho[] = new Carrinho($row['nome'], $row['preco'], $row['quantidade'], $row['cod_produto']);
                 }
         
                 $conn = null;
@@ -214,7 +221,7 @@
                         $stmt->execute();
                         $resultado = $stmt->fetch();
         
-                        $carrinho[] = new Carrinho($resultado['nome'], $resultado['preco'], $quantidade, $cod_produto, $cod_produto);
+                        $carrinho[] = new Carrinho($resultado['nome'], $resultado['preco'], $quantidade, $cod_produto);
         
                         $conn = null;
                         $stmt = null;
