@@ -46,9 +46,11 @@ CREATE TABLE tbl_compra_produto(
 
 
 CREATE TABLE tbl_tmpcompra(
-	cod_tmpcompra serial PRIMARY KEY,
+	cod_usuario serial,
+	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario),
 	cod_compra serial,
-	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra)
+	FOREIGN KEY (cod_compra) REFERENCES tbl_compra(cod_compra),
+	PRIMARY KEY (cod_usuario, cod_compra)
 );
 
 CREATE TABLE tbl_usuario(

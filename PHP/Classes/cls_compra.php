@@ -13,20 +13,16 @@ class Compra{
     private $status = null;
     private $data_compra = null;
     private $cod_usuario = null;
-    private $nome = null;
-    private $quantidade = null;
-    private $preco = null;
-    public function __construct($cod_compra, $status, $data_compra, $cod_usuario, $nome, $quantidade, $preco){
+
+    private $compras = array();
+    public function __construct($cod_compra, $status, $data_compra, $cod_usuario){
         $this->cod_compra = $cod_compra;
         $this->status = $status;
         $this->data_compra = $data_compra;
         $this->cod_usuario = $cod_usuario;
-        $this->nome = $nome;
-        $this->quantidade = $quantidade;
-        $this->preco = $preco;
     }
 
-    public function getCodCompra(){
+    public function getCod_compra(){
         return $this->cod_compra;
     }
 
@@ -34,24 +30,21 @@ class Compra{
         return $this->status;
     }
 
-    public function getDataCompra(){
+    public function getData_compra(){
         return $this->data_compra;
     }
-    
-    public function getCodUsuario(){
+
+    public function getCod_usuario(){
         return $this->cod_usuario;
     }
 
-    public function getNome(){
-        return $this->nome;
+    public function createCompra($cod_produto, $quantidade, $nome, $preco){
+        $compra_produto = new Compra_produto($cod_produto, $quantidade, $nome, $preco);
+        array_push($this->compras, $compra_produto);
     }
 
-    public function getQuantidade(){
-        return $this->quantidade;
-    }
-
-    public function getPreco(){
-        return $this->preco;
+    public function getCompras(){
+        return $this->compras;
     }
 }
 ?>

@@ -7,6 +7,51 @@
 
     include("sessao.php");
 
+
+    function getCodCompra(){
+        $user = CheckUser();
+        if ($user == 1)
+        {
+            $cod_usuario = $_SESSION['usuario']['cod_usuario'];
+
+            $conn = coneccao();
+
+            //Checa se há alguma compra no carrinho
+            $sql = "SELECT cod_compra FROM tbl_tmpcompra WHERE cod_usuario = :cod_usuario";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+            $stmt->execute();
+            $resultado = $stmt->fetch();
+
+            //Se não houver
+            if ($resultado == null)
+            {
+                //Cria uma nova compra
+                $sql = "INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES ('Pendente', null, :cod_usuario)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                $stmt->execute();
+
+                //Pega o código da compra criada
+                $codCompra = $conn->lastInsertId();
+
+                //Cria uma nova linha na tabela de carrinho temporário
+                $sql = "INSERT INTO tbl_tmpcompra (cod_compra, cod_usuario) VALUES (:cod_compra, :cod_usuario)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':cod_compra', $codCompra, PDO::PARAM_INT);
+                $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+            else{
+                $codCompra = $resultado['cod_compra'];
+            }
+
+            $conn = null;
+            $stmt = null;
+        
+            return $codCompra;
+        }
+    }
     function tblProduto(){
         if (!(isset($produtos)))
         {
@@ -39,21 +84,25 @@
             $compras = array();
 
             if($user == 1){
+                $conn = coneccao();
                 $cod_usuario = $_SESSION['usuario']['cod_usuario'];
 
-                $conn = coneccao();
-        
-                $sql = "SELECT * FROM tbl_compra 
-                INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
-                INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
-                WHERE cod_usuario = :cod_usuario";
+                $sql = 'SELECT * FROM tbl_compra WHERE cod_usuario = :cod_usuario';
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                $stmt->bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
                 $stmt->execute();
-        
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    $compras[] = new Compra($row['cod_compra'], $row['status'], $row['data_compra'], 
-                    $row['cod_usuario'], $row['nome'], $row['quantidade'], $row['preco']);
+                    $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra'], $row['cod_usuario']);
+                    $sql2 = 'SELECT p.cod_produto, cp.quantidade, p.nome, p.preco FROM tbl_compra_produto AS cp
+                    INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
+                    WHERE cp.cod_compra = :cod_compra';
+                    $stmt2 = $conn->prepare($sql2);
+                    $stmt2->bindParam(':cod_compra', $row['cod_compra'], PDO::PARAM_INT);
+                    $stmt2->execute();
+                    while($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                        $compra->createCompra($row2['cod_produto'], $row2['quantidade'], $row2['nome'], $row2['preco']);
+                    }
                 }
         
                 $conn = null;
