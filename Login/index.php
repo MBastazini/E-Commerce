@@ -109,7 +109,14 @@
     <section class="container sec_login" id='topo'>
         <div class="login tela_log_cad">
             <h1>INICIAR SESSÃO</h1>
-
+            <?php
+                
+                if ($erro == 3)
+                {
+                    echo"<h2>Senha alterada com sucesso!</h2>";
+                }
+                
+            ?>
             <form action="../PHP/insereDadosUsuario.php" method="post">
                 <input type='hidden' value="login" name="funcao">
                 <?php 
@@ -152,7 +159,8 @@
             </div>
             <p id="ou">OU</p>
             <div class="google">
-                <a href="#">Esqueci minha senha</a>
+                <a href="esqueci_email.html">Esqueci minha senha</a>
+
             </div>
         </div>
     </section>

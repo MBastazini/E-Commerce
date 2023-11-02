@@ -176,7 +176,7 @@ include('obtemDados.php');
   require 'PHPMailer/src/SMTP.php';
 
 
-  function enviaemail($destinatario/*, $senha*/){
+  function enviaemail($destinatario, $codigo){
 
     
 
@@ -207,9 +207,11 @@ include('obtemDados.php');
 
         //Caso envie para outra página com alteração de usuario: 
         $mail->isHTML(true);                                  
-        $mail->Subject = 'Esqueci minha senha para o ecommerce tinywood';
-        $mail->Body    = "<a href=http://200.145.153.91/luizsilva/Testes/PHP/alterasenha.php?email=".$destinatario.">Clique aqui para mudar sua senha</a>";
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $mail->Subject = 'Esqueci minha senha - TinyWood';
+        $mail->Body    = "Seu código de verificação é: <b>$codigo</b>
+        <br><br>
+        Se você não solicitou a alteração de senha, ignore este e-mail.";
+        $mail->AltBody = 'Seu código de verificação é:' . $codigo;
 
 
         $enviado = $mail->send();
