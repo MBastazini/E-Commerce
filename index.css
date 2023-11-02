@@ -2622,16 +2622,24 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         background-color: white;
         transition: 0.5s;
     }
-    #info_compra > div > div{
+    .compra > div{
         grid-area: 2/2/2/8;
+        margin-top: 20px;
+        margin-bottom: 50px;
+    }
+    .compra.enabled > div{
+        transform: translateY(-100%);
     }
     #info_c_h.inside, #info_compra.inside > div{
         grid-template-columns: 1fr 1fr 1fr 1fr;
         margin: 0;
         padding: 0;
+        opacity: 70%;
+        
     }
     #info_compra.inside{
         margin: 0;
+        background-color: white !important;
     }
     #info_compra.token > div, #info_c_h.token{
         grid-template-columns: 1fr 1fr 1fr;
