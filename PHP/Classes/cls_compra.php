@@ -7,6 +7,7 @@
 	cod_usuario serial,
 	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
 );*/
+require_once("cls_compra_produto.php");
 
 class Compra{
     private $cod_compra = null;
@@ -21,7 +22,7 @@ class Compra{
         $this->data_compra = $data_compra;
     }
 
-    public function getCod_compra(){
+    public function getCodCompra(){
         return $this->cod_compra;
     }
 
@@ -29,7 +30,7 @@ class Compra{
         return $this->status;
     }
 
-    public function getData_compra(){
+    public function getDataCompra(){
         return $this->data_compra;
     }
 
@@ -43,7 +44,7 @@ class Compra{
         return $this->compras;
     }
 
-    public function getValor_total(){
+    public function getValorTotal(){
         return $this->valor_total;
     }
 

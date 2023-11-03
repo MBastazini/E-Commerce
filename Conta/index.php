@@ -122,29 +122,134 @@
 
         <h1>Informações de compras efetuadas</h1>
         <div id="info_c_h">
-            <p>Nome do produto</p>
-            <p>Quantidade</p>
-            <p>Preço total</p>
-            <p>Data da compra</p>
+            <p>Mais</p>
+            <p>Código</p>
+            <p>Status</p>
+            <p>Data efetuada</p>
+            <p>Valor total</p>
         </div>
         <div id="info_compra">
             
-            <?php 
-                $compras = tblCompra();
-                foreach ($compras as $compra)
-                {
-                    $quantidade = $compra -> getQuantidade();
-                    $preco_total = ($compra -> getPreco() * $quantidade);
-                    $data_compra = $compra -> getDataCompra();
-                    $nome_produto = $compra -> getNome();
-                    echo "<div>
-                    <p>". $nome_produto ."</p>
-                    <p>". $quantidade ."</p>
-                    <p>". $preco_total ."</p>
-                    <p>". $data_compra ."</p>
-                    </div>";
-                }
-            ?>
+        <?php 
+        
+        $compras = tblCompra();
+        foreach ($compras as $compra)
+        {
+            $cod_compra = $compra -> getCodCompra();
+            $status = $compra -> getStatus();
+            $data_compra = $compra -> getDataCompra();
+            $valor_total = $compra -> getValorTotal();
+            echo"
+            <div class='compra'>
+                <img src='../Icones/Down_preto.svg'>
+                <p>". $cod_compra ."</p>
+                <p>". $status ."</p>
+                <p>". $data_compra ."</p>
+                <p>R$ ". $valor_total ."</p>
+                <div>
+                    <div id='info_c_h' class='inside'>
+                        <p>Nome</p>
+                        <p>Preco</p>
+                        <p>Quantidade</p>
+                        <p>Codigo</p>
+                    </div>
+                    <div id='info_compra' class='inside'>
+                        ";
+                            $produtos = $compra->getCompras();
+                            foreach($produtos as $produto)
+                            {
+                                $nome = $produto -> getNome();
+                                $preco = $produto -> getPreco();
+                                $quantidade = $produto -> getQuantidade();
+                                $cod_produto = $produto -> getCodProduto();
+                                echo" 
+                                <div>
+                                    <p>". $nome ."</p>
+                                    <p>". $preco ."</p>
+                                    <p>". $quantidade ."</p>
+                                    <p>". $cod_produto ."</p>
+                                </div>";
+                            }
+                            
+                        echo"
+                    </div>
+                </div>
+            </div>";   
+        }
+        
+
+        ?>
+            <div class="compra enabled">
+                <img src="../Icones/Down_preto.svg">
+                <p>12</p>
+                <p>Concluida</p>
+                <p>25/05/2005</p>
+                <p>R$ 20,00</p>
+                <div>
+                    <div id="info_c_h" class="inside">
+                        <p>Nome</p>
+                        <p>Preco</p>
+                        <p>Quantidade</p>
+                        <p>Codigo</p>
+                    </div>
+                    <div id="info_compra" class="inside">
+                        <div>   
+                            <p>Nome</p>
+                            <p>Preco</p>
+                            <p>Quantidade</p>
+                            <p>Codigo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compra">
+                <img src="../Icones/Down_preto.svg">
+                <p>12</p>
+                <p>Concluida</p>
+                <p>25/05/2005</p>
+                <p>R$ 20,00</p>
+                <div>
+                    <div id="info_c_h" class="inside">
+                        <p>Nome</p>
+                        <p>Preco</p>
+                        <p>Quantidade</p>
+                        <p>Codigo</p>
+                    </div>
+                    <div id="info_compra" class="inside">
+                        <div>   
+                            <p>Nome</p>
+                            <p>Preco</p>
+                            <p>Quantidade</p>
+                            <p>Codigo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compra enabled">
+                <img src="../Icones/Down_preto.svg">
+                <p>12</p>
+                <p>Concluida</p>
+                <p>25/05/2005</p>
+                <p>R$ 20,00</p>
+                <div>
+                    <div id="info_c_h" class="inside">
+                        <p>Nome</p>
+                        <p>Preco</p>
+                        <p>Quantidade</p>
+                        <p>Codigo</p>
+                    </div>
+                    <div id="info_compra" class="inside">
+                        <div>   
+                            <p>Nome</p>
+                            <p>Preco</p>
+                            <p>Quantidade</p>
+                            <p>Codigo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <h1>Sessões ativas</h1>

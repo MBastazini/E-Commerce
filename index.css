@@ -2619,6 +2619,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         transition: 0.5s;
         padding: 5px 0px;
         grid-template-rows: auto auto;
+        position: relative;
     }
     #info_compra > div.compra:hover{
         cursor: pointer;
@@ -2629,9 +2630,25 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         grid-area: 2/2/2/8;
         margin-top: 20px;
         margin-bottom: 50px;
+        transform: translateY(-100%);
+        position: absolute;
+        opacity: 0;
+        transition: 0.5s;
     }
     .compra.enabled > div{
-        transform: translateY(-100%);
+        position: relative;
+        transform: translate(0);
+        opacity: 1;
+        transition: 0.5s;
+    }
+    .compra > img{
+        transition: rotate 0.5s;
+    }
+    .compra.enabled > img{
+        rotate: 180deg;
+        border-right: none !important;
+        border-left: 3px solid #96C379;
+        transition: rotate 0.5s;
     }
     #info_c_h.inside, #info_compra.inside > div{
         grid-template-columns: 1fr 1fr 1fr 1fr;

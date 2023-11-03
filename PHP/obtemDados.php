@@ -4,6 +4,7 @@
     require_once('Classes/cls_compra.php');
     require_once('Classes/cls_produto.php');
     require_once('Classes/cls_usuario.php');
+    require_once("Classes/cls_compra_produto.php");
 
     include("sessao.php");
 
@@ -87,16 +88,15 @@
                 $conn = coneccao();
                 $cod_usuario = $_SESSION['usuario']['cod_usuario'];
 
-                $sql = 'SELECT * FROM tbl_compra WHERE cod_usuario = :cod_usuario';
+                $sql = 'SELECT * FROM tbl_compra WHERE cod_usuario = :cod_usuario AND status = \'Concluida\' ORDER BY cod_compra';
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
-                $stmt->bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
                 $stmt->execute();
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra']);
                     $sql2 = 'SELECT p.cod_produto, cp.quantidade, p.nome, p.preco FROM tbl_compra_produto AS cp
                     INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
-                    WHERE cp.cod_compra = :cod_compra';
+                    WHERE cp.cod_compra = :cod_compra ORDER BY cp.cod_compra';
                     $stmt2 = $conn->prepare($sql2);
                     $stmt2->bindParam(':cod_compra', $row['cod_compra'], PDO::PARAM_INT);
                     $stmt2->execute();

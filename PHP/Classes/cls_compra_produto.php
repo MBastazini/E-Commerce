@@ -12,7 +12,7 @@ class Compra_produto{
         $this->preco = $preco;
     }
 
-    public function getCod_produto(){
+    public function getCodProduto(){
         return $this->cod_produto;
     }
 
@@ -24,6 +24,9 @@ class Compra_produto{
         return $this->nome;
     }
 
+    public function getPreco(){
+        return $this->preco;
+    }
         
 }
 ?>
