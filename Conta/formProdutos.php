@@ -41,7 +41,7 @@
 <body>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/login.js" defer></script>
-
+    <script src="../JS/form_produtos.js" defer></script>
     <?php 
         barraNavegacao('', '../');
     ?>
@@ -63,7 +63,7 @@
             <?php 
             ?>
 
-            <form action='../PHP/insereDadosProduto.php' method='post'>
+            <form action='../PHP/insereDadosProduto.php' method='post' enctype="multipart/form-data">
                 <input type='hidden' name='funcao' value='cadastro'>
                 <div class="inp">
                     <?php 
@@ -114,6 +114,11 @@
                     ?>
                     <p>Excluido</p>
                 </div>
+                <div class="inp file">
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <p>Selecione uma imagem (Opcional)</p>
+                    <img src="#" id="file_img" alt="Imagem não selecionada">
+                </div>
 
                 <input type='hidden' name='cod_produto' value=<?php echo $cod_produto; ?>>
                 <input type='hidden' name='funcao' value=<?php echo $funcao; ?>>
@@ -127,7 +132,7 @@
                     {
                         echo "ALTERAR";
                     }
-                    ?>">
+                    ?>" name="submit">
                 </div>
             </form>
             <div class="crud_voltar">

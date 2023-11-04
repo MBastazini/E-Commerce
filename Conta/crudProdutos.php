@@ -66,7 +66,7 @@
                         echo"";
                     }
                     echo'">
-                            <img src="../Imagens/Produtos/2.jpg">
+                            <img src="../Imagens/Produtos/'.$produto->getCodProduto().'.jpg">
                             <div class="info">
                                 <div>
                                     <p>Nome</p>
