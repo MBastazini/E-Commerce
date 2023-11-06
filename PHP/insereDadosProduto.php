@@ -2,6 +2,79 @@
 
 include("sessao.php");
 
+    function adcionaImagem($cod_produto){
+        //Adiciona a imagem
+        $targer_dir = "/home/projetoscti/www/projetoscti14/Imagens/Produtos/";
+        //Mudar aqui para o nome do arquivo no pc do cara.
+        $targer_file = $targer_dir . $_FILES["fileToUpload"]["name"];
+        $uploadOk = 1;
+
+        $imageFileType = strtolower(pathinfo($targer_file,PATHINFO_EXTENSION));
+
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+
+            if($check !== false) {
+                $uploadOk = 1;
+
+            } else {
+                
+                $uploadOk = 0;
+            }
+        }
+
+        $targer_file = $targer_dir . $cod_produto . '.jpg';
+        // Check if file already exists
+        if (file_exists($targer_file)) {
+            //header('Location: ../Conta/crudProdutos.php#arquivo-ja-existe');
+            if(unlink($targer_file)){
+                header('Location: ../Conta/crudProdutos.php#FODA_SE');
+                exit();
+            }
+            else{
+                header('Location: ../Conta/crudProdutos.php#houve-um-erro-ao-fazer-upload-do-arquivo');
+                exit();
+            }   
+            $uploadOk = 1;
+        }
+        else{
+            header('Location: ../Conta/crudProdutos.php#arquivo-ja-existe');
+            exit();
+        }
+
+
+        // Check file size
+        if ($_FILES["fileToUpload"]["size"] > 1000000) {
+            header('Location: ../Conta/crudProdutos.php#arquivo-muito-grande');
+            $uploadOk = 0;
+        }
+
+
+        // Allow certain file formats
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+            header('Location: ../Conta/crudProdutos.php#formato-de-arquivo-nao-suportado');
+
+            $uploadOk = 0;
+        }
+
+
+        // if everything is ok, try to upload file
+        //Caminho do file (com nome certo)
+        
+        if ($uploadOk == 1) {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targer_file)) {
+                echo "The file ". basename( $targer_file). " has been uploaded.";
+                header('Location: ../Conta/crudProdutos.php#produto-adicionado-com-sucesso');
+            } else {
+                header('Location: ../Conta/crudProdutos.php#houve-um-erro-ao-fazer-upload-do-arquivo');
+            }
+
+        } else {
+            header('Location: ../Conta/crudProdutos.php#houve-um-erro-ao-fazer-upload-do-arquivo');
+        }
+
+    }
     function adicionaProduto()
     {
         $user = CheckUser();
@@ -58,8 +131,10 @@ include("sessao.php");
                     $stmt -> execute();
                     $cod_produto = $conn->lastInsertId();
                 }
-                    catch(PDOException $e){
-                    echo "<script>alert('Erro ao adicionar produto!');</script>";
+                catch(PDOException $e){
+                    $mensagem = $e->getMessage();
+                    str_replace(" ", "-", $mensagem);
+                    Header('Location: ../Conta/crudProdutos.php#' . $mensagem);
                     $cod_produto = 0;
                 }
                 
@@ -67,67 +142,7 @@ include("sessao.php");
                 $conn = null;
                 $stmt = null;
 
-
-
-
-                //Adiciona a imagem
-                $targer_dir = "/home/projetoscti/www/projetoscti14/Imagens/Produtos/";
-                //Mudar aqui para o nome do arquivo no pc do cara.
-                $targer_file = $targer_dir . $cod_produto;
-                $uploadOk = 1;
-
-                $imageFileType = strtolower(pathinfo($targer_file,PATHINFO_EXTENSION));
-
-                // Check if image file is a actual image or fake image
-                if(isset($_POST["submit"])) {
-                    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-
-                    if($check !== false) {
-                        echo "File is an image - " . $check["mime"] . ".";
-                        $uploadOk = 1;
-
-                    } else {
-                        echo "File is not an image.";
-                        $uploadOk = 0;
-                    }
-                }
-
-                // Check if file already exists
-                if (file_exists($targer_file)) {
-                    echo "Sorry, file already exists.";
-                    $uploadOk = 0;
-                }
-
-
-                // Check file size
-                if ($_FILES["fileToUpload"]["size"] > 500000) {
-                    echo "Sorry, your file is too large.";
-
-                    $uploadOk = 0;
-                }
-
-
-                // Allow certain file formats
-                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                    echo "Sorry, only JPG, JPEG, PNG files are allowed.";
-
-                    $uploadOk = 0;
-                }
-
-
-                // if everything is ok, try to upload file
-                if ($uploadOk == 1) {
-                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targer_file)) {
-                        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-
-                    } else {
-                        echo "Sorry, there was an error uploading your file.";
-                    }
-
-                } else {
-                    echo "Sorry, your file was not uploaded.";
-                }
-
+                adcionaImagem($cod_produto);
             }
         }
     }
@@ -195,6 +210,34 @@ include("sessao.php");
                 echo "<script>alert('Erro ao editar produto!');</script>";
             }
             
+            adcionaImagem($linha['cod_produto']);
+
+            $conn = null;
+            $stmt = null;
+
+
+        }
+    }
+
+    function restauraProduto($cod_produto)
+    {
+        $user = CheckUser();
+
+        if($user == 1)
+        {
+            $conn = coneccao();
+            try{
+                $sql = "UPDATE tbl_produto SET excluido = false WHERE cod_produto = :cod_produto";
+                $stmt = $conn->prepare($sql);
+                $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
+                $stmt -> execute();
+            }
+            catch(PDOException $e){
+                $mensagem = $e->getMessage();
+                str_replace(" ", "-", $mensagem);
+                Header('Location: ../Conta/crudProdutos.php#' . $mensagem);
+            }
+            
         
             $conn = null;
             $stmt = null;
@@ -209,13 +252,16 @@ include("sessao.php");
         {
             $conn = coneccao();
             try{
-                $sql = "DELETE FROM tbl_produto WHERE cod_produto = :cod_produto";
+                $sql = "UPDATE tbl_produto SET excluido = true WHERE cod_produto = :cod_produto";
                 $stmt = $conn->prepare($sql);
                 $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
                 $stmt -> execute();
             }
             catch(PDOException $e){
-                echo "<script>alert('Erro ao deletar produto!');</script>";
+                $mensagem = $e->getMessage();
+                str_replace(" ", "-", $mensagem);
+                Header('Location: ../Conta/crudProdutos.php#' . $mensagem);
+                $cod_produto = 0;
             }
             
         
@@ -241,11 +287,19 @@ include("sessao.php");
                 else if($funcao == 'edit')
                 {
                     editaProduto();
-                    header("location: ../Conta/crudProdutos.php");
+                    header("location: ../Conta/crudProdutos.php#produto-editado-com-sucesso");
                 }
                 else if($funcao == 'del')
                 {
                     deletaProduto($_POST['cod_produto']);
+                    header("location: ../Conta/crudProdutos.php#produto-excluido-com-sucesso");
+                }
+                else if ($funcao == 'res')
+                {
+                    restauraProduto($_POST['cod_produto']);
+                    header("location: ../Conta/crudProdutos.php#produto-restaurado-com-sucesso");
+                }
+                else{
                     header("location: ../Conta/crudProdutos.php");
                 }
             }  

@@ -2886,6 +2886,9 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #crud > .elemento > .acoes button#del:hover{
         background-color: #aa0e0e;
     }
+    #crud > .elemento > .acoes button#res:hover{
+        background-color: rgb(160, 217, 76);
+    }
     #crud > .elemento > .acoes button > img{
         width: 22px;
     }

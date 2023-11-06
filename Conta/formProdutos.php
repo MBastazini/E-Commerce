@@ -12,6 +12,7 @@
     $icms = null;
     $excluido = false;
     $cod_produto = null;
+    $imagem = '#';
     $funcao = $_POST['funcao'];
     if ($funcao == 'edit')
     {
@@ -24,6 +25,7 @@
         $icms = $_POST['icms'];
         $excluido = isset($_POST['excluido']) && $_POST['excluido'] == 1;
         $cod_produto = $_POST['cod_produto'];
+        $imagem = '../Imagens/Produtos/' . $cod_produto . '.jpg';
     }
 ?>
 
@@ -67,57 +69,59 @@
                 <input type='hidden' name='funcao' value='cadastro'>
                 <div class="inp">
                     <?php 
-                     echo "<input type='text' name='nome_produto' maxlength='80' value='".$nome_produto."'>";
+                     echo "<input type='text' required name='nome_produto' maxlength='80' value='".$nome_produto."'>";
                     ?>
                     <p>Nome do produto</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' name='preco' maxlength='100' value='".$preco."'>";
+                        echo "<input type='number' required name='preco' maxlength='100' value='".$preco."'>";
                     ?>
                     <p>Preço</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' name='quantidade' maxlength='100' value='".$quantidade."'>";
+                        echo "<input type='number' required name='quantidade' maxlength='100' value='".$quantidade."'>";
                     ?>
                     <p>Quantidade em estoque</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='text' name='descricao' maxlength='100' value='".$descricao."'>";
+                        echo "<input type='text' required name='descricao' maxlength='100' value='".$descricao."'>";
                     ?>
                     <p>Descrição</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' name='custo' maxlength='100' value='".$custo."'>";
+                        echo "<input type='number' required name='custo' maxlength='100' value='".$custo."'>";
                     ?>
                     <p>Custo</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='text' name='categoria' maxlength='100' value='".$categoria."'>";
+                        echo "<input type='text' required name='categoria' maxlength='100' value='".$categoria."'>";
                     ?>
                     <p>Categoria</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' name='icms' maxlength='100' value='".$icms."'>";
+                        echo "<input type='number' required name='icms' maxlength='100' value='".$icms."'>";
                     ?>
                     <p>ICMS</p>
                 </div>
                 <div class="inp excluido">
                     <?php 
-                        echo "<div> <input type='radio' name='excluido' value='1' " . ($excluido ? "checked" : "") . "> Sim </div>";
-                        echo "<div> <input type='radio' name='excluido' value='0' " . (!$excluido ? "checked" : "") . "> Não </div>";
+                        echo "<div> <input type='radio' required name='excluido' value='1' " . ($excluido ? "checked" : "") . "> Sim </div>";
+                        echo "<div> <input type='radio' required name='excluido' value='0' " . (!$excluido ? "checked" : "") . "> Não </div>";
                     ?>
                     <p>Excluido</p>
                 </div>
                 <div class="inp file">
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                    <p>Selecione uma imagem (Opcional)</p>
-                    <img src="#" id="file_img" alt="Imagem não selecionada">
+                    <input type="file" name="fileToUpload" id="fileToUpload" required>
+                    <p>Selecione uma imagem</p>
+                    <?php 
+                        echo "<img src='$imagem' alt='Imagem do produto' id='file_img'>"
+                    ?>
                 </div>
 
                 <input type='hidden' name='cod_produto' value=<?php echo $cod_produto; ?>>

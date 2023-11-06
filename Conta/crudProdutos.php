@@ -19,18 +19,13 @@
     <script src="../JS/conta.js" defer></script>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/login.js" defer></script>
+    <script src="../JS/crudProdutos.js" defer></script>
 
     <?php 
         barraNavegacao('', '../');
     ?>
 
     <div id="crud" class="container">
-        <form action="formProdutos.php" method="post">
-            <input type="hidden" name="funcao" value="add">
-            <button type="submit">
-                <img src="../Icones/add.svg">
-                Adicionar produto</button>
-        </form>
 
         <?php 
         
@@ -39,15 +34,29 @@
         {
             if ($_SESSION['usuario']['adm'])
             {
+                echo '<form action="formProdutos.php" method="post">
+                <input type="hidden" name="funcao" value="add">
+                <button type="submit">
+                    <img src="../Icones/add.svg">
+                    Adicionar produto</button>
+            </form>';
                 $produtos = tblProduto();
                 foreach($produtos as $produto)
                 {
                     if ($produto->getExcluido() == 1)
                     {
                         $excluido = "Sim";
+                        $exclido_id = 'res';
+                        $excluido_frase = 'Restaurar';
+                        $excluido_img = '../Icones/restore.svg';
+                        $funcao = 'res';
                     }
                     else{
                         $excluido = "Não";
+                        $exclido_id = 'del';
+                        $excluido_frase = 'Excluir';
+                        $excluido_img = '../Icones/delete.svg';
+                        $funcao = 'del';
                     }
 
                     if (null !== $produto->getCategoria())
@@ -138,10 +147,10 @@
                             <form action="../PHP/insereDadosProduto.php" method="post">
 
                                 <input type="hidden" name="cod_produto" value="'.$produto->getCodProduto().'">
-                                <input type="hidden" name="funcao" value="del">
-                                <button type="submit" name="excluir" value="1" id="del">
-                                    <img src="../Icones/delete.svg">
-                                    Excluir
+                                <input type="hidden" name="funcao" value="'. $funcao .'">
+                                <button type="submit" name="excluir" value="1" id="'.$exclido_id.'">
+                                    <img src="'. $excluido_img .'">
+                                    '.$excluido_frase.'
                                 </button>
 
                             </form>

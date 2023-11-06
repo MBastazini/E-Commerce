@@ -60,7 +60,7 @@
     
             $conn = coneccao();
 
-            $sql = "SELECT * FROM tbl_produto ORDER BY cod_produto";
+            $sql = "SELECT * FROM tbl_produto ORDER BY (CASE WHEN excluido = true THEN 1 ELSE 0 END), cod_produto;";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
 
