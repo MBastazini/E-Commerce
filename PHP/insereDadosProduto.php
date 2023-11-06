@@ -25,23 +25,6 @@ include("sessao.php");
         }
 
         $targer_file = $targer_dir . $cod_produto . '.jpg';
-        // Check if file already exists
-        if (file_exists($targer_file)) {
-            //header('Location: ../Conta/crudProdutos.php#arquivo-ja-existe');
-            if(unlink($targer_file)){
-                header('Location: ../Conta/crudProdutos.php#FODA_SE');
-                exit();
-            }
-            else{
-                header('Location: ../Conta/crudProdutos.php#houve-um-erro-ao-fazer-upload-do-arquivo');
-                exit();
-            }   
-            $uploadOk = 1;
-        }
-        else{
-            header('Location: ../Conta/crudProdutos.php#arquivo-ja-existe');
-            exit();
-        }
 
 
         // Check file size
@@ -52,8 +35,8 @@ include("sessao.php");
 
 
         // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-            header('Location: ../Conta/crudProdutos.php#formato-de-arquivo-nao-suportado');
+        if($imageFileType != "jpg") {
+            header('Location: ../Conta/crudProdutos.php#formato-de-arquivo-nao-suportado-(Apenas-JPG)');
 
             $uploadOk = 0;
         }
