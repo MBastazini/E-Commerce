@@ -29,16 +29,6 @@ body{
     scrollbar-width: thin;
 }
 
-/* Works on Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-width: 12px;
-}
-
-/* Alterando a cor do botão de rolagem */
-::-webkit-scrollbar-thumb {
-background: #007bff; /* Cor do botão de rolagem */
-}
-
 /* Alterando a cor da trilha da barra de rolagem */
 ::-webkit-scrollbar-track {
 background: #f0f0f0; /* Cor da trilha da barra de rolagem */
@@ -369,7 +359,7 @@ h5{
     width: 100%;
     background-image: url(Imagens/arvorefinal.jpeg);
     background-repeat:no-repeat;
-    background-size: cover;
+    object-fit: cover;
     position: relative;
     background-position: right;
 }
@@ -934,7 +924,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     position: relative;
     overflow: hidden;
     background-image: url('Icones/quad_grad.svg');
-    background-size: cover; /* Ajusta o tamanho da imagem para cobrir todo o div */
+    object-fit: cover; /* Ajusta o tamanho da imagem para cobrir todo o div */
     background-repeat: no-repeat; /* Evita a repetição da imagem */
     background-position: center; /* Centraliza a imagem no div */
 }
@@ -1993,7 +1983,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         width: 80%;
         height: 50%;
         background-image: url(Icones/quadrados.svg);
-        background-size: cover;
+        object-fit: cover;
         background-position: center;
     }
     .dev#mateus > .dev_img
@@ -2208,7 +2198,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     }
     .filtro_opcoes > div > input[type='checkbox']:checked{
         background-image: url(Icones/Check.svg);
-        background-size: cover;
+        object-fit: cover;
     }
     #ativos{
         display: flex;
@@ -2323,7 +2313,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     .product > img{
         height: 150px;
         aspect-ratio: 1;
-        background-size: cover;
+        object-fit: cover;
     }
     .product_botoes{
         display: flex;
@@ -2854,19 +2844,47 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         white-space: nowrap;
         margin-top: 12px; /*tamanho definido da scrollbar*/
     }
+    #crud.img{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+    #add_img{
+        grid-area: 1/1/1/3;
+    }
     #crud > .elemento > img{
         width: 150px;
         height: 150px;
         object-fit: cover;
         margin: 5px;
     }
-    #crud > .elemento > .acoes{
+    #crud > .elemento_img{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    #crud > .elemento_img > img{
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+    #crud > .elemento_img > div > h1{
+        font-size: 30px;
+        font-weight: 400;
+    }
+    #crud > .elemento_img > div > div{
+        display: block;
+        gap: 0;
+    }
+    .acoes{
         display: grid;
         grid-template-rows: 1fr 1fr;
         gap: 20px;
         padding: 15px;
     }
-    #crud > .elemento > .acoes button{
+    .acoes button{
         background-color: var(--destaque_02);
         color: white;
         padding: 5px 10px;
@@ -2883,16 +2901,16 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         justify-content: center;
         font-size: 18px;
     }
-    #crud > .elemento > .acoes button#del:hover{
+    .acoes button#del:hover{
         background-color: #aa0e0e;
     }
-    #crud > .elemento > .acoes button#res:hover{
+    .acoes button#res:hover{
         background-color: rgb(160, 217, 76);
     }
-    #crud > .elemento > .acoes button > img{
+    .acoes button > img{
         width: 22px;
     }
-    #crud > .elemento > .acoes button:hover{
+    .acoes button:hover{
         transform: scale(1.1);
         background-color: var(--cor_destaque);
         transition: 0.5s;
@@ -3066,7 +3084,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             width: 80%;
             height: 40%;
             background-image: url(Icones/quadrados.svg);
-            background-size: cover;
+            object-fit: cover;
         }
         .dev h1{
             font-size: 30px;
@@ -3450,13 +3468,13 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         #crud > .elemento{
             height: 250px;
         }
-        #crud > .elemento > .acoes{
+        .acoes{
             height: 60%;
         }
-        #crud > .elemento > .acoes button{
+        .acoes button{
             font-size: 15px;
         }
-        #crud > .elemento > .acoes button > img{
+        .acoes button > img{
             width: 18px;
         }
     }
@@ -3828,7 +3846,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         #crud > .elemento{
             grid-template-columns: 110px 5fr 1fr;
         }
-        #crud > .elemento > .acoes button{
+        .acoes button{
             flex-direction: column;
         }
 }
@@ -4128,7 +4146,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             flex-direction: column;
             height: auto;
         }
-        #crud > .elemento > .acoes{
+        .acoes{
             display: flex;
         }
         #crud{

@@ -149,8 +149,8 @@
             $excluido = $produto->getExcluido();
             if(!$excluido)
             {
-                $quantidade = $produto->getQuantidade();
-                if ($quantidade > 0)
+                $estoque = $produto->getEstoque();
+                if ($estoque > 0)
                 {
                     $cod_produto = $produto->getCodProduto();
                     $nome = $produto->getNome();

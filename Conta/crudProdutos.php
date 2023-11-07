@@ -88,7 +88,7 @@
                                 </div>
                                 <div>
                                     <p>Quantidade em estoque</p>
-                                    <h1>'.$produto->getQuantidade().'</h1>
+                                    <h1>'.$produto->getEstoque().'</h1>
                                 </div>
                                 <div>
                                     <p>Descricao</p>
@@ -127,7 +127,7 @@
                                 <input type="hidden" name="cod_produto" value="'.$produto->getCodProduto().'">
                                 <input type="hidden" name="nome_produto" value="'.$produto->getNome().'">    
                                 <input type="hidden" name="preco" value="'.$produto->getPreco().'">
-                                <input type="hidden" name="quantidade" value="'.$produto->getQuantidade().'">
+                                <input type="hidden" name="quantidade" value="'.$produto->getEstoque().'">
                                 <input type="hidden" name="descricao" value="'.$produto->getDescricao().'">
                                 <input type="hidden" name="custo" value="'.$produto->getCusto().'">
                                 <input type="hidden" name="categoria" value="'.$produto->getCategoria().'">

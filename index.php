@@ -17,56 +17,6 @@
 <body>
     <script src="JS/home.js" defer></script>
     <script src="JS/index.js" defer></script>
-    
-
-    <!--<div class="nav_nav nav_sobe container">
-        <div class="nav_fundo nf_fixo"></div>
-        <a href="index.html"><img src="Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
-
-
-        <div class="nav_div_pesquisa">
-                <div class="nav_pesquisa">
-                    <img src="Icones/pesquisa_cinza.svg" class="nav_icon">
-                    <input type="text" placeholder="Pesquisar...">
-                </div>
-                <div class="nav_p_resultados">
-
-                
-                </div>
-        </div>
-        
-        <img src="Icones/menu-hamburguer.svg" class="nav_tres_risco" alt="Mais opções">
-        <div class="nav_elementos">
-            <div class="nav_risco"></div>
-     
-            <div class="nav_home" id="nav_botao_ativo">
-                <img class="nav_icon" src="Icones/home_branco.svg">
-                <p>HOME</p>
-            </div>
-            <a href="produtos.php">
-                <div class="nav_produtos">
-                    <img class="nav_icon" src="Icones/shopping_preto.svg">
-                    <p>PRODUTOS</p>
-                </div>
-            <a href="sobre.html">   
-                <div class="nav_sobre">
-                    <img class="nav_icon" src="Icones/sobre_preto.svg">
-                    <p>SOBRE</p>
-                </div>
-            </a>
-
-            <a href="carrinho.html">
-                <div class="nav_info_lateral">
-                    <img class="nav_icon2" src="Icones/carrinho_preto.svg">
-                    <p>CARRINHO</p>
-                </div>
-            </a>
-            <a href="PHP/usuario.php">
-                
-            </a>
-        </div>
-        
-    </div> -->
 
     <?php 
         barraNavegacao('home', '');
@@ -238,64 +188,6 @@
     <?php 
         Footer('', '#telaInicio');
     ?>
-    <!--<footer>
-        <div class="tela_scroll_down up">
-            <a href="#telaInicio" class="a"> 
-                <h1>Voltar ao topo</h1> 
-                <img src="Icones/arrow.svg">
-            </a>
-        </div>
-        <div id="f_1"></div>
-        <div id="f_2"></div>
-        <div id="f_3"></div>
-        <div id="f_4"></div>
-        <div id="f_5"></div>
-
-        <div class="footer_logo">
-            <img src="Icones/logo-bola-branco.svg" alt="Logo da Tiny Wood">
-            <div class="footer_logo_info">
-                <h1>TINY WOOD</h1>
-                <p>Alguimas informaçoes pq eu vi num lugar e 
-                    vou colocar
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vo
-                luptate quidem distinctio rerum assumenda quae aut, dicta c</p>
-                <div class="footer_logo_info_mais">
-                    <div class="footer_logo_info_mais_botao" value="1"></div>
-                    <div class="footer_logo_info_mais_botao" value="2"></div>
-                    <div class="footer_logo_info_mais_botao" value="3"></div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="copyright">
-            <p>All copyrights to &copy; TinyWood</p>
-        </div>
-        <div class="footer_info">
-            <div class="footer_div">
-                <h1>Desenvolvedores</h1>
-                <a href="sobre.html#leticia"><p>Leticia Garcia | N° 21</p></a>
-                <a href="sobre.html#luiz"><p>Luiz Felipe | N° 22</p></a>
-                <a href="sobre.html#mariana"><p>Mariana Senger | N° 23</p></a>
-                <a href="sobre.html#mateus"><p>Mateus Bastazini | N° 24</p></a>
-                <a href="sobre.html#matheus"><p>Matheus Trentini | N° 25</p></a>
-            </div>
-            <div class="footer_div">
-                <h1>Contato</h1>
-                <a><p>E-mail</p></a>
-                <a><p>Telefone</p></a>
-                <a><p>sla1</p></a>
-                <a><p>sla2</p></a>
-            </div>
-            <div class="footer_div">
-                <h1>Contato</h1>
-                <a><p>E-mail</p></a>
-                <a><p>Telefone</p></a>
-                <a><p>sla1</p></a>
-                <a><p>sla2</p></a>
-            </div>
-        </div>
-    </footer>-->
 </body>
 </html>
 

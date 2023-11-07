@@ -5,13 +5,26 @@ CREATE TABLE tbl_produto(
 	preco numeric(10,2) not null,
 	excluido boolean not null,
 	data_exclusao timestamp not null, /* precisa? */
-	codigovisual varchar(50) not null, /* que porra e essa e qual a diferença de 'imagem'*/
 	custo numeric(10,2) not null,
 	margem_lucro numeric(10,2) not null, /* é so caucula na hora */
 	icms numeric(10,2) not null, 
 	categoria varchar(10) not null
-	quantidade integer not null
+	estoque integer not null
+
+	imagem serial,
+	FOREIGN KEY (imagem) REFERENCES tbl_imagem_produto(cod_imagem)
 );
+
+CREATE TABLE tbl_imagem_produto(
+	cod_imagem serial PRIMARY KEY,
+	imagem varchar(200) not null,
+	nome_img varchar(100) not null
+);
+ALTER TABLE tbl_produto DROP COLUMN quantidade;
+ALTER TABLE tbl_produto ADD COLUMN estoque integer;
+UPDATE tbl_produto SET estoque = 10;
+ALTER TABLE tbl_produto ALTER COLUMN estoque SET NOT NULL;
+
 ALTER TABLE tbl_produto ADD COLUMN categoria categorias;
 
 CREATE TABLE tbl_token(

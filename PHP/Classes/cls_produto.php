@@ -22,9 +22,12 @@ class Produto{
     private $custo = null;
     private $excluido = null;
     private $icms = null;
-    private $quantidade = null;
+    private $estoque = null;
     private $margem_lucro = null;
-    public function __construct($cod_produto, $nome, $descricao, $preco, $categoria, $custo, $excluido, $icms, $quantidade, $margem_lucro){
+    private $imagem = null;
+    
+    public function __construct($cod_produto, $nome, $descricao, $preco, 
+    $categoria, $custo, $excluido, $icms, $estoque, $margem_lucro, $imagem){
         $this->cod_produto = $cod_produto;
         $this->nome = $nome;
         $this->descricao = $descricao;
@@ -33,8 +36,9 @@ class Produto{
         $this->custo = $custo;
         $this->excluido = $excluido;
         $this->icms = $icms;
-        $this->quantidade = $quantidade;
+        $this->estoque = $estoque;
         $this->margem_lucro = $margem_lucro;
+        $this->imagem = $imagem;
     }
 
     public function getCodProduto(){
@@ -76,12 +80,16 @@ class Produto{
         return $this->icms;
     }
 
-    public function getQuantidade(){
-        return $this->quantidade;
+    public function getEstoque(){
+        return $this->estoque;
+    }
+
+    public function getImagem(){
+        return $this->imagem;
     }
     
-    public function setQuantidade($quantidade){
-        $this->quantidade = $quantidade;
+    public function setEstoque($estoque){
+        $this->estoque = $estoque;
     }
 
     public function getMarginLucro(){

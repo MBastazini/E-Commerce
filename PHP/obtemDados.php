@@ -53,6 +53,28 @@
             return $codCompra;
         }
     }
+
+    function tblImagem(){
+        if (!(isset($imagens)))
+        {
+            $imagens = array();
+    
+            $conn = coneccao();
+    
+            $sql = "SELECT * FROM tbl_imagem ORDER BY cod_imagem";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+    
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $imagens[] = new Imagem($row['cod_imagem'], $row['imagem'], $row['nome_img']);
+            }
+    
+            $conn = null;
+            $stmt = null;
+        }
+        
+        return $imagens;
+    }
     function tblProduto(){
         if (!(isset($produtos)))
         {
@@ -60,13 +82,16 @@
     
             $conn = coneccao();
 
-            $sql = "SELECT * FROM tbl_produto ORDER BY (CASE WHEN excluido = true THEN 1 ELSE 0 END), cod_produto;";
+            $sql = "SELECT * FROM tbl_produto INNER JOIN
+            tbl_imagem ON tbl_produto.imagem = tbl_imagem.cod_imagem
+            ORDER BY (CASE WHEN excluido = true THEN 1 ELSE 0 END), cod_produto;";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
 
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                 $produtos[] = new Produto($row['cod_produto'], $row['nome'], $row['descricao'], 
-                $row['preco'], $row['categoria'], $row['custo'], $row['excluido'], $row['icms'], $row['quantidade'], $row['margem_lucro']);
+                $row['preco'], $row['categoria'], $row['custo'], $row['excluido'], $row['icms'], 
+                $row['estoque'], $row['margem_lucro'], $row['imagem']);
             }
 
             $conn = null;
@@ -77,7 +102,7 @@
         return $produtos;
     }
 
-    function tblCompra()
+    function tblCompra($tipo = 0)
     {
         if (!(isset($compras)))
         {
@@ -88,13 +113,21 @@
                 $conn = coneccao();
                 $cod_usuario = $_SESSION['usuario']['cod_usuario'];
 
-                $sql = 'SELECT * FROM tbl_compra WHERE cod_usuario = :cod_usuario AND status = \'Concluida\' ORDER BY cod_compra';
-                $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                if ($tipo == 0)
+                {
+                    $sql = 'SELECT * FROM tbl_compra WHERE cod_usuario = :cod_usuario AND status = \'Concluida\' ORDER BY cod_compra';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                }   
+                else{
+                    $sql = 'SELECT * FROM tbl_compra WHERE status = \'Concluida\' ORDER BY cod_compra';
+                    $stmt = $conn->prepare($sql);
+                }
+                
                 $stmt->execute();
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra']);
-                    $sql2 = 'SELECT p.cod_produto, cp.quantidade, p.nome, p.preco FROM tbl_compra_produto AS cp
+                    $sql2 = 'SELECT * FROM tbl_compra_produto AS cp
                     INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
                     WHERE cp.cod_compra = :cod_compra ORDER BY cp.cod_compra';
                     $stmt2 = $conn->prepare($sql2);
@@ -192,7 +225,7 @@
         
                 $cod_compra = getCodCompra();
                 //Talvez nem precise do usuario
-                $sql = "SELECT * FROM tbl_compra_produto AS cp
+                $sql = "SELECT p.nome, p.preco, cp.quantidade, p.cod_produto FROM tbl_compra_produto AS cp
                 INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
                 INNER JOIN tbl_compra AS c ON cp.cod_compra = c.cod_compra
                 WHERE c.cod_usuario = :cod_usuario AND c.cod_compra = :cod_compra";
