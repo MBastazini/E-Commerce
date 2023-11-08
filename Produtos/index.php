@@ -156,7 +156,8 @@
                     $nome = $produto->getNome();
                     $preco = $produto->getPreco();
                     $categoria = $produto->getCategoria();
-                    
+                    $imagem = $produto->getImagem();
+
                     if(estaNoCarrinho($cod_produto))
                     {
                         $icone = 'Check_branco.svg';
@@ -168,7 +169,7 @@
                     }
 
                     echo "<div class='product' id='".$cod_produto."'>
-                    <img src='../Imagens/Produtos/". $cod_produto .".jpg' alt='Produto'>
+                    <img src='../$imagem' alt='Produto'>
                     <div>
                         <h1>". $nome."</h1>
                         <h2> R$ ". $preco ."</h2>

@@ -122,6 +122,8 @@
                         $cod_produto = $produto->getCodProduto();
                         $nome = $produto->getNome();
                         $preco = $produto->getPreco();
+                        $imagem = $produto->getImagem();
+
                         if(estaNoCarrinho($cod_produto))
                         {
                             $icone = 'Check_branco.svg';
@@ -136,7 +138,7 @@
                                 <div class='produto_texto'>
                                     <p> R$ ". $preco."</p>
                                     <h1>".$nome."</h1>
-                                    <h2>Imagens/Produtos/$cod_produto.jpg</h2>
+                                    <h2>$imagem</h2>
                                 </div>
                                 <div class='produto_botao'>
                                     <form action='PHP/insereDadosCarrinho.php' method='post'>

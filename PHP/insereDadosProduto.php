@@ -2,7 +2,21 @@
 
 include("sessao.php");
 
-    function adcionaImagem($cod_produto){
+    function adcionaImagem(){
+        //Adiciona a imagem no BD:
+        $conn = coneccao();
+        $nome = explode(".", $_FILES["fileToUpload"]["name"])[0];
+        $caminho_img = "Imagens/Produtos/" . $_FILES["fileToUpload"]["name"];
+
+        $sql = "INSERT INTO tbl_imagem_produto (nome_img, imagem) VALUES (:nome, :imagem)";
+        $stmt = $conn->prepare($sql);
+        $stmt -> bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt -> bindParam(':imagem', $caminho_img, PDO::PARAM_STR);
+        $stmt -> execute();
+
+        $stmt = null;
+        $conn = null;
+
         //Adiciona a imagem
         $targer_dir = "/home/projetoscti/www/projetoscti14/Imagens/Produtos/";
         //Mudar aqui para o nome do arquivo no pc do cara.
@@ -24,9 +38,6 @@ include("sessao.php");
             }
         }
 
-        $targer_file = $targer_dir . $cod_produto . '.jpg';
-
-
         // Check file size
         if ($_FILES["fileToUpload"]["size"] > 1000000) {
             header('Location: ../Conta/crudProdutos.php#arquivo-muito-grande');
@@ -36,7 +47,7 @@ include("sessao.php");
 
         // Allow certain file formats
         if($imageFileType != "jpg") {
-            header('Location: ../Conta/crudProdutos.php#formato-de-arquivo-nao-suportado-(Apenas-JPG)');
+            header('Location: ../Conta/crudImagens.php#formato-de-arquivo-nao-suportado-(Apenas-JPG)');
 
             $uploadOk = 0;
         }
@@ -48,15 +59,29 @@ include("sessao.php");
         if ($uploadOk == 1) {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targer_file)) {
                 echo "The file ". basename( $targer_file). " has been uploaded.";
-                header('Location: ../Conta/crudProdutos.php#produto-adicionado-com-sucesso');
+                header('Location: ../Conta/crudImagens.php#imagem-adicionada-com-sucesso');
             } else {
-                header('Location: ../Conta/crudProdutos.php#houve-um-erro-ao-fazer-upload-do-arquivo');
+                header('Location: ../Conta/crudImagens.php#houve-um-erro-ao-fazer-upload-do-arquivo');
             }
 
         } else {
-            header('Location: ../Conta/crudProdutos.php#houve-um-erro-ao-fazer-upload-do-arquivo');
+            header('Location: ../Conta/crudImagens.php#houve-um-erro-ao-fazer-upload-do-arquivo');
         }
 
+    }
+
+    function deletaImagem(){
+        $conn = coneccao();
+        $cod_imagem = $_POST['cod_imagem'];
+        $sql = "DELETE FROM tbl_imagem_produto WHERE cod_imagem = :cod_imagem";
+        $stmt = $conn->prepare($sql);
+        $stmt -> bindParam(':cod_imagem', $cod_imagem, PDO::PARAM_INT);
+        $stmt -> execute();
+
+        $stmt = null;
+        $conn = null;
+        
+        header('Location: ../Conta/crudImagens.php#imagem-deletada-com-sucesso-(lembre-de-a-deletar-manualmente-no-servidor)');
     }
     function adicionaProduto()
     {
@@ -67,7 +92,7 @@ include("sessao.php");
             if ($_SESSION['usuario']['adm'])
             {
                 $conn = coneccao();
-                if ($_POST['categoria'] == '')
+                if ($_POST['categoria'] == '- Nenhuma -')
                 {
                     $categoria = NULL;
                 }
@@ -94,13 +119,14 @@ include("sessao.php");
                     'icms'          => $_POST['icms'],
                     'quantidade'    => $quantidade,
                     'excluido'      => $excluido,
-                    'margem_lucro'  => $margem_lucro
+                    'margem_lucro'  => $margem_lucro,
+                    'imagem'        => $_POST['imagem']
 
                 ];
                 
                 try{
-                    $sql = "INSERT INTO tbl_produto (nome, descricao, preco, categoria, custo, icms, quantidade, excluido, margem_lucro) 
-                    VALUES (:nome, :descricao, :preco, :categoria, :custo, :icms, :quantidade, :excluido, :margem_lucro)";
+                    $sql = "INSERT INTO tbl_produto (nome, descricao, preco, categoria, custo, icms, quantidade, excluido, margem_lucro, imagem) 
+                    VALUES (:nome, :descricao, :preco, :categoria, :custo, :icms, :quantidade, :excluido, :margem_lucro, :imagem)";
                     $stmt = $conn->prepare($sql);
                     $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
                     $stmt -> bindParam(':descricao', $linha['descricao'], PDO::PARAM_STR);
@@ -111,8 +137,8 @@ include("sessao.php");
                     $stmt -> bindParam(':quantidade', $linha['quantidade'], PDO::PARAM_INT);
                     $stmt -> bindParam(':excluido', $linha['excluido'], PDO::PARAM_INT);
                     $stmt -> bindParam(':margem_lucro', $linha['margem_lucro'], PDO::PARAM_STR);
+                    $stmt -> bindParam(':imagem', $linha['imagem'], PDO::PARAM_STR);
                     $stmt -> execute();
-                    $cod_produto = $conn->lastInsertId();
                 }
                 catch(PDOException $e){
                     $mensagem = $e->getMessage();
@@ -121,11 +147,10 @@ include("sessao.php");
                     $cod_produto = 0;
                 }
                 
+
             
                 $conn = null;
                 $stmt = null;
-
-                adcionaImagem($cod_produto);
             }
         }
     }
@@ -192,8 +217,6 @@ include("sessao.php");
             catch(PDOException $e){
                 echo "<script>alert('Erro ao editar produto!');</script>";
             }
-            
-            adcionaImagem($linha['cod_produto']);
 
             $conn = null;
             $stmt = null;
@@ -265,7 +288,7 @@ include("sessao.php");
                 if($funcao == 'add')
                 {
                     adicionaProduto();
-                    //header("location: ../Conta/crudProdutos.php");
+                    header("location: ../Conta/crudProdutos.php#produto-adicionado-com-sucesso");
                 }
                 else if($funcao == 'edit')
                 {
@@ -281,6 +304,12 @@ include("sessao.php");
                 {
                     restauraProduto($_POST['cod_produto']);
                     header("location: ../Conta/crudProdutos.php#produto-restaurado-com-sucesso");
+                }
+                else if ($funcao == 'add_img'){
+                    adcionaImagem();
+                }
+                else if ($funcao == 'del_img'){
+                    deletaImagem();
                 }
                 else{
                     header("location: ../Conta/crudProdutos.php");

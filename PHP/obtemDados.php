@@ -5,6 +5,7 @@
     require_once('Classes/cls_produto.php');
     require_once('Classes/cls_usuario.php');
     require_once("Classes/cls_compra_produto.php");
+    require_once("Classes/cls_imagem.php");
 
     include("sessao.php");
 
@@ -61,7 +62,7 @@
     
             $conn = coneccao();
     
-            $sql = "SELECT * FROM tbl_imagem ORDER BY cod_imagem";
+            $sql = "SELECT * FROM tbl_imagem_produto ORDER BY cod_imagem";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
     
@@ -83,7 +84,7 @@
             $conn = coneccao();
 
             $sql = "SELECT * FROM tbl_produto INNER JOIN
-            tbl_imagem ON tbl_produto.imagem = tbl_imagem.cod_imagem
+            tbl_imagem_produto ON tbl_produto.imagem = tbl_imagem_produto.cod_imagem
             ORDER BY (CASE WHEN excluido = true THEN 1 ELSE 0 END), cod_produto;";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
@@ -225,9 +226,10 @@
         
                 $cod_compra = getCodCompra();
                 //Talvez nem precise do usuario
-                $sql = "SELECT p.nome, p.preco, cp.quantidade, p.cod_produto FROM tbl_compra_produto AS cp
+                $sql = "SELECT p.nome, p.preco, cp.quantidade, p.cod_produto, ip.imagem FROM tbl_compra_produto AS cp
                 INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
                 INNER JOIN tbl_compra AS c ON cp.cod_compra = c.cod_compra
+                INNER JOIN tbl_imagem_produto AS ip ON p.imagem = ip.cod_imagem
                 WHERE c.cod_usuario = :cod_usuario AND c.cod_compra = :cod_compra";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
@@ -235,7 +237,7 @@
                 $stmt->execute();
         
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    $carrinho[] = new Carrinho($row['nome'], $row['preco'], $row['quantidade'], $row['cod_produto']);
+                    $carrinho[] = new Carrinho($row['nome'], $row['preco'], $row['quantidade'], $row['cod_produto'], $row['imagem']);
                 }
         
                 $conn = null;
@@ -248,13 +250,13 @@
                     foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
                         $conn = coneccao();
         
-                        $sql = "SELECT nome, preco FROM tbl_produto WHERE cod_produto = :cod_produto";
+                        $sql = "SELECT nome, preco, imagem FROM tbl_produto WHERE cod_produto = :cod_produto";
                         $stmt = $conn->prepare($sql);
                         $stmt->bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
                         $stmt->execute();
                         $resultado = $stmt->fetch();
         
-                        $carrinho[] = new Carrinho($resultado['nome'], $resultado['preco'], $quantidade, $cod_produto);
+                        $carrinho[] = new Carrinho($resultado['nome'], $resultado['preco'], $quantidade, $cod_produto, $resultado['imagem']);
         
                         $conn = null;
                         $stmt = null;

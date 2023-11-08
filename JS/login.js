@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     const inps = document.querySelectorAll('.inp');
     inps.forEach((inp) => {
-      const input = inp.querySelector('input');
+      const input = inp.querySelector('input, select');
       const texto = inp.querySelector('p');
       adicionarEventos(input, texto);
     });

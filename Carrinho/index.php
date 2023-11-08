@@ -36,10 +36,11 @@
                     $nome = $c->getNome();
                     $quantidade = $c->getQuantidade();
                     $preco = $c->getPreco();
+                    $imagem = $c->getImagem();
                     $preco_total = $preco * $quantidade;
                     echo"
                             <div class='produto_compra' id='produto_$cod_produto'>
-                                <img src='../Imagens/Produtos/$cod_produto.jpg' alt='Chaveiro img'>
+                                <img src='../$imagem' alt='Chaveiro img'>
                                 <div>
                                     <p>$nome</p>
                                     <div class='produto_compra_div'>

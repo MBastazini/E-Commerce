@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <link rel="icon" type="image/x-icon" href="../Icones/logo-bola-verde.svg">
+
+    <title>Cadastro - Tiny Wood</title>
+</head>
+<body>
+    <script src="../JS/index.js" defer></script>
+    <script src="../JS/login.js" defer></script>
+
+
+    <section class="container sec_login" id="topo">
+        <div class="cadastro tela_log_cad">
+            <h1>
+
+            </h1>
+
+
+            <form action='../PHP/insereDadosProduto.php' method='post' enctype="multipart/form-data">
+                <input type='hidden' name='funcao' value='cadastro'>
+                <div class="inp">
+
+                    <input type='text' required name='nome_produto' maxlength='80'>
+                    
+                    <p>Nome do produto</p>
+                </div>
+                <div class="inp">
+
+                        <input type='number' required name='preco' maxlength='100'>
+
+                    <p>Preço</p>
+                </div>
+                <div class="inp">
+
+                        <input type='number' required name='quantidade' maxlength='100'>
+
+                    <p>Quant. em estoque</p>
+                </div>
+                <div class="inp">
+
+                        <input type='text' required name='descricao' maxlength='100'>
+
+                    <p>Descrição</p>
+                </div>
+                <div class="inp">
+
+                        <input type='number' required name='custo' maxlength='100'>
+
+                    <p>Custo</p>
+                </div>
+                <div class="inp">
+                    <select name="categoria">
+                        <option value="1">- Nenhuma -</option>
+                        <option value="2">Informatica</option>
+                        <option value="3">Mecanica</option>
+                        <option value="3">Eletronica</option>
+                        <option value="3">CTI</option>
+
+                    </select>
+                    <p>Categoria</p>
+                </div>
+                <div class="inp">
+
+                        <input type='number' required name='icms' maxlength='100'>
+
+                    <p>ICMS</p>
+                </div>
+                <div class="inp excluido">
+                        <div> <input type='radio' required name='excluido' value='1'>Sim</div>
+                        <div> <input type='radio' required name='excluido' value='0'>Não</div>
+
+                    <p>Excluido</p>
+                </div>
+                <div class="inp file">
+                    <select name="categoria">
+                        <option value="1">- Nenhuma -</option>
+                        <option value="2">Informatica</option>
+                        <option value="3">Mecanica</option>
+                        <option value="3">Eletronica</option>
+                        <option value="3">CTI</option>
+                    </select>
+                    <p>Imagem</p>
+                    <a href='#'>Adicionar nova</a>
+                </div>
+                <div class="btn">
+                    <input type="submit" value="Adicionar" name="submit">
+                </div>
+            </form>
+            <div class="crud_voltar">
+                <a href='crudProdutos.php'> VOLTAR </a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

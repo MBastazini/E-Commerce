@@ -34,12 +34,19 @@
         {
             if ($_SESSION['usuario']['adm'])
             {
-                echo '<form action="formProdutos.php" method="post">
+                echo '<div>
+                <form action="formProdutos.php" method="post">
                 <input type="hidden" name="funcao" value="add">
                 <button type="submit">
                     <img src="../Icones/add.svg">
                     Adicionar produto</button>
-            </form>';
+                </form>
+                <form action="crudImagens.php" method="post">
+                    <input type="hidden" name="funcao" value="add">
+                    <button type="submit">
+                        CRUD Imagens</button>
+                </form>
+                </div>';
                 $produtos = tblProduto();
                 foreach($produtos as $produto)
                 {
@@ -59,6 +66,7 @@
                         $funcao = 'del';
                     }
 
+                    
                     if (null !== $produto->getCategoria())
                     {
                         $categoria = $produto->getCategoria();
@@ -66,7 +74,10 @@
                     else{
                         $categoria = "Nenhuma";
                     }
+                    
+
                     echo '<div class="elemento" id="';
+                    
                     if ($produto->getExcluido() == 1)
                     {
                         echo"excluido";
@@ -75,7 +86,7 @@
                         echo"";
                     }
                     echo'">
-                            <img src="../Imagens/Produtos/'.$produto->getCodProduto().'.jpg">
+                            <img src="../'.$produto->getImagem().'">
                             <div class="info">
                                 <div>
                                     <p>Nome</p>

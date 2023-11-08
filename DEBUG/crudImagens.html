@@ -85,11 +85,30 @@
     </div>
 
     <div id="crud" class="container img">
-        <form action="#" method="post" id="add_img">
-            <button type="submit">
-                <img src="../Icones/add.svg">
-                Adicionar Imagem</button>
-        </form>
+        <div class="add_img">
+            <form action="../PHP/adeicionaimagem.php" method="post" enctype="multipart/form-data" id='form_img' class="add_img">
+                <a id="btn_crud_produtos" href="crudProdutos.php">CRUD Produtos</a>
+                <div>
+                    <p>Selecione uma imagem para adicionar (.JPG):</p>
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <p style="font-size: small;">(O nome da imagem será o nome do arquivo)</p>
+                </div>
+                
+                <button type="submit">
+                        <img src="../Icones/add.svg">
+                        Adicionar Imagem
+                </button>   
+                <p id='aviso_crud_img'>Atenção: o website não possui permissão para deletar arquivos do servidor.
+                    É sim possivel adicionar automaticamente imagens clicando no botão acima, porem para deleta-las e necessario
+                    clicar no botão 'Excluir' e deletar manualmente o arquivo no servidor.
+                </p>
+                <div>
+                    <p>Preview da imagem:</p>
+                    <img src="../Imagens/Produtos/10.jpg">
+                </div>
+            </form>
+            
+        </div>
         <div class="elemento_img">
             <div>
                 <h1>CARRARO</h1>

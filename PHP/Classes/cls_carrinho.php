@@ -5,11 +5,13 @@ class Carrinho{
     private $quantidade = null;
     private $cod_produto = null;
 
-    public function __construct($nome, $preco, $quantidade, $cod_produto){
+    private $imagem = null;
+    public function __construct($nome, $preco, $quantidade, $cod_produto, $imagem){
         $this->nome = $nome;
         $this->preco = $preco;
         $this->quantidade = $quantidade;
         $this->cod_produto = $cod_produto;
+        $this->imagem = $imagem;
     }
 
     public function getNome(){
@@ -26,6 +28,10 @@ class Carrinho{
 
     public function getCodProduto(){
         return $this->cod_produto;
+    }
+
+    public function getImagem(){
+        return $this->imagem;
     }
 
 }

@@ -43,7 +43,7 @@
 <body>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/login.js" defer></script>
-    <script src="../JS/form_produtos.js" defer></script>
+    <script src="../JS/formProdutos.js" defer></script>
     <?php 
         barraNavegacao('', '../');
     ?>
@@ -83,7 +83,7 @@
                     <?php 
                         echo "<input type='number' required name='quantidade' maxlength='100' value='".$quantidade."'>";
                     ?>
-                    <p>Quantidade em estoque</p>
+                    <p>Quant. em estoque</p>
                 </div>
                 <div class="inp">
                     <?php 
@@ -99,7 +99,14 @@
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='text' required name='categoria' maxlength='100' value='".$categoria."'>";
+                        echo '<select name="categoria">
+                        <option value="1">- Nenhuma -</option>
+                        <option value="2">Informática</option>
+                        <option value="3">Mecânica</option>
+                        <option value="3">Eletrônica</option>
+                        <option value="3">CTI</option>
+
+                    </select>';
                     ?>
                     <p>Categoria</p>
                 </div>
@@ -117,13 +124,26 @@
                     <p>Excluido</p>
                 </div>
                 <div class="inp file">
-                    <input type="file" name="fileToUpload" id="fileToUpload" required>
-                    <p>Selecione uma imagem</p>
-                    <?php 
-                        echo "<img src='$imagem' alt='Imagem do produto' id='file_img'>"
-                    ?>
-                </div>
+                    <select name="imagens">
+                        <?php 
+                        
+                        $imagens = tblImagem();
+                        foreach($imagens as $imagem)
+                        {
+                            $cod_imagem = $imagem->getCodImagem();
+                            $nome = $imagem->getNomeImg();
+                            $caminho_img = $imagem->getImagem();
+                            echo "<option value='$cod_imagem' name='$caminho_img'>$nome</option>";
+                        }
 
+                        ?>
+                    </select>
+                    <p>Imagem</p>
+                    <a href='crudImagens.php' target="_blank">Adicionar nova</a>
+                </div>
+                <div id="crud_produto_img">
+                    <img src='#'>
+                </div>
                 <input type='hidden' name='cod_produto' value=<?php echo $cod_produto; ?>>
                 <input type='hidden' name='funcao' value=<?php echo $funcao; ?>>
                 <div class="btn">
