@@ -73,17 +73,24 @@ include("sessao.php");
     }
 
     function deletaImagem(){
-        $conn = coneccao();
-        $cod_imagem = $_POST['cod_imagem'];
-        $sql = "DELETE FROM tbl_imagem_produto WHERE cod_imagem = :cod_imagem";
-        $stmt = $conn->prepare($sql);
-        $stmt -> bindParam(':cod_imagem', $cod_imagem, PDO::PARAM_INT);
-        $stmt -> execute();
+        try{
+            $conn = coneccao();
+            $cod_imagem = $_POST['cod_imagem'];
+            $sql = "DELETE FROM tbl_imagem_produto WHERE cod_imagem = :cod_imagem";
+            $stmt = $conn->prepare($sql);
+            $stmt -> bindParam(':cod_imagem', $cod_imagem, PDO::PARAM_INT);
+            $stmt -> execute();
 
-        $stmt = null;
-        $conn = null;
+            $stmt = null;
+            $conn = null;
         
-        header('Location: ../Conta/crudImagens.php#imagem-deletada-com-sucesso-(lembre-de-a-deletar-manualmente-no-servidor)');
+            header('Location: ../Conta/crudImagens.php#imagem-deletada-com-sucesso-(lembre-de-a-deletar-manualmente-no-servidor)');  
+        }
+        catch(PDOException $e) {
+            $conn = null;
+            header('Location: ../Conta/crudImagens.php#Algum-produto-esta-usando-essa-imagem,-nao-e-possivel-deleta-la');
+        }
+        
     }
     function adicionaProduto()
     {

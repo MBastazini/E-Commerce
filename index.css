@@ -2900,12 +2900,18 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         gap: 50px;
     }
     #btn_crud_produtos{
-        border: 2px solid black;
         padding: 5px;
         border-radius: 5px;
         width: 80%;
         text-align: center;
         cursor: pointer;
+        background-color: var(--destaque_02);
+        color: white;
+        transition: 0.5s;
+    }
+    #btn_crud_produtos:hover{
+        background-color: var(--cor_destaque);
+        transition: 0.5s;
     }
     .add_img{
         grid-area: 1/1/1/3;
@@ -2931,6 +2937,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     #crud > .elemento_img > div > h1{
         font-size: 30px;
         font-weight: 400;
+        text-align: center;
     }
     #crud > .elemento_img > div > div{
         display: block;
@@ -2963,7 +2970,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         background-color: #aa0e0e;
     }
     .acoes button#res:hover{
-        background-color: rgb(160, 217, 76);
+        background-color: var(--destaque_texto);
     }
     .acoes button > img{
         width: 22px;
