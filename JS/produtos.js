@@ -1,6 +1,6 @@
 
-function clickMudaImg(img_clicada){
-    /* Chamar a função mudaImg(1), até que a 'img_clicada' possua o id='ativa' */
+ /*function clickMudaImg(img_clicada){
+    /* Chamar a função mudaImg(1), até que a 'img_clicada' possua o id='ativa' 
     while(img_clicada.id != 'ativo'){
         mudaImg(1);
     }
@@ -9,7 +9,7 @@ function mudaImg(a){
     const img = document.querySelectorAll('.div_img_pequena > img');
     const img_ativa = document.getElementById('img_ativa');
     /* Se 'a' vale 0, indica uma movimentação de uma imagem para a direita,
-    se for 1, vai mudar uma imagem para a esquerda (existem 4 imagens) */
+    se for 1, vai mudar uma imagem para a esquerda (existem 4 imagens) 
     if (a == 0){
         for (let i = 0; i < img.length; i++){
             if (img[i].id == 'ativo'){
@@ -55,7 +55,7 @@ function mudaImg(a){
         }
     });
         
-}
+}*/
 
 function addCart(event) {
     event.stopPropagation();
@@ -143,17 +143,19 @@ function checkFiltro(element)
 }
 
 function mudaFiltro(){
-    const produtos = document.querySelectorAll('.product');
+    const produtos = document.querySelectorAll('.caixa_produto');
     const filtros = document.querySelectorAll('#ativos > div');
     const nenhum_produto = document.getElementById('nenhum-produto-encontrado'); 
     nenhum_produto.style.display = 'block';
     produtos.forEach((produto) => {
-        const p_filtros = produto.querySelectorAll('div > h3');
+        const p_filtros = produto.querySelectorAll('.product > div > h3');
+        
         produto.style.display = 'none';
         filtros.forEach((filtro) => {      
             if(filtro.style.display != 'none')
             {
                 p_filtros.forEach((p_filtro) => {
+                    alert(p_filtro.innerText);
                     if (filtro.getAttribute('name') == p_filtro.innerText)
                     {
                         produto.style.display = 'flex';
@@ -165,42 +167,49 @@ function mudaFiltro(){
         
     });
 }
+
+
 function telaProduto(produto){
     const produto_grande = document.getElementById('produto_grande');
     produto_grande.classList.add('ativo');
     const produto_grande_h1 = document.querySelector('#pg_info > h1');
-    const nome_produto = produto.querySelector('div > h1').innerText;
+    
+    let nome_produto = produto.querySelector('div > h1').innerText;
     produto_grande_h1.innerText = nome_produto;
+
+    let descricao_produto = produto.querySelector('div > p').innerText;
+    const produto_grande_h2 = document.querySelector('#pg_info > h2');
+    produto_grande_h2.innerText = descricao_produto;
+
+    let preco_produto = produto.querySelector('.product_botoes > h1');
+    const produto_grande_preco = document.querySelector('#pg_info > h1:nth-child(3)');
+    produto_grande_preco.innerText = preco_produto.innerText;
+
+    let filtro_produto = produto.querySelector('p.categoria:nth-child(1)');
+    let quantidade_produto = produto.querySelector('p.categoria:nth-child(2)');
+
+    const produto_grande_filtro = document.querySelector('#info_tipo_estoque > p:nth-child(1)');
+    produto_grande_filtro.innerText = filtro_produto.innerText;
+    const produto_grande_quantidade = document.querySelector('#info_tipo_estoque > p:nth-child(2)');
+    produto_grande_quantidade.innerText = quantidade_produto.innerText;
+
     const pg_info = document.getElementById('pg_info');
     pg_info.style.top = (window.scrollY + 50) + 'px';
     //Fazer aqui o codigo para carregar a pasta da imagem correta tambem.
 
-    let id = produto.getAttribute('id');
-    let src = '../Imagens/Produtos/' + id + '.jpg';
-
+    let img = produto.querySelector('img');
     const img_grande = document.getElementById('img_grande');
-    img_grande.src = src;
-    const imagens_pequenas = document.querySelectorAll('.div_img_pequena > img');
+    img_grande.src = img.src;
+
+    /*const imagens_pequenas = document.querySelectorAll('.div_img_pequena > img');
     let cont = 1;
     imagens_pequenas.forEach((img) => {
         img.src = src;
         cont++;
-    });
+    });*/
 }   
 
 document.addEventListener('DOMContentLoaded', function () {
-    let url = window.location.href;
-    if (url.includes('#'))
-    {
-        let id = url.split('#')[1];
-        const produto = document.getElementById(id);
-        if (produto)
-        {
-            setTimeout(telaProduto(produto), 1000);
-        }
-    }
-
-
 
     const cheks = document.querySelectorAll('.filtro_opcoes > div > input[type="checkbox"]');
     cheks.forEach((check) => {
@@ -208,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
         checkFiltro(check.parentElement);
     });
 
-    const produtos = document.querySelectorAll('.product');
+    const produtos = document.querySelectorAll('.caixa_produto');
     produtos.forEach((produto) => {
         produto.addEventListener('click', function () {
             setTimeout(telaProduto(produto), 1000);

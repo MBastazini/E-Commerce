@@ -122,15 +122,15 @@
                 <div class="filtro_opcoes">
                     
                     <div onclick="checkFiltro(this)">
-                        <input type="checkbox" name="INFORMATICA">
+                        <input type="checkbox" name="Informática">
                         <p>Informática</p>
                     </div>
                     <div onclick="checkFiltro(this)">
-                        <input type="checkbox" name="MECANICA">
+                        <input type="checkbox" name="Mecânica">
                         <p>Mecânica</p>
                     </div>
                     <div onclick="checkFiltro(this)">
-                        <input type="checkbox"  name="ELETRONICA">
+                        <input type="checkbox"  name="Eletrônica">
                         <p>Eletrônica</p>
                     </div>
                     <div onclick="checkFiltro(this)">
@@ -142,7 +142,9 @@
         </div>
         <div id="area_produtos">
             <p id='nenhum-produto-encontrado' style="display: none;">Nenhum produto encontrado com os filtros selecionados</p>
+
         <?php
+        
         
         foreach ($produtos as $produto)
         {
@@ -157,7 +159,12 @@
                     $preco = $produto->getPreco();
                     $categoria = $produto->getCategoria();
                     $imagem = $produto->getImagem();
+                    $descricao = $produto->getDescricao();
 
+                    if ($categoria == null)
+                    {
+                        $categoria = 'Nenhuma categoria';
+                    }
                     if(estaNoCarrinho($cod_produto))
                     {
                         $icone = 'Check_branco.svg';
@@ -168,111 +175,46 @@
                         $funcao = 'add';
                     }
 
-                    echo "<div class='product' id='".$cod_produto."'>
-                    <img src='../$imagem' alt='Produto'>
-                    <div>
-                        <h1>". $nome."</h1>
-                        <h2> R$ ". $preco ."</h2>
-                        ";
-                        if(isset($categoria))
-                        {
-                            echo "<h3>". $categoria ."</h3>";
-                        } 
-                        echo "
-                        <h3>Nenhum</h3>
+                    echo "
+                    <div class = 'caixa_produto' id='$cod_produto'>
+                        <div class='product'>
+                            <img src='../$imagem' alt='Produto'>
+                            <div>
+                                <h1>$nome</h1> <!-- Nome -> H1 --> 
+                                <p>$descricao
+                                </p>
+
+                                <div><p class='categoria'>$categoria</CTI></p>
+                                    <p class='categoria'>$estoque à venda</CTI></p>
+                                </div>
+                                
+                                <h3>$categoria</h3> <!-- Filtro(s) -> H3-->
+                                <h3>Nenhum</h3>
+                                
+                                
+                            </div>
+                        </div>
                         <div class='product_botoes'>
-                            <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                                <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                                <input type='hidden' name='funcao' value='comprar'>
-                                <button type='submit'>
-                                    <p>COMPRAR</p>
-                                </button>
-                            </form>
-                            <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                                <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                                <input type='hidden' name='funcao' value='$funcao'>
-                                <button type='submit' id='add-cart' onclick='addCart(event)'>
+                            <button>
+                                <p>COMPRAR</p>
+                            </button>
+                            <form action='#'>
+                                <button type='submit' id='add-cart' onclick='addCarrinho($cod_produto, this)'>
                                     <p>+</p>
                                     <img src='../Icones/$icone' alt='carrinho'>
                                 </button>
                             </form>
+
+                            <h1>R$ $preco</h1>
                         </div>
-                    
                     </div>
-                    </div>";
+                    ";
                 }
             }
             
         }
 
-        /*$sql = "select * from tbl_produto order by cod_produto";
-        $select = $conn->query($sql);
-        while($dados = $select->fetch()){
-            $icone = 'carrinho_branco.svg';
-            $funcao = 'add';
-            
-            if($ativo)
-            {               
-                $sql2 = "SELECT * FROM tbl_tmpcompra 
-                INNER JOIN tbl_compra ON tbl_tmpcompra.cod_compra = tbl_compra.cod_compra
-                INNER JOIN tbl_compra_produto ON tbl_compra.cod_compra = tbl_compra_produto.cod_compra
-                WHERE tbl_compra.cod_usuario = :cod_usuario AND tbl_compra_produto.cod_produto = :cod_produto";
-                $select2 = executaSQL($sql2, ['cod_produto' => $dados['cod_produto'], 'cod_usuario' => $cod_usuario]);
-                $resultado = $select2->fetch();
-                if ($resultado != NULL)
-                {
-                    $icone = 'Check_branco.svg';
-                    $funcao = 'ver';
-                }
-            }
-            else if ($visitante)
-            {
-                if(isset($_SESSION['visitante']['carrinho']))
-                {
-                    foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
-                        if ($cod_produto == $dados['cod_produto'])
-                        {
-                            $icone = 'Check_branco.svg';
-                            $funcao = 'ver';
-                        }
-                    }
-                }
-                
-            }
-                
-            
-
-            echo "<div class='product' id='".$dados['cod_produto']."'>
-            <img src='../Imagens/Produtos/". $dados['cod_produto'] ."/P1.png' alt='Produto'>
-            <div>
-                <h1>". $dados['nome']."</h1>
-                <h2> R$ ". $dados['preco'] ."</h2>
-                ";
-                if(isset($dados['categoria']))
-                {
-                    echo "<h3>". $dados['categoria'] ."</h3>";
-                } 
-                echo "
-                <h3>Nenhum</h3>
-                <div class='product_botoes'>
-                        <button>
-                            <p>COMPRAR</p>
-                        </button>
-                        <form action='../PHP/carrinho.php' method='post'>
-                            <input type='hidden' name='cod_produto' value='". $dados['cod_produto'] ."'>
-                            <input type='hidden' name='cod_usuario' value='". $cod_usuario. "'>
-                            <input type='hidden' name='funcao' value='$funcao'>
-                            <button type='submit' id='add-cart' onclick='addCart(event)'>
-                                <p>+</p>
-                                <img src='../Icones/$icone' alt='carrinho'>
-                            </button>
-                        </form>
-                    </div>
-            
-            </div>
-            </div>";
-
-        };*/
+        
         ?>
                 
         </div>
@@ -281,24 +223,29 @@
     <div id="produto_grande">
         <div id="pg_blur"></div>
         <div id="pg_info">
-            <h1>CHAVEIRO CARRARO</h1>
+            <h1>Nome-produto</h1>
             <div class="div_img_grande">
                 <div class="seta roda180" onclick="mudaImg(1)">
                     <img src="../Icones/Seta-img.svg">
                 </div>
                 
-                <img src="../Imagens/Produtos/1/produto1.png" id="img_grande">
+                <img src="../Imagens/Produtos/Cartas.jpg" id="img_grande">
 
                 <div class="seta" onclick="mudaImg(0)">
                     <img src="../Icones/Seta-img.svg">
                 </div>
             </div>
 
+            <h1>R$ 10</h1>
+            <h2>- Descricao produto -</h2>
+            <div id="info_tipo_estoque"><p class="categoria">Filtro: ---</CTI></p>
+                <p class="categoria">- à venda</CTI></p>
+            </div>
             <div class="div_img_pequena">
-                <img src="../Imagens/Produtos/1/produto1.png" id="ativo" onclick="clickMudaImg(this)">
-                <img src="../Imagens/Produtos/1/produto2.png" onclick="clickMudaImg(this)">
-                <img src="../Imagens/Produtos/1/produto3.png" onclick="clickMudaImg(this)">
-                <img src="../Imagens/Produtos/1/produto4.png" onclick="clickMudaImg(this)">
+                <img src="../Imagens/Produtos/1/P1.png" id="ativo" onclick="clickMudaImg(this)">
+                <img src="../Imagens/Produtos/1/P2.png" onclick="clickMudaImg(this)">
+                <img src="../Imagens/Produtos/1/P3.png" onclick="clickMudaImg(this)">
+                <img src="../Imagens/Produtos/1/P4.png" onclick="clickMudaImg(this)">
                 <div id="img_ativa" style="left: -10px"></div>
             </div>
             <p>Clique fora para fechar</p>
