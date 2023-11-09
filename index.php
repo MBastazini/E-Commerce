@@ -141,9 +141,9 @@
                                     <h2>$imagem</h2>
                                 </div>
                                 <div class='produto_botao'>
-                                    <form action='PHP/insereDadosCarrinho.php' method='post'>
+                                    <form action='confirmarCompra.php' method='post'>
                                         <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
-                                        <input type='hidden' name='funcao' value='comprar'>
+                                        <input type='hidden' name='tipo' value='2'>
                                         <button>
                                             <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
                                             <p>Comprar</p>

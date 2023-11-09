@@ -195,11 +195,17 @@
                             </div>
                         </div>
                         <div class='product_botoes'>
-                            <button>
-                                <p>COMPRAR</p>
-                            </button>
-                            <form action='#'>
-                                <button type='submit' id='add-cart' onclick='addCarrinho($cod_produto, this)'>
+                            <form action='../confirmarCompra.php' method='post'>
+                                <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                                <input type='hidden' name='tipo' value='2'>
+                                <button type='submit'>
+                                    <p>COMPRAR</p>
+                                </button>
+                            </form>
+                            <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                                <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                                <input type='hidden' name='funcao' value='$funcao'>
+                                <button type='submit' id='add-cart' onclick='addCart(event)'>
                                     <p>+</p>
                                     <img src='../Icones/$icone' alt='carrinho'>
                                 </button>

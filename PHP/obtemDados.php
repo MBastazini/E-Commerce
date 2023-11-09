@@ -76,17 +76,32 @@
         
         return $imagens;
     }
-    function tblProduto(){
+    function tblProduto($cod_produto = 0){
         if (!(isset($produtos)))
         {
             $produtos = array();
     
             $conn = coneccao();
 
-            $sql = "SELECT * FROM tbl_produto INNER JOIN
-            tbl_imagem_produto ON tbl_produto.imagem = tbl_imagem_produto.cod_imagem
-            ORDER BY (CASE WHEN excluido = true THEN 1 ELSE 0 END), cod_produto;";
-            $stmt = $conn->prepare($sql);
+            $where = ' ';
+            if ($cod_produto != 0)
+            {
+                $sql = 'SELECT * FROM tbl_produto INNER JOIN
+                tbl_imagem_produto ON tbl_produto.imagem = tbl_imagem_produto.cod_imagem
+                WHERE cod_produto = :cod_produto
+                ORDER BY (CASE WHEN excluido = true THEN 1 ELSE 0 END), cod_produto;';
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
+
+            }
+            else{
+                $sql = "SELECT * FROM tbl_produto INNER JOIN
+                tbl_imagem_produto ON tbl_produto.imagem = tbl_imagem_produto.cod_imagem
+                ORDER BY (CASE WHEN excluido = true THEN 1 ELSE 0 END), cod_produto;";
+                $stmt = $conn->prepare($sql);
+            }
+            
+
             $stmt->execute();
 
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -119,13 +134,22 @@
                     $sql = 'SELECT * FROM tbl_compra WHERE cod_usuario = :cod_usuario AND status = \'Concluida\' ORDER BY cod_compra';
                     $stmt = $conn->prepare($sql);
                     $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
-                }   
+                } 
+                else if ($tipo == 1)
+                {
+                    $sql = 'SELECT c.cod_compra, c.status, c.data_compra FROM tbl_tmpcompra AS tmp
+                    INNER JOIN tbl_compra AS c ON tmp.cod_compra = c.cod_compra
+                    WHERE c.cod_usuario = :cod_usuario AND c.status = \'Pendente\' ORDER BY c.cod_compra';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_STR);
+                    
+                }  
                 else{
                     $sql = 'SELECT * FROM tbl_compra WHERE status = \'Concluida\' ORDER BY cod_compra';
                     $stmt = $conn->prepare($sql);
                 }
                 
-                $stmt->execute();
+                  $stmt->execute();
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra']);
                     $sql2 = 'SELECT * FROM tbl_compra_produto AS cp

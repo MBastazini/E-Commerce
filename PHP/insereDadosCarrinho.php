@@ -114,7 +114,7 @@
         {
             $conn = coneccao();
 
-            try{
+            //try{
                 /* Aqui o usuario ja cria uma compra com status concluida, e gera um pdf das informações da compra (unitaria)
                 para o usuario, sem passar por tmpCompra */
                 $cod_usuario = $_SESSION['usuario']['cod_usuario'];
@@ -137,6 +137,9 @@
                 $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
                 $stmt -> execute();
 
+
+
+                
                 $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
                 $stmt = $conn->prepare($sql);
                 $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
@@ -160,10 +163,10 @@
                         <h1>Valor total da compra: R$ ". $preco ."</h1>
                 ";
                 gerapdf($html);
-            }
-            catch(PDOException $e){
-                echo "<script>alert('Erro ao adicionar produto!');</script>";
-            }
+            //}
+            //catch(PDOException $e){
+            //    echo "<script>alert('Erro ao adicionar produto!');</script>";
+            //}
             
 
             $conn = null;

@@ -3144,12 +3144,112 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         object-fit: cover;
     }
         
+    #confirmar_compra{
+        background-color: var(--fundo_01);
+        width: 100%;
+        margin-top: 100px;
+        border-radius: 10px;
+        min-height: 80vh;
+    }
+    #confirmar_compra > h1{
+        font-size: 30px;
+        padding: 30px;
+    }
+    #confirmar_compra > h2{
+        margin-left: 20px;
+        font-size: 35px;
+        font-weight: 100;
+    }
+    #confirmar_compra > div{
+        padding: 30px;
+        padding-top: 0px;
+        box-sizing: border-box;
+    }
+
+    #confirmar_compra > p{
+        font-size: 20px;
+        margin: 20px;
+    }
+    #confirmar_compra > #botoes{
+        display: flex;
+        gap: 50px;
+        
+        /*grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        align-content: center;
+        justify-items: center;*/
+
+    }
+    #confirmar_compra #info_compra{
+        margin-bottom: 0px;
+    }
+    #botoes > a{
+        background-color: var(--destaque_01);
+        color: rgb(0, 0, 0);
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: 0.5s;
+        font-size: 20px;
+        width: fit-content;
+        height: fit-content;
+    }
+    #botoes > div:nth-child(1)
+    {
+        background-color: var(--cor_destaque);
+        font-size: 25px;
+        color: white;
+        padding: 15px 30px;
+    }
+    #botoes > div:hover{
+        transform: scale(1.05);
+        transition: 0.5s;
+    }
         /*
 
 
 
 
     INICIO @media
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

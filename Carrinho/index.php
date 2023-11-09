@@ -122,8 +122,7 @@
                         ?>
                     </h1>
                 </div>
-                <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                    <input type='hidden' name='funcao' value='finalizar'>
+                <form action='../confirmarCompra.php' method='post'>
                     <button class="finalizar_compra"><h1>FINALIZAR COMPRA</h1></button>
                 </form>
             </div>  
