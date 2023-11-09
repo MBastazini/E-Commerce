@@ -25,7 +25,7 @@
         $icms = $_POST['icms'];
         $excluido = isset($_POST['excluido']) && $_POST['excluido'] == 1;
         $cod_produto = $_POST['cod_produto'];
-        $imagem = '../Imagens/Produtos/' . $cod_produto . '.jpg';
+        $imagem_atual = $_POST['imagem'];
     }
 ?>
 
@@ -133,7 +133,12 @@
                             $cod_imagem = $imagem->getCodImagem();
                             $nome = $imagem->getNomeImg();
                             $caminho_img = $imagem->getImagem();
-                            echo "<option value='$cod_imagem' name='$caminho_img'>$nome</option>";
+                            $sel = '';
+                            if ($imagem == $imagem_atual)
+                            {
+                                $sel = 'selected';
+                            }
+                            echo "<option value='$cod_imagem' name='$caminho_img' $sel>$nome</option>";
                         }
 
                         ?>

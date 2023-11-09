@@ -165,7 +165,7 @@ include("sessao.php");
         {
             $conn = coneccao();
 
-            if ($_POST['categoria'] == '')
+            if ($_POST['categoria'] == 'NONE')
             {
                 $categoria = NULL;
             }
@@ -194,14 +194,17 @@ include("sessao.php");
                 'cod_produto'   => $_POST['cod_produto'],
                 'quantidade'    => $quantidade,
                 'excluido'      => $excluido,
-                'margem_lucro'  => $margem_lucro
+                'margem_lucro'  => $margem_lucro,
+                'imagem'        => $_POST['imagens']
             ];
             
             try{
                 $sql = "UPDATE tbl_produto SET nome = :nome, descricao = :descricao, 
                 preco = :preco, categoria = :categoria, custo = :custo, icms = :icms, 
-                quantidade = :quantidade, margem_lucro = :margem_lucro, excluido = :excluido
+                estoque = :quantidade, margem_lucro = :margem_lucro, excluido = :excluido,
+                imagem = :imagem
                 WHERE cod_produto = :cod_produto";
+
                 $stmt = $conn->prepare($sql);
                 $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
                 $stmt -> bindParam(':descricao', $linha['descricao'], PDO::PARAM_STR);
@@ -213,6 +216,7 @@ include("sessao.php");
                 $stmt -> bindParam(':quantidade', $linha['quantidade'], PDO::PARAM_INT);
                 $stmt -> bindParam(':margem_lucro', $linha['margem_lucro'], PDO::PARAM_STR);
                 $stmt -> bindParam(':excluido', $linha['excluido'], PDO::PARAM_INT);
+                $stmt -> bindParam(':imagem', $linha['imagem'], PDO::PARAM_STR);
                 $stmt -> execute();
             }
             catch(PDOException $e){
@@ -289,7 +293,7 @@ include("sessao.php");
                 if($funcao == 'add')
                 {
                     adicionaProduto();
-                    //header("location: ../Conta/crudProdutos.php#produto-adicionado-com-sucesso");
+                    header("location: ../Conta/crudProdutos.php#produto-adicionado-com-sucesso");
                 }
                 else if($funcao == 'edit')
                 {

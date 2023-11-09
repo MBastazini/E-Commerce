@@ -145,6 +145,7 @@
                                 <input type="hidden" name="icms" value="'.$produto->getIcms().'">
                                 <input type="hidden" name="excluido" value="'.$produto->getExcluido().'">
                                 <input type="hidden" name="margin_lucro" value="'.$produto->getMarginLucro().'">
+                                <input type="hidden" name="imagem" value="'.$produto->getImagem().'">
 
                                 <input type="hidden" name="funcao" value="edit">
                                 
