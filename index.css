@@ -2313,6 +2313,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         height: 150px;
         aspect-ratio: 1;
         object-fit: cover;
+        border-radius: 10px;
     }
     .product_botoes{
         display: flex;

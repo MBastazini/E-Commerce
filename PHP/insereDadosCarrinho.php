@@ -69,9 +69,21 @@
             $quantidade = $stmt->fetch(PDO::FETCH_ASSOC);
             $quantidade = $quantidade['quantidade'];
 
+            $sql = "SELECT estoque FROM tbl_produto WHERE cod_produto = :cod_produto";
+            $stmt = $conn->prepare($sql);
+            $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
+            $stmt -> execute();
+            $estoque = $stmt->fetch(PDO::FETCH_ASSOC);
+            $estoque = $estoque['estoque'];
+
             if ($quantidade + $s == 0)
             {
                 deletaDoCarrinho($cod_produto);
+            }
+            else if ($quantidade + $s > $estoque)
+            {
+                header('Location: ../Carrinho/index.php#esse-produto-nao-possui-mais-estoque');
+                exit();
             }
             else{
                 //Atualiza a quantidade de produtos na compra

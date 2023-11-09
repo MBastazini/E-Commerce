@@ -66,7 +66,7 @@
             ?>
 
             <form action='../PHP/insereDadosProduto.php' method='post' enctype="multipart/form-data">
-                <input type='hidden' name='funcao' value='cadastro'>
+                <input type='hidden' name='funcao' value='add'>
                 <div class="inp">
                     <?php 
                      echo "<input type='text' required name='nome_produto' maxlength='80' value='".$nome_produto."'>";
@@ -75,13 +75,13 @@
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' required name='preco' maxlength='100' value='".$preco."'>";
+                        echo "<input type='number' required name='preco' maxlength='100' value='".$preco."' step='0.01' min='0.01'>";
                     ?>
                     <p>Preço</p>
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' required name='quantidade' maxlength='100' value='".$quantidade."'>";
+                        echo "<input type='number' required name='quantidade' maxlength='100' value='".$quantidade."' min='0'>";
                     ?>
                     <p>Quant. em estoque</p>
                 </div>
@@ -93,18 +93,18 @@
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' required name='custo' maxlength='100' value='".$custo."'>";
+                        echo "<input type='number' required name='custo' maxlength='100' value='".$custo."' step='0.01' min='0.01'>";
                     ?>
                     <p>Custo</p>
                 </div>
                 <div class="inp">
                     <?php 
                         echo '<select name="categoria">
-                        <option value="1">- Nenhuma -</option>
-                        <option value="2">Informática</option>
-                        <option value="3">Mecânica</option>
-                        <option value="3">Eletrônica</option>
-                        <option value="3">CTI</option>
+                        <option value="NONE">- Nenhuma -</option>
+                        <option value="Informática">Informática</option>
+                        <option value="Mecânica">Mecânica</option>
+                        <option value="Eletrônica">Eletrônica</option>
+                        <option value="CTI">CTI</option>
 
                     </select>';
                     ?>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="inp">
                     <?php 
-                        echo "<input type='number' required name='icms' maxlength='100' value='".$icms."'>";
+                        echo "<input type='number' required name='icms' maxlength='100' value='".$icms."' min='1'>";
                     ?>
                     <p>ICMS</p>
                 </div>

@@ -31,25 +31,26 @@ include("sessao.php");
 
             if($check !== false) {
                 $uploadOk = 1;
-
             } else {
-                
                 $uploadOk = 0;
+                header('Location: ../Conta/crudImagens.php#arquivo-nao-e-uma-imagem');
+                exit();
             }
         }
 
         // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 1000000) {
-            header('Location: ../Conta/crudProdutos.php#arquivo-muito-grande');
+        if ($_FILES["fileToUpload"]["size"] > 10000000) {
             $uploadOk = 0;
+            header('Location: ../Conta/crudImagens.php#arquivo-muito-grande');
+            exit();    
         }
 
 
         // Allow certain file formats
         if($imageFileType != "jpg") {
-            header('Location: ../Conta/crudImagens.php#formato-de-arquivo-nao-suportado-(Apenas-JPG)');
-
             $uploadOk = 0;
+            header('Location: ../Conta/crudImagens.php#formato-de-arquivo-nao-suportado-(Apenas-JPG)');
+            exit();
         }
 
 
@@ -62,10 +63,11 @@ include("sessao.php");
                 header('Location: ../Conta/crudImagens.php#imagem-adicionada-com-sucesso');
             } else {
                 header('Location: ../Conta/crudImagens.php#houve-um-erro-ao-fazer-upload-do-arquivo');
+                exit();
             }
 
         } else {
-            header('Location: ../Conta/crudImagens.php#houve-um-erro-ao-fazer-upload-do-arquivo');
+            header('Location: ../Conta/crudImagens.php#a-imagem-nao-foi-enviada');
         }
 
     }
@@ -92,7 +94,7 @@ include("sessao.php");
             if ($_SESSION['usuario']['adm'])
             {
                 $conn = coneccao();
-                if ($_POST['categoria'] == '- Nenhuma -')
+                if ($_POST['categoria'] == 'NONE')
                 {
                     $categoria = NULL;
                 }
@@ -102,10 +104,10 @@ include("sessao.php");
 
                 if ($_POST['quantidade'] <= 0)
                 {
-                    $quantidade = $_POST['quantidade'] = 0;
+                    $estoque = $_POST['quantidade'] = 0;
                 }
                 else{
-                    $quantidade = $_POST['quantidade'];
+                    $estoque = $_POST['quantidade'];
                 }
 
                 $excluido = isset($_POST['excluido']) && $_POST['excluido'] == 1;
@@ -117,16 +119,16 @@ include("sessao.php");
                     'categoria'     => $categoria,
                     'custo'         => $_POST['custo'],
                     'icms'          => $_POST['icms'],
-                    'quantidade'    => $quantidade,
+                    'estoque'       => $estoque,
                     'excluido'      => $excluido,
                     'margem_lucro'  => $margem_lucro,
-                    'imagem'        => $_POST['imagem']
+                    'imagem'        => $_POST['imagens']
 
                 ];
                 
-                try{
-                    $sql = "INSERT INTO tbl_produto (nome, descricao, preco, categoria, custo, icms, quantidade, excluido, margem_lucro, imagem) 
-                    VALUES (:nome, :descricao, :preco, :categoria, :custo, :icms, :quantidade, :excluido, :margem_lucro, :imagem)";
+                //try{
+                    $sql = "INSERT INTO tbl_produto (nome, descricao, preco, categoria, custo, icms, estoque, excluido, margem_lucro, imagem) 
+                    VALUES (:nome, :descricao, :preco, :categoria, :custo, :icms, :estoque, :excluido, :margem_lucro, :imagem)";
                     $stmt = $conn->prepare($sql);
                     $stmt -> bindParam(':nome', $linha['nome'], PDO::PARAM_STR);
                     $stmt -> bindParam(':descricao', $linha['descricao'], PDO::PARAM_STR);
@@ -134,18 +136,17 @@ include("sessao.php");
                     $stmt -> bindParam(':categoria', $linha['categoria'], PDO::PARAM_STR);
                     $stmt -> bindParam(':custo', $linha['custo'], PDO::PARAM_STR);
                     $stmt -> bindParam(':icms', $linha['icms'], PDO::PARAM_STR);
-                    $stmt -> bindParam(':quantidade', $linha['quantidade'], PDO::PARAM_INT);
+                    $stmt -> bindParam(':estoque', $linha['estoque'], PDO::PARAM_INT);
                     $stmt -> bindParam(':excluido', $linha['excluido'], PDO::PARAM_INT);
                     $stmt -> bindParam(':margem_lucro', $linha['margem_lucro'], PDO::PARAM_STR);
                     $stmt -> bindParam(':imagem', $linha['imagem'], PDO::PARAM_STR);
                     $stmt -> execute();
-                }
-                catch(PDOException $e){
-                    $mensagem = $e->getMessage();
-                    str_replace(" ", "-", $mensagem);
-                    Header('Location: ../Conta/crudProdutos.php#' . $mensagem);
-                    $cod_produto = 0;
-                }
+                //}
+                //catch(PDOException $e){
+                //    $mensagem = $e->getMessage();
+                //    str_replace(" ", "-", $mensagem);
+                //    Header('Location: ../Conta/crudProdutos.php#erro-PDO');
+                //}
                 
 
             
@@ -288,7 +289,7 @@ include("sessao.php");
                 if($funcao == 'add')
                 {
                     adicionaProduto();
-                    header("location: ../Conta/crudProdutos.php#produto-adicionado-com-sucesso");
+                    //header("location: ../Conta/crudProdutos.php#produto-adicionado-com-sucesso");
                 }
                 else if($funcao == 'edit')
                 {

@@ -74,7 +74,8 @@ CREATE TABLE tbl_usuario(
 	telefone varchar(13) not null
 );
 
-CREATE TYPE categorias AS ENUM ('Informática', 'Mecânica', 'Eletrônica', 'CTI');
+CREATE TYPE tipo AS ENUM ('Informática', 'Mecânica', 'Eletrônica', 'CTI');
+ALTER TABLE tbl_produto ADD COLUMN categoria tipo;
 CREATE TYPE compra_status AS ENUM ('Concluida', 'Pendente', 'Cancelada');
 
 

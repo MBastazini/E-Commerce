@@ -73,65 +73,12 @@
                         </form>
                     </div>
                 </div>
-                <img src='../$caminho_img' alt='IMAGEM NÃO ENCONTRADA NO BANCO DE DADOS. FAVOR DELETAR'>
+                <img src='../$caminho_img' alt='IMAGEM NÃO ENCONTRADA NO SERVIDOR. FAVOR DELETAR'>
             </div>
             ";
         }
 
         ?>
-        <div class="elemento_img">
-            <div>
-                <h1>CARRARO</h1>
-                <div class="acoes">
-                    <form action="#" method="post">
-                        <button type="submit" name="excluir" value="1" id="del">
-                            <img src="../Icones/delete.svg">
-                            Excluir</button>
-                    </form>
-                </div>
-            </div>
-            <img src="../Imagens/Produtos/2.jpg">
-            
-            
-            
-
-        </div>
-
-        <div class="elemento_img">
-            <div>
-                <h1>CARRARO</h1>
-                <div class="acoes">
-                    <form action="#" method="post">
-                        <button type="submit" name="excluir" value="1" id="del">
-                            <img src="../Icones/delete.svg">
-                            Excluir</button>
-                    </form>
-                </div>
-            </div>
-            <img src="../Imagens/Produtos/2.jpg">
-            
-            
-            
-
-        </div>
-
-        <div class="elemento_img">
-            <div>
-                <h1>CARRARO</h1>
-                <div class="acoes">
-                    <form action="#" method="post">
-                        <button type="submit" name="excluir" value="1" id="del">
-                            <img src="../Icones/delete.svg">
-                            Excluir</button>
-                    </form>
-                </div>
-            </div>
-            <img src="../Imagens/Produtos/2.jpg">
-            
-            
-            
-
-        </div>
     </div>
 
     <?php 

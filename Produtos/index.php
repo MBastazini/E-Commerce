@@ -123,15 +123,15 @@
                     
                     <div onclick="checkFiltro(this)">
                         <input type="checkbox" name="INFORMATICA">
-                        <p>INFORMATICA</p>
+                        <p>Informática</p>
                     </div>
                     <div onclick="checkFiltro(this)">
                         <input type="checkbox" name="MECANICA">
-                        <p>MECANICA</p>
+                        <p>Mecânica</p>
                     </div>
                     <div onclick="checkFiltro(this)">
                         <input type="checkbox"  name="ELETRONICA">
-                        <p>ELETRONICA</p>
+                        <p>Eletrônica</p>
                     </div>
                     <div onclick="checkFiltro(this)">
                         <input type="checkbox"  name="CTI">
