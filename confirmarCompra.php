@@ -43,33 +43,37 @@
                 <div class="compra enabled">
                     <p></p>
                     <?php 
-                    
-                    if ($tipo == 2)
+                    $user = CheckUser();
+                    if ($user == 1)
                     {
-                        $produto = tblProduto($cod_produto);
-                        $nome = $produto[0]->getNome();
-                        $preco = $produto[0]->getPreco();
-                        $valor_total = $preco; 
+                        if ($tipo == 2)
+                        {
+                            $produto = tblProduto($cod_produto);
+                            $nome = $produto[0]->getNome();
+                            $preco = $produto[0]->getPreco();
+                            $valor_total = $preco; 
 
-                        $data_hoje = date('d/m/Y');
-                        echo "<p> - </p>";
-                        echo "<p>Pendente</p>";
-                        echo "<p>$data_hoje</p>";
-                        echo "<p>$preco</p>";
-                    }
-                    else{
-                        $compra = tblCompra(1);
-                        $cod_compra = $compra[0]->getCodCompra();
-                        $status = $compra[0]->getStatus();
-                        $data = $compra[0]->getDataCompra();
-                        $valor_total = $compra[0]->getValorTotal();
+                            $data_hoje = date('d/m/Y');
+                            echo "<p> - </p>";
+                            echo "<p>Pendente</p>";
+                            echo "<p>$data_hoje</p>";
+                            echo "<p>$preco</p>";
+                        }
+                        else{
+                            $compra = tblCompra(1);
+                            $cod_compra = $compra[0]->getCodCompra();
+                            $status = $compra[0]->getStatus();
+                            $data = $compra[0]->getDataCompra();
+                            $valor_total = $compra[0]->getValorTotal();
 
-                        echo "<p>$cod_compra</p>";
-                        echo "<p>$status</p>";
-                        echo "<p>$data</p>";
-                        echo "<p>$valor_total</p>";
-                    }
+                            echo "<p>$cod_compra</p>";
+                            echo "<p>$status</p>";
+                            echo "<p>$data</p>";
+                            echo "<p>$valor_total</p>";
+                        }
+                        
                     
+                    }
                     ?>
                     <div>
                         <div id="info_c_h" class="inside">
@@ -81,32 +85,36 @@
                         <div id="info_compra" class="inside">
                             <?php 
                             
-                            if ($tipo == 2)
+                            if ($user == 1)
                             {
-                                echo "<div>";
-                                echo "<p>$nome</p>";
-                                echo "<p>$preco</p>";
-                                echo "<p>1</p>";
-                                echo "<p>$cod_produto</p>";
-                                echo "</div>";
-                            }   
-                            else{
-                                $produtos = $compra[0]->getCompras();
-                                foreach($produtos as $produto)
+                                if ($tipo == 2)
                                 {
-                                    $nome = $produto->getNome();
-                                    $preco = $produto->getPreco();
-                                    $quantidade = $produto->getQuantidade();
-                                    $cod_produto = $produto->getCodProduto();
-
                                     echo "<div>";
                                     echo "<p>$nome</p>";
                                     echo "<p>$preco</p>";
-                                    echo "<p>$quantidade</p>";
+                                    echo "<p>1</p>";
                                     echo "<p>$cod_produto</p>";
                                     echo "</div>";
+                                }   
+                                else{
+                                    $produtos = $compra[0]->getCompras();
+                                    foreach($produtos as $produto)
+                                    {
+                                        $nome = $produto->getNome();
+                                        $preco = $produto->getPreco();
+                                        $quantidade = $produto->getQuantidade();
+                                        $cod_produto = $produto->getCodProduto();
+
+                                        echo "<div>";
+                                        echo "<p>$nome</p>";
+                                        echo "<p>$preco</p>";
+                                        echo "<p>$quantidade</p>";
+                                        echo "<p>$cod_produto</p>";
+                                        echo "</div>";
+                                    }
                                 }
                             }
+                            
                             
                             
                             ?>

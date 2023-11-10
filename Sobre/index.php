@@ -117,7 +117,7 @@
                 <div onclick="CopyMessage(this)">
                     <img src="../Icones/copy.svg">
                      <p>Telefone</p>
-                     <h1>+55 (14) 99794-3704</h1>
+                     <h1>+55 (14) 3103-6150</h1>
                 </div>
                 <div onclick="CopyMessage(this)">
                     <img src="../Icones/copy.svg">
@@ -180,8 +180,6 @@
                     </p>
                 </div>
             </div>
-            <p id='ps'>P. S. O primeiro desenvolvedor esta torto, não acha?<br>
-            porque não dá uma ajeitada?</p>
         </div>
         
     </section>

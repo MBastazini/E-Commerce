@@ -1854,9 +1854,6 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         margin-bottom: 40px;
         font-size: 40px;
     }
-    #ps{
-        font-size: 20px;
-    }
     #tela_sobre > p{
         font-size: 30px;
         font-weight: 400;
@@ -2042,7 +2039,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 
     /*Organização posocional dos desenvolvedores*/
     .dev#mateus{
-        top: 20px;
+        top: 0px;
         left: 0px;
     }
     .dev#luiz{
@@ -3341,7 +3338,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 
         /*Reposicionamento dos devs*/
         .dev#mateus{
-            top: 20px;
+            top: 0px;
             left: 0px;
         }
         .dev#luiz{
@@ -3458,7 +3455,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 
     /*Reposicionamento dos devs*/
     .dev#mateus{
-        top: 20px;
+        top: 0px;
         left: 50px;
     }
     .dev#luiz{
@@ -3639,7 +3636,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 
         /**/
         .dev#mateus{
-            top: 20px;
+            top: 0px;
             left: 0px;
         }
         .dev#luiz{
@@ -3797,7 +3794,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 
 
         .dev#mateus{
-            top: 20px;
+            top: 0px;
             left: 20px;
         }
         .dev#luiz{
@@ -4021,7 +4018,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
 
         .dev#mateus{
-            top: 20px;
+            top: 0px;
             left: 0px;
         }
         .dev#luiz{
@@ -4298,7 +4295,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
 
         .dev#mateus{
-            top: 20px;
+            top: 0px;
             left: 70px;
         }
         .dev#luiz{
@@ -4319,9 +4316,6 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
         #sobre_devs{
             height: 1500px;
-        }
-        #ps{
-            font-size: 15px;
         }
 
 

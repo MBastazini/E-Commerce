@@ -112,14 +112,14 @@ include('obtemDados.php');
           <div class='footer_info'>
               <div class='footer_div'>
                   <h1>Desenvolvedores</h1>
-                  <a href='Sobre/#leticia'><p>Leticia Garcia | N° 21</p></a>
-                  <a href='Sobre/#luiz'><p>Luiz Felipe | N° 22</p></a>
-                  <a href='Sobre/#mariana'><p>Mariana Senger | N° 23</p></a>
-                  <a href='Sobre/#mateus'><p>Mateus Bastazini | N° 24</p></a>
-                  <a href='Sobre/#matheus'><p>Matheus Trentini | N° 25</p></a>
+                  <a href='".$src."Sobre/#leticia'><p>Leticia Garcia | N° 21</p></a>
+                  <a href='".$src."Sobre/#luiz'><p>Luiz Felipe | N° 22</p></a>
+                  <a href='".$src."Sobre/#mariana'><p>Mariana Senger | N° 23</p></a>
+                  <a href='".$src."Sobre/#mateus'><p>Mateus Bastazini | N° 24</p></a>
+                  <a href='".$src."Sobre/#matheus'><p>Matheus Trentini | N° 25</p></a>
               </div>
               <div class='footer_div'>
-                  <h1>Colegio</h1>
+                  <h1>Colégio</h1>
                   <a href='https://cti.feb.unesp.br'><p>CTI - Unesp (Campus Bauru)</p></a>
                   <a href='https://www.bauru.unesp.br'><p>UNESP Bauru</p></a>
               </div>
