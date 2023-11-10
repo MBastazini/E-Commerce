@@ -206,7 +206,7 @@
         return $tokens;
     }
 
-    function tblUsuario()
+    function tblUsuario($tipo = 0)
     {
         
         if(!(isset($usuario)))
@@ -218,10 +218,19 @@
             {
                 $cod_usuario = $_SESSION['usuario']['cod_usuario'];
                 $conn = coneccao();
-        
-                $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario ORDER BY cod_usuario";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindParam(":cod_usuario", $cod_usuario, PDO::PARAM_INT);
+                
+                if ($tipo == 0)
+                {   
+                    $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario ORDER BY cod_usuario";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(":cod_usuario", $cod_usuario, PDO::PARAM_INT);
+                }
+                else
+                {
+                    $sql = "SELECT * FROM tbl_usuario ORDER BY cod_usuario";
+                    $stmt = $conn->prepare($sql);
+                }
+                
                 $stmt->execute();
         
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){

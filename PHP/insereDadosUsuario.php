@@ -101,6 +101,27 @@ include("insereDadosCarrinho.php");
         }
     }
 
+    function deletaUsuario($cod_usuario)
+    {
+        $user = CheckUser();
+        if ($user == 1)
+        {
+            $conn = coneccao();
+            try{
+                $sql = "DELETE FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
+                $stmt = $conn->prepare($sql);
+                $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                $stmt -> execute();
+            }
+            catch(PDOException $e){
+                echo "<script>alert('Erro ao deletar usuário!');</script>";
+            }
+            
+
+            $conn = null;
+            $stmt = null;
+        }
+    }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
@@ -232,6 +253,12 @@ include("insereDadosCarrinho.php");
             $id = $_POST['id'];
             deletaToken($id);
             header('Location: ../Conta');
+        }
+        else if ($funcao == 'del_user')
+        {
+            $cod_usuario = $_POST['cod_usuario'];
+            deletaUsuario($cod_usuario);
+            header('Location: ../Conta/crudUsuarios.php#usuario-excluido');
         }
         
     }

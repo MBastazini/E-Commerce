@@ -192,7 +192,7 @@
                         }
                     }
                     else{
-                        echo"<form action='./#faca-o-login-para-finalizar-a-compra' method='post'>
+                        echo"<form action='../Login/#faca-o-login-para-finalizar-a-compra' method='post'>
                         <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
                         </form>";
                     }

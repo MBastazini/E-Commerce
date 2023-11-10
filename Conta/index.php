@@ -106,7 +106,7 @@
                             <img src='../Icones/config.svg'>
                         </div>
                     </a>
-                    <a href=''>
+                    <a href='crudUsuarios.php'>
                         <div class='edit_btn' id='CRUD'>
                             <p>Tabela de usuarios</p>
                             <img src='../Icones/config.svg'>
