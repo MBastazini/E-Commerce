@@ -106,20 +106,24 @@ include("insereDadosCarrinho.php");
         $user = CheckUser();
         if ($user == 1)
         {
-            $conn = coneccao();
-            try{
-                $sql = "DELETE FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
-                $stmt = $conn->prepare($sql);
-                $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
-                $stmt -> execute();
-            }
-            catch(PDOException $e){
-                echo "<script>alert('Erro ao deletar usuário!');</script>";
+            if ($_SESSION['usuario']['adm'])
+            {
+                $conn = coneccao();
+                try{
+                    $sql = "DELETE FROM tbl_usuario WHERE cod_usuario = :cod_usuario";
+                    $stmt = $conn->prepare($sql);
+                    $stmt -> bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+                    $stmt -> execute();
+                }
+                catch(PDOException $e){
+                    echo "<script>alert('Erro ao deletar usuário!');</script>";
+                }
+                
+
+                $conn = null;
+                $stmt = null;
             }
             
-
-            $conn = null;
-            $stmt = null;
         }
     }
 
