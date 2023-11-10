@@ -125,11 +125,21 @@
             </div>
         </div>
         
-        <h2>Total: <?php echo"R$ $valor_total"; ?></h2>
+        <?php 
+        
+        if ($user == 1)
+        {
+            echo "<h2>Total: $valor_total; </h2>";
+        }   
+
+        ?>
+        
         <p>Um relariorio será gerado com as informações da compra.</p>
         <div id="botoes">
             
         <?php 
+        if ($user == 1)
+        {
             if ($tipo == 2)
             {
                 $funcao = 'comprar';
@@ -143,6 +153,11 @@
                 <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
                 <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
             </form>";
+        }
+        else{
+            echo "Faça o login para finalizar a compra";
+        }
+            
         ?>
             <a href='./'>Voltar</a>
         </div>

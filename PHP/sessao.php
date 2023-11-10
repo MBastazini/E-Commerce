@@ -45,7 +45,7 @@
                 $conn = coneccao();
             $token = session_id(); //Se falhar o token olhar aqui
             //$ip = $_SERVER['REMOTE_ADDR'];
-            $data = date('Y-m-d');
+            $data = date('Y-m-d H:i:s');
 
             $linha = [
                 'cod_usuario' => $cod_usuario,

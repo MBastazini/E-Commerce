@@ -30,8 +30,7 @@ ALTER TABLE tbl_produto ADD COLUMN categoria categorias;
 CREATE TABLE tbl_token(
 	cod_token serial PRIMARY KEY,
 	token varchar(100) not null,
-	data_criacao date not null,
-	ip_criacao varchar(15),
+	data_criacao TIMESTAMP not null,
 	cod_usuario serial,
 	FOREIGN KEY (cod_usuario) REFERENCES tbl_usuario(cod_usuario)
 );

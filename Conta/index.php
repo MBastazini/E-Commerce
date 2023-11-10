@@ -179,83 +179,10 @@
         
 
         ?>
-            <div class="compra enabled">
-                <img src="../Icones/Down_preto.svg">
-                <p>12</p>
-                <p>Concluida</p>
-                <p>25/05/2005</p>
-                <p>R$ 20,00</p>
-                <div>
-                    <div id="info_c_h" class="inside">
-                        <p>Nome</p>
-                        <p>Preco</p>
-                        <p>Quantidade</p>
-                        <p>Codigo</p>
-                    </div>
-                    <div id="info_compra" class="inside">
-                        <div>   
-                            <p>Nome</p>
-                            <p>Preco</p>
-                            <p>Quantidade</p>
-                            <p>Codigo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="compra">
-                <img src="../Icones/Down_preto.svg">
-                <p>12</p>
-                <p>Concluida</p>
-                <p>25/05/2005</p>
-                <p>R$ 20,00</p>
-                <div>
-                    <div id="info_c_h" class="inside">
-                        <p>Nome</p>
-                        <p>Preco</p>
-                        <p>Quantidade</p>
-                        <p>Codigo</p>
-                    </div>
-                    <div id="info_compra" class="inside">
-                        <div>   
-                            <p>Nome</p>
-                            <p>Preco</p>
-                            <p>Quantidade</p>
-                            <p>Codigo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="compra enabled">
-                <img src="../Icones/Down_preto.svg">
-                <p>12</p>
-                <p>Concluida</p>
-                <p>25/05/2005</p>
-                <p>R$ 20,00</p>
-                <div>
-                    <div id="info_c_h" class="inside">
-                        <p>Nome</p>
-                        <p>Preco</p>
-                        <p>Quantidade</p>
-                        <p>Codigo</p>
-                    </div>
-                    <div id="info_compra" class="inside">
-                        <div>   
-                            <p>Nome</p>
-                            <p>Preco</p>
-                            <p>Quantidade</p>
-                            <p>Codigo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-
         <h1>Sessões ativas</h1>
         <div id="info_c_h" class="token">
             <p>Data da criação</p>
-            <p>Ip da maquina de criação</p>
             <p>Deletar / Apagar sessão</p>
         </div>
         <div id="info_compra" class="token">    
@@ -264,12 +191,10 @@
             foreach ($tokens as $token)
             {
                 $data_criacao = $token -> getDataCriacao();
-                $ip_criacao = $token -> getIpCriacao();
                 $cod_token = $token -> getCodToken();
                 echo"
                 <div> 
                 <p>". $data_criacao ."</p>
-                <p>". $ip_criacao ."</p>
                 <form action='../PHP/insereDadosUsuario.php' method='post' id='form-token'>
                     <input type='hidden' name='funcao' value='deltoken'>
                     <button type='submit' name='id' value='". $cod_token ."'>

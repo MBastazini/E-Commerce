@@ -195,7 +195,7 @@
                 $stmt->execute();
         
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    $tokens[] = new Token($row['cod_token'], $row['token'], $row['data_criacao'], $row['ip_criacao'], $row['cod_usuario']);
+                    $tokens[] = new Token($row['cod_token'], $row['token'], $row['data_criacao'], $row['cod_usuario']);
                 }
         
                 $conn = null;
@@ -275,7 +275,9 @@
                     foreach ($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade){
                         $conn = coneccao();
         
-                        $sql = "SELECT nome, preco, imagem FROM tbl_produto WHERE cod_produto = :cod_produto";
+                        $sql = "SELECT p.nome, p.preco, ip.imagem FROM tbl_produto AS p
+                        INNER JOIN tbl_imagem_produto AS ip ON p.imagem = ip.cod_imagem
+                        WHERE cod_produto = :cod_produto";
                         $stmt = $conn->prepare($sql);
                         $stmt->bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
                         $stmt->execute();

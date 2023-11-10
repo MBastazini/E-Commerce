@@ -2740,7 +2740,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         background-color: white !important;
     }
     #info_compra.token > div, #info_c_h.token{
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
     #info_c_h{
         background-color: var(--destaque_texto);

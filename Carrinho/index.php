@@ -175,18 +175,28 @@
                 </div>
                 <?php 
                     
-                    $valido = carrinhoValido();
-                    if ($valido)
+                    $user = CheckUser();
+                    if ($user == 1)
                     {
-                        echo"<form action='../confirmarCompra.php' method='post'>
+                        $valido = carrinhoValido();
+                        if ($valido)
+                        {
+                            echo"<form action='../confirmarCompra.php' method='post'>
+                            <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
+                            </form>";
+                        }
+                        else{
+                            echo"<form action='./#carrinho-nao-valido' method='post'>
+                                <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
+                            </form>";
+                        }
+                    }
+                    else{
+                        echo"<form action='./#faca-o-login-para-finalizar-a-compra' method='post'>
                         <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
                         </form>";
                     }
-                    else{
-                        echo"<form action='./#carrinho-nao-valido' method='post'>
-                            <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
-                        </form>";
-                    }
+                    
                     
                     ?>
                 

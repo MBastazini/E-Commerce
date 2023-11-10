@@ -134,11 +134,16 @@
                             $nome = $imagem->getNomeImg();
                             $caminho_img = $imagem->getImagem();
                             $sel = '';
-                            if ($imagem == $imagem_atual)
+                            $imagem_C = $imagem->getImagem();
+                            if ($imagem_C == $imagem_atual)
                             {
-                                $sel = 'selected';
+                                
+                                echo "<option value='$cod_imagem' name='$caminho_img' selected>$nome</option>";
                             }
-                            echo "<option value='$cod_imagem' name='$caminho_img' $sel>$nome</option>";
+                            else{
+                                echo "<option value='$cod_imagem' name='$caminho_img'>$nome</option>";
+                            }
+                            
                         }
 
                         ?>

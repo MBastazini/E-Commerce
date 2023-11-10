@@ -12,14 +12,12 @@ class Token{
     private $cod_token = null;
     private $token = null;
     private $data_criacao = null;
-    private $ip_criacao = null;
     private $cod_usuario = null;
 
-    public function __construct($cod_token, $token, $data_criacao, $ip_criacao, $cod_usuario){
+    public function __construct($cod_token, $token, $data_criacao, $cod_usuario){
         $this->cod_token = $cod_token;
         $this->token = $token;
         $this->data_criacao = $data_criacao;
-        $this->ip_criacao = $ip_criacao;
         $this->cod_usuario = $cod_usuario;
     }
 
@@ -33,10 +31,6 @@ class Token{
 
     public function getDataCriacao(){
         return $this->data_criacao;
-    }
-
-    public function getIpCriacao(){
-        return $this->ip_criacao;
     }
 
     public function getCodUsuario(){
