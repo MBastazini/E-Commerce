@@ -362,5 +362,10 @@
             comprar($cod_produto);
             header('Location: ../');
         }
+        else if ($funcao == 'limpa_c')
+        {
+            limparCarrinho();
+            header('Location: ../Carrinho/#carrinho-limpo');
+        }
     }
 ?>

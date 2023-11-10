@@ -196,7 +196,10 @@
                         <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
                         </form>";
                     }
-                    
+                    echo"<form action='../PHP/insereDadosCarrinho.php' method='post' id='limpa_carrinho'>
+                        <input type='hidden' name='funcao' value='limpa_c'>
+                        <button class='finalizar_compra'><h1>Limpar carrinho</h1></button>
+                        </form>";
                     
                     ?>
                 

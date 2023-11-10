@@ -1452,6 +1452,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     border: none;
     outline: none;
 }
+#limpa_carrinho > button{
+    background-color: var(--destaque_02);
+    font-size: 10px;
+}
 .finalizar_compra:hover{
     transform: scale(1.05);
     transition: 0.5s;
