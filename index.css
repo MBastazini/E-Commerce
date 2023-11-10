@@ -359,7 +359,7 @@ h5{
     width: 100%;
     background-image: url(Imagens/arvorefinal.jpeg);
     background-repeat:no-repeat;
-    object-fit: cover;
+    background-size: cover;
     position: relative;
     background-position: right;
 }
@@ -1357,6 +1357,12 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     gap: 20px;
     height: 50%;
     margin: 5px 0px;
+}
+.produto_compra.esgotado{
+    background-color: #fe7b7b;
+}
+.produto_compra.esgotado .produto_compra_div > form > input{
+    background-color: rgb(185, 185, 185);
 }
 #compra_total{
     height: fit-content;
@@ -3311,7 +3317,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             width: 80%;
             height: 40%;
             background-image: url(Icones/quadrados.svg);
-            object-fit: cover;
+            background-size: cover;
         }
         .dev h1{
             font-size: 30px;

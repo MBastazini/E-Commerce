@@ -80,7 +80,7 @@
             {
                 deletaDoCarrinho($cod_produto);
             }
-            else if ($quantidade + $s > $estoque)
+            else if ($quantidade + $s > $estoque && $s > 0)
             {
                 header('Location: ../Carrinho/index.php#esse-produto-nao-possui-mais-estoque');
                 exit();
@@ -99,11 +99,20 @@
             $conn = null;
             $stmt = null;
         } else if ($user = 2){
+            $estoque = tblProduto($cod_produto)[0]->getEstoque();
+            if ($_SESSION['visitante']['carrinho'][$cod_produto] > $estoque && $s > 0)
+            {
+                header('Location: ../Carrinho/index.php#esse-produto-nao-possui-mais-estoque');
+                exit();
+            }
+
             $_SESSION['visitante']['carrinho'][$cod_produto] += $s;
+
             if ($_SESSION['visitante']['carrinho'][$cod_produto] == 0)
             {
                 deletaDoCarrinho($cod_produto);
             }
+            
         }
     }
 
@@ -121,6 +130,14 @@
                 $nome_usuario = $_SESSION['usuario']['nome'];
                 $data_hoje = date("Y/m/d");
                 $status = 'Concluida';
+
+                $estoque = tblProduto($cod_produto)[0]->getEstoque();
+                if ($estoque <= 0)
+                {
+                    header('Location: ../Produtos/#nao-ha-estoque-suficiente');
+                    exit();
+                }
+
                 $sql = "INSERT INTO tbl_compra (status, data_compra, cod_usuario) VALUES (:status, :data_compra, :cod_usuario)";
                 $stmt = $conn->prepare($sql);
                 $stmt -> bindParam(':status', $status, PDO::PARAM_STR);
@@ -190,7 +207,11 @@
             
             $cod_compra = getCodCompra();
             
-            $html= "
+            $valido = carrinhoValido();
+
+            if ($valido)
+            {
+                $html= "
                         <h1>TINYWOOD - Viva CTI 2023<h1><br><br>
 
                             <h1>Compra finalizada</h1><br>
@@ -252,6 +273,12 @@
             
             
             header('Location: ../');
+            }
+            else{
+                header('Location: ../Carrinho/index.php#seu-carrinho-nao-e-valido');
+                exit();
+            }
+            
         }
         else{
             header('Location: ../Login/');
@@ -313,7 +340,7 @@
             adicionaNoCarrinho($cod_produto, 1);
             if ($funcao == 'add')
             {
-                header('Location: ../Produtos/#'.$cod_produto);
+                header('Location: ../Produtos/#produto-adicionado-no-carrinho');
             }
             else if ($funcao == 'add++')
             {
@@ -327,11 +354,13 @@
         else if($funcao == 'finalizar')
         {
             finalizarCarrinho();
+            //header('Location: ../');
         }
         else if($funcao == 'comprar')
         {
             $cod_produto = $_POST['cod_produto'];
             comprar($cod_produto);
+            header('Location: ../');
         }
     }
 ?>

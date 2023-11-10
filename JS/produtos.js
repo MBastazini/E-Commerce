@@ -155,7 +155,6 @@ function mudaFiltro(){
             if(filtro.style.display != 'none')
             {
                 p_filtros.forEach((p_filtro) => {
-                    alert(p_filtro.innerText);
                     if (filtro.getAttribute('name') == p_filtro.innerText)
                     {
                         produto.style.display = 'flex';

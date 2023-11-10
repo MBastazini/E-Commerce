@@ -22,7 +22,6 @@
 <body>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/carrinho.js" defer></script>
-
     <?php 
         barraNavegacao('carrinho', '../');
     ?>
@@ -31,35 +30,80 @@
         <div id="produtos_compra">
             <?php 
                 $carrinho = tblCarrinho();
-                foreach($carrinho as $c) {
-                    $cod_produto = $c->getCodProduto();
-                    $nome = $c->getNome();
-                    $quantidade = $c->getQuantidade();
-                    $preco = $c->getPreco();
-                    $imagem = $c->getImagem();
-                    $preco_total = $preco * $quantidade;
-                    echo"
-                            <div class='produto_compra' id='produto_$cod_produto'>
-                                <img src='../$imagem' alt='Chaveiro img'>
-                                <div>
-                                    <p>$nome</p>
-                                    <div class='produto_compra_div'>
-                                        <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                                            <input type='hidden' name='cod_produto' value='$cod_produto'>
-                                            <input type='hidden' value='muda-' name='funcao'>
-                                            <input type='submit' value='-'>
-                                        </form>
-                                        <p id='quantidade'>$quantidade</p>
-                                        <form action='../PHP/insereDadosCarrinho.php' method='post'>
-                                            <input type='hidden' name='cod_produto' value='$cod_produto'>
-                                            <input type='hidden' value='muda+' name='funcao'>
-                                            <input type='submit' value='+'>
-                                        </form>
+                if ($carrinho)
+                {
+                    foreach($carrinho as $c) {
+                        $cod_produto = $c->getCodProduto();
+                        $nome = $c->getNome();
+                        $quantidade = $c->getQuantidade();
+
+                        $estoque = tblProduto($cod_produto)[0] -> getEstoque();
+
+                        $valido = true;
+                        if ($quantidade > $estoque)
+                        {
+                            $valido = false;
+                        }
+
+                        $preco = $c->getPreco();
+                        $imagem = $c->getImagem();
+                        $preco_total = $preco * $quantidade;
+
+                        if ($valido)
+                        {
+                            echo"
+                                <div class='produto_compra' id='produto_$cod_produto'>
+                                    <img src='../$imagem' alt='Chaveiro img'>
+                                    <div>
+                                        <p>$nome</p>
+                                        <div class='produto_compra_div'>
+                                            <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                                                <input type='hidden' name='cod_produto' value='$cod_produto'>
+                                                <input type='hidden' value='muda-' name='funcao'>
+                                                <input type='submit' value='-'>
+                                            </form>
+                                            <p id='quantidade'>$quantidade</p>
+                                            <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                                                <input type='hidden' name='cod_produto' value='$cod_produto'>
+                                                <input type='hidden' value='muda+' name='funcao'>
+                                                <input type='submit' value='+'>
+                                            </form>
+                                        </div>
+                                        <h1>R$ ".$preco_total."</h1>
                                     </div>
-                                    <h1>R$ ".$preco_total."</h1>
-                                </div>
-                            </div>";   
-                }  
+                                </div>";   
+                        }
+                        else{
+                            echo"
+                                <div class='produto_compra esgotado' id='produto_$cod_produto'>
+                                    <p>Não há estoque</p>
+                                    <img src='../$imagem' alt='Chaveiro img'>
+                                    <div>
+                                        <p>$nome</p>
+                                        <div class='produto_compra_div'>
+                                            <form action='../PHP/insereDadosCarrinho.php' method='post'>
+                                                <input type='hidden' name='cod_produto' value='$cod_produto'>
+                                                <input type='hidden' value='muda-' name='funcao'>
+                                                <input type='submit' value='-'>
+                                            </form>
+                                            <p id='quantidade'>$quantidade</p>
+                                            <form action='#' method='post'>
+                                                <input type='hidden' name='cod_produto' value='$cod_produto'>
+                                                <input type='hidden' value='muda+' name='funcao'>
+                                                <input type='submit' value='+'>
+                                            </form>
+                                        </div>
+                                        <h1>R$ ".$preco_total."</h1>
+                                    </div>
+                                </div>";   
+                        }
+                        
+                    }   
+                }
+                else{
+                    echo "Não há produtos no carrinho";
+                
+                }
             ?>
             <!-- Na cração disso com PHP atente-se em colocar o uma STRING concatenada como 'produto_' + $id_produto
             Algo assim, ai o id_produto fica armasenado, mas não temos classes com o nome dela sendo apenas um numero solto -->
@@ -97,20 +141,27 @@
                     
                     <?php 
                     $carrinho = tblCarrinho();
-                    foreach($carrinho as $c) {
-                        $cod_produto = $c->getCodProduto();
-                        $nome = $c->getNome();
-                        $quantidade = $c->getQuantidade();
-                        $preco = $c->getPreco();
-                        $preco_total = $preco * $quantidade;
-                        echo"
-                            <a class='compra_efetuada' href='#produto_$cod_produto'>
-                            <p>". $quantidade."x</p>
-                            <p>$nome</p>
-                            <h1>R$ ".$preco_total."</h1>
-                            </a>        
-                        ";   
-                    }  
+                    if ($carrinho)
+                    {
+                        foreach($carrinho as $c) {
+                            $cod_produto = $c->getCodProduto();
+                            $nome = $c->getNome();
+                            $quantidade = $c->getQuantidade();
+                            $preco = $c->getPreco();
+                            $preco_total = $preco * $quantidade;
+                            echo"
+                                <a class='compra_efetuada' href='#produto_$cod_produto'>
+                                <p>". $quantidade."x</p>
+                                <p>$nome</p>
+                                <h1>R$ ".$preco_total."</h1>
+                                </a>        
+                            ";   
+                        } 
+                    }
+                    else{
+                        echo "Não há produtos no carrinho";
+                    }
+                     
                     ?>
                 </div>
                 <div class="compras_total">
@@ -122,20 +173,34 @@
                         ?>
                     </h1>
                 </div>
-                <form action='../confirmarCompra.php' method='post'>
-                    <button class="finalizar_compra"><h1>FINALIZAR COMPRA</h1></button>
-                </form>
+                <?php 
+                    
+                    $valido = carrinhoValido();
+                    if ($valido)
+                    {
+                        echo"<form action='../confirmarCompra.php' method='post'>
+                        <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
+                        </form>";
+                    }
+                    else{
+                        echo"<form action='./#carrinho-nao-valido' method='post'>
+                            <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
+                        </form>";
+                    }
+                    
+                    ?>
+                
             </div>  
         </div>
     </section>
-    
+
 
     <?php 
         Footer('../', '#grid_carrinho');
     ?>
 
 
-    <!--<footer>
+    <!---<footer>
         <div class="tela_scroll_down up">
             <a href="#grid_carrinho" class="a"> 
                 <h1>Voltar ao topo</h1> 

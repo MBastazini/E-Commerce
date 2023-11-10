@@ -254,7 +254,8 @@
                 INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
                 INNER JOIN tbl_compra AS c ON cp.cod_compra = c.cod_compra
                 INNER JOIN tbl_imagem_produto AS ip ON p.imagem = ip.cod_imagem
-                WHERE c.cod_usuario = :cod_usuario AND c.cod_compra = :cod_compra";
+                WHERE c.cod_usuario = :cod_usuario AND c.cod_compra = :cod_compra
+                AND p.excluido = false ORDER BY p.cod_produto";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
                 $stmt->bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
@@ -355,5 +356,36 @@
             }
         }
         return $estaNoCarrinho;
+    }
+
+    function carrinhoValido() //Checa se o carrinho atual possui estoque para ser comprado
+    {
+        $user = CheckUser();
+        if ($user == 1)
+        {
+            $carrinho = tblCarrinho();
+            foreach ($carrinho as $c)
+            {
+                $cod_produto = $c->getCodProduto();
+                $quantidade = $c->getQuantidade();
+                $produto = tblProduto($cod_produto)[0];
+                if ($quantidade > $produto->getEstoque())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else if($user == 2){
+            foreach($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade)
+            {
+                $produto = tblProduto($cod_produto)[0];
+                if ($quantidade > $produto->getEstoque())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 ?>

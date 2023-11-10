@@ -158,16 +158,18 @@ INNER JOIN tbl_compra_produto AS cp ON tbl_compra.cod_compra = cp.cod_compra
 INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
 WHERE tbl_compra.cod_usuario = '1';
 
-INSERT INTO tbl_produto (nome, descricao, preco, excluido, data_exclusao, codigovisual, custo, margem_lucro, icms, categoria) VALUES 
-('Chaveiro CPU','Chaveiro com o simbolo de um processador (CPU), representando o curso de informatica.',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00 ,'INFORMATICA'),
-('Chaveiro ENGINE','Chaveiro com a imagem de uma engrenagem, representando o curso de Mecânica.',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00 ,'MECANICA'),
-('Chaveiro LAMPADA','Chaveiro com a imagem de uma lampada, represenando o curso de Eletronica',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00 ,'ELETRONICA'),
-('Chaveiro CTI','Chaveiro com a logo do CTI',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00 ,'CTI');
 
-INSERT INTO tbl_produto (nome, descricao, preco, excluido, data_exclusao, codigovisual, custo, margem_lucro, icms) VALUES 
-('Chaveiro lua','Chaveiro com a imagem de uma lua e estrelas',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00),
-('Chaveiro pato','Chaveiro com a imagem de um pato estiloso',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00),
-('Chaveiro cartas','Chaveiro com a imagem de duas cartas de baralho',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00),
-('Chaveiro sol','Chaveiro com a imagem de um sol',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00),
-('Chaveiro gatinho','Chaveiro com a imagem de um gatinho fofinho',5.00,false,'5-9-2023','chaveiro1',2.90, 0.00,1.00);
+
+INSERT INTO tbl_produto (nome, descricao, preco, excluido, custo, margem_lucro, icms, categoria, imagem, estoque) VALUES 
+('Chaveiro CPU','Chaveiro com o simbolo de um processador (CPU), representando o curso de informatica.',5.00,false,2.90, 0.00,1.00 ,'Informática', 12, 5),
+('Chaveiro ENGINE','Chaveiro com a imagem de uma engrenagem, representando o curso de Mecânica.',5.00,false,2.90, 0.00,1.00 ,'Mecânica', 14, 5),
+('Chaveiro LAMPADA','Chaveiro com a imagem de uma lampada, represenando o curso de Eletronica',5.00,false,2.90, 0.00,1.00 ,'Eletrônica', 16, 5),
+('Chaveiro CTI','Chaveiro com a logo do CTI',5.00,false,2.90, 0.00,1.00 ,'CTI', 13, 5);
+
+INSERT INTO tbl_produto (nome, descricao, preco, excluido, custo, margem_lucro, icms, imagem, estoque) VALUES 
+('Chaveiro lua','Chaveiro com a imagem de uma lua e estrelas',5.00,false,2.90, 0.00,1.00, 17, 5),
+('Chaveiro pato','Chaveiro com a imagem de um pato estiloso',5.00,false,2.90, 0.00,1.00, 18, 5),
+('Chaveiro cartas','Chaveiro com a imagem de duas cartas de baralho',5.00,false,2.90, 0.00,1.00, 9, 5),
+('Chaveiro sol','Chaveiro com a imagem de um sol',5.00,false,2.90, 0.00,1.00, 19, 5),
+('Chaveiro gatinho','Chaveiro com a imagem de um gatinho fofinho',5.00,false,2.90, 0.00,1.00, 15, 5);
 

@@ -72,6 +72,9 @@ function adicionarProdutosDaTabela() {
     total.innerText = `R$ ${valor_total}`;
 }*/
 
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const produtos_compra = document.querySelectorAll('.compra_efetuada');
     produtos_compra.forEach(produto_compra => {
@@ -88,6 +91,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 300);
         });
     });
+
+    
     //novoValorTotal();
 
     //const produtos_compra = document.querySelector('#produtos_compra');
