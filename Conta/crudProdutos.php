@@ -34,7 +34,9 @@
         {
             if ($_SESSION['usuario']['adm'])
             {
-                echo '<div>
+                echo '
+                <a id="btn_crud_produtos" class="cruds" href="./">Voltar</a>
+                <div>
                 <form action="formProdutos.php" method="post">
                 <input type="hidden" name="funcao" value="add">
                 <button type="submit">

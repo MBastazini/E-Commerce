@@ -2993,6 +2993,10 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         background-color: var(--cor_destaque);
         transition: 0.5s;
     }
+    #btn_crud_produtos.cruds{
+        width: 100%;
+        margin-bottom: 10px;
+    }
     .add_img{
         grid-area: 1/1/1/3;
     }

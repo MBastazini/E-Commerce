@@ -33,6 +33,7 @@
         {
             if ($_SESSION['usuario']['adm'])
             {
+                echo '<a id="btn_crud_produtos" class="cruds" href="./">Voltar</a>';
                 $usuarios = tblUsuario(1);
                 foreach($usuarios as $usuario)
                 {

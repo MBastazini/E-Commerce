@@ -280,7 +280,7 @@
             <div class="footer_logo_info">
                 <h1>TINY WOOD</h1>
                 <p>Alguimas informaçoes pq eu vi num lugar e 
-                    vou colocar
+                    vou colo'car'
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vo
                 luptate quidem distinctio rerum assumenda quae aut, dicta c</p>
                 <div class="footer_logo_info_mais">
