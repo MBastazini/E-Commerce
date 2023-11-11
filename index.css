@@ -2684,13 +2684,13 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     }
 
    
-
     #info_compra{
         width: 100%;
         box-sizing: border-box;
         padding: 10px;
         border: 2px solid var(--destaque_texto);
         margin-bottom: 50px;
+        background-color: var(--fundo_01);
     }
     #info_compra > div, #info_c_h{
         width: 100%;
@@ -3235,6 +3235,89 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         transform: scale(1.05);
         transition: 0.5s;
     }
+
+
+
+    #relatorios{
+        width: 100%;
+    }
+
+    #relatorios #opcoes > .filtro > h1{
+        font-size: 30px;
+        margin: 10px;
+        margin-top: 0px;
+    }
+    #relatorios #opcoes > .filtro > div{
+        display: flex;
+        gap: 20px;
+    }
+    #relatorios #opcoes > .filtro > div > p{
+        background-color: var(--destaque_01);
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 20px;
+        transition: 0.2s;
+    }
+    #relatorios #opcoes{
+        background-color: var(--fundo_01);
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid var(--destaque_texto);
+        margin-top: 100px;
+    }
+    #relatorios #opcoes > .filtro > div > p:hover{
+        transform: scale(1.05);
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    #relatorios #opcoes > .filtro > div > p.enabled{
+        background-color: var(--destaque_texto);
+        color: white;
+        transform: scale(1);
+        cursor: default;
+    }
+    #relatorios #opcoes div > h2{
+        font-size: 25px;
+        font-weight: 100;
+        margin: 10px;
+    }
+    #relatorios #opcoes div input{
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid var(--destaque_texto);
+        outline: none;
+        font-size: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 10px 0px;
+    }
+    #relatorios #opcoes > div.hidden{
+        display: none;
+    }
+
+    #relatorios #opcoes div.submit{
+        display: flex;
+        justify-content: center;
+    }
+    #relatorios #opcoes button{
+        background-color: var(--cor_destaque);
+        width: 50%;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: 0.5s;
+        font-size: 20px;
+        margin: 10px;
+    }
+    #relatorios #opcoes button:hover{
+        transform: scale(1.05);
+        transition: 0.5s;
+        width: 55%;
+    }
+
         /*
 
 

@@ -18,6 +18,7 @@
     <script src="../JS/conta.js" defer></script>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/login.js" defer></script>
+    <script src="../JS/compras.js" defer></script>
 
     <?php 
         barraNavegacao('', '../');
@@ -110,6 +111,12 @@
                         <div class='edit_btn' id='CRUD'>
                             <p>Tabela de usuarios</p>
                             <img src='../Icones/config.svg'>
+                        </div>
+                    </a>
+                    <a href='relatorios.php'>
+                        <div class='edit_btn' id='CRUD'>
+                            <p>Relatorios de vendas</p>
+                            <img src='../Icones/report.svg'>
                         </div>
                     </a>
                 </div>

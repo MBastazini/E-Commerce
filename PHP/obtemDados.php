@@ -118,7 +118,7 @@
         return $produtos;
     }
 
-    function tblCompra($tipo = 0)
+    function tblCompra($tipo = 0, $sql = '')
     {
         if (!(isset($compras)))
         {
@@ -134,6 +134,7 @@
                     $sql = 'SELECT * FROM tbl_compra WHERE cod_usuario = :cod_usuario AND status = \'Concluida\' ORDER BY cod_compra';
                     $stmt = $conn->prepare($sql);
                     $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_INT);
+
                 } 
                 else if ($tipo == 1)
                 {
@@ -142,14 +143,20 @@
                     WHERE c.cod_usuario = :cod_usuario AND c.status = \'Pendente\' ORDER BY c.cod_compra';
                     $stmt = $conn->prepare($sql);
                     $stmt->bindParam(':cod_usuario', $cod_usuario, PDO::PARAM_STR);
+
                     
                 }  
-                else{
+                else if ($tipo == 2)
+                {
                     $sql = 'SELECT * FROM tbl_compra WHERE status = \'Concluida\' ORDER BY cod_compra';
                     $stmt = $conn->prepare($sql);
                 }
+                else{
+                    $stmt = $conn->prepare($sql);
+                    
+                }
                 
-                  $stmt->execute();
+                $stmt->execute();
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra']);
                     $sql2 = 'SELECT * FROM tbl_compra_produto AS cp
@@ -399,4 +406,6 @@
             return true;
         }
     }
+
+
 ?>

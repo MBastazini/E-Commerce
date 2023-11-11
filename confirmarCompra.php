@@ -25,6 +25,7 @@
     <title>Tiny Wood</title>
 </head>
 <body>
+    <script src="../JS/compras.js" defer></script>
     <?php 
         barraNavegacao('', '');
     ?>
