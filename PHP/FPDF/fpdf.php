@@ -9,7 +9,7 @@
 
 define('FPDF_VERSION','1.81');
 
-abstract class FPDF
+class FPDF
 {
 protected $page;               // current page number
 protected $n;                  // current object number
@@ -74,6 +74,7 @@ protected $PDFVersion;         // PDF version number
 function __construct($orientation='P', $unit='mm', $size='A4')
 {
 	// Some checks
+	$this->_dochecks();
 	// Initialization of properties
 	$this->state = 0;
 	$this->page = 0;
@@ -574,7 +575,6 @@ function AcceptPageBreak()
 
 function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='')
 {
-	$txt = utf8_decode($txt);
 	// Output a cell
 	$k = $this->k;
 	if($this->y+$h>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak())
@@ -1034,6 +1034,22 @@ function Output($dest='', $name='', $isUTF8=false)
 *                              Protected methods                               *
 *******************************************************************************/
 
+protected function _dochecks()
+{
+   
+	// Check mbstring overloading
+	if(ini_get('mbstring.func_overload') & 2)
+		$this->Error('mbstring overloading must be disabled');
+	// Ensure runtime magic quotes are disabled
+	if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+		set_magic_quotes_runtime(0);
+    }
+    else {
+  	  ini_set('magic_quotes_runtime', 0);
+	}        
+	//if(get_magic_quotes_runtime())
+	//@set_magic_quotes_runtime(0);
+}
 
 protected function _checkoutput()
 {

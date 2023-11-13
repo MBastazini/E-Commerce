@@ -1,6 +1,5 @@
 <?php   
-include('obtemDados.php');
-
+    require_once('obtemDados.php');
   function barraNavegacao($tela, $src)
   {
     $user = CheckUser();
@@ -230,107 +229,121 @@ include('obtemDados.php');
 
   }
 
+  function CriaHTML(array $compras)
+    {
+        $html = "<br><br>
+                    <b>".
+                    sprintf('%3s', 'Id').
+                    sprintf('%12s','Data').
+                    sprintf('%50s','Nome').
+                    sprintf('%10s','$ Total').
+                    "</b>
+                <br>";
 
-  function gerapdf($texto){
-    require('FPDF/fpdf.php');
 
-    class pdf extends FPDF
-        {
-        protected $B = 0;
-        protected $I = 0;
-        protected $U = 0;
-        protected $HREF = '';
+        if (isset($compras)) {
+            foreach ($compras as $compra) {
+                $cod_compra = sprintf('%03s', $compra -> getCodCompra());
 
-        function WriteHTML($html)
-        {
-            // HTML parser
-            $html = str_replace("\n",' ',$html);
-            $a = preg_split('/<(.*)>/U',$html,-1,PREG_SPLIT_DELIM_CAPTURE);
-            foreach($a as $i=>$e)
-            {
-                if($i%2==0)
-                {
-                    // Text
-                    if($this->HREF)
-                        $this->PutLink($this->HREF,$e);
-                    else
-                        $this->Write(5,$e);
+                $cod_usuario = $compra -> getCodUsuario();
+                $nome_usuario = tblUsuario(5, $cod_usuario)[0] -> getNome();
+
+                $nome_usuario = sprintf('%50s', $nome_usuario);
+
+                $data_compra = sprintf('%12s', $compra -> getDataCompra());
+
+                $valor_total = sprintf('%10s', $compra -> getValorTotal());
+
+                $html .= $cod_compra . $data_compra . $nome_usuario . $valor_total . "<br>";
+                
+
+                $html .= "<b>".
+                sprintf('%20s','Prod').
+                sprintf('%5s','Qtd').
+                sprintf('%10s','$ unit').
+                sprintf('%10s','$ sub').
+                "</b><br>";
+
+
+                $produtos = $compra->getCompras();
+                foreach($produtos as $produto) {
+                    $nome = sprintf('%20s', $produto -> getNome());
+                    $preco = $produto -> getPreco();
+                    $quantidade = $produto -> getQuantidade();
+                    $cod_produto = $produto -> getCodProduto();
+
+                    $html .= '
+                    <tr>
+                        <td> -> </td>
+                        <td>' . $nome . '</td>
+                        <td>' . $preco . '</td>
+                        <td>' . $quantidade . '</td>
+                        <td>' . $cod_produto . '</td>
+                    </tr>';
                 }
-                else
-                {
-                    // Tag
-                    if($e[0]=='/')
-                        $this->CloseTag(strtoupper(substr($e,1)));
-                    else
-                    {
-                        // Extract attributes
-                        $a2 = explode(' ',$e);
-                        $tag = strtoupper(array_shift($a2));
-                        $attr = array();
-                        foreach($a2 as $v)
-                        {
-                            if(preg_match('/([^=]*)=["\']?([^"\']*)/',$v,$a3))
-                                $attr[strtoupper($a3[1])] = $a3[2];
-                        }
-                        $this->OpenTag($tag,$attr);
-                    }
-                }
+                $html .= '
+                <tr>
+                    <td> == </td>
+                    <td> == </td>
+                    <td> == </td>
+                    <td> == </td>
+                    <td> == </td>
+                </tr>
+                </table>
+                ';
             }
-        }
-
-        function OpenTag($tag, $attr)
-        {
-            // Opening tag
-            if($tag=='B' || $tag=='I' || $tag=='U')
-                $this->SetStyle($tag,true);
-            if($tag=='A')
-                $this->HREF = $attr['HREF'];
-            if($tag=='BR')
-                $this->Ln(5);
-        }
-
-        function CloseTag($tag)
-        {
-            // Closing tag
-            if($tag=='B' || $tag=='I' || $tag=='U')
-                $this->SetStyle($tag,false);
-            if($tag=='A')
-                $this->HREF = '';
-        }
-
-        function SetStyle($tag, $enable)
-        {
-            // Modify style and select corresponding font
-            $this->$tag += ($enable ? 1 : -1);
-            $style = '';
-            foreach(array('B', 'I', 'U') as $s)
-            {
-                if($this->$s>0)
-                    $style .= $s;
-            }
-            $this->SetFont('',$style);
-        }
-
-        function PutLink($URL, $txt)
-        {
-            // Put a hyperlink
-            $this->SetTextColor(0,0,255);
-            $this->SetStyle('U',true);
-            $this->Write(5,$txt,$URL);
-            $this->SetStyle('U',false);
-            $this->SetTextColor(0);
-        }
         }
         
-    $pdf = new pdf();
-    $pdf->AddPage();
-    $pdf->SetFont('Arial','',20);
-    //$pdf->SetLeftMargin(45);
-    $pdf->SetFontSize(12);
-    $pdf->WriteHTML($texto);
-    $pdf->Output('D', 'Compra_tinywood.pdf');
+        //echo $html;
+        CriaPDF('', $html, 'jota.pdf');
+    }
+
+  function CriaPDF ( $paramTitulo, $paramHtml, $paramArquivoPDF )
+  {
+   $arq = false;     
+   try {  
+    require "fpdf/html_table.php"; 
+    // abre classe fpdf estendida com recurso que converte <table> em pdf
+  
+    $pdf = new PDF();  
+    // cria um novo objeto $pdf da classe 'pdf' que estende 'fpdf' em 'html_table.php'
+    $pdf->AddPage();  // cria uma pagina vazia
+    $pdf->SetFont('helvetica','B',20);       
+    $pdf->Write(5,$paramTitulo);    
+    $pdf->SetFont('helvetica','',8);     
+    $pdf->WriteHTML($paramHtml); // renderiza $html na pagina vazia
+    ob_end_clean();    
+    // fpdf requer tela vazia, essa instrucao 
+    // libera a tela antes do output
+    
+    // gerando um arquivo 
+    $pdf->Output($paramArquivoPDF,'F');
+    // gerando um download 
+    $pdf->Output('D',$paramArquivoPDF);  // disponibiliza o pdf gerado pra download
+    $arq = true;
+   } catch (Exception $e) {
+     echo $e->getMessage(); // erros da aplicação - gerais
+   }
+   return $arq;
   }
 
-  
-
+  if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        $funcao = $_POST['funcao'];
+        if ($funcao == 'relatorio')
+        {
+            $valor_f = $_POST['valor_f'];
+            $sql_f = $_POST['sql_f'];
+            if ($valor_f == 2)
+            {
+                $compras = tblCompra(2);
+                CriaHTML($compras);
+            }
+            else if ($valor_f == 3){
+                $compras = tblCompra(3, $sql_f);
+                CriaHTML($compras);
+            }
+            
+        }
+    }
 ?>

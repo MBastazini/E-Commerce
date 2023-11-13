@@ -6,8 +6,8 @@
     require_once('Classes/cls_usuario.php');
     require_once("Classes/cls_compra_produto.php");
     require_once("Classes/cls_imagem.php");
+    include('sessao.php');
 
-    include("sessao.php");
 
 
     function getCodCompra(){
@@ -158,7 +158,7 @@
                 
                 $stmt->execute();
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra']);
+                    $compra = new Compra($row['cod_compra'], $row['status'], $row['data_compra'], $row['cod_usuario']);
                     $sql2 = 'SELECT * FROM tbl_compra_produto AS cp
                     INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
                     WHERE cp.cod_compra = :cod_compra ORDER BY cp.cod_compra';
@@ -213,7 +213,7 @@
         return $tokens;
     }
 
-    function tblUsuario($tipo = 0)
+    function tblUsuario($tipo = 0, $c_u = 0)
     {
         
         if(!(isset($usuario)))
@@ -231,6 +231,12 @@
                     $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario ORDER BY cod_usuario";
                     $stmt = $conn->prepare($sql);
                     $stmt->bindParam(":cod_usuario", $cod_usuario, PDO::PARAM_INT);
+                }
+                else if ($tipo == 5)
+                {
+                    $sql = "SELECT * FROM tbl_usuario WHERE cod_usuario = :cod_usuario ORDER BY cod_usuario";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(":cod_usuario", $c_u, PDO::PARAM_INT);
                 }
                 else
                 {
@@ -408,4 +414,6 @@
     }
 
 
+    
+    
 ?>

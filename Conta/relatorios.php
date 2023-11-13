@@ -100,9 +100,13 @@
 
     if ($valido)
     {
+        $valor_f = 3;
+        $sql_f = $sql;
         $compras = tblCompra(3, $sql);
     }
     else{
+        $valor_f = 2;
+        $sql_f = '';
         $compras = tblCompra(2);
     }
 ?>
@@ -181,6 +185,16 @@
 
                 <a id="btn_crud_produtos" class="cruds" href="./">Voltar</a>
             </form>
+            <form action="../PHP/caixa.php" method="post">
+                <input type="hidden" name="funcao" value="relatorio">
+                <input type="hidden" name="sql_f" value="<?php echo $sql_f; ?>">
+                <input type="hidden" name="valor_f" value="<?php echo $valor_f; ?>">
+                
+                <div class="submit">
+                    <button type="submit">Gerar PDF</button>
+                </div>
+            </form>
+            
                 
 
             </div>
