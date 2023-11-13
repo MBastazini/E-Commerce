@@ -231,7 +231,7 @@
 
   function CriaHTML(array $compras)
     {
-        $html = "<br><br>
+        $html = "<html> <br><br>
                     <b>".
                     sprintf('%3s', 'Id').
                     sprintf('%12s','Data').
@@ -267,32 +267,23 @@
 
                 $produtos = $compra->getCompras();
                 foreach($produtos as $produto) {
-                    $nome = sprintf('%20s', $produto -> getNome());
+                    
                     $preco = $produto -> getPreco();
                     $quantidade = $produto -> getQuantidade();
                     $cod_produto = $produto -> getCodProduto();
+                    $subtotal = $preco * $quantidade;
 
-                    $html .= '
-                    <tr>
-                        <td> -> </td>
-                        <td>' . $nome . '</td>
-                        <td>' . $preco . '</td>
-                        <td>' . $quantidade . '</td>
-                        <td>' . $cod_produto . '</td>
-                    </tr>';
+                    $nome = sprintf('%20s', $produto -> getNome());
+                    $preco = sprintf('%10s', $preco);
+                    $quantidade = sprintf('%5s', $quantidade);
+                    $subtotal = sprintf('%10s', $subtotal);
+
+                    $html .= $nome . $quantidade . $preco . $subtotal . "<br>";
                 }
-                $html .= '
-                <tr>
-                    <td> == </td>
-                    <td> == </td>
-                    <td> == </td>
-                    <td> == </td>
-                    <td> == </td>
-                </tr>
-                </table>
-                ';
-            }
+                
+            }  
         }
+        $html .= '</html>';
         
         //echo $html;
         CriaPDF('', $html, 'jota.pdf');
