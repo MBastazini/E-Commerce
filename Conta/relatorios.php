@@ -190,9 +190,15 @@
                 <input type="hidden" name="sql_f" value="<?php echo $sql_f; ?>">
                 <input type="hidden" name="valor_f" value="<?php echo $valor_f; ?>">
                 
-                <div class="submit">
-                    <button type="submit">Gerar PDF</button>
+                <div class="gerar_relatorio">
+                <div>
+                    <input type="checkbox" name="previzualizar"> Previzualizar (abre o relatorio em uma nova aba) | Quando desligado executa o download automaticamente
                 </div>
+                
+                <button type="submit">Gerar PDF</button>
+                <p>(ATENÇÃO) primeiro carregue a tabela depois gere o PDF, pois o PDF será gerado com base na tabela apresentada abaixo:</p>
+                
+            </div> 
             </form>
             
                 
@@ -215,7 +221,7 @@
                     {
                         $cod_compra = $compra -> getCodCompra();
                         $cod_usuario = $compra -> getCodUsuario();
-                    $nome_usuario = tblUsuario(5, $cod_usuario)[0] -> getNome();
+                        $nome_usuario = tblUsuario(5, $cod_usuario)[0] -> getNome();
                         $data_compra = $compra -> getDataCompra();
                         $valor_total = $compra -> getValorTotal();
                         echo "

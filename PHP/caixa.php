@@ -1,5 +1,6 @@
 <?php   
-    require_once('obtemDados.php');
+    include('fpdf/html_table.php');
+    include('obtemDados.php');
   function barraNavegacao($tela, $src)
   {
     $user = CheckUser();
@@ -229,90 +230,78 @@
 
   }
 
-  function CriaHTML(array $compras)
+
+  /*function adicionaEspacos($entrada)
+  {
+    $tamanhoDesejado = 20;
+    // Verificar se a string é maior que o tamanho desejado
+    if (strlen($entrada) > $tamanhoDesejado) {
+        // Cortar a string para o tamanho desejado e adicionar '...'
+        return substr($entrada, 0, $tamanhoDesejado-1) . '|';
+    } else {
+        // Adicionar espaços ao final até atingir o tamanho desejado
+        return str_pad($entrada, $tamanhoDesejado, ' . ');
+    }
+  }*/
+  function CriaHTML(array $compras, $tipo = 0)
     {
         $html = "<html>";
 
 
         if (isset($compras)) {
             foreach ($compras as $compra) {
-                $html .= " <br><br><b>".sprintf('%30s', 'Id'). sprintf('%30s', 'Nome').sprintf('%30s', 'Data compra').sprintf('%30s', 'R$ Total')."</b><br>";
-
-                $cod_compra = sprintf('%30s', $compra -> getCodCompra());
-
-                $cod_usuario = $compra -> getCodUsuario();
+                $cod_compra = $compra->getCodCompra();
+                $cod_usuario = $compra->getCodUsuario();
                 $nome_usuario = tblUsuario(5, $cod_usuario)[0] -> getNome();
+                $data = $compra->getDataCompra();
+                $valor_total = $compra->getValorTotal();
 
-                $nome_usuario = sprintf('%30s', $nome_usuario);
-
-                $data_compra = sprintf('%30s', $compra -> getDataCompra());
-
-                $valor_total = sprintf('%30s', $compra -> getValorTotal());
-
-                $html .= $cod_compra . $nome_usuario . $data_compra . $valor_total . "<br>";
+                //Apresentar os dados em uma table
+                $html .= "";
+                $html .= "<tr>";
+                $html .= "<p>Codigo da compra: $cod_compra</p><br>";
+                $html .= "<p>Nome do usuario: $nome_usuario</p><br>";
+                $html .= "<p>Data da compra: $data</p><br>";
+                $html .= "<p>Valor total: $valor_total</p><br>";
+                $html .= "<br><br>----------------------------------------------------------------------------------------------------------------------------------<br><br>";
+                $html .= "<br><br>";
+                //$html .= adicionaEspacos("Produto");
+                //$html .= adicionaEspacos("Quantidade");
+                //$html .= adicionaEspacos("$ Unitario");
+                //$html .= adicionaEspacos("$ Subtotal");
+                ///$html .= "<br><br>";
+                //$html .= "<br><br>----------------------------------------------------------------------------------------------------------------------------------<br><br>";
                 
 
-                $html .= "<b>".
-                sprintf('%30s','').
-                sprintf('%30s','Produto').
-                sprintf('%50s','R$ Unitario').
-                sprintf('%30s','R$ Subtotal').
-                "</b><br>";
+
 
 
                 $produtos = $compra->getCompras();
                 foreach($produtos as $produto) {
-                    
-                    $preco = $produto -> getPreco();
-                    $quantidade = $produto -> getQuantidade();
-                    $cod_produto = $produto -> getCodProduto();
+                    $nome = $produto->getNome();
+                    $preco = $produto->getPreco();
+                    $quantidade = $produto->getQuantidade();
                     $subtotal = $preco * $quantidade;
 
-                    $a = sprintf('%30s', '');
-                    $nome = sprintf('%50s', $produto -> getNome());
-                    $preco = sprintf('%50s', $preco);
-                    $quantidade = sprintf('%30s', $quantidade);
-                    $subtotal = sprintf('%300s', $subtotal);
-
-                    $html .= $a . $nome . $preco . $quantidade . $subtotal . "<br>";
+                    $html .= " ---------- Produto: $nome <br><br><br>";
+                    $html .= " ------ Quantidade: $quantidade <br><br><br>";
+                    $html .= " -- Preco unitario: $preco <br><br><br>";
+                    $html .= " --------- Subtotal: $subtotal <br><br><br>";
+                    $html .= "<br><br> === - === - === <br><br><br><br><br>";
+    
                 }
+                $html .= "<br>";
+                $html .= "</tr>";
+                $html .= "</table>";
                 
             }
         }
         $html .= '</html>';
         
         //echo $html;
-        CriaPDF('', $html, 'jota.pdf');
+        $pdf = new createPDF($html, 'Relatoio de vendas', 'relatorio.pdf', 'TinyWood', time());
+        $pdf->run($tipo);
     }
-
-  function CriaPDF ( $paramTitulo, $paramHtml, $paramArquivoPDF )
-  {
-   $arq = false;     
-   try {  
-    require "fpdf/html_table.php"; 
-    // abre classe fpdf estendida com recurso que converte <table> em pdf
-  
-    $pdf = new PDF();  
-    // cria um novo objeto $pdf da classe 'pdf' que estende 'fpdf' em 'html_table.php'
-    $pdf->AddPage();  // cria uma pagina vazia
-    $pdf->SetFont('helvetica','B',20);       
-    $pdf->Write(5,$paramTitulo);    
-    $pdf->SetFont('helvetica','',8);     
-    $pdf->WriteHTML($paramHtml); // renderiza $html na pagina vazia
-    ob_end_clean();    
-    // fpdf requer tela vazia, essa instrucao 
-    // libera a tela antes do output
-    
-    // gerando um arquivo 
-    $pdf->Output($paramArquivoPDF,'F');
-    // gerando um download 
-    $pdf->Output('D',$paramArquivoPDF);  // disponibiliza o pdf gerado pra download
-    $arq = true;
-   } catch (Exception $e) {
-     echo $e->getMessage(); // erros da aplicação - gerais
-   }
-   return $arq;
-  }
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
@@ -324,11 +313,23 @@
             if ($valor_f == 2)
             {
                 $compras = tblCompra(2);
-                CriaHTML($compras);
+                $previzualizar = isset($_POST['previzualizar']);
+                $tipo = 1;
+                if ($previzualizar)
+                {
+                    $tipo = 2;
+                }
+                CriaHTML($compras, $tipo);
             }
             else if ($valor_f == 3){
                 $compras = tblCompra(3, $sql_f);
-                CriaHTML($compras);
+                $previzualizar = isset($_POST['previzualizar']);
+                $tipo = 1;
+                if ($previzualizar)
+                {
+                    $tipo = 2;
+                }
+                CriaHTML($compras, $tipo);
             }
             
         }

@@ -2683,7 +2683,30 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         background-color: var(--cor_destaque);
     }
 
-   
+    .gerar_relatorio{
+        border-radius: 10px;
+        border: 1px solid var(--destaque_texto);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .gerar_relatorio div{
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    .gerar_relatorio input{
+        width: 20px !important;
+        height: 20px;
+    }
+    .gerar_relatorio > button{
+        background-color: var(--destaque_02) !important;
+    }
+    .gerar_relatorio > p{
+        padding: 10px;
+    }
     #info_compra{
         width: 100%;
         box-sizing: border-box;
@@ -3264,6 +3287,11 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         border-radius: 10px;
         border: 1px solid var(--destaque_texto);
         margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    } #relatorios #opcoes > *{
+        width: 100%;
     }
     #relatorios #opcoes > .filtro > div > p:hover{
         transform: scale(1.05);

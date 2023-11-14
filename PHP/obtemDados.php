@@ -129,7 +129,7 @@
                 $conn = coneccao();
                 $cod_usuario = $_SESSION['usuario']['cod_usuario'];
 
-                if ($tipo == 0)
+                if ($tipo == 0) //Compras do usuario ativo
                 {
                     $sql = 'SELECT * FROM tbl_compra WHERE cod_usuario = :cod_usuario AND status = \'Concluida\' ORDER BY cod_compra';
                     $stmt = $conn->prepare($sql);

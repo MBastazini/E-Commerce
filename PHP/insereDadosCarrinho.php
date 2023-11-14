@@ -155,31 +155,7 @@
                 $stmt -> execute();
 
 
-
-                
-                $sql = "SELECT * FROM tbl_produto WHERE cod_produto = :cod_produto";
-                $stmt = $conn->prepare($sql);
-                $stmt -> bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
-                $stmt -> execute();
-                $produto = $stmt->fetch(PDO::FETCH_ASSOC);
-                $preco = $produto['preco'];
-                $nome = $produto['nome'];
-
-                $html= "
-                        <h1>TINYWOOD - Viva CTI 2023<h1><br><br>
-
-                        <h1>Compra finalizada</h1><br>
-                        <h2>Nome: $nome_usuario</h2><br>
-                        <h2>Codigo do usuario: $cod_usuario</h2><br>
-                        <br>
-                        <br>
-                        <h1>Compras efetuadas:</h1><br>
-                        <h1> Produto | Quantidade | Preço </h1><br><br>
-                        <h2>".$nome." ||| 1 ||| R$ ".$preco ."</h2><br>
-                        <br>
-                        <h1>Valor total da compra: R$ ". $preco ."</h1>
-                ";
-                gerapdf($html);
+                CriaHTML(tblCompra(1));
             //}
             //catch(PDOException $e){
             //    echo "<script>alert('Erro ao adicionar produto!');</script>";
@@ -211,45 +187,12 @@
 
             if ($valido)
             {
-                $html= "
-                        <h1>TINYWOOD - Viva CTI 2023<h1><br><br>
 
-                            <h1>Compra finalizada</h1><br>
-                            <h2>Nome: $nome_usuario</h2><br>
-                            <h2>Codigo do usuario: $cod_usuario</h2><br>
-                            <br>
-                            <br>
-                            <h1>Compras efetuadas:</h1><br>
-                            <h1> Produto | Quantidade | Preço </h1><br><br>
-                        ";
-
-            $valor_total = 0;
 
             $sql = "SELECT * FROM tbl_compra_produto WHERE cod_compra = :cod_compra";
             $stmt = $conn->prepare($sql);
             $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
             $stmt -> execute();
-            while($compra = $stmt->fetch(PDO::FETCH_ASSOC))
-            {
-                //Obtem nome, quantidade e preço dessa compra (quantidade é FK de tbl_compra_produto)
-                $quantidade = $compra['quantidade'];
-                
-                $sql2 = "SELECT p.nome, p.preco FROM tbl_compra_produto AS cp
-                INNER JOIN tbl_produto AS p ON cp.cod_produto = p.cod_produto
-                WHERE cp.cod_compra = :cod_compra";
-                $stmt2 = $conn->prepare($sql2);
-                $stmt2 -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
-                $stmt2 -> execute();
-                $resultado = $stmt2->fetch(PDO::FETCH_ASSOC);
-
-                $nome = $resultado['nome'];
-                $preco = $resultado['preco'];
-
-                $valor_total += $preco * $quantidade;
-                    $html .= "
-                            <h2>$nome ||| $quantidade ||| $preco </h2><br>
-                        ";
-            }
             
             //Deleta a tmpcompra
             $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
@@ -271,7 +214,7 @@
             $stmt = null;
             $stmt2 = null;
             
-            
+            CriaHTML(tblCompra(1));
             header('Location: ../');
             }
             else{
