@@ -202,7 +202,7 @@
             <div id="info_c_h">
                 <p>Mais</p>
                 <p>Código</p>
-                <p>Status</p>
+                <p>Usuario</p>
                 <p>Data efetuada</p>
                 <p>Valor total</p>
             </div>
@@ -214,14 +214,15 @@
                     foreach ($compras as $compra)
                     {
                         $cod_compra = $compra -> getCodCompra();
-                        $status = $compra -> getStatus();
+                        $cod_usuario = $compra -> getCodUsuario();
+                    $nome_usuario = tblUsuario(5, $cod_usuario)[0] -> getNome();
                         $data_compra = $compra -> getDataCompra();
                         $valor_total = $compra -> getValorTotal();
                         echo "
                         <div class='compra'>
                             <img src='../Icones/Down_preto.svg'>
                             <p>". $cod_compra ."</p>
-                            <p>". $status ."</p>
+                            <p>". $nome_usuario ."</p>
                             <p>". $data_compra ."</p>
                             <p>R$ ". $valor_total ."</p>
                             <div>

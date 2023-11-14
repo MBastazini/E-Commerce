@@ -231,37 +231,32 @@
 
   function CriaHTML(array $compras)
     {
-        $html = "<html> <br><br>
-                    <b>".
-                    sprintf('%3s', 'Id').
-                    sprintf('%12s','Data').
-                    sprintf('%50s','Nome').
-                    sprintf('%10s','$ Total').
-                    "</b>
-                <br>";
+        $html = "<html>";
 
 
         if (isset($compras)) {
             foreach ($compras as $compra) {
-                $cod_compra = sprintf('%03s', $compra -> getCodCompra());
+                $html .= " <br><br><b>".sprintf('%30s', 'Id'). sprintf('%30s', 'Nome').sprintf('%30s', 'Data compra').sprintf('%30s', 'R$ Total')."</b><br>";
+
+                $cod_compra = sprintf('%30s', $compra -> getCodCompra());
 
                 $cod_usuario = $compra -> getCodUsuario();
                 $nome_usuario = tblUsuario(5, $cod_usuario)[0] -> getNome();
 
-                $nome_usuario = sprintf('%50s', $nome_usuario);
+                $nome_usuario = sprintf('%30s', $nome_usuario);
 
-                $data_compra = sprintf('%12s', $compra -> getDataCompra());
+                $data_compra = sprintf('%30s', $compra -> getDataCompra());
 
-                $valor_total = sprintf('%10s', $compra -> getValorTotal());
+                $valor_total = sprintf('%30s', $compra -> getValorTotal());
 
-                $html .= $cod_compra . $data_compra . $nome_usuario . $valor_total . "<br>";
+                $html .= $cod_compra . $nome_usuario . $data_compra . $valor_total . "<br>";
                 
 
                 $html .= "<b>".
-                sprintf('%20s','Prod').
-                sprintf('%5s','Qtd').
-                sprintf('%10s','$ unit').
-                sprintf('%10s','$ sub').
+                sprintf('%30s','').
+                sprintf('%30s','Produto').
+                sprintf('%50s','R$ Unitario').
+                sprintf('%30s','R$ Subtotal').
                 "</b><br>";
 
 
@@ -273,15 +268,16 @@
                     $cod_produto = $produto -> getCodProduto();
                     $subtotal = $preco * $quantidade;
 
-                    $nome = sprintf('%20s', $produto -> getNome());
-                    $preco = sprintf('%10s', $preco);
-                    $quantidade = sprintf('%5s', $quantidade);
-                    $subtotal = sprintf('%10s', $subtotal);
+                    $a = sprintf('%30s', '');
+                    $nome = sprintf('%50s', $produto -> getNome());
+                    $preco = sprintf('%50s', $preco);
+                    $quantidade = sprintf('%30s', $quantidade);
+                    $subtotal = sprintf('%300s', $subtotal);
 
-                    $html .= $nome . $quantidade . $preco . $subtotal . "<br>";
+                    $html .= $a . $nome . $preco . $quantidade . $subtotal . "<br>";
                 }
                 
-            }  
+            }
         }
         $html .= '</html>';
         
