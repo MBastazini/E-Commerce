@@ -114,7 +114,6 @@
             $stmt = null;
         }
         
-
         return $produtos;
     }
 
@@ -138,7 +137,7 @@
                 } 
                 else if ($tipo == 1)
                 {
-                    $sql = 'SELECT c.cod_compra, c.status, c.data_compra FROM tbl_tmpcompra AS tmp
+                    $sql = 'SELECT c.cod_compra, c.status, c.data_compra, c.cod_usuario FROM tbl_tmpcompra AS tmp
                     INNER JOIN tbl_compra AS c ON tmp.cod_compra = c.cod_compra
                     WHERE c.cod_usuario = :cod_usuario AND c.status = \'Pendente\' ORDER BY c.cod_compra';
                     $stmt = $conn->prepare($sql);
@@ -180,7 +179,13 @@
             }
         }
         
-        return $compras;
+        if (isset($compras))
+        {
+            return $compras;
+        }
+        else{
+            return null;
+        }
     }
 
     function tblToken()

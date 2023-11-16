@@ -245,10 +245,10 @@
   }*/
   function CriaHTML(array $compras, $tipo = 0)
     {
+        
         $html = "<html>";
-
-
-        if (isset($compras)) {
+        if (isset($compras) && !empty($compras)) {
+            
             foreach ($compras as $compra) {
                 $cod_compra = $compra->getCodCompra();
                 $cod_usuario = $compra->getCodUsuario();
@@ -295,43 +295,48 @@
                 $html .= "</table>";
                 
             }
+            
+        }
+        else{
+            $html .= "<p>Não há compras</p>";
         }
         $html .= '</html>';
-        
-        //echo $html;
-        $pdf = new createPDF($html, 'Relatoio de vendas', 'relatorio.pdf', 'TinyWood', time());
-        $pdf->run($tipo);
+        echo $html;
+        //$pdf = new createPDF($html, 'Relatoio de vendas', 'relatorio.pdf', 'TinyWood', time());
+        //$pdf->run($tipo);
     }
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $funcao = $_POST['funcao'];
-        if ($funcao == 'relatorio')
-        {
-            $valor_f = $_POST['valor_f'];
-            $sql_f = $_POST['sql_f'];
-            if ($valor_f == 2)
+        if (isset($_POST['funcao'])){
+            $funcao = $_POST['funcao'];
+            if ($funcao == 'relatorio')
             {
-                $compras = tblCompra(2);
-                $previzualizar = isset($_POST['previzualizar']);
-                $tipo = 1;
-                if ($previzualizar)
+                $valor_f = $_POST['valor_f'];
+                $sql_f = $_POST['sql_f'];
+                if ($valor_f == 2)
                 {
-                    $tipo = 2;
+                    $compras = tblCompra(2);
+                    $previzualizar = isset($_POST['previzualizar']);
+                    $tipo = 1;
+                    if ($previzualizar)
+                    {
+                        $tipo = 2;
+                    }
+                    CriaHTML($compras, $tipo);
                 }
-                CriaHTML($compras, $tipo);
-            }
-            else if ($valor_f == 3){
-                $compras = tblCompra(3, $sql_f);
-                $previzualizar = isset($_POST['previzualizar']);
-                $tipo = 1;
-                if ($previzualizar)
-                {
-                    $tipo = 2;
+                else if ($valor_f == 3){
+                    $compras = tblCompra(3, $sql_f);
+                    $previzualizar = isset($_POST['previzualizar']);
+                    $tipo = 1;
+                    if ($previzualizar)
+                    {
+                        $tipo = 2;
+                    }
+                    CriaHTML($compras, $tipo);
                 }
-                CriaHTML($compras, $tipo);
+                
             }
-            
         }
     }
 ?>

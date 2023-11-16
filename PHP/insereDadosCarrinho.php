@@ -173,9 +173,11 @@
     }
 
     function finalizarCarrinho(){
+        
         $user = CheckUser();
         if ($user == 1)
         {
+            
             $conn = coneccao();
 
             $cod_usuario = $_SESSION['usuario']['cod_usuario'];
@@ -188,18 +190,20 @@
             if ($valido)
             {
 
+            $compras = tblCompra(1);
 
             $sql = "SELECT * FROM tbl_compra_produto WHERE cod_compra = :cod_compra";
             $stmt = $conn->prepare($sql);
             $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
             $stmt -> execute();
             
+            
             //Deleta a tmpcompra
             $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
             $stmt = $conn->prepare($sql);
             $stmt -> bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
             $stmt -> execute();
-
+            
             //Muda o status da compra para 'concluido' e a data para agora
             $data_hoje = date("Y/m/d");
             $status = 'Concluida';
@@ -214,8 +218,16 @@
             $stmt = null;
             $stmt2 = null;
             
-            CriaHTML(tblCompra(1));
-            header('Location: ../');
+            
+            if (isset($compras) && !empty($compras))
+            {
+                CriaHTML($compras);
+            }
+            else{
+                echo "ERRO";
+            }
+            
+            //header('Location: ../');
             }
             else{
                 header('Location: ../Carrinho/index.php#seu-carrinho-nao-e-valido');
@@ -309,6 +321,9 @@
         {
             limparCarrinho();
             header('Location: ../Carrinho/#carrinho-limpo');
+        }
+        else{
+            echo "FUNCAO INVALIDA";
         }
     }
 ?>

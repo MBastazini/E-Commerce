@@ -4,6 +4,7 @@
     include("PHP/caixa.php");
 
     $tipo = 1;
+    $valor_total = 0;
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         if (isset($_POST['tipo']))
@@ -50,27 +51,35 @@
                         if ($tipo == 2)
                         {
                             $produto = tblProduto($cod_produto);
-                            $nome = $produto[0]->getNome();
-                            $preco = $produto[0]->getPreco();
-                            $valor_total = $preco; 
+                            if (isset($produto))
+                            {
+                                $nome = $produto[0]->getNome();
+                                $preco = $produto[0]->getPreco();
+                                $valor_total = $preco; 
 
-                            $data_hoje = date('d/m/Y');
-                            echo "<p> - </p>";
-                            echo "<p>Pendente</p>";
-                            echo "<p>$data_hoje</p>";
-                            echo "<p>$preco</p>";
+                                $data_hoje = date('d/m/Y');
+                                echo "<p> - </p>";
+                                echo "<p>Pendente</p>";
+                                echo "<p>$data_hoje</p>";
+                                echo "<p>$preco</p>";
+                            }
+                            else{
+                                echo "ERRO";
+                            }
                         }
                         else{
                             $compra = tblCompra(1);
-                            $cod_compra = $compra[0]->getCodCompra();
-                            $status = $compra[0]->getStatus();
-                            $data = $compra[0]->getDataCompra();
-                            $valor_total = $compra[0]->getValorTotal();
 
-                            echo "<p>$cod_compra</p>";
-                            echo "<p>$status</p>";
-                            echo "<p>$data</p>";
-                            echo "<p>$valor_total</p>";
+                                $cod_compra = $compra[0]->getCodCompra();
+                                $status = $compra[0]->getStatus();
+                                $valor_total = $compra[0]->getValorTotal();
+
+                                echo "<p>$cod_compra</p>";
+                                echo "<p>$status</p>";
+                                echo "<p> - Não efetuda - </p>";
+                                echo "<p>$valor_total</p>";
+
+                            
                         }
                         
                     
@@ -98,21 +107,29 @@
                                     echo "</div>";
                                 }   
                                 else{
+                                    
                                     $produtos = $compra[0]->getCompras();
-                                    foreach($produtos as $produto)
-                                    {
-                                        $nome = $produto->getNome();
-                                        $preco = $produto->getPreco();
-                                        $quantidade = $produto->getQuantidade();
-                                        $cod_produto = $produto->getCodProduto();
+                                    if (isset($produtos)){
+                                        foreach($produtos as $produto)
+                                        {
+                                            $nome = $produto->getNome();
+                                            $preco = $produto->getPreco();
+                                            $quantidade = $produto->getQuantidade();
+                                            $cod_produto = $produto->getCodProduto();
 
-                                        echo "<div>";
-                                        echo "<p>$nome</p>";
-                                        echo "<p>$preco</p>";
-                                        echo "<p>$quantidade</p>";
-                                        echo "<p>$cod_produto</p>";
-                                        echo "</div>";
+                                            echo "<div>";
+                                            echo "<p>$nome</p>";
+                                            echo "<p>$preco</p>";
+                                            echo "<p>$quantidade</p>";
+                                            echo "<p>$cod_produto</p>";
+                                            echo "</div>";
+                                        }
                                     }
+                                    else{
+                                        echo "ERRO";
+                                        header("Location: ./");
+                                    }
+                                    
                                 }
                             }
                             
@@ -130,7 +147,7 @@
         
         if ($user == 1)
         {
-            echo "<h2>Total: $valor_total; </h2>";
+            echo "<h2>Total: $valor_total </h2>";
         }   
 
         ?>
