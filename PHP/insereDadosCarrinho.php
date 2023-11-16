@@ -155,7 +155,7 @@
                 $stmt -> execute();
 
 
-                CriaHTML(tblCompra(1));
+                CriaHTML(tblCompra(5, '', $cod_compra));
             //}
             //catch(PDOException $e){
             //    echo "<script>alert('Erro ao adicionar produto!');</script>";

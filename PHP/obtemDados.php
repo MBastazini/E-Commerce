@@ -117,7 +117,7 @@
         return $produtos;
     }
 
-    function tblCompra($tipo = 0, $sql = '')
+    function tblCompra($tipo = 0, $sql = '', $param_codCompra = 0)
     {
         if (!(isset($compras)))
         {
@@ -149,6 +149,12 @@
                 {
                     $sql = 'SELECT * FROM tbl_compra WHERE status = \'Concluida\' ORDER BY cod_compra';
                     $stmt = $conn->prepare($sql);
+                }
+                else if ($tipo == 5)
+                {
+                    $sql = 'SELECT * FROM tbl_compra WHERE cod_compra = :cod_compra ORDER BY cod_compra';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':cod_compra', $param_codCompra, PDO::PARAM_INT);
                 }
                 else{
                     $stmt = $conn->prepare($sql);

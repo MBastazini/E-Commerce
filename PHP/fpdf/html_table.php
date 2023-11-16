@@ -63,7 +63,7 @@ class createPDF {
             return $s;
     }
 
-    function run($tipo = 0, $nome = '') {
+    function run($tipo = 0, $nome = 'relatorio') {
         // change some win codes, and xhtml into html
         $str=array(
         '<br />' => '<br>',
@@ -101,14 +101,16 @@ class createPDF {
         $pdf->WriteHTML($this->_convert($this->html),$this->bi);
 
         // output
-		if ($tipo == 1 || $tipo == 2) //admin
+		if ($tipo == 1) //admin
 		{	
-			$caminho = '../../Relatorios/'.$nome.'.pdf';
+			$caminho = "/home/projetoscti/www/projetoscti14/Relatorios/$nome.pdf";
 			$pdf->Output('F', $caminho);
-			if ($tipo == 2){
-				header("Location: ../../Relatorios/Relatorios.php?msg=1");
-			}
+			header("Location: /projetoscti14/Relatorios/$nome.pdf");
 		}
+        else if ($tipo == 2)
+        {
+            $pdf->Output('D', 'Compra_tinywood.pdf');
+        }
         else{
 			$pdf->Output();
 		}

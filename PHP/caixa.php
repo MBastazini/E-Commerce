@@ -243,7 +243,7 @@
         return str_pad($entrada, $tamanhoDesejado, ' . ');
     }
   }*/
-  function CriaHTML(array $compras, $tipo = 0)
+  function CriaHTML(array $compras, $tipo = 0, $adm = false)
     {
         
         $html = "<html>";
@@ -298,12 +298,21 @@
             
         }
         else{
-            $html .= "<p>Não há compras</p>";
+            $html .= "<p>Nao ha compras</p>";
         }
         $html .= '</html>';
-        echo $html;
-        //$pdf = new createPDF($html, 'Relatoio de vendas', 'relatorio.pdf', 'TinyWood', time());
-        //$pdf->run($tipo);
+        //echo $html;
+        if ($adm)
+        {
+            $relatorio = "Relatorio de vendas";
+        }
+        else{
+            $relatorio = "Compra TinyWood";
+        }
+
+        $nome = "Relatorio_[Tipo_".$tipo."]";
+        $pdf = new createPDF($html, $relatorio, 'relatorio.pdf', 'TinyWood', time());
+        $pdf->run($tipo, $nome);
     }
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -318,22 +327,22 @@
                 {
                     $compras = tblCompra(2);
                     $previzualizar = isset($_POST['previzualizar']);
-                    $tipo = 1;
+                    $tipo = 2;
                     if ($previzualizar)
                     {
-                        $tipo = 2;
+                        $tipo = 1;
                     }
-                    CriaHTML($compras, $tipo);
+                    CriaHTML($compras, $tipo, true);
                 }
                 else if ($valor_f == 3){
                     $compras = tblCompra(3, $sql_f);
                     $previzualizar = isset($_POST['previzualizar']);
-                    $tipo = 1;
+                    $tipo = 2;
                     if ($previzualizar)
                     {
-                        $tipo = 2;
+                        $tipo = 1;
                     }
-                    CriaHTML($compras, $tipo);
+                    CriaHTML($compras, $tipo, true);
                 }
                 
             }

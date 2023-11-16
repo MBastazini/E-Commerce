@@ -178,7 +178,7 @@
                     </div>
                 </div>-->
 
-                <input type='hidden' name='funcao' value='relatorio'>
+                <input type='hidden' name='funcao' value='carrega_relatorio'>
                 <div class="submit">
                     <button type="submit">Carregar dados</button>
                 </div>
@@ -192,7 +192,7 @@
                 
                 <div class="gerar_relatorio">
                 <div>
-                    <input type="checkbox" name="previzualizar"> Previzualizar (abre o relatorio em uma nova aba) | Quando desligado executa o download automaticamente
+                    <input type="checkbox" name="previzualizar"> Baixar no servidor (Quando desligado abre uma aba com o PDF localmente.)
                 </div>
                 
                 <button type="submit">Gerar PDF</button>
