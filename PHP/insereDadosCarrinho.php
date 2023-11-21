@@ -204,7 +204,7 @@ function finalizarCarrinho()
             //Atualiza o estoque dos produtos
             $sql = "SELECT cod_produto, quantidade FROM tbl_compra_produto WHERE cod_compra = :cod_compra";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(":cod_compra", $cod_usuario, PDO::PARAM_INT);
+            $stmt->bindParam(":cod_compra", $cod_compra, PDO::PARAM_INT);
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
