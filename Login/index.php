@@ -1,20 +1,19 @@
-<?php 
-    ini_set ( 'display_errors' , 1); 
-    error_reporting (E_ALL);
-    include("../PHP/caixa.php");
-    //inicioSessao(); -> suponho que no login e cadastro não seja necessario executar.
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+include("../PHP/caixa.php");
+//inicioSessao(); -> suponho que no login e cadastro não seja necessario executar.
 
-    if(isset($_GET['erro']))
-    {
-        $erro = $_GET['erro'];
-    }
-    else{
-        $erro = 0;
-    }
+if (isset($_GET['erro'])) {
+    $erro = $_GET['erro'];
+} else {
+    $erro = 0;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +23,7 @@
 
     <title>Login - Tiny Wood</title>
 </head>
+
 <body>
     <script src="../JS/index.js" defer></script>
     <script src="../JS/login.js" defer></script>
@@ -102,39 +102,36 @@
         </div>
         
     </div>-->
-    <?php 
-        barraNavegacao('', '../');
+    <?php
+    barraNavegacao('', '../');
     ?>
 
     <section class="container sec_login" id='topo'>
         <div class="login tela_log_cad">
             <h1>INICIAR SESSÃO</h1>
             <?php
-                
-                if ($erro == 3)
-                {
-                    echo"<h2>Senha alterada com sucesso!</h2>";
-                }
-                
+
+            if ($erro == 3) {
+                echo "<h2>Senha alterada com sucesso!</h2>";
+            }
+
             ?>
             <form action="../PHP/insereDadosUsuario.php" method="post">
                 <input type='hidden' value="login" name="funcao">
-                <?php 
-                    if ($erro == 1)
-                    {
-                        echo "<p>E-mail incorreto</p>";
-                    }
+                <?php
+                if ($erro == 1) {
+                    echo "<p>E-mail incorreto</p>";
+                }
                 ?>
                 <div class="email inp">
                     <input type="email" name="email" maxlength="100">
                     <p>E-mail</p>
                 </div>
-                
-                <?php 
-                    if ($erro == 2)
-                    {
-                        echo "<p>Senha Incorreta</p>";
-                    }
+
+                <?php
+                if ($erro == 2) {
+                    echo "<p>Senha Incorreta</p>";
+                }
                 ?>
                 <div class="senha inp">
                     <input type="password" name="senha" maxlength="40">
@@ -142,14 +139,14 @@
                 </div>
 
                 <div class="lembrarme">
-                    <input type="radio" name="lembrar" id="lembrar" value='1'>
+                    <input type="checkbox" name="lembrar" id="lembrar" value='1'>
                     <p>Lembrar-me</p>
                 </div>
 
                 <div class="btn">
                     <input type="submit" value="INICIAR SESSÃO">
                 </div>
-                
+
             </form>
             <div class="troca_log_cad">
                 <a href="../Cadastro">
@@ -165,8 +162,8 @@
         </div>
     </section>
 
-    <?php 
-        Footer('../', '#topo');
+    <?php
+    Footer('../', '#topo');
     ?>
 
     <!--<footer>
@@ -222,4 +219,5 @@
         </div>
     </footer> -->
 </body>
+
 </html>
