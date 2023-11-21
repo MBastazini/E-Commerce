@@ -8,6 +8,9 @@
     {
         $tipo = $_GET['tipo'];
     }
+    else{
+        $tipo = '';
+    }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
