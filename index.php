@@ -159,7 +159,7 @@ include("PHP/caixa.php");
                                             <p>+ Carrinho</p>
                                         </button>
                                     </form>
-                                    <a href='Produtos'>
+                                    <a href='Produtos/index.php#" . $cod_produto . "'>
                                         <div>
                                             <img src='Icones/sobre_branco.svg' alt='Carrinho de compras'>
                                             <p>Ver mais</p>
