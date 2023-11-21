@@ -165,6 +165,7 @@ function mudaFiltro(){
         });
         
     });
+    pg_blur.style.height = document.body.scrollHeight + 'px';
 }
 
 

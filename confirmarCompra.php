@@ -1,22 +1,21 @@
-<?php 
-    ini_set ( 'display_errors' , 1); 
-    error_reporting (E_ALL);
-    include("PHP/caixa.php");
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+include("PHP/caixa.php");
 
-    $tipo = 1;
-    $valor_total = 0;
-    if($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-        if (isset($_POST['tipo']))
-        {
-            $tipo = $_POST['tipo'];
-            $cod_produto = $_POST['cod_produto'];
-        }
+$tipo = 1;
+$valor_total = 0;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['tipo'])) {
+        $tipo = $_POST['tipo'];
+        $cod_produto = $_POST['cod_produto'];
     }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,10 +24,11 @@
     <link rel="icon" type="image/x-icon" href="Icones/logo-bola-verde.svg">
     <title>Tiny Wood</title>
 </head>
+
 <body>
     <script src="../JS/compras.js" defer></script>
-    <?php 
-        barraNavegacao('', '');
+    <?php
+    barraNavegacao('', '');
     ?>
     <section id="confirmar_compra" class="container">
         <h1>Confirme seu pedido</h1>
@@ -41,48 +41,45 @@
                 <p>Valor total</p>
             </div>
             <div id="info_compra">
-            
+
                 <div class="compra enabled">
                     <p></p>
-                    <?php 
+                    <?php
                     $user = CheckUser();
-                    if ($user == 1)
-                    {
-                        if ($tipo == 2)
-                        {
+                    if ($user == 1) {
+                        if ($tipo == 2) {
                             $produto = tblProduto($cod_produto);
-                            if (isset($produto))
-                            {
+                            if (isset($produto)) {
                                 $nome = $produto[0]->getNome();
                                 $preco = $produto[0]->getPreco();
-                                $valor_total = $preco; 
+                                $valor_total = $preco;
 
                                 $data_hoje = date('d/m/Y');
                                 echo "<p> - </p>";
                                 echo "<p>Pendente</p>";
                                 echo "<p>$data_hoje</p>";
                                 echo "<p>$preco</p>";
-                            }
-                            else{
+                            } else {
                                 echo "ERRO";
                             }
-                        }
-                        else{
+                        } else {
                             $compra = tblCompra(1);
 
-                                $cod_compra = $compra[0]->getCodCompra();
-                                $status = $compra[0]->getStatus();
-                                $valor_total = $compra[0]->getValorTotal();
+                            $cod_compra = $compra[0]->getCodCompra();
+                            $status = $compra[0]->getStatus();
+                            $valor_total = $compra[0]->getValorTotal();
 
-                                echo "<p>$cod_compra</p>";
-                                echo "<p>$status</p>";
-                                echo "<p> - Não efetuda - </p>";
-                                echo "<p>$valor_total</p>";
+                            echo "<p>$cod_compra</p>";
+                            echo "<p>$status</p>";
+                            echo "<p> - Não efetuda - </p>";
+                            echo "<p>$valor_total</p>";
 
-                            
+
                         }
-                        
-                    
+
+
+                    } else {
+                        header("Location: ./#faca-o-login-paraefetuar-uma-compra");
                     }
                     ?>
                     <div>
@@ -93,25 +90,21 @@
                             <p>Codigo</p>
                         </div>
                         <div id="info_compra" class="inside">
-                            <?php 
-                            
-                            if ($user == 1)
-                            {
-                                if ($tipo == 2)
-                                {
+                            <?php
+
+                            if ($user == 1) {
+                                if ($tipo == 2) {
                                     echo "<div>";
                                     echo "<p>$nome</p>";
                                     echo "<p>$preco</p>";
                                     echo "<p>1</p>";
                                     echo "<p>$cod_produto</p>";
                                     echo "</div>";
-                                }   
-                                else{
-                                    
+                                } else {
+
                                     $produtos = $compra[0]->getCompras();
-                                    if (isset($produtos)){
-                                        foreach($produtos as $produto)
-                                        {
+                                    if (isset($produtos)) {
+                                        foreach ($produtos as $produto) {
                                             $nome = $produto->getNome();
                                             $preco = $produto->getPreco();
                                             $quantidade = $produto->getQuantidade();
@@ -124,66 +117,61 @@
                                             echo "<p>$cod_produto</p>";
                                             echo "</div>";
                                         }
-                                    }
-                                    else{
+                                    } else {
                                         echo "ERRO";
                                         header("Location: ./");
                                     }
-                                    
+
                                 }
                             }
-                            
-                            
-                            
+
+
+
                             ?>
                         </div>
                     </div>
                 </div>
-    
+
             </div>
         </div>
-        
-        <?php 
-        
-        if ($user == 1)
-        {
+
+        <?php
+
+        if ($user == 1) {
             echo "<h2>Total: $valor_total </h2>";
-        }   
+        }
 
         ?>
-        
+
         <p>Um relariorio será gerado com as informações da compra.</p>
         <div id="botoes">
-            
-        <?php 
-        if ($user == 1)
-        {
-            if ($tipo == 2)
-            {
-                $funcao = 'comprar';
-            }
-            else{
-                $funcao = 'finalizar';
-                $cod_produto = 0;
-            }
-            echo "<form action='./PHP/insereDadosCarrinho.php' method='post'>
+
+            <?php
+            if ($user == 1) {
+                if ($tipo == 2) {
+                    $funcao = 'comprar';
+                } else {
+                    $funcao = 'finalizar';
+                    $cod_produto = 0;
+                }
+                echo "<form action='./PHP/insereDadosCarrinho.php' method='post'>
                 <input type='hidden' name='funcao' value='$funcao'>
-                <input type='hidden' name='cod_produto' value='". $cod_produto ."'>
+                <input type='hidden' name='cod_produto' value='" . $cod_produto . "'>
                 <button class='finalizar_compra'><h1>FINALIZAR COMPRA</h1></button>
             </form>";
-        }
-        else{
-            echo "Faça o login para finalizar a compra";
-        }
-            
-        ?>
+            } else {
+                echo "Faça o login para finalizar a compra";
+            }
+
+            ?>
             <a href='./'>Voltar</a>
         </div>
-        
+
     </section>
 
-    <?php 
-        Footer('', '#confirmar_compra');
+    <?php
+    Footer('', '#confirmar_compra');
     ?>
 </body>
+
 </html>

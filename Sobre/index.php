@@ -1,11 +1,12 @@
-<?php 
-    ini_set ( 'display_errors' , 1); 
-    error_reporting (E_ALL);
-    include("../PHP/caixa.php");
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+include("../PHP/caixa.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,10 +16,11 @@
 
     <title>Sobre - Tiny Wood</title>
 </head>
+
 <body class="over_hid"></body>
-    <script src="../JS/sobre.js" defer></script>
-    <script src="../JS/index.js" defer></script>
-    <!-- <div class="nav_nav container">
+<script src="../JS/sobre.js" defer></script>
+<script src="../JS/index.js" defer></script>
+<!-- <div class="nav_nav container">
         <div class="nav_fundo"></div>
         <a href="index.html"><img src="../Icones/logo-verde.svg" class="nav_logo" alt="Logo TINYWOOD"></a>
 
@@ -91,104 +93,104 @@
         
     </div> -->
 
-    <?php 
-        barraNavegacao('sobre', '../');
-    ?>
+<?php
+barraNavegacao('sobre', '../');
+?>
 
-    <section class="container" id="tela_sobre">
-        <h1>TINY WOOD</h1>
-        <p>“Conectado com a natureza em todos os lugares“</p>
-        <div class="sobre_img">
+<section class="container" id="tela_sobre">
+    <h1>TINY WOOD</h1>
+    <p>“Conectado com a natureza em todos os lugares“</p>
+    <!--<div class="sobre_img">
             <img src="../Icones/foto-teste.png">
+        </div>-->
+    <div class="info_tiny_wood">
+        <h1 class="titulo t_centro">SOBRE NÓS</h1>
+        <p>A Tiny Wood é uma empresa LTDA composta por alunos do ensino médio do Colégio Técnico Industrial de Bauru,
+            desenvolvida como um projeto de startup com cunho didático, orientada por nossos professores
+            Jovita Mercedes, Marcelo Cabello, Débora Aires e José Vieira. Confeccionado artesanalmente a
+            criação do produto final e seu canal de vendas online, associados à tecnologia, inovação e
+            sustentabilidade.
+        </p>
+        <div>
+
         </div>
-        <div class="info_tiny_wood">
-            <h1 class="titulo t_centro">SOBRE NÓS</h1>
-            <p>A Tiny Wood é uma empresa LTDA composta por alunos do ensino médio do Colégio Técnico Industrial de Bauru, 
-                desenvolvida como um projeto de startup com cunho didático, orientada por nossos professores 
-                Jovita Mercedes, Marcelo Cabello, Débora Aires e José Vieira. Confeccionado artesanalmente a 
-                criação do produto final e seu canal de vendas online, associados à tecnologia, inovação e 
-                sustentabilidade.
-            </p>
-            <div>
-                
+        <h2 id="contato">CONTATE-NOS</h2>
+        <div id="sobre_contato">
+            <div onclick="CopyMessage(this)">
+                <img src="../Icones/copy.svg">
+                <p>Telefone</p>
+                <h1>+55 (14) 3103-6150</h1>
             </div>
-            <h2 id="contato">CONTATE-NOS</h2>
-            <div id="sobre_contato">
-                <div onclick="CopyMessage(this)">
-                    <img src="../Icones/copy.svg">
-                     <p>Telefone</p>
-                     <h1>+55 (14) 3103-6150</h1>
-                </div>
-                <div onclick="CopyMessage(this)">
-                    <img src="../Icones/copy.svg">
-                     <p>E-mail</p>
-                     <h1>tinywood@projetoscti.com.br</h1>
-                 </div>
-             </div>
-        </div>
-
-        <div class="info_tiny_wood">
-            <h1 class="titulo t_centro">DESENVOLVEDORES</h1>
-            <div id="sobre_devs">
-                <div class="dev" id="mateus">
-                    <div class="dev_btn enabled"></div>
-                    <h1>Mateus Bastazini<br>N°24</h1>
-                    <div class="dev_img"></div>
-                    <p> Financeiro e lider tecnico, responsavel pelo 
-                        CSS / HTML / JavaScript e design do site, ajudou na lixação
-                        e corte a laser das madeiras,
-                        inclusive é ele quem esta escrevendo isso, Bom dia.
-
-                    </p>
-                </div>
-                <div class="dev enabled" id="luiz">
-                    <div class="dev_btn"></div>
-                    <h1>Luiz Felipe<br>N°22</h1>
-                    <div class="dev_img"></div>
-                    <p> Lider geral, responsavel pelo backend e banco de dados,
-                        alem de ser o responsavel pela ideia de chaveiros de madeira,
-                        e quem mais ajudou a obte-las e trata-las.
-
-                    </p>
-                </div>
-                <div class="dev enabled" id="leticia">
-                    <div class="dev_btn"></div>
-                    <h1>Leticia Garcia<br>N°21</h1>
-                    <div class="dev_img"></div>
-                    <p> Qualidade, responsavel, juntamente com a Mariana, pelos mapas
-                        conceituais e logicos do banco de dados, alem de ajudar
-                        na obtenção dos metais para os chaveiros, lixação e no corte a laser.
-
-                    </p>
-                </div>
-                <div class="dev enabled" id="mariana">
-                    <div class="dev_btn"></div>
-                    <h1>Mariana Senger<br>N°23</h1>
-                    <div class="dev_img"></div>
-                    <p> Produção, responsavel, juntamente com a Leticia, pelos mapas
-                        conceituais e logicos do banco de dados, alem de montar o design dos chaveiros
-                        e ajudar com a lixação.
-
-                    </p>
-                </div>
-                <div class="dev enabled" id="matheus">
-                    <div class="dev_btn"></div>
-                    <h1>Matheus Trentini<br>N°25</h1>
-                    <div class="dev_img"></div>
-                    <p> Marketing, montou o documento necessario para o envio do projeto e conseguiu um patrocinio.
-
-                    </p>
-                </div>
+            <div onclick="CopyMessage(this)">
+                <img src="../Icones/copy.svg">
+                <p>E-mail</p>
+                <h1>tinywood@projetoscti.com.br</h1>
             </div>
         </div>
-        
-    </section>
+    </div>
 
-    <?php 
-        Footer('../', '#tela_sobre');
-    ?>
+    <div class="info_tiny_wood">
+        <h1 class="titulo t_centro">DESENVOLVEDORES</h1>
+        <div id="sobre_devs">
+            <div class="dev" id="mateus">
+                <div class="dev_btn enabled"></div>
+                <h1>Mateus Bastazini<br>N°24</h1>
+                <div class="dev_img"></div>
+                <p> Financeiro e lider tecnico, responsavel pelo
+                    CSS / HTML / JavaScript e design do site, ajudou na lixação
+                    e corte a laser das madeiras,
+                    inclusive é ele quem esta escrevendo isso, Bom dia.
 
-    <!-- <footer>
+                </p>
+            </div>
+            <div class="dev enabled" id="luiz">
+                <div class="dev_btn"></div>
+                <h1>Luiz Felipe<br>N°22</h1>
+                <div class="dev_img"></div>
+                <p> Lider geral, responsavel pelo backend e banco de dados,
+                    alem de ser o responsavel pela ideia de chaveiros de madeira,
+                    e quem mais ajudou a obte-las e trata-las.
+
+                </p>
+            </div>
+            <div class="dev enabled" id="leticia">
+                <div class="dev_btn"></div>
+                <h1>Leticia Garcia<br>N°21</h1>
+                <div class="dev_img"></div>
+                <p> Qualidade, responsavel, juntamente com a Mariana, pelos mapas
+                    conceituais e logicos do banco de dados, alem de ajudar
+                    na obtenção dos metais para os chaveiros, lixação e no corte a laser.
+
+                </p>
+            </div>
+            <div class="dev enabled" id="mariana">
+                <div class="dev_btn"></div>
+                <h1>Mariana Senger<br>N°23</h1>
+                <div class="dev_img"></div>
+                <p> Produção, responsavel, juntamente com a Leticia, pelos mapas
+                    conceituais e logicos do banco de dados, alem de montar o design dos chaveiros
+                    e ajudar com a lixação.
+
+                </p>
+            </div>
+            <div class="dev enabled" id="matheus">
+                <div class="dev_btn"></div>
+                <h1>Matheus Trentini<br>N°25</h1>
+                <div class="dev_img"></div>
+                <p> Marketing, montou o documento necessario para o envio do projeto e conseguiu um patrocinio.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<?php
+Footer('../', '#tela_sobre');
+?>
+
+<!-- <footer>
         <div class="tela_scroll_down up">
             <a href="#tela_sobre" class="a"> 
                 <h1>Voltar ao topo</h1> 
@@ -247,4 +249,5 @@
         </div>
     </footer> -->
 </body>
+
 </html>

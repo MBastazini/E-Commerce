@@ -40,12 +40,19 @@ function checkInput(pesquisa_input, resultados){
 }
 document.addEventListener("DOMContentLoaded", function() {
     //pega a mensagem do link depois do # e mostra ela
-    var mensagem = window.location.hash;
-    if (mensagem != '') {
+    var link = window.location.href;
+    if (!(link.includes('Sobre'))) {
+        var mensagem = window.location.hash;
         mensagem = mensagem.replace('#', '');
-        mensagem = mensagem.replaceAll('-', ' ');
-        alert(mensagem);
+        if (!(/^\d+$/.test(mensagem)))
+        {
+            if (mensagem != '') {  
+                mensagem = mensagem.replaceAll('-', ' ');
+                alert(mensagem);
+            }
+        }
     }
+    
 
     const resultados = document.querySelector('.nav_p_resultados');
     const pesquisa_input = document.querySelector('.nav_pesquisa input');   
