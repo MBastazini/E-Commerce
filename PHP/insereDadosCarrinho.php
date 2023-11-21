@@ -144,6 +144,11 @@ function comprar($cod_produto)
         $stmt->bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
         $stmt->execute();
 
+        //Atualiza o estoque do produto
+        $sql = 'UPDATE tbl_produto SET estoque = estoque - 1 WHERE cod_produto = :cod_produto';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':cod_produto', $cod_produto, PDO::PARAM_INT);
+        $stmt->execute();
 
         CriaHTML(tblCompra(5, '', $cod_compra));
         //}
@@ -180,12 +185,6 @@ function finalizarCarrinho()
 
             $compras = tblCompra(1);
 
-            $sql = "SELECT * FROM tbl_compra_produto WHERE cod_compra = :cod_compra";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
-            $stmt->execute();
-
-
             //Deleta a tmpcompra
             $sql = "DELETE FROM tbl_tmpcompra WHERE cod_compra = :cod_compra";
             $stmt = $conn->prepare($sql);
@@ -201,6 +200,23 @@ function finalizarCarrinho()
             $stmt->bindParam(':data_compra', $data_hoje, PDO::PARAM_STR);
             $stmt->bindParam(':cod_compra', $cod_compra, PDO::PARAM_INT);
             $stmt->execute();
+
+            //Atualiza o estoque dos produtos
+            $sql = "SELECT cod_produto, quantidade FROM tbl_compra_produto WHERE cod_compra = :cod_compra";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":cod_compra", $cod_usuario, PDO::PARAM_INT);
+            $stmt->execute();
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $cod_produto = $row['cod_produto'];
+                $quantidade = $row['quantidade'];
+
+                $sql = "UPDATE tbl_produto SET estoque = estoque - :quantidade WHERE cod_produto = :cod_produto";
+                $stmt2 = $conn->prepare($sql);
+                $stmt2->bindParam(":quantidade", $quantidade, PDO::PARAM_INT);
+                $stmt2->bindParam(":cod_produto", $cod_produto, PDO::PARAM_INT);
+                $stmt2->execute();
+            }
 
             $conn = null;
             $stmt = null;
