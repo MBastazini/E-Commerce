@@ -1924,6 +1924,125 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
 
     }  
     
+    #desenvolvedores{
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    @property --gradient-angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+    }
+
+    @keyframes bordaRGB {
+        0% { --gradient-angle: 0deg}
+        100% { --gradient-angle: 360deg }
+    }
+    #desenvolvedores > div::before, #desenvolvedores > div::after{
+        content: "";
+        position: absolute;
+        inset: 0;
+        
+        border-radius: inherit;
+        animation: bordaRGB 2s linear infinite;
+        z-index: -1;
+        transition: 0.3s;
+        opacity: 0;
+    }
+
+    #desenvolvedores #mateus::before, #desenvolvedores #mateus::after{
+        background: conic-gradient(
+        from var(--gradient-angle),
+        blue,
+        rgb(0, 255, 0),
+        yellow,
+        red,
+        blue);
+        background-color: rgb(0, 170, 255);
+    }
+
+    #desenvolvedores #leticia::before, #desenvolvedores #leticia::after{
+        background-color: #344d0e;
+        background: conic-gradient(
+        from var(--gradient-angle),
+        #344d0e,
+        #9fea2f,
+        #344d0e);
+    }
+
+    #desenvolvedores #luiz::before, #desenvolvedores #luiz::after{
+        background-color: #778899;
+        background: conic-gradient(
+        from var(--gradient-angle),
+        #778899,
+        #208fff,
+        #778899);
+    }
+
+    #desenvolvedores #mariana::before, #desenvolvedores #mariana::after{
+        background-color: pink;
+        background: conic-gradient(
+        from var(--gradient-angle),
+        pink,
+        rgb(255, 0, 183),
+        pink);
+    }
+
+    #desenvolvedores #matheus::before, #desenvolvedores #matheus::after{
+        background-color: red;
+        background: conic-gradient(
+        from var(--gradient-angle),
+        red,
+        rgb(255, 192, 192),
+        red);
+    }
+
+
+    #desenvolvedores > div:hover::before, #desenvolvedores > div:hover::after{
+        opacity: 1;
+        transition: 0.3s;
+    }
+    
+
+    
+    #desenvolvedores > div::after{
+        filter: blur(20px);
+    }
+    #desenvolvedores > div{
+        background-color: white;
+        display: flex;
+        height: 200px;
+        border: 2px solid black;
+        border-radius: 10px;
+        transition: 0.5s;
+        position: relative;
+    }
+    #desenvolvedores > div:hover{
+        border: 2px solid rgba(255, 255, 255, 0);
+    }
+    #desenvolvedores img{
+        min-width: 200px;
+        min-height: 200px;
+        max-width: 200px;
+        max-height: 200px;
+        box-sizing: border-box;
+        padding: 20px;
+        object-fit: cover;
+    }
+
+    #desenvolvedores h1{
+        font-size: 30px;
+        margin: 20px 0px;
+    }
+
+    #desenvolvedores p{
+        font-size: 20px;
+    }
+
+
+    /*Não utilizado
     #sobre_devs{
         position: relative;
         height: 1500px;
@@ -2039,7 +2158,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         text-align: justify;
     }
 
-    /*Organização posocional dos desenvolvedores*/
+    /*Organização posocional dos desenvolvedores
     .dev#mateus{
         top: 0px;
         left: 0px;
@@ -2060,7 +2179,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         top: 800px;
         left: 780px;
     }
-
+    */
 
        /*
     ====================================================
