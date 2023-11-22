@@ -1964,39 +1964,39 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     }
 
     #desenvolvedores #leticia::before, #desenvolvedores #leticia::after{
-        background-color: #344d0e;
         background: conic-gradient(
         from var(--gradient-angle),
         #344d0e,
         #9fea2f,
         #344d0e);
+        background-color: #344d0e;
     }
 
-    #desenvolvedores #luiz::before, #desenvolvedores #luiz::after{
-        background-color: #778899;
+    #desenvolvedores #luiz::before, #desenvolvedores #luiz::after{    
         background: conic-gradient(
         from var(--gradient-angle),
-        #778899,
+        #8fa5ba,
         #208fff,
-        #778899);
+        #8fa5ba);
+        background-color: #8fa5ba;
     }
 
     #desenvolvedores #mariana::before, #desenvolvedores #mariana::after{
-        background-color: pink;
         background: conic-gradient(
         from var(--gradient-angle),
         pink,
         rgb(255, 0, 183),
         pink);
+        background-color: pink;
     }
 
     #desenvolvedores #matheus::before, #desenvolvedores #matheus::after{
-        background-color: red;
         background: conic-gradient(
         from var(--gradient-angle),
-        red,
-        rgb(255, 192, 192),
-        red);
+        #778899,
+        #10f7ff,
+        #778899);
+        background-color: red;
     }
 
 
@@ -2004,8 +2004,6 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         opacity: 1;
         transition: 0.3s;
     }
-    
-
     
     #desenvolvedores > div::after{
         filter: blur(20px);
@@ -3589,6 +3587,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
 
         /*Reposicionamento dos devs*/
+        /*
         .dev#mateus{
             top: 0px;
             left: 0px;
@@ -3608,7 +3607,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         .dev#matheus{
             top: 600px;
             left: 600px;
-        }
+        }*/
 
 
         .product > div h1{
@@ -3706,6 +3705,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     }
 
     /*Reposicionamento dos devs*/
+    /*
     .dev#mateus{
         top: 0px;
         left: 50px;
@@ -3725,7 +3725,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
     .dev#matheus{
         top: 1200px;
         left: 300px;
-    }
+    }*/
 
     #sobre_devs{
         height: 1800px;
@@ -3886,7 +3886,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             font-size: 25px;
         }
 
-        /**/
+        /*
         .dev#mateus{
             top: 0px;
             left: 0px;
@@ -3906,7 +3906,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         .dev#matheus{
             top: 1200px;
             left: 200px;
-        }
+        }*/
 
 
 
@@ -4045,6 +4045,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         }
 
 
+        /*
         .dev#mateus{
             top: 0px;
             left: 20px;
@@ -4064,7 +4065,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         .dev#matheus{
             top: 800px;
             left: 170px;
-        }
+        }*/
 
         #sobre_devs{
             height: 1200px;
@@ -4269,6 +4270,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             top: 10px;
         }
 
+        /*
         .dev#mateus{
             top: 0px;
             left: 0px;
@@ -4288,7 +4290,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         .dev#matheus{
             top: 720px;
             left: 125px;
-        }
+        }*/
 
         #sobre_devs{
             height: 1000px;
@@ -4546,6 +4548,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
             font-size: 18px;
         }
 
+        /*
         .dev#mateus{
             top: 0px;
             left: 70px;
@@ -4565,7 +4568,7 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         .dev#matheus{
             top: 1250px;
             left: 70px;
-        }
+        }*/
         #sobre_devs{
             height: 1500px;
         }

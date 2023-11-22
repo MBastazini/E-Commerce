@@ -131,57 +131,108 @@ barraNavegacao('sobre', '../');
 
     <div class="info_tiny_wood">
         <h1 class="titulo t_centro">DESENVOLVEDORES</h1>
-        <div id="sobre_devs">
-            <div class="dev" id="mateus">
-                <div class="dev_btn enabled"></div>
-                <h1>Mateus Bastazini<br>N°24</h1>
-                <div class="dev_img"></div>
-                <p> Financeiro e lider tecnico, responsavel pelo
-                    CSS / HTML / JavaScript e design do site, ajudou na lixação
-                    e corte a laser das madeiras,
-                    inclusive é ele quem esta escrevendo isso, Bom dia.
-
-                </p>
+        <div id="desenvolvedores">
+            <div id="leticia">
+                <img src="../Imagens/leticia.jpg">
+                <div>
+                    <h1>Leticia Garcia</h1>
+                    <p>Qualidade, responsavel, juntamente com a Mariana, pelos mapas
+                        conceituais e logicos do banco de dados, alem de ajudar
+                        na obtenção dos metais para os chaveiros, lixação e no corte a laser.</p>
+                </div>
             </div>
-            <div class="dev enabled" id="luiz">
-                <div class="dev_btn"></div>
-                <h1>Luiz Felipe<br>N°22</h1>
-                <div class="dev_img"></div>
-                <p> Lider geral, responsavel pelo backend e banco de dados,
-                    alem de ser o responsavel pela ideia de chaveiros de madeira,
-                    e quem mais ajudou a obte-las e trata-las.
-
-                </p>
+            <div id="luiz">
+                <img src="../Imagens/luiz.jpg">
+                <div>
+                    <h1>Luiz Felipe</h1>
+                    <p>Lider geral, responsavel pelo backend e banco de dados,
+                        alem de ser o responsavel pela ideia de chaveiros de madeira,
+                        e quem mais ajudou a obte-las e trata-las.</p>
+                </div>
             </div>
-            <div class="dev enabled" id="leticia">
-                <div class="dev_btn"></div>
-                <h1>Leticia Garcia<br>N°21</h1>
-                <div class="dev_img"></div>
-                <p> Qualidade, responsavel, juntamente com a Mariana, pelos mapas
-                    conceituais e logicos do banco de dados, alem de ajudar
-                    na obtenção dos metais para os chaveiros, lixação e no corte a laser.
-
-                </p>
+            <div id="mariana">
+                <img src="../Imagens/mariana.jpg">
+                <div>
+                    <h1>Mariana Senger</h1>
+                    <p>Produção, responsavel, juntamente com a Leticia, pelos mapas
+                        conceituais e logicos do banco de dados, alem de montar o design dos chaveiros
+                        e ajudar com a lixação.</p>
+                </div>
             </div>
-            <div class="dev enabled" id="mariana">
-                <div class="dev_btn"></div>
-                <h1>Mariana Senger<br>N°23</h1>
-                <div class="dev_img"></div>
-                <p> Produção, responsavel, juntamente com a Leticia, pelos mapas
-                    conceituais e logicos do banco de dados, alem de montar o design dos chaveiros
-                    e ajudar com a lixação.
-
-                </p>
+            <div id="mateus">
+                <img src="../Imagens/mateus.jpg">
+                <div>
+                    <h1>Mateus Bastazini</h1>
+                    <p>Financeiro e lider tecnico, responsavel pelo
+                        CSS / HTML / JavaScript e design do site, ajudou na lixação
+                        e corte a laser das madeiras,
+                        inclusive é ele quem esta escrevendo isso, Bom dia.</p>
+                </div>
             </div>
-            <div class="dev enabled" id="matheus">
-                <div class="dev_btn"></div>
-                <h1>Matheus Trentini<br>N°25</h1>
-                <div class="dev_img"></div>
-                <p> Marketing, montou o documento necessario para o envio do projeto e conseguiu um patrocinio.
-
-                </p>
+            <div id="matheus">
+                <img src="../Imagens/matheus.jpg">
+                <div>
+                    <h1>Matheus Trentini</h1>
+                    <p>Marketing, ajudou na montagem do documento necessário
+                        para o envio do projeto, tal como a lixagem das madeiras
+                        e ajudou a tirar as fotos e vídeos.
+                    </p>
+                </div>
             </div>
         </div>
+        <!--<div id="sobre_devs">
+                <div class="dev" id="mateus">
+                    <div class="dev_btn enabled"></div>
+                    <h1>Mateus Bastazini<br>N°24</h1>
+                    <div class="dev_img"></div>
+                    <p> Financeiro e lider tecnico, responsavel pelo 
+                        CSS / HTML / JavaScript e design do site, ajudou na lixação
+                        e corte a laser das madeiras,
+                        inclusive é ele quem esta escrevendo isso, Bom dia.
+
+                    </p>
+                </div>
+                <div class="dev enabled" id="luiz">
+                    <div class="dev_btn"></div>
+                    <h1>Luiz Felipe<br>N°22</h1>
+                    <div class="dev_img"></div>
+                    <p> Lider geral, responsavel pelo backend e banco de dados,
+                        alem de ser o responsavel pela ideia de chaveiros de madeira,
+                        e quem mais ajudou a obte-las e trata-las.
+
+                    </p>
+                </div>
+                <div class="dev enabled" id="leticia">
+                    <div class="dev_btn"></div>
+                    <h1>Leticia Garcia<br>N°21</h1>
+                    <div class="dev_img"></div>
+                    <p> ______, responsavel, juntamente com a Mariana, pelos mapas
+                        conceituais e logicos do banco de dados, alem de ajudar
+                        na obtenção dos metais para os chaveiros, lixação e no corte a laser.
+
+                    </p>
+                </div>
+                <div class="dev enabled" id="mariana">
+                    <div class="dev_btn"></div>
+                    <h1>Mriana Senger<br>N°23</h1>
+                    <div class="dev_img"></div>
+                    <p> _______, responsavel, juntamente com a Leticia, pelos mapas
+                        conceituais e logicos do banco de dados, alem de montar o design dos chaveiros
+                        e ajudar com a lixação.
+
+                    </p>
+                </div>
+                <div class="dev enabled" id="matheus">
+                    <div class="dev_btn"></div>
+                    <h1>Matheus Trantini<br>N°25</h1>
+                    <div class="dev_img"></div>
+                    <p> Marketing, montou o documento necessario para o envio do projeto e conseguiu um patrocinio.
+
+                    </p>
+                </div>
+            </div>
+            <p id='ps'>P. S. O primeiro desenvolvedor esta torto, não acha?<br>
+            porque não dá uma ajeitada?</p> -->
     </div>
 
 </section>
