@@ -4154,6 +4154,25 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         #crud > .elemento > .info > div > p{
             font-size: 12px;
         }
+
+        #desenvolvedores > div{
+            height: 150px;
+        }
+
+        #desenvolvedores img{
+            min-height: 100px;
+            max-height: 100px;
+            min-width: 100px;
+            max-width: 100px;
+        }
+
+        #desenvolvedores h1{
+            font-size: 15px;
+        }
+
+        #desenvolvedores p{
+            font-size: 12px;
+        }
     }
 
     
@@ -4637,6 +4656,41 @@ consumiria mais linhas (menos de CSS, porem mais de HTML.)*/
         #crud > .elemento > .info > div{
             padding: 20px;
             padding-bottom: 10px;
+        }
+
+        .product{
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #pg_info #img_grande{
+            width: 100px;
+            height: 100px;
+        }
+        #pg_info{
+            width: 200px;
+        }
+        #pg_info > h2{
+            font-size: 15px;
+        }
+        #info_tipo_estoque > p{
+            font-size: 16px !important;
+        }
+
+        .nav_sobe{
+            transform: translateY(0%);
+        }
+
+        .tela_log_cad{
+            width: 200px;
+        }
+        .tela_log_cad.cadastro
+        {
+            width: 200px;
+        }
+
+        .tela_inicial{
+            margin-top: 40px;
         }
     }
 
