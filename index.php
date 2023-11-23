@@ -123,51 +123,61 @@ include("PHP/caixa.php");
                 $produtos = tblProduto();
 
                 foreach ($produtos as $produto) {
-                    $cod_produto = $produto->getCodProduto();
-                    $nome = $produto->getNome();
-                    $preco = $produto->getPreco();
-                    $imagem = $produto->getImagem();
-
-                    if (estaNoCarrinho($cod_produto)) {
-                        $icone = 'Check_branco.svg';
-                        $funcao = 'ver';
-                    } else {
-                        $icone = 'carrinho_branco.svg';
-                        $funcao = 'add++';
-                    }
-                    echo "<div class='produto'> 
-                            <div class='produto_info'>
-                                <div class='produto_texto'>
-                                    <p> R$ " . $preco . "</p>
-                                    <h1>" . $nome . "</h1>
-                                    <h2>$imagem</h2>
-                                </div>
-                                <div class='produto_botao'>
-                                    <form action='confirmarCompra.php' method='post'>
-                                        <input type='hidden' name='cod_produto' value='" . $cod_produto . "'>
-                                        <input type='hidden' name='tipo' value='2'>
-                                        <button>
-                                            <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
-                                            <p>Comprar</p>
-                                        </button>
-                                    </form>
-                                    <form action='PHP/insereDadosCarrinho.php' method='post'>
-                                        <input type='hidden' name='cod_produto' value='" . $cod_produto . "'>
-                                        <input type='hidden' name='funcao' value='$funcao'>
-                                        <button onclick='addCart()'>
-                                            <img src='Icones/$icone' alt='Carrinho de compras'>
-                                            <p>+ Carrinho</p>
-                                        </button>
-                                    </form>
-                                    <a href='Produtos/index.php#" . $cod_produto . "'>
-                                        <div>
-                                            <img src='Icones/sobre_branco.svg' alt='Carrinho de compras'>
-                                            <p>Ver mais</p>
+                    $excluido = $produto->getExcluido();
+                    if (!$excluido)
+                    {
+                        $estoque = $produto->getEstoque();
+                        if ($estoque > 0)
+                        {
+                            $cod_produto = $produto->getCodProduto();
+                            $nome = $produto->getNome();
+                            $preco = $produto->getPreco();
+                            $imagem = $produto->getImagem();
+    
+                            if (estaNoCarrinho($cod_produto)) {
+                                $icone = 'Check_branco.svg';
+                                $funcao = 'ver';
+                            } else {
+                                $icone = 'carrinho_branco.svg';
+                                $funcao = 'add++';
+                            }
+                            echo "<div class='produto'> 
+                                    <div class='produto_info'>
+                                        <div class='produto_texto'>
+                                            <p> R$ " . $preco . "</p>
+                                            <h1>" . $nome . "</h1>
+                                            <h2>$imagem</h2>
                                         </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>";
+                                        <div class='produto_botao'>
+                                            <form action='confirmarCompra.php' method='post'>
+                                                <input type='hidden' name='cod_produto' value='" . $cod_produto . "'>
+                                                <input type='hidden' name='tipo' value='2'>
+                                                <button>
+                                                    <img src='Icones/shopping_branco.svg' alt='Carrinho de compras'>
+                                                    <p>Comprar</p>
+                                                </button>
+                                            </form>
+                                            <form action='PHP/insereDadosCarrinho.php' method='post'>
+                                                <input type='hidden' name='cod_produto' value='" . $cod_produto . "'>
+                                                <input type='hidden' name='funcao' value='$funcao'>
+                                                <button onclick='addCart()'>
+                                                    <img src='Icones/$icone' alt='Carrinho de compras'>
+                                                    <p>+ Carrinho</p>
+                                                </button>
+                                            </form>
+                                            <a href='Produtos/index.php#" . $cod_produto . "'>
+                                                <div>
+                                                    <img src='Icones/sobre_branco.svg' alt='Carrinho de compras'>
+                                                    <p>Ver mais</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>";    
+                        }
+                        
+                        }
+                        
                 }
 
                 ?>
