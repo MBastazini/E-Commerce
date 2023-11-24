@@ -225,6 +225,7 @@ function finalizarCarrinho()
 
             if (isset($compras) && !empty($compras)) {
                 CriaHTML($compras);
+                header('Location: ../Carrinho/#compra-finalizada');
             } else {
                 echo "ERRO";
             }

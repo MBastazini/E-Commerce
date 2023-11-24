@@ -101,12 +101,20 @@
                     <?php 
                         echo '<select name="categoria">
                         <option value="NONE">- Nenhuma -</option>
-                        <option value="Informática">Informática</option>
-                        <option value="Mecânica">Mecânica</option>
-                        <option value="Eletrônica">Eletrônica</option>
-                        <option value="CTI">CTI</option>
+                        <option value="Informática"';
+                        echo ($categoria == 'Informática' ? 'selected' : '');
+                        echo'>Informática</option>';
+                        echo'<option value="Mecânica"';
+                        echo ($categoria == 'Mecânica' ? 'selected' : '');
+                        echo'>Mecânica</option>';
+                        echo'<option value="Eletrônica"';
+                        echo ($categoria == 'Eletrônica' ? 'selected' : '');
+                        echo'>Eletrônica</option>';
+                        echo'<option value="CTI"';
+                        echo ($categoria == 'CTI' ? 'selected' : '');
+                        echo'>CTI</option>';
 
-                    </select>';
+                    echo'</select>';
                     ?>
                     <p>Categoria</p>
                 </div>

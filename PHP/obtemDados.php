@@ -399,8 +399,10 @@
         if ($user == 1)
         {
             $carrinho = tblCarrinho();
+            $cont = 0;
             foreach ($carrinho as $c)
             {
+                
                 $cod_produto = $c->getCodProduto();
                 $quantidade = $c->getQuantidade();
                 $produto = tblProduto($cod_produto)[0];
@@ -408,8 +410,9 @@
                 {
                     return false;
                 }
+                $cont++;
             }
-            return true;
+            return ($cont != 0);
         }
         else if($user == 2){
             foreach($_SESSION['visitante']['carrinho'] as $cod_produto => $quantidade)

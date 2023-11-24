@@ -109,7 +109,7 @@ class createPDF {
 		}
         else if ($tipo == 2)
         {
-            $pdf->Output('D', 'Compra_tinywood.pdf');
+            $pdf->Output();
         }
         else{
 			$pdf->Output();
